@@ -22,7 +22,7 @@ class Splash extends StatelessWidget {
       color: Color(0xFFf2f2f2),
       child: Center(
         child: Icon(
-          FontAwesomeIcons.airbnb,
+          FontAwesomeIcons.school,
           size: 70,
           color: Color(0xFFdbdbdb),
         ),

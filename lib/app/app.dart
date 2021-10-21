@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/auth/splash.dart';
+import 'package:school/app/screens/login/login_screen.dart';
+import 'package:school/app/screens/splash/splash_screen.dart';
+import 'package:school/app/screens/welcome/welcome_screen.dart';
 
-import 'screens/auth/login/login.dart';
 import 'screens/home/home.dart';
 
 class Run extends StatefulWidget {
@@ -18,7 +19,7 @@ class _RunState extends State<Run> {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Splash(context),
+      home: WelcomeScreen(),
       routes: {
         '/home': (context) => Home(),
         '/login': (context) => Login(),

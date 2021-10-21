@@ -9,3 +9,4 @@ const white = Color(0xFFFFFFFF);
 const grey = Color(0xFF777777);
 const black = Color(0xFF000000);
 const red = Color(0xFFFF0000);
+const blue = Color(0xFF7cabff);

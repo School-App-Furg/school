@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/colors.dart';
+import '../styles/colors.dart';
+import '../styles/sizes.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -15,21 +16,20 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.8,
+      width: width(context, 0.8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: TextButton(
           style: ButtonStyle(
               padding: MaterialStateProperty.all(
                   EdgeInsets.symmetric(vertical: 20, horizontal: 40)),
-              backgroundColor: MaterialStateProperty.all(blue)),
+              backgroundColor: MaterialStateProperty.all(primary)),
           onPressed: onpressed,
           child: Text(
             text,
-            style: TextStyle(color: textColor, fontWeight: FontWeight.w900),
+            style: TextStyle(color: white, fontWeight: FontWeight.w900),
           ),
         ),
       ),

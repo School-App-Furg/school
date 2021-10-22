@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/login/login_screen.dart';
-import 'package:school/app/screens/splash/splash_screen.dart';
-import 'package:school/app/screens/welcome/welcome_screen.dart';
+import 'screens/auth/login/login_screen.dart';
+import 'screens/splash/splash_screen.dart';
 
 import 'screens/home/home.dart';
 
@@ -19,7 +18,7 @@ class _RunState extends State<Run> {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WelcomeScreen(),
+      home: Splash(context),
       routes: {
         '/home': (context) => Home(),
         '/login': (context) => Login(),

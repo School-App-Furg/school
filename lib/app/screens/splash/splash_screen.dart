@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:school/app/core/navigation.dart';
+import '../../core/service/navigation.dart';
 
 class Splash extends StatelessWidget {
   bool isLogged = true;

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>886047047462-h3osfljqgupj8clrhbm1tag9bof4mtg5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.886047047462-h3osfljqgupj8clrhbm1tag9bof4mtg5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBRfriKCYMPi0Peet1UKf0j1JOfJAipXbE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>886047047462</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.furg.school</string>
+	<key>PROJECT_ID</key>
+	<string>school-973bf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>school-973bf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:886047047462:ios:b224a8159821af3a440be7</string>
+</dict>
+</plist>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../styles/colors.dart';
 import '../styles/sizes.dart';
 
@@ -11,15 +12,14 @@ class TextFieldContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      margin: EdgeInsets.symmetric(vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
       width: width(context, 0.8),
       decoration: BoxDecoration(
-        color: blue,
-        borderRadius: BorderRadius.circular(29),
-      ),
+          color: white,
+          borderRadius: BorderRadius.circular(29),
+          border: Border.all(color: blue, width: 1.5)),
       child: child,
     );
   }

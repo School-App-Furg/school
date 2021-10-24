@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/screens/splash/splash_screen.dart';
 import 'screens/auth/login/login_screen.dart';
-import 'screens/splash/splash_screen.dart';
-
 import 'screens/home/home.dart';
 
 class Run extends StatefulWidget {

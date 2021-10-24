@@ -44,14 +44,16 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SvgPicture.asset(
+                      "assets/icons/welcome2.svg",
+                      height: widthAll(context),
+                    ),
                     Text(
                       "CADASTRE A SUA ESCOLA",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    //SizedBox(height: size.height * 0.03),
-                    SvgPicture.asset(
-                      "assets/icons/welcome2.svg",
-                      height: height(context, 0.35),
+                    SizedBox(
+                      height: 10,
                     ),
                     RoundedInput(
                         hintText: "Nome da Escola",
@@ -90,10 +92,12 @@ class SignUpScreen extends StatelessWidget {
                       onpressed: () {},
                       textColor: blue,
                     ),
-                    SizedBox(height: height(context, 0.03)),
-                    AlreadyHaveAnAccountCheck(
-                      login: false,
-                      press: () {},
+                    SizedBox(
+                      height: height(context, 0.05),
+                      child: AlreadyHaveAnAccountCheck(
+                        login: false,
+                        press: () {},
+                      ),
                     ),
                   ],
                 ),

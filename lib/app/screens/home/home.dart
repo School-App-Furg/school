@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/screens/home/home_controller.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final HomeController controller = HomeController();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Text("HOME");
+    return Scaffold(
+      body: Center(
+        child: Text('home'),
+      ),
+    );
   }
 }

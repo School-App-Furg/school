@@ -2,20 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../core/service/navigation.dart';
 
-class Splash extends StatelessWidget {
-  bool isLogged = true;
-  Splash(BuildContext context) {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        if (isLogged) {
-          navigateToHomePage(context);
-        } else {
-          navigateToLoginPage(context);
-        }
+class Splash extends StatefulWidget {
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback(
+      (timeStamp) async {
+        //final authStore = Modular.get<AuthStore>();
+        final isLogged = true;
+        //await authStore.isLogged();
+        Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            if (isLogged) {
+              navigateToHomePage(context);
+            } else {
+              navigateToWelcomePage(context);
+            }
+          },
+        );
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(

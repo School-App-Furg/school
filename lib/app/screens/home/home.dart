@@ -11,24 +11,13 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    controller.buscarAlunos();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ListView.builder(
-          itemCount: controller.notas.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Row(
-              children: [
-                Text(controller.notas[index].name),
-                Text(controller.notas[index].nota.toString())
-              ],
-            );
-          },
-        ),
+        child: Text('home'),
       ),
     );
   }

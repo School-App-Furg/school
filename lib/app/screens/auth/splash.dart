@@ -17,12 +17,12 @@ class _SplashState extends State<Splash> {
         final isLogged = true;
         //await authStore.isLogged();
         Future.delayed(
-          const Duration(milliseconds: 2000),
+          const Duration(seconds: 2),
           () {
             if (isLogged) {
               navigateToHomePage(context);
             } else {
-              navigateToLoginPage(context);
+              navigateToWelcomePage(context);
             }
           },
         );

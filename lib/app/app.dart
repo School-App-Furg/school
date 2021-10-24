@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/auth/splash.dart';
-
+import 'package:school/app/screens/splash/splash_screen.dart';
+import 'screens/auth/login/login_screen.dart';
 import 'screens/auth/forgot_password/forgot.dart';
-import 'screens/auth/login/login.dart';
 import 'screens/auth/register/register.dart';
 import 'screens/auth/welcome/welcome.dart';
 import 'screens/home/home.dart';

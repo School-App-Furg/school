@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-const pinkMariaMaria = Color(0xFFF34580);
 const darkGrey = Color(0xFF555555);
 const mediumGrey = Color(0xFFAAAAAA);
 const green = Color(0XFF45C251);

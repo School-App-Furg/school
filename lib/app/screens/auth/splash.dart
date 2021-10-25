@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:school/app/core/navigation.dart';
+import '../../core/service/navigation.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
     WidgetsBinding.instance!.addPostFrameCallback(
       (timeStamp) async {
         //final authStore = Modular.get<AuthStore>();
-        final isLogged = true;
+        final isLogged = false;
         //await authStore.isLogged();
         Future.delayed(
           const Duration(seconds: 2),
@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
       color: Color(0xFFf2f2f2),
       child: Center(
         child: Icon(
-          FontAwesomeIcons.airbnb,
+          FontAwesomeIcons.school,
           size: 70,
           color: Color(0xFFdbdbdb),
         ),

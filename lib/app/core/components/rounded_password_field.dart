@@ -11,7 +11,7 @@ class RoundedPasswordField extends StatefulWidget {
   RoundedPasswordField({
     Key? key,
     required this.onChanged,
-    required this.validator,
+    this.validator,
     required this.hintSenha,
   }) : super(key: key);
 

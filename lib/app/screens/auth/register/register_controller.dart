@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:cpf_cnpj_validator/cnpj_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+
 import 'package:mobx/mobx.dart';
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   @observable
   String nomeEscola = "";
 
@@ -29,24 +29,52 @@ abstract class _RegisterControllerBase with Store {
   }
 
   //---------------------------------------------------
-
+  @observable
   num cnpj = 0;
 
-  String email = "";
-
-  String senha = "";
-
-  setCnpj(value) {
+  @action
+  setCnpjEscola(value) {
     cnpj = value;
   }
 
+  @action
+  validateCnpj(String value) {
+    CNPJValidator.isValid(value);
+  }
+
+  //---------------------------------------------------
+
+  @observable
+  String email = "";
+
+  @action
   setEmail(value) {
     email = value;
   }
 
+  @action
+  validateEmail(value) {
+    EmailValidator(errorText: 'Digite um email válido');
+  }
+
+  //---------------------------------------------------
+  @observable
+  String senha = "";
+
+  @action
   setSenha(value) {
     senha = value;
   }
+
+  @action
+  validateSenha(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
+  //---------------------------------------------------
 
   cadastrar() {
     validateNomeEscola(nomeEscola);

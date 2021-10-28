@@ -1,4 +1,6 @@
+import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:school/app/core/components/rounded_password_field.dart';
@@ -6,16 +8,17 @@ import 'package:school/app/screens/auth/register/register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
-import '../../../core/service/validations.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
 class Register extends StatelessWidget {
   Register({Key? key}) : super(key: key);
-
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final RegisterController _controller = RegisterController();
+
     return Scaffold(
       body: Container(
         height: heightAll(context),
@@ -42,7 +45,7 @@ class Register extends StatelessWidget {
             SingleChildScrollView(child: Observer(
               builder: (_) {
                 return Form(
-                  key: _controller.formKey,
+                  key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -59,17 +62,16 @@ class Register extends StatelessWidget {
                       ),
                       RoundedInput(
                           hintText: "Nome da Escola",
-                          validator: validateEmptyField,
                           onChanged: _controller.setNomeEscola,
                           icon: Icons.school),
-                      Visibility(
-                        visible: _controller.nomeEscolaError,
-                        child: Text("Deu ruim"),
-                      ),
                       RoundedInput(
                         hintText: "CNPJ",
-                        validator: validateEmail,
-                        onChanged: _controller.setCnpj,
+                        mask: [
+                          CnpjCpfFormatter(
+                            eDocumentType: EDocumentType.CNPJ,
+                          )
+                        ],
+                        onChanged: _controller.setCnpjEscola,
                         icon: Icons.description_outlined,
                       ),
                       Padding(
@@ -78,17 +80,17 @@ class Register extends StatelessWidget {
                       ),
                       RoundedInput(
                         hintText: "E-mail",
-                        validator: validateEmail,
+                        keyboardType: TextInputType.emailAddress,
                         onChanged: _controller.setEmail,
                         icon: Icons.email,
                       ),
                       RoundedPasswordField(
-                        validator: validateSenha,
+                        //validator: validateSenha,
                         hintSenha: "Senha",
                         onChanged: _controller.setSenha,
                       ),
                       RoundedPasswordField(
-                        validator: validateSenha,
+                        //validator: validateSenha,
                         hintSenha: "Confirmar Senha",
                         onChanged: _controller.setSenha,
                       ),

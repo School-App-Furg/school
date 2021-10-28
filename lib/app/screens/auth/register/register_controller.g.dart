@@ -40,6 +40,21 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
+  final _$cnpjAtom = Atom(name: '_RegisterControllerBase.cnpj');
+
+  @override
+  num get cnpj {
+    _$cnpjAtom.reportRead();
+    return super.cnpj;
+  }
+
+  @override
+  set cnpj(num value) {
+    _$cnpjAtom.reportWrite(value, super.cnpj, () {
+      super.cnpj = value;
+    });
+  }
+
   final _$_RegisterControllerBaseActionController =
       ActionController(name: '_RegisterControllerBase');
 
@@ -66,10 +81,22 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
   }
 
   @override
+  dynamic setCnpjEscola(dynamic value) {
+    final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
+        name: '_RegisterControllerBase.setCnpjEscola');
+    try {
+      return super.setCnpjEscola(value);
+    } finally {
+      _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nomeEscola: ${nomeEscola},
-nomeEscolaError: ${nomeEscolaError}
+nomeEscolaError: ${nomeEscolaError},
+cnpj: ${cnpj}
     ''';
   }
 }

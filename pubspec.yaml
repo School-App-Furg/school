@@ -43,9 +43,9 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   cloud_firestore: ^2.5.4
   firebase_core: ^1.8.0
-  cpf_cnpj_validator: ^2.0.0
+  flux_validator_dart: ^2.0.0
   cnpj_cpf_formatter_nullsafety: ^1.1.1
-  form_field_validator: ^1.1.0
+  validators2: ^3.0.0
   
 
 dev_dependencies:

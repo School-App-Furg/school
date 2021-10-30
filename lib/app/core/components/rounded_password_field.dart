@@ -8,11 +8,13 @@ class RoundedPasswordField extends StatefulWidget {
 
   final String hintSenha;
   final String? Function(String?)? validator;
+  final String? errorText;
   RoundedPasswordField({
     Key? key,
     required this.onChanged,
     this.validator,
     required this.hintSenha,
+    required this.errorText,
   }) : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class RoundedPasswordField extends StatefulWidget {
 
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   bool _obscureText = true;
+  String? errorText;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
@@ -30,6 +33,8 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         onChanged: widget.onChanged,
         cursorColor: blue,
         decoration: InputDecoration(
+          errorText: widget.errorText,
+          errorStyle: TextStyle(height: 0.05),
           border: InputBorder.none,
           hintText: widget.hintSenha,
           icon: Icon(

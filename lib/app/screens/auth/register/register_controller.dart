@@ -1,83 +1,105 @@
-import 'package:cpf_cnpj_validator/cnpj_validator.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-
 import 'package:mobx/mobx.dart';
+import 'package:validators2/validators.dart';
+import 'package:flux_validator_dart/flux_validator_dart.dart';
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
+  final FormErrorState error = FormErrorState();
+
+  //-----------------------------------------
+
   @observable
   String nomeEscola = "";
 
-  @observable
-  bool nomeEscolaError = false;
-
   @action
-  setNomeEscola(value) {
-    nomeEscola = value;
-  }
-
-  @action
-  validateNomeEscola(String value) {
-    if (value.isNotEmpty) {
-      return true;
-    } else {
-      nomeEscolaError = true;
-      return false;
+  Future validateNomeEscola(String value) async {
+    if (isNull(value) || value.isEmpty) {
+      error.nomeEscola = 'Campo obrigatório';
+      return;
     }
+    error.nomeEscola = null;
   }
 
-  //---------------------------------------------------
+  //-----------------------------------------
+
   @observable
-  num cnpj = 0;
-
-  @action
-  setCnpjEscola(value) {
-    cnpj = value;
-  }
+  String cnpj = "";
 
   @action
   validateCnpj(String value) {
-    CNPJValidator.isValid(value);
+    if (Validator.cnpj(value)) {
+      error.cnpj = "CNPJ inválido";
+      return;
+    }
+    error.cnpj = null;
   }
 
-  //---------------------------------------------------
+  //-----------------------------------------
 
   @observable
   String email = "";
 
   @action
-  setEmail(value) {
-    email = value;
+  validateEmail(String value) {
+    error.email = isEmail(value) ? null : 'E-mail inválido';
   }
 
-  @action
-  validateEmail(value) {
-    EmailValidator(errorText: 'Digite um email válido');
+  void dispose() {
+    for (final d in _disposers) {
+      d();
+    }
   }
 
-  //---------------------------------------------------
+  //-----------------------------------------
+
   @observable
   String senha = "";
 
   @action
-  setSenha(value) {
-    senha = value;
-  }
-
-  @action
   validateSenha(String value) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = new RegExp(pattern);
-    return regExp.hasMatch(value);
+    error.senha =
+        isNull(value) || value.isEmpty ? 'Senha precisa ser preenchida' : null;
   }
 
-  //---------------------------------------------------
+  //-----------------------------------------
+
+  late List<ReactionDisposer> _disposers;
+
+  void setupValidations() {
+    _disposers = [
+      reaction((_) => nomeEscola, validateNomeEscola),
+      reaction((_) => cnpj, validateCnpj),
+      reaction((_) => email, validateEmail),
+      reaction((_) => senha, validateSenha)
+    ];
+  }
 
   cadastrar() {
     validateNomeEscola(nomeEscola);
-    if (validateNomeEscola(nomeEscola) == true) {}
+    validateEmail(email);
+    validateCnpj(cnpj);
+    validateSenha(senha);
   }
+}
+
+class FormErrorState = _FormErrorState with _$FormErrorState;
+
+abstract class _FormErrorState with Store {
+  @observable
+  String? nomeEscola;
+
+  @observable
+  String? cnpj;
+
+  @observable
+  String? email;
+
+  @observable
+  String? senha;
+
+  @computed
+  bool get hasErrors =>
+      nomeEscola != null || cnpj != null || email != null || senha != null;
 }

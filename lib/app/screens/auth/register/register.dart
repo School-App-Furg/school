@@ -8,17 +8,33 @@ import 'package:school/app/screens/auth/register/register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final RegisterController _controller = RegisterController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.setupValidations();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final RegisterController _controller = RegisterController();
-
     return Scaffold(
       body: Container(
         height: heightAll(context),
@@ -42,75 +58,78 @@ class Register extends StatelessWidget {
                 width: width(context, 0.25),
               ),
             ),
-            SingleChildScrollView(child: Observer(
-              builder: (_) {
-                return Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/welcome2.svg",
-                        height: widthAll(context),
-                      ),
-                      Text(
-                        "CADASTRE A SUA ESCOLA",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      RoundedInput(
+            SingleChildScrollView(
+              child: Form(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/icons/welcome2.svg",
+                      height: widthAll(context),
+                    ),
+                    Text(
+                      "CADASTRE A SUA ESCOLA",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Observer(
+                      builder: (_) => RoundedInput(
                           hintText: "Nome da Escola",
-                          onChanged: _controller.setNomeEscola,
+                          onChanged: (value) => _controller.nomeEscola = value,
+                          errorText: _controller.error.nomeEscola,
                           icon: Icons.school),
-                      RoundedInput(
+                    ),
+                    Observer(
+                      builder: (_) => RoundedInput(
                         hintText: "CNPJ",
                         mask: [
                           CnpjCpfFormatter(
                             eDocumentType: EDocumentType.CNPJ,
                           )
                         ],
-                        onChanged: _controller.setCnpjEscola,
+                        onChanged: (value) => _controller.cnpj = value,
+                        errorText: _controller.error.cnpj,
                         icon: Icons.description_outlined,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Divider(),
-                      ),
-                      RoundedInput(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Divider(),
+                    ),
+                    Observer(
+                      builder: (_) => RoundedInput(
                         hintText: "E-mail",
                         keyboardType: TextInputType.emailAddress,
-                        onChanged: _controller.setEmail,
+                        onChanged: (value) => _controller.email = value,
+                        errorText: _controller.error.email,
                         icon: Icons.email,
                       ),
-                      RoundedPasswordField(
-                        //validator: validateSenha,
+                    ),
+                    Observer(
+                      builder: (_) => RoundedPasswordField(
                         hintSenha: "Senha",
-                        onChanged: _controller.setSenha,
+                        onChanged: (value) => _controller.senha = value,
+                        errorText: _controller.error.senha,
                       ),
-                      RoundedPasswordField(
-                        //validator: validateSenha,
-                        hintSenha: "Confirmar Senha",
-                        onChanged: _controller.setSenha,
+                    ),
+                    RoundedButton(
+                      text: "CADASTRAR",
+                      onpressed: _controller.cadastrar,
+                      textColor: blue,
+                    ),
+                    SizedBox(
+                      height: height(context, 0.05),
+                      child: AlreadyHaveAnAccountCheck(
+                        login: false,
+                        press: () {},
                       ),
-                      RoundedButton(
-                        text: "CADASTRAR",
-                        onpressed: _controller.cadastrar,
-                        textColor: blue,
-                      ),
-                      SizedBox(
-                        height: height(context, 0.05),
-                        child: AlreadyHaveAnAccountCheck(
-                          login: false,
-                          press: () {},
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

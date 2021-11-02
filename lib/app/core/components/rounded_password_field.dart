@@ -5,13 +5,13 @@ import 'package:school/app/core/styles/colors.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
-  final TextEditingController controller;
-  final Function validator;
+  final String? hintSenha;
+  final String? errorText;
   RoundedPasswordField({
     Key? key,
     required this.onChanged,
-    required this.controller,
-    required this.validator,
+    required this.hintSenha,
+    required this.errorText,
   }) : super(key: key);
 
   @override
@@ -24,14 +24,14 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        controller: widget.controller,
         obscureText: _obscureText,
         validator: validateSenha,
         onChanged: widget.onChanged,
         cursorColor: black,
         decoration: InputDecoration(
+          errorText: widget.errorText,
           border: InputBorder.none,
-          hintText: "Senha",
+          hintText: widget.hintSenha,
           icon: Icon(
             Icons.lock,
             color: primary,

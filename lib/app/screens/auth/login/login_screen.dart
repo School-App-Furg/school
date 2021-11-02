@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:school/app/core/components/already_have_an_account_button.dart';
 import 'package:school/app/core/components/forgot_password_button.dart';
@@ -9,11 +10,31 @@ import 'package:school/app/core/service/validations.dart';
 import 'package:school/app/core/styles/colors.dart';
 import 'package:school/app/core/styles/sizes.dart';
 
-class LoginScreen extends StatelessWidget {
+import 'login_controller.dart';
+
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
-  final TextEditingController emailCntrlr = TextEditingController();
-  final TextEditingController passCntrlr = TextEditingController();
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final LoginController _controller = LoginController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.setupValidations();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -58,16 +79,21 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: height(context, 0.01)),
-                    RoundedInput(
-                        hintText: "Seu e-mail",
-                        controller: emailCntrlr,
-                        icon: Icons.mail,
-                        onChanged: (value) {},
-                        validator: validateEmail),
-                    RoundedPasswordField(
-                      controller: passCntrlr,
-                      validator: validateSenha,
-                      onChanged: (String value) {},
+                    Observer(
+                      builder: (_) => RoundedInput(
+                        hintText: "E-mail",
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) => _controller.email = value,
+                        errorText: _controller.error.email,
+                        icon: Icons.email,
+                      ),
+                    ),
+                    Observer(
+                      builder: (_) => RoundedPasswordField(
+                        hintSenha: "Senha",
+                        onChanged: (value) => _controller.senha = value,
+                        errorText: _controller.error.senha,
+                      ),
                     ),
                     ForgotPassword(
                       press: () {},
@@ -75,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: height(context, 0.03)),
                     RoundedButton(
                       text: "LOGIN",
-                      onpressed: () {},
+                      onpressed: _controller.login,
                       textColor: black,
                     ),
                     SizedBox(

@@ -77,10 +77,10 @@ abstract class _RegisterControllerBase with Store {
   }
 
   cadastrar() {
-    validateNomeEscola(nomeEscola);
-    validateEmail(email);
-    validateCnpj(cnpj);
-    validateSenha(senha);
+    if ((validateNomeEscola(nomeEscola) != null) ||
+        (validateEmail(email) != null) ||
+        (validateCnpj(cnpj) != null) ||
+        (validateSenha(senha)) != null) {}
   }
 }
 

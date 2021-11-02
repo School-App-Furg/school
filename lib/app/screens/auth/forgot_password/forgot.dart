@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:school/app/core/components/already_have_an_account_button.dart';
 import 'package:school/app/core/components/rounded_button.dart';
@@ -7,10 +8,32 @@ import 'package:school/app/core/service/validations.dart';
 import 'package:school/app/core/styles/colors.dart';
 import 'package:school/app/core/styles/sizes.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+import 'forgot_controller.dart';
+
+class ForgotPasswordScreen extends StatefulWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailCntrlr = TextEditingController();
+  final ForgotController _controller = ForgotController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.setupValidations();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -54,17 +77,20 @@ class ForgotPasswordScreen extends StatelessWidget {
                     SizedBox(
                       height: height(context, 0.01),
                     ),
-                    RoundedInput(
-                      hintText: "Seu e-mail",
-                      controller: emailCntrlr,
-                      validator: validateEmail,
-                      onChanged: (value) {},
-                      icon: Icons.mail,
-                      keyboardType: TextInputType.emailAddress,
+                    Observer(
+                      builder: (_) => RoundedInput(
+                        hintText: "Seu e-mail",
+                        controller: emailCntrlr,
+                        validator: validateEmail,
+                        onChanged: (value) => _controller.email = value,
+                        errorText: _controller.error.email,
+                        icon: Icons.email,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
                     ),
                     RoundedButton(
                       text: "RECEBER INSTRUÇÕES",
-                      onpressed: () {},
+                      onpressed: _controller.recuperarSenha,
                       textColor: primary,
                     ),
                     SizedBox(

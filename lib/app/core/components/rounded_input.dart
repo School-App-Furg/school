@@ -10,6 +10,7 @@ class RoundedInput extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
+  final String? errorText;
   const RoundedInput(
       {Key? key,
       required this.hintText,
@@ -17,6 +18,7 @@ class RoundedInput extends StatelessWidget {
       required this.onChanged,
       required this.controller,
       required this.validator,
+      required this.errorText,
       this.keyboardType = TextInputType.text})
       : super(key: key);
 
@@ -30,6 +32,7 @@ class RoundedInput extends StatelessWidget {
         cursorColor: blue,
         keyboardType: keyboardType,
         decoration: InputDecoration(
+          errorText: errorText,
           icon: Icon(
             icon,
             color: primary,

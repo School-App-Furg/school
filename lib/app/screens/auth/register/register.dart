@@ -56,17 +56,20 @@ class Register extends StatelessWidget {
                       height: 10,
                     ),
                     RoundedInput(
-                        hintText: "Nome da Escola",
-                        controller: nomeCntrlr,
-                        validator: validateEmptyField,
-                        onChanged: (value) {},
-                        icon: Icons.school),
+                      hintText: "Nome da Escola",
+                      controller: nomeCntrlr,
+                      validator: validateEmptyField,
+                      onChanged: (value) {},
+                      icon: Icons.school,
+                      errorText: "",
+                    ),
                     RoundedInput(
                       hintText: "CNPJ",
                       controller: emailCntrlr,
                       validator: validateEmail,
                       onChanged: (value) {},
                       icon: Icons.description_outlined,
+                      errorText: "",
                     ),
                     RoundedInput(
                       hintText: "Cidade",
@@ -74,6 +77,7 @@ class Register extends StatelessWidget {
                       validator: validateEmail,
                       onChanged: (value) {},
                       icon: Icons.location_city,
+                      errorText: "",
                     ),
                     RoundedInput(
                       hintText: "E-mail",
@@ -81,6 +85,7 @@ class Register extends StatelessWidget {
                       validator: validateEmail,
                       onChanged: (value) {},
                       icon: Icons.email,
+                      errorText: "",
                     ),
                     /*RoundedPasswordField(
                       controller: passCntrlr,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/home_controller.dart';
+import 'home_controller.dart';
 
 class Home extends StatefulWidget {
   @override

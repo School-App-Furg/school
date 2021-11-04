@@ -74,6 +74,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10,
                     ),
+
                     Observer(
                       builder: (_) => RoundedInput(
                           hintText: "Nome da Escola",
@@ -97,6 +98,7 @@ class _RegisterState extends State<Register> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Divider(),
+
                     ),
                     Observer(
                       builder: (_) => RoundedInput(

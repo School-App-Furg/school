@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
-import '../../../core/service/validations.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
@@ -56,10 +55,11 @@ class Register extends StatelessWidget {
                       height: 10,
                     ),
                     RoundedInput(
-                        hintText: "Nome da Escola",
-                        errorText: "",
-                        onChanged: (value) {},
-                        icon: Icons.school),
+                      hintText: "Nome da Escola",
+                      onChanged: (value) {},
+                      icon: Icons.school,
+                      errorText: "",
+                    ),
                     RoundedInput(
                       hintText: "CNPJ",
                       errorText: "",

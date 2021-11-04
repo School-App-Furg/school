@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../styles/colors.dart';
+import 'package:school/app/core/components/text_field_container.dart';
 
-import 'text_field_container.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
@@ -24,14 +24,16 @@ class RoundedPasswordField extends StatefulWidget {
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   bool _obscureText = true;
   String? errorText;
+
+  get validateSenha => null;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
         obscureText: _obscureText,
-        validator: widget.validator,
+        validator: validateSenha,
         onChanged: widget.onChanged,
-        cursorColor: blue,
+        cursorColor: black,
         decoration: InputDecoration(
           errorText: widget.errorText,
           errorStyle: TextStyle(height: 0.05),
@@ -48,7 +50,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
               });
             },
             child: new Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off),
+                _obscureText ? Icons.visibility_off : Icons.visibility),
           ),
         ),
       ),

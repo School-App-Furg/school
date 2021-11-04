@@ -1,17 +1,38 @@
+import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:school/app/core/components/rounded_password_field.dart';
+import 'package:school/app/screens/auth/register/register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
-  final TextEditingController emailCntrlr = TextEditingController();
-  final TextEditingController passCntrlr = TextEditingController();
-  final TextEditingController nomeCntrlr = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final RegisterController _controller = RegisterController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.setupValidations();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +60,6 @@ class Register extends StatelessWidget {
             ),
             SingleChildScrollView(
               child: Form(
-                key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -54,38 +74,51 @@ class Register extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    RoundedInput(
-                      hintText: "Nome da Escola",
-                      onChanged: (value) {},
-                      icon: Icons.school,
-                      errorText: "",
+
+                    Observer(
+                      builder: (_) => RoundedInput(
+                          hintText: "Nome da Escola",
+                          onChanged: (value) => _controller.nomeEscola = value,
+                          errorText: _controller.error.nomeEscola,
+                          icon: Icons.school),
                     ),
-                    RoundedInput(
-                      hintText: "CNPJ",
-                      errorText: "",
-                      onChanged: (value) {},
-                      icon: Icons.description_outlined,
+                    Observer(
+                      builder: (_) => RoundedInput(
+                        hintText: "CNPJ",
+                        mask: [
+                          CnpjCpfFormatter(
+                            eDocumentType: EDocumentType.CNPJ,
+                          )
+                        ],
+                        onChanged: (value) => _controller.cnpj = value,
+                        errorText: _controller.error.cnpj,
+                        icon: Icons.description_outlined,
+                      ),
                     ),
-                    RoundedInput(
-                      hintText: "Cidade",
-                      errorText: "",
-                      onChanged: (value) {},
-                      icon: Icons.location_city,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Divider(),
+
                     ),
-                    RoundedInput(
-                      hintText: "E-mail",
-                      errorText: "",
-                      onChanged: (value) {},
-                      icon: Icons.email,
+                    Observer(
+                      builder: (_) => RoundedInput(
+                        hintText: "E-mail",
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) => _controller.email = value,
+                        errorText: _controller.error.email,
+                        icon: Icons.email,
+                      ),
                     ),
-                    /*RoundedPasswordField(
-                      controller: passCntrlr,
-                      validator: validateSenha,
-                      onChanged: (String value) {},
-                    ),*/
+                    Observer(
+                      builder: (_) => RoundedPasswordField(
+                        hintSenha: "Senha",
+                        onChanged: (value) => _controller.senha = value,
+                        errorText: _controller.error.senha,
+                      ),
+                    ),
                     RoundedButton(
                       text: "CADASTRAR",
-                      onpressed: () {},
+                      onpressed: _controller.cadastrar,
                       textColor: blue,
                     ),
                     SizedBox(

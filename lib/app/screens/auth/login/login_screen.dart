@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../core/components/already_have_an_account_button.dart';
-import '../../../core/components/forgot_password_button.dart';
-import '../../../core/components/rounded_button.dart';
-import '../../../core/components/rounded_input.dart';
-import '../../../core/components/rounded_password_field.dart';
+import 'package:school/app/core/components/already_have_an_account_button.dart';
+import 'package:school/app/core/components/forgot_password_button.dart';
+import 'package:school/app/core/components/rounded_button.dart';
+import 'package:school/app/core/components/rounded_input.dart';
+import 'package:school/app/core/components/rounded_password_field.dart';
 
-import '../../../core/styles/colors.dart';
-import '../../../core/styles/sizes.dart';
+import 'package:school/app/core/styles/colors.dart';
+import 'package:school/app/core/styles/sizes.dart';
+
 
 import 'login_controller.dart';
 

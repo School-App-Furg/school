@@ -41,11 +41,12 @@ dependencies:
   mobx: ^2.0.1
   flutter_svg: ^0.23.0+1
   font_awesome_flutter: ^9.1.0
-  email_validator: ^2.0.1
   cloud_firestore: ^2.5.4
   firebase_core: ^1.8.0
+  flux_validator_dart: ^2.0.0
+  cnpj_cpf_formatter_nullsafety: ^1.1.1
   validators2: ^3.0.0
-
+  
 
 dev_dependencies:
   flutter_test:

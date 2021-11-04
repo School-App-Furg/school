@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'text_field_container.dart';
 import '../service/validations.dart';
 import '../styles/colors.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
-  final String? hintSenha;
+
+  final String hintSenha;
+  final String? Function(String?)? validator;
   final String? errorText;
   RoundedPasswordField({
     Key? key,
     required this.onChanged,
+    this.validator,
     required this.hintSenha,
     required this.errorText,
   }) : super(key: key);
@@ -20,6 +24,9 @@ class RoundedPasswordField extends StatefulWidget {
 
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   bool _obscureText = true;
+  String? errorText;
+
+  get validateSenha => null;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
@@ -30,6 +37,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         cursorColor: black,
         decoration: InputDecoration(
           errorText: widget.errorText,
+          errorStyle: TextStyle(height: 0.05),
           border: InputBorder.none,
           hintText: widget.hintSenha,
           icon: Icon(

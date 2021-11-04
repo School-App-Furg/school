@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:school/app/core/components/already_have_an_account_button.dart';
-import 'package:school/app/core/components/rounded_button.dart';
-import 'package:school/app/core/components/rounded_input.dart';
-import 'package:school/app/core/service/validations.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/core/styles/sizes.dart';
+import '../../../core/components/already_have_an_account_button.dart';
+import '../../../core/components/rounded_button.dart';
+import '../../../core/components/rounded_input.dart';
+import '../../../core/styles/colors.dart';
+import '../../../core/styles/sizes.dart';
 
 import 'forgot_controller.dart';
 
@@ -80,8 +79,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Observer(
                       builder: (_) => RoundedInput(
                         hintText: "Seu e-mail",
-                        controller: emailCntrlr,
-                        validator: validateEmail,
                         onChanged: (value) => _controller.email = value,
                         errorText: _controller.error.email,
                         icon: Icons.email,

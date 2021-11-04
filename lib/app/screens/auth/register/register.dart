@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
-import '../../../core/service/validations.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
@@ -57,35 +56,27 @@ class Register extends StatelessWidget {
                     ),
                     RoundedInput(
                       hintText: "Nome da Escola",
-                      controller: nomeCntrlr,
-                      validator: validateEmptyField,
                       onChanged: (value) {},
                       icon: Icons.school,
                       errorText: "",
                     ),
                     RoundedInput(
                       hintText: "CNPJ",
-                      controller: emailCntrlr,
-                      validator: validateEmail,
+                      errorText: "",
                       onChanged: (value) {},
                       icon: Icons.description_outlined,
-                      errorText: "",
                     ),
                     RoundedInput(
                       hintText: "Cidade",
-                      controller: emailCntrlr,
-                      validator: validateEmail,
+                      errorText: "",
                       onChanged: (value) {},
                       icon: Icons.location_city,
-                      errorText: "",
                     ),
                     RoundedInput(
                       hintText: "E-mail",
-                      controller: emailCntrlr,
-                      validator: validateEmail,
+                      errorText: "",
                       onChanged: (value) {},
                       icon: Icons.email,
-                      errorText: "",
                     ),
                     /*RoundedPasswordField(
                       controller: passCntrlr,

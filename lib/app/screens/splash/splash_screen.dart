@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
       color: Color(0xFFf2f2f2),
       child: Center(
         child: Icon(
-          FontAwesomeIcons.school,
+          FontAwesomeIcons.graduationCap,
           size: 70,
           color: Color(0xFFdbdbdb),
         ),

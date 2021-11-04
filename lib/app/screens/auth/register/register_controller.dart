@@ -77,6 +77,7 @@ abstract class _RegisterControllerBase with Store {
   }
 
   cadastrar() {
+    // ignore: unnecessary_null_comparison
     if ((validateNomeEscola(nomeEscola) != null) ||
         (validateEmail(email) != null) ||
         (validateCnpj(cnpj) != null) ||

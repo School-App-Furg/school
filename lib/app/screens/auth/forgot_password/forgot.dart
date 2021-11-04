@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:school/app/core/service/navigation.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
@@ -35,10 +36,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: size.height,
+        height: heightAll(context),
         width: double.infinity,
         child: Stack(
           alignment: Alignment.center,
@@ -95,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                     AlreadyHaveAnAccountCheck(
                       login: false,
-                      press: () {},
+                      press: () => navigateToLoginPage(context),
                     ),
                   ],
                 ),

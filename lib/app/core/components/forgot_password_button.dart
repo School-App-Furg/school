@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../styles/colors.dart';
 
 class ForgotPassword extends StatelessWidget {
-  final Function press;
+  final VoidCallback press;
   const ForgotPassword({
     Key? key,
     required this.press,
@@ -18,7 +18,7 @@ class ForgotPassword extends StatelessWidget {
           style: TextStyle(color: primary),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: press,
           child: Text(
             "Clique aqui",
             style: TextStyle(

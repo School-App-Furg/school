@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../core/service/navigation.dart';
+
+import 'package:school/app/core/service/navigation.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _SplashState extends State<Splash> {
     WidgetsBinding.instance!.addPostFrameCallback(
       (timeStamp) async {
         //final authStore = Modular.get<AuthStore>();
-        final isLogged = true;
+        final isLogged = false;
         //await authStore.isLogged();
         Future.delayed(
           const Duration(seconds: 2),

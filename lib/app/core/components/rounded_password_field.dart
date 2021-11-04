@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'text_field_container.dart';
-import '../service/validations.dart';
+
 import '../styles/colors.dart';
 
 class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
-
   final String hintSenha;
   final String? Function(String?)? validator;
   final String? errorText;

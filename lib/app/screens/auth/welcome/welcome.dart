@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:school/app/core/navigation.dart';
+import 'package:school/app/core/service/navigation.dart';
+
 import '../../../core/components/rounded_button.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';

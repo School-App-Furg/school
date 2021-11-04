@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:school/app/core/components/rounded_password_field.dart';
+
+import 'package:school/app/core/service/navigation.dart';
 import 'package:school/app/screens/auth/register/register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
@@ -74,7 +76,6 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10,
                     ),
-
                     Observer(
                       builder: (_) => RoundedInput(
                           hintText: "Nome da Escola",
@@ -98,7 +99,6 @@ class _RegisterState extends State<Register> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Divider(),
-
                     ),
                     Observer(
                       builder: (_) => RoundedInput(
@@ -125,7 +125,7 @@ class _RegisterState extends State<Register> {
                       height: height(context, 0.05),
                       child: AlreadyHaveAnAccountCheck(
                         login: false,
-                        press: () {},
+                        press: () => navigateToLoginPage(context),
                       ),
                     ),
                   ],

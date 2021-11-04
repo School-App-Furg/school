@@ -19,6 +19,3 @@ void navigateToRegisterPage(BuildContext context) {
 void navigateToForgotPage(BuildContext context) {
   Navigator.pushNamed(context, '/forgot');
 }
-//void navigateToOfferDetail(BuildContext context, HouseOfferModel model) {
-//  Navigator.of(context).pushNamed('/offerDetail', arguments: model);
-//}

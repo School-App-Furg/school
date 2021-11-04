@@ -6,10 +6,10 @@ import 'package:school/app/core/components/forgot_password_button.dart';
 import 'package:school/app/core/components/rounded_button.dart';
 import 'package:school/app/core/components/rounded_input.dart';
 import 'package:school/app/core/components/rounded_password_field.dart';
+import 'package:school/app/core/service/navigation.dart';
 
 import 'package:school/app/core/styles/colors.dart';
 import 'package:school/app/core/styles/sizes.dart';
-
 
 import 'login_controller.dart';
 
@@ -38,11 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: double.infinity,
-        height: size.height,
+        height: heightAll(context),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     ForgotPassword(
-                      press: () {},
+                      press: () => navigateToForgotPage(context),
                     ),
                     SizedBox(height: height(context, 0.03)),
                     RoundedButton(
@@ -109,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: height(context, 0.03),
                     ),
                     AlreadyHaveAnAccountCheck(
-                      press: () {},
+                      press: () => navigateToRegisterPage(context),
                     ),
                   ],
                 ),

@@ -23,11 +23,11 @@ class _RunState extends State<Run> {
       ),
       home: Splash(),
       routes: {
-        '/home': (context) => Home(),
-        '/login': (context) => Login(),
+        '/home': (context) => LoginScreen(),
+        '/login': (context) => LoginScreen(),
         '/welcome': (context) => Welcome(),
         '/register': (context) => Register(),
-        '/forgot': (context) => Forgot()
+        '/forgot': (context) => Forgot(),
       },
       initialRoute: '/',
     );

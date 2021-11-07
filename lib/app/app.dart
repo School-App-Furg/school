@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/screens/home/home_page.dart';
 import 'package:school/app/screens/splash/splash_screen.dart';
 import 'screens/auth/login/login_screen.dart';
 import 'screens/auth/forgot_password/forgot.dart';
@@ -23,7 +24,7 @@ class _RunState extends State<Run> {
       ),
       home: Splash(),
       routes: {
-        '/home': (context) => Home(),
+        '/home': (context) => HomePage(),
         '/login': (context) => Login(),
         '/welcome': (context) => Welcome(),
         '/register': (context) => Register(),

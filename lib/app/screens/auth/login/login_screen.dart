@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: height(context, 0.03)),
                     RoundedButton(
                       text: "LOGIN",
-                      onpressed: _controller.login,
+                      onpressed: _controller.login(context),
                       textColor: black,
                     ),
                     SizedBox(

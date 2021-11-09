@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import 'package:school/app/screens/repository/auth_repository.dart';
+import 'package:school/app/screens/repository/user_repository.dart';
 
 import 'package:validators2/validators.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
@@ -10,6 +11,7 @@ class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
   AuthRepository _authRepository = AuthRepository();
+  UsersRepository _userRepository = UsersRepository();
 
   final FormErrorState error = FormErrorState();
 
@@ -81,14 +83,17 @@ abstract class _RegisterControllerBase with Store {
     ];
   }
 
-  cadastrar() {
+  cadastrar() async {
     // ignore: unnecessary_null_comparison
     if ((validateNomeEscola(nomeEscola) != null) ||
         (validateEmail(email) != null) ||
         (validateCnpj(cnpj) != null) ||
         (validateSenha(senha)) != null) {
-      _authRepository.createUserWithEmailPass(
-          email, senha, nomeEscola, cnpj, 0);
+      var data = await _authRepository.createUserWithEmailPass(
+        email,
+        senha,
+      );
+      _userRepository.insertUser(data!.uid, nomeEscola, cnpj, 0);
     }
   }
 }

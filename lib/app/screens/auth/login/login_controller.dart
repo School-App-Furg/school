@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/service/navigation.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 import 'package:validators2/validators.dart';
 part 'login_controller.g.dart';
 
@@ -6,6 +10,7 @@ class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
   final FormErrorState error = FormErrorState();
+  AuthRepository _authRepository = AuthRepository();
 
   @observable
   String email = "";
@@ -43,8 +48,14 @@ abstract class _LoginControllerBase with Store {
     ];
   }
 
-  login() {
-    if ((validateEmail(email) != null) || (validateSenha(senha)) != null) {}
+  login(BuildContext context) {
+    if ((validateEmail(email) != null) || (validateSenha(senha)) != null) {
+      Future<User?> login =
+          _authRepository.signInEmailAndPassword(email, senha);
+      if (login != null) {
+        navigateToHomePage(context);
+      }
+    }
   }
 }
 

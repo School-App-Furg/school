@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+
 import 'package:school/app/core/components/rounded_password_field.dart';
 
 import 'package:school/app/core/service/navigation.dart';
@@ -13,7 +13,6 @@ import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-import '../../repository/auth_repository.dart';
 
 class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);

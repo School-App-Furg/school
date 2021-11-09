@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:school/app/core/service/navigation.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,16 +16,14 @@ class _SplashState extends State<Splash> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback(
       (timeStamp) async {
-        //final authStore = Modular.get<AuthStore>();
-        final isLogged = false;
-        //await authStore.isLogged();
+        final auth = Provider.of<AuthRepository>(context, listen: false);
         Future.delayed(
           const Duration(seconds: 2),
           () {
-            if (isLogged) {
-              navigateToHomePage(context);
-            } else {
+            if (auth.usuario == null) {
               navigateToWelcomePage(context);
+            } else {
+              navigateToHomePage(context);
             }
           },
         );
@@ -41,6 +41,14 @@ class _SplashState extends State<Splash> {
           size: 70,
           color: Color(0xFFdbdbdb),
         ),
+      ),
+    );
+  }
+
+  loading() {
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

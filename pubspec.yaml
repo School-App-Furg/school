@@ -41,11 +41,13 @@ dependencies:
   mobx: ^2.0.1
   flutter_svg: ^0.23.0+1
   font_awesome_flutter: ^9.1.0
-  cloud_firestore: ^2.5.4
+  cloud_firestore: ^3.1.0  
   firebase_core: ^1.8.0
   flux_validator_dart: ^2.0.0
   cnpj_cpf_formatter_nullsafety: ^1.1.1
   validators2: ^3.0.0
+  firebase_auth: ^3.2.0
+  provider: ^6.0.1
   
 
 dev_dependencies:

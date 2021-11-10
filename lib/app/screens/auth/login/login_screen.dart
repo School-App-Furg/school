@@ -7,6 +7,7 @@ import 'package:school/app/core/components/rounded_button.dart';
 import 'package:school/app/core/components/rounded_input.dart';
 import 'package:school/app/core/components/rounded_password_field.dart';
 import 'package:school/app/core/service/navigation.dart';
+import 'package:school/app/core/service/validators.dart';
 
 import 'package:school/app/core/styles/colors.dart';
 import 'package:school/app/core/styles/sizes.dart';
@@ -21,20 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final LoginController _controller = LoginController();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.setupValidations();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SingleChildScrollView(
               child: Form(
-                key: formKey,
+                key: _controller.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,21 +67,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: height(context, 0.01)),
-                    Observer(
-                      builder: (_) => RoundedInput(
-                        hintText: "E-mail",
-                        keyboardType: TextInputType.emailAddress,
-                        onChanged: (value) => _controller.email = value,
-                        errorText: _controller.error.email,
-                        icon: Icons.email,
-                      ),
+                    RoundedInput(
+                      hintText: "E-mail",
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _controller.emailController,
+                      validator: validateEmail,
+                      icon: Icons.email,
                     ),
                     Observer(
-                      builder: (_) => RoundedPasswordField(
-                        hintSenha: "Senha",
-                        onChanged: (value) => _controller.senha = value,
-                        errorText: _controller.error.senha,
-                      ),
+                      builder: (_) {
+                        return RoundedPasswordField(
+                          hintSenha: "Senha",
+                          controller: _controller.senhaController,
+                          validator: validateSenha,
+                          obscureText: _controller.obscureText,
+                          onTap: () {
+                            _controller.mostrarSenhaUser();
+                          },
+                        );
+                      },
                     ),
                     ForgotPassword(
                       press: () => navigateToForgotPage(context),
@@ -101,8 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: height(context, 0.03)),
                     RoundedButton(
                       text: "LOGIN",
-                      onpressed: _controller.login(context),
                       textColor: black,
+                      onpressed: () => _controller.login(context),
                     ),
                     SizedBox(
                       height: height(context, 0.03),

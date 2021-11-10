@@ -1,119 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:school/app/screens/repository/auth_repository.dart';
 import 'package:school/app/screens/repository/user_repository.dart';
-
-import 'package:validators2/validators.dart';
-import 'package:flux_validator_dart/flux_validator_dart.dart';
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
+  GlobalKey<FormState> formKey = GlobalKey();
   AuthRepository _authRepository = AuthRepository();
   UsersRepository _userRepository = UsersRepository();
 
-  final FormErrorState error = FormErrorState();
-
-  //-----------------------------------------
-
-  @observable
-  String nomeEscola = "";
-
-  @action
-  Future validateNomeEscola(String value) async {
-    if (isNull(value) || value.isEmpty) {
-      error.nomeEscola = 'Campo obrigatório';
-      return;
-    }
-    error.nomeEscola = null;
-  }
-
-  //-----------------------------------------
+  TextEditingController nomeEscolaController = TextEditingController();
+  TextEditingController cnpjController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
 
   @observable
-  String cnpj = "";
+  bool obscureText = true;
 
   @action
-  validateCnpj(String value) {
-    if (Validator.cnpj(value)) {
-      error.cnpj = "CNPJ inválido";
-      return;
-    }
-    error.cnpj = null;
+  void mostrarSenhaUser() {
+    obscureText = !obscureText;
   }
 
-  //-----------------------------------------
-
-  @observable
-  String email = "";
-
-  @action
-  validateEmail(String value) {
-    error.email = isEmail(value) ? null : 'E-mail inválido';
-  }
-
-  void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
-  }
-
-  //-----------------------------------------
-
-  @observable
-  String senha = "";
-
-  @action
-  validateSenha(String value) {
-    error.senha =
-        isNull(value) || value.isEmpty ? 'Senha precisa ser preenchida' : null;
-  }
-
-  //-----------------------------------------
-
-  late List<ReactionDisposer> _disposers;
-
-  void setupValidations() {
-    _disposers = [
-      reaction((_) => nomeEscola, validateNomeEscola),
-      reaction((_) => cnpj, validateCnpj),
-      reaction((_) => email, validateEmail),
-      reaction((_) => senha, validateSenha)
-    ];
+  //função de cadastro do usuário
+  teste() {
+    print(emailController.text);
   }
 
   cadastrar() async {
-    // ignore: unnecessary_null_comparison
-    if ((validateNomeEscola(nomeEscola) != null) ||
-        (validateEmail(email) != null) ||
-        (validateCnpj(cnpj) != null) ||
-        (validateSenha(senha)) != null) {
+    if (formKey.currentState!.validate()) {
       var data = await _authRepository.createUserWithEmailPass(
-        email,
-        senha,
+        emailController.text,
+        senhaController.text,
       );
-      _userRepository.insertUser(data!.uid, nomeEscola, cnpj, 0);
+      _userRepository.insertUser(
+          data!.uid, nomeEscolaController.text, cnpjController.text, 0);
     }
   }
-}
-
-class FormErrorState = _FormErrorState with _$FormErrorState;
-
-abstract class _FormErrorState with Store {
-  @observable
-  String? nomeEscola;
-
-  @observable
-  String? cnpj;
-
-  @observable
-  String? email;
-
-  @observable
-  String? senha;
-
-  @computed
-  bool get hasErrors =>
-      nomeEscola != null || cnpj != null || email != null || senha != null;
 }

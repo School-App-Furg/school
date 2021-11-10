@@ -1,47 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:validators2/validators.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 part 'forgot_controller.g.dart';
 
 class ForgotController = _ForgotControllerBase with _$ForgotController;
 
 abstract class _ForgotControllerBase with Store {
-  final FormErrorState error = FormErrorState();
+  AuthRepository _authRepository = AuthRepository();
 
-  @observable
-  String email = "";
-
-  @action
-  validateEmail(String value) {
-    error.email = isEmail(value) ? null : 'E-mail inválido';
-  }
-
-  void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
-  }
-
-  //-----------------------------------------
-
-  late List<ReactionDisposer> _disposers;
-
-  void setupValidations() {
-    _disposers = [
-      reaction((_) => email, validateEmail),
-    ];
-  }
+  GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController emailController = TextEditingController();
 
   recuperarSenha() {
-    if (validateEmail(email) != null) {}
+    if (formKey.currentState!.validate()) {
+      _authRepository.requestNewPassword(emailController.text);
+    }
   }
-}
-
-class FormErrorState = _FormErrorState with _$FormErrorState;
-
-abstract class _FormErrorState with Store {
-  @observable
-  String? email;
-
-  @computed
-  bool get hasErrors => email != null;
 }

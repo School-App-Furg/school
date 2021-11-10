@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:school/app/core/service/navigation.dart';
 import '../../../core/components/already_have_an_account_button.dart';
@@ -18,21 +17,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final TextEditingController emailCntrlr = TextEditingController();
   final ForgotController _controller = ForgotController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.setupValidations();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SingleChildScrollView(
               child: Form(
-                key: formKey,
+                key: _controller.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,14 +61,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     SizedBox(
                       height: height(context, 0.01),
                     ),
-                    Observer(
-                      builder: (_) => RoundedInput(
-                        hintText: "Seu e-mail",
-                        onChanged: (value) => _controller.email = value,
-                        errorText: _controller.error.email,
-                        icon: Icons.email,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
+                    RoundedInput(
+                      hintText: "Seu e-mail",
+                      controller: _controller.emailController,
+                      icon: Icons.email,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     RoundedButton(
                       text: "RECEBER INSTRUÇÕES",

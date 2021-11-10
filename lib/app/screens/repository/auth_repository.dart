@@ -4,9 +4,7 @@ import 'package:flutter/services.dart';
 
 class AuthRepository extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
   User? usuario;
-  bool isLoading = true;
 
   AuthRepository() {
     _authCheck();
@@ -16,7 +14,6 @@ class AuthRepository extends ChangeNotifier {
     _auth.authStateChanges().listen(
       (User? user) {
         usuario = (user == null) ? null : user;
-        isLoading = false;
         notifyListeners();
       },
     );
@@ -30,12 +27,13 @@ class AuthRepository extends ChangeNotifier {
   // sign up with email
   Future<User?> createUserWithEmailPass(String email, String pass) async {
     try {
-      UserCredential dados = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: pass,
       );
 
-      return dados.user;
+      return userCredential.user;
     } on PlatformException catch (e) {
       throw Exception(e);
     }
@@ -44,11 +42,11 @@ class AuthRepository extends ChangeNotifier {
   // sign in with email and password
   Future<User?> signInEmailAndPassword(String email, String password) async {
     try {
-      UserCredential dados = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return dados.user;
+      return userCredential.user;
     } on PlatformException catch (e) {
       throw Exception(e);
     }
@@ -58,6 +56,17 @@ class AuthRepository extends ChangeNotifier {
   Future<void> logout() async {
     await _auth.signOut();
     _getUser();
+  }
+
+  // check signIn
+  Stream<User?> isSignedIn() {
+    var currentUser = _auth.authStateChanges();
+    return currentUser;
+  }
+
+  // get current user
+  Future<User?> getCurrentUser() async {
+    return _auth.currentUser;
   }
 
   //Requisição de nova senha

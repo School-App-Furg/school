@@ -44,12 +44,4 @@ class _SplashState extends State<Splash> {
       ),
     );
   }
-
-  loading() {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
 }

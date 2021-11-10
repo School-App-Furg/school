@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/service/navigation.dart';
+import 'package:school/app/core/service/snackbars.dart';
 
 import 'package:school/app/screens/repository/auth_repository.dart';
 import 'package:school/app/screens/repository/user_repository.dart';
@@ -11,7 +14,6 @@ abstract class _RegisterControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   AuthRepository _authRepository = AuthRepository();
   UsersRepository _userRepository = UsersRepository();
-
   TextEditingController nomeEscolaController = TextEditingController();
   TextEditingController cnpjController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -26,18 +28,24 @@ abstract class _RegisterControllerBase with Store {
   }
 
   //função de cadastro do usuário
-  teste() {
-    print(emailController.text);
-  }
-
-  cadastrar() async {
+  cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      var data = await _authRepository.createUserWithEmailPass(
-        emailController.text,
-        senhaController.text,
-      );
-      _userRepository.insertUser(
-          data!.uid, nomeEscolaController.text, cnpjController.text, 0);
+      try {
+        User? user = await _authRepository.createUserWithEmailPass(
+          emailController.text,
+          senhaController.text,
+        );
+        await user!.updateDisplayName(nomeEscolaController.text);
+        bool inserted = await _userRepository.insertUser(
+            user.uid, nomeEscolaController.text, cnpjController.text, 0);
+        if (inserted) {
+          navigateToInsideApp(context);
+        } else {
+          buildSnackBarUi(context, "Seu usuário não foi cadastrado!");
+        }
+      } catch (e) {
+        buildSnackBarUi(context, e.toString());
+      }
     }
   }
 }

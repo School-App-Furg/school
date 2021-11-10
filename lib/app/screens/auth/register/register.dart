@@ -93,17 +93,14 @@ class _RegisterState extends State<Register> {
                       icon: Icons.email,
                     ),
                     RoundedPasswordField(
-                      hintSenha: "Senha",
-                      controller: _controller.senhaController,
-                      validator: validateSenha,
-                      obscureText: _controller.obscureText,
-                      onTap: () {
-                        _controller.mostrarSenhaUser();
-                      },
-                    ),
+                        hintSenha: "Senha",
+                        controller: _controller.senhaController,
+                        validator: validateSenha,
+                        obscureText: _controller.obscureText,
+                        onTap: _controller.mostrarSenhaUser),
                     RoundedButton(
                       text: "CADASTRAR",
-                      onpressed: _controller.teste,
+                      onpressed: () => _controller.cadastrar(context),
                       textColor: blue,
                     ),
                     SizedBox(

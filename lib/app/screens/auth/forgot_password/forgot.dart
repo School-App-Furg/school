@@ -69,7 +69,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                     RoundedButton(
                       text: "RECEBER INSTRUÇÕES",
-                      onpressed: _controller.recuperarSenha,
+                      onpressed: () => _controller.recuperarSenha(context),
                       textColor: primary,
                     ),
                     SizedBox(

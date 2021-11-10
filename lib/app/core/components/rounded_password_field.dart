@@ -9,7 +9,7 @@ class RoundedPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool obscureText;
-  final VoidCallback onTap;
+  final Function()? onTap;
 
   RoundedPasswordField({
     Key? key,

@@ -5,16 +5,19 @@ import 'text_field_container.dart';
 import '../styles/colors.dart';
 
 class RoundedPasswordField extends StatefulWidget {
-  final ValueChanged<String> onChanged;
   final String hintSenha;
+  final TextEditingController controller;
   final String? Function(String?)? validator;
-  final String? errorText;
+  final bool obscureText;
+  final Function()? onTap;
+
   RoundedPasswordField({
     Key? key,
-    required this.onChanged,
-    this.validator,
     required this.hintSenha,
-    required this.errorText,
+    required this.controller,
+    this.validator,
+    required this.obscureText,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -22,20 +25,15 @@ class RoundedPasswordField extends StatefulWidget {
 }
 
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
-  bool _obscureText = true;
-  String? errorText;
-
-  get validateSenha => null;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        obscureText: _obscureText,
-        validator: validateSenha,
-        onChanged: widget.onChanged,
+        obscureText: widget.obscureText,
         cursorColor: black,
+        controller: widget.controller,
+        validator: widget.validator,
         decoration: InputDecoration(
-          errorText: widget.errorText,
           errorStyle: TextStyle(height: 0.05),
           border: InputBorder.none,
           hintText: widget.hintSenha,
@@ -44,13 +42,9 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
             color: primary,
           ),
           suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
+            onTap: widget.onTap,
             child: new Icon(
-                _obscureText ? Icons.visibility_off : Icons.visibility),
+                widget.obscureText ? Icons.visibility_off : Icons.visibility),
           ),
         ),
       ),

@@ -1,47 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:validators2/validators.dart';
+import 'package:school/app/core/service/snackbars.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 part 'forgot_controller.g.dart';
 
 class ForgotController = _ForgotControllerBase with _$ForgotController;
 
 abstract class _ForgotControllerBase with Store {
-  final FormErrorState error = FormErrorState();
+  AuthRepository _authRepository = AuthRepository();
+  GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController emailController = TextEditingController();
 
-  @observable
-  String email = "";
-
-  @action
-  validateEmail(String value) {
-    error.email = isEmail(value) ? null : 'E-mail inválido';
-  }
-
-  void dispose() {
-    for (final d in _disposers) {
-      d();
+  Future<void> recuperarSenha(BuildContext context) async {
+    try {
+      await _authRepository.requestNewPassword(emailController.text);
+      buildSnackBarUi(context, "Email de recuperação de senha enviado");
+    } catch (e) {
+      buildSnackBarUi(context, e.toString());
     }
   }
-
-  //-----------------------------------------
-
-  late List<ReactionDisposer> _disposers;
-
-  void setupValidations() {
-    _disposers = [
-      reaction((_) => email, validateEmail),
-    ];
-  }
-
-  recuperarSenha() {
-    if (validateEmail(email) != null) {}
-  }
-}
-
-class FormErrorState = _FormErrorState with _$FormErrorState;
-
-abstract class _FormErrorState with Store {
-  @observable
-  String? email;
-
-  @computed
-  bool get hasErrors => email != null;
 }

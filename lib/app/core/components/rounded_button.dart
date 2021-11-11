@@ -5,7 +5,7 @@ import '../styles/sizes.dart';
 class RoundedButton extends StatelessWidget {
   final String text;
   final Color textColor;
-  final VoidCallback onpressed;
+  final Function()? onpressed;
 
   const RoundedButton(
       {Key? key,

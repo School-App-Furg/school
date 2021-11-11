@@ -9,33 +9,18 @@ part of 'login_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginController on _LoginControllerBase, Store {
-  final _$emailAtom = Atom(name: '_LoginControllerBase.email');
+  final _$obscureTextAtom = Atom(name: '_LoginControllerBase.obscureText');
 
   @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
+  bool get obscureText {
+    _$obscureTextAtom.reportRead();
+    return super.obscureText;
   }
 
   @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$senhaAtom = Atom(name: '_LoginControllerBase.senha');
-
-  @override
-  String get senha {
-    _$senhaAtom.reportRead();
-    return super.senha;
-  }
-
-  @override
-  set senha(String value) {
-    _$senhaAtom.reportWrite(value, super.senha, () {
-      super.senha = value;
+  set obscureText(bool value) {
+    _$obscureTextAtom.reportWrite(value, super.obscureText, () {
+      super.obscureText = value;
     });
   }
 
@@ -43,22 +28,11 @@ mixin _$LoginController on _LoginControllerBase, Store {
       ActionController(name: '_LoginControllerBase');
 
   @override
-  dynamic validateEmail(String value) {
+  void mostrarSenhaUser() {
     final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.validateEmail');
+        name: '_LoginControllerBase.mostrarSenhaUser');
     try {
-      return super.validateEmail(value);
-    } finally {
-      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic validateSenha(String value) {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.validateSenha');
-    try {
-      return super.validateSenha(value);
+      return super.mostrarSenhaUser();
     } finally {
       _$_LoginControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -67,57 +41,7 @@ mixin _$LoginController on _LoginControllerBase, Store {
   @override
   String toString() {
     return '''
-email: ${email},
-senha: ${senha}
-    ''';
-  }
-}
-
-mixin _$FormErrorState on _FormErrorState, Store {
-  Computed<bool>? _$hasErrorsComputed;
-
-  @override
-  bool get hasErrors =>
-      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
-              name: '_FormErrorState.hasErrors'))
-          .value;
-
-  final _$emailAtom = Atom(name: '_FormErrorState.email');
-
-  @override
-  String? get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String? value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$senhaAtom = Atom(name: '_FormErrorState.senha');
-
-  @override
-  String? get senha {
-    _$senhaAtom.reportRead();
-    return super.senha;
-  }
-
-  @override
-  set senha(String? value) {
-    _$senhaAtom.reportWrite(value, super.senha, () {
-      super.senha = value;
-    });
-  }
-
-  @override
-  String toString() {
-    return '''
-email: ${email},
-senha: ${senha},
-hasErrors: ${hasErrors}
+obscureText: ${obscureText}
     ''';
   }
 }

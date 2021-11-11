@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 
 import 'package:school/app/screens/auth/welcome/welcome.dart';
 import 'screens/auth/login/login_screen.dart';
@@ -26,7 +28,12 @@ class _RunState extends State<Run> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: Colors.grey[100],
       ),
-      home: Splash(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthRepository()),
+        ],
+        child: Splash(),
+      ),
       routes: {
         '/home': (context) => Home(),
         '/login': (context) => LoginScreen(),

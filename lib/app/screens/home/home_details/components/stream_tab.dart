@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/styles/colors.dart';
 import 'package:school/app/screens/home/home_details/widgets/comment_composer.dart';
 
 class StreamTab extends StatefulWidget {
@@ -50,7 +51,7 @@ class _StreamTabState extends State<StreamTab> {
               children: [
                 SizedBox(width: 10),
                 CircleAvatar(
-                  backgroundImage: AssetImage('Assets/Images/Dp/cat3.jpg'),
+                  backgroundColor: blue,
                 ),
                 SizedBox(width: 10),
                 Text(

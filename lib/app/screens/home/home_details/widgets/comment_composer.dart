@@ -33,7 +33,7 @@ class _CommentComposerState extends State<CommentComposer> {
                               SizedBox(width: 10),
                               CircleAvatar(
                                 backgroundImage:
-                                    AssetImage("${commentList[index].userDp}"),
+                                    AssetImage("${commentList[index]}"),
                               ),
                               SizedBox(width: 10),
                               Column(

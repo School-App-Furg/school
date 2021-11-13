@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
-import '../styles/colors.dart';
+import 'package:flutter/services.dart';
 
+import '../styles/colors.dart';
 import 'text_field_container.dart';
 
 class RoundedInput extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final List<TextInputFormatter>? mask;
+  final TextInputType? keyboardType;
   final TextEditingController controller;
-  final ValueChanged<String> onChanged;
   final String? Function(String?)? validator;
-  final TextInputType keyboardType;
-  const RoundedInput(
-      {Key? key,
-      required this.hintText,
-      required this.icon,
-      required this.onChanged,
-      required this.controller,
-      required this.validator,
-      this.keyboardType = TextInputType.text})
-      : super(key: key);
+
+  const RoundedInput({
+    Key? key,
+    required this.hintText,
+    required this.icon,
+    this.mask,
+    this.keyboardType,
+    required this.controller,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        controller: controller,
-        onChanged: onChanged,
-        validator: validator,
         cursorColor: blue,
         keyboardType: keyboardType,
+        inputFormatters: mask,
+        controller: controller,
+        validator: validator,
         decoration: InputDecoration(
           icon: Icon(
             icon,

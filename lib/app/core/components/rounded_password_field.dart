@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import '../styles/colors.dart';
 
 import 'text_field_container.dart';
 
+import '../styles/colors.dart';
+
 class RoundedPasswordField extends StatefulWidget {
-  final ValueChanged<String> onChanged;
+  final String hintSenha;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool obscureText;
+  final Function()? onTap;
+
   RoundedPasswordField({
     Key? key,
-    required this.onChanged,
+    required this.hintSenha,
     required this.controller,
-    required this.validator,
+    this.validator,
+    required this.obscureText,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -19,31 +25,26 @@ class RoundedPasswordField extends StatefulWidget {
 }
 
 class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
-  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
+        obscureText: widget.obscureText,
+        cursorColor: black,
         controller: widget.controller,
-        obscureText: _obscureText,
         validator: widget.validator,
-        onChanged: widget.onChanged,
-        cursorColor: blue,
         decoration: InputDecoration(
+          errorStyle: TextStyle(height: 0.05),
           border: InputBorder.none,
-          hintText: "Senha",
+          hintText: widget.hintSenha,
           icon: Icon(
             Icons.lock,
-            color: white,
+            color: primary,
           ),
           suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
+            onTap: widget.onTap,
             child: new Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off),
+                widget.obscureText ? Icons.visibility_off : Icons.visibility),
           ),
         ),
       ),

@@ -16,10 +16,11 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         color: Colors.black,
       ),
       title: const Text(
-        'School App',
+        'Escola São Bento',
         style: TextStyle(
           color: Colors.black,
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
+          fontSize: 17,
         ),
       ),
       actions: [

@@ -57,7 +57,7 @@ class HomeDrawer extends StatelessWidget {
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text("Jardel")
+                    Text("Administração\nEscolar")
                   ],
                 ),
               ),
@@ -79,6 +79,14 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      leading: Icon(
+                        Icons.app_registration_rounded,
+                        color: Colors.black,
+                      ),
+                      title: Text("Cadastro\nProfessor/Aluno"),
                     ),
                     ListTile(
                       onTap: () {},

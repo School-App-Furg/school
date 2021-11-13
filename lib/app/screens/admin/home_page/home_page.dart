@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import '../classroom/classroom_page.dart';
+import 'package:school/app/core/components/popup_menu.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 
@@ -28,15 +28,6 @@ class _HomePageState extends State<HomePage> {
         itemCount: controller.classRoomList.length,
         itemBuilder: (context, int index) {
           return GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ClassRoomPage(
-                  uiColor: controller.classRoomList[index].uiColor,
-                  disciplina: controller.classRoomList[index].disciplina,
-                  bannerImg: controller.classRoomList[index].bannerImg,
-                ),
-              ),
-            ),
             child: Stack(
               children: [
                 Container(
@@ -62,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.classRoomList[index].disciplina,
+                                controller.classRoomList[index].anoTurma,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 22.0,
@@ -73,18 +64,31 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => PopupMenu(),
                             icon: const Icon(Icons.more_vert),
                             color: Colors.white,
                           ),
                         ],
                       ),
-                      Text(
-                        controller.classRoomList[index].professor,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.classRoomList[index].sala,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            controller.classRoomList[index].turmas,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

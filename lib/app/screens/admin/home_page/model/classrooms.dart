@@ -4,17 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ClassRooms {
-  String disciplina;
-  String descricao;
-  String professor;
+  String anoTurma;
+  String sala;
+  String turmas;
   NetworkImage bannerImg;
   Color uiColor = Colors.red;
   List<double> clrs = [];
 
   ClassRooms({
-    required this.disciplina,
-    required this.descricao,
-    required this.professor,
+    required this.anoTurma,
+    required this.sala,
+    required this.turmas,
     required this.bannerImg,
     required this.clrs,
   });

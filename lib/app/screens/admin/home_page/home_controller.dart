@@ -12,71 +12,42 @@ abstract class _HomeControllerBase with Store {
 
   List<ClassRooms> classRoomList = [
     ClassRooms(
-      disciplina: "Biologia",
-      descricao: "second year",
-      professor: "Alice",
-      bannerImg: NetworkImage(
-          "https://www.gstatic.com/classroom/themes/img_breakfast.jpg"),
+      anoTurma: "5º" + " Ano",
+      sala: "Sala " + "01",
+      turmas: "Turma(s) " + "A e B",
+      bannerImg:
+          NetworkImage("https://gstatic.com/classroom/themes/USHistory.jpg"),
       clrs: [255, 233, 116, 57],
     ),
     ClassRooms(
-      disciplina: "Inglês",
-      descricao: "second year",
-      professor: "Peter Parker",
+      anoTurma: "6º" + " Ano",
+      sala: "Sala " + "02",
+      turmas: "Turma(s) " + "A e B",
       bannerImg: NetworkImage(
-          "https://www.gstatic.com/classroom/themes/img_bookclub.jpg"),
+          "https://gstatic.com/classroom/themes/img_backtoschool.jpg"),
       clrs: [255, 101, 237, 153],
     ),
     ClassRooms(
-      disciplina: "História",
-      descricao: "second year",
-      professor: "Felipe",
+      anoTurma: "6º" + " Ano",
+      sala: "Sala " + "03",
+      turmas: "Turma(s) " + "A e B",
       bannerImg:
-          NetworkImage("https://www.gstatic.com/classroom/themes/Honors.jpg"),
+          NetworkImage("https://gstatic.com/classroom/themes/Honors.jpg"),
       clrs: [255, 111, 27, 198],
     ),
     ClassRooms(
-        disciplina: "Matemática",
-        descricao: "first year",
-        professor: "Karina",
+        anoTurma: "7º" + " Ano",
+        sala: "Sala " + "04",
+        turmas: "Turma(s) " + "A e B",
         bannerImg: NetworkImage(
-            "https://www.gstatic.com/classroom/themes/img_learnlanguage.jpg"),
+            "https://gstatic.com/classroom/themes/WorldStudies.jpg"),
         clrs: [255, 0, 0, 0]),
     ClassRooms(
-        disciplina: "Geografia",
-        descricao: "first year",
-        professor: "Leonel",
-        bannerImg: NetworkImage(
-            "https://www.gstatic.com/classroom/themes/img_code.jpg"),
+        anoTurma: "8º" + " Ano",
+        sala: "Sala " + "05",
+        turmas: "Turma(s) " + "A e B",
+        bannerImg:
+            NetworkImage("https://gstatic.com/classroom/themes/Biology.jpg"),
         clrs: [255, 102, 153, 204]),
-    ClassRooms(
-      disciplina: "Química",
-      descricao: "first year",
-      professor: "Thor",
-      bannerImg: NetworkImage(
-          "https://www.gstatic.com/classroom/themes/Chemistry.jpg"),
-      clrs: [255, 111, 27, 198],
-    ),
-  ];
-
-  List<Comments> commentList = [
-    Comments(
-        userName: "Maria", date: "02/01/21", comment: "Aula no laboratório"),
-    Comments(userName: "Pedro", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Bro Cat", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Michael Cat", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Wild Cat", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Kit Cat", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Copy Cat", date: "02/01/21", comment: "Aula top"),
-    Comments(userName: "Kitty Cat", date: "02/01/21", comment: "Aula top"),
-  ];
-
-  List<ClassWorks> classWorkList = [
-    ClassWorks(topic: "Avaliação 1", dateTime: "01/01/21"),
-    ClassWorks(topic: "Avaliação 2", dateTime: "01/01/21"),
-    ClassWorks(topic: "Avaliação 3", dateTime: "01/01/21"),
-    ClassWorks(topic: "Avaliação 4", dateTime: "01/01/21"),
-    ClassWorks(topic: "Avaliação 5", dateTime: "01/01/21"),
-    ClassWorks(topic: "Avaliação 6", dateTime: "01/01/21"),
   ];
 }

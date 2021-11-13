@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'components/classwork_tab/classwork_tab.dart';
+import 'components/people_tab/people_tab.dart';
 
-import 'components/classwork_tab.dart';
-import 'components/people_tab.dart';
-import 'components/stream_tab.dart';
+import 'classroom_controller.dart';
+import 'components/stream_tab/stream_tab.dart';
 
 class ClassRoomPage extends StatefulWidget {
+  final ClassroomController controller = ClassroomController();
   final NetworkImage bannerImg;
   final String disciplina;
   final Color uiColor;
@@ -29,15 +31,16 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    String? disciplina = widget.disciplina;
-    NetworkImage? bannerImg = widget.bannerImg;
     final tabs = [
       StreamTab(
-        bannerImg: bannerImg,
-        disciplina: disciplina,
+        controller: widget.controller,
+        bannerImg: widget.bannerImg,
+        disciplina: widget.disciplina,
       ),
-      ClassWork(),
-      PeopleTab()
+      ClassWork(controller: widget.controller),
+      PeopleTab(
+        controller: widget.controller,
+      )
     ];
     return Scaffold(
       appBar: AppBar(

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../../../core/styles/colors.dart';
-import '../widgets/comment_composer.dart';
+import '../../../../../core/styles/colors.dart';
+import 'components/comment_composer.dart';
+import '../../classroom_controller.dart';
 
 class StreamTab extends StatefulWidget {
+  final ClassroomController controller;
   final NetworkImage bannerImg;
   final String disciplina;
 
-  StreamTab({required this.bannerImg, required this.disciplina});
+  StreamTab(
+      {required this.bannerImg,
+      required this.disciplina,
+      required this.controller});
 
   @override
   _StreamTabState createState() => _StreamTabState();
@@ -41,26 +46,29 @@ class _StreamTabState extends State<StreamTab> {
           ),
         ),
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            height: 60,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)]),
-            child: Row(
-              children: [
-                SizedBox(width: 10),
-                CircleAvatar(
-                  backgroundColor: blue,
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "Compartilhar na turma...",
-                  style: TextStyle(color: Colors.grey),
-                )
-              ],
-            )),
-        CommentComposer(),
+          margin: EdgeInsets.symmetric(horizontal: 15),
+          height: 60,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)]),
+          child: Row(
+            children: [
+              SizedBox(width: 10),
+              CircleAvatar(
+                backgroundColor: blue,
+              ),
+              SizedBox(width: 10),
+              Text(
+                "Compartilhar na turma...",
+                style: TextStyle(color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+        CommentComposer(
+          controller: widget.controller,
+        ),
       ],
     );
   }

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/service/navigation.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/screens/repository/auth_repository.dart';
-import 'package:school/app/screens/repository/user_repository.dart';
+import '../../../core/service/navigation.dart';
+import '../../../core/service/snackbars.dart';
+import '../../repository/auth_repository.dart';
+import '../../repository/user_repository.dart';
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;

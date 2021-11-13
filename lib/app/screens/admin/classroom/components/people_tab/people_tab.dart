@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../data/classrooms.dart';
-import '../../data/comments.dart';
-import '../widgets/profile_tile.dart';
+import '../../classroom_controller.dart';
+
+import 'components/profile_tile.dart';
 
 class PeopleTab extends StatefulWidget {
+  final ClassroomController controller;
+
+  const PeopleTab({Key? key, required this.controller}) : super(key: key);
   @override
   _PeopleTabState createState() => _PeopleTabState();
 }
@@ -29,7 +32,7 @@ class _PeopleTabState extends State<PeopleTab> {
           color: Colors.redAccent,
         ),
         Profile(
-          name: classRoomList[0].professor,
+          name: widget.controller.classRoomList[0].professor,
         ),
         SizedBox(width: 30),
         Container(
@@ -47,13 +50,15 @@ class _PeopleTabState extends State<PeopleTab> {
           color: Colors.redAccent,
         ),
         Expanded(
-            child: ListView.builder(
-                itemCount: commentList.length,
-                itemBuilder: (context, int index) {
-                  return Profile(
-                    name: commentList[index].userName,
-                  );
-                }))
+          child: ListView.builder(
+            itemCount: widget.controller.commentList.length,
+            itemBuilder: (context, int index) {
+              return Profile(
+                name: widget.controller.commentList[index].userName,
+              );
+            },
+          ),
+        )
       ],
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:school/app/core/service/navigation.dart';
+import '../../../core/service/navigation.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';

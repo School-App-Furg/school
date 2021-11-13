@@ -5,9 +5,9 @@ import 'components/people_tab.dart';
 import 'components/stream_tab.dart';
 
 class ClassRoomPage extends StatefulWidget {
-  NetworkImage bannerImg;
-  String disciplina;
-  Color uiColor;
+  final NetworkImage bannerImg;
+  final String disciplina;
+  final Color uiColor;
 
   ClassRoomPage(
       {required this.disciplina,
@@ -71,21 +71,12 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            title: Text('Presenças'),
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Presenças'),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            title: Text('Avaliações'),
+            label: 'Avaliações',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            title: Text(
-              'Pessoas',
-              style: TextStyle(),
-            ),
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Pessoas'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.redAccent,

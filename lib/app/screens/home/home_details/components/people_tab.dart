@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/data/classrooms.dart';
-import 'package:school/app/screens/home/data/comments.dart';
-import 'package:school/app/screens/home/home_details/widgets/profile_tile.dart';
+import '../../data/classrooms.dart';
+import '../../data/comments.dart';
+import '../widgets/profile_tile.dart';
 
 class PeopleTab extends StatefulWidget {
   @override

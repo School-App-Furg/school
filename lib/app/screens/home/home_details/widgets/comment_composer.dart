@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/data/comments.dart';
+import '../../data/comments.dart';
 
 class CommentComposer extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/data/classworks.dart';
+import '../../data/classworks.dart';
 
 class ClassWork extends StatefulWidget {
   @override

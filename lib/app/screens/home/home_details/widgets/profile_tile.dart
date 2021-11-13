@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
-  String name;
+  final String name;
 
   Profile({required this.name});
 

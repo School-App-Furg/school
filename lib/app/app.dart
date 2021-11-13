@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/home_page.dart';
-import 'package:school/app/screens/splash/splash_screen.dart';
+import 'screens/home/home_page.dart';
+import 'screens/splash/splash_screen.dart';
 import 'screens/auth/login/login_screen.dart';
 import 'screens/auth/forgot_password/forgot.dart';
 import 'screens/auth/register/register.dart';

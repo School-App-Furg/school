@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/screens/home/home_details/widgets/comment_composer.dart';
+import '../../../../core/styles/colors.dart';
+import '../widgets/comment_composer.dart';
 
 class StreamTab extends StatefulWidget {
-  NetworkImage bannerImg;
-  String disciplina;
+  final NetworkImage bannerImg;
+  final String disciplina;
 
   StreamTab({required this.bannerImg, required this.disciplina});
 

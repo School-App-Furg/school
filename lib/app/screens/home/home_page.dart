@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/home/data/classrooms.dart';
+import 'data/classrooms.dart';
 
 import 'home_controller.dart';
 import 'home_details/class_room_page.dart';

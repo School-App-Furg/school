@@ -1,6 +1,5 @@
 class Comments {
   String userName;
-
   String date;
   String comment;
 

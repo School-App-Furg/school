@@ -2,11 +2,11 @@ import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:school/app/core/components/rounded_password_field.dart';
+import '../../../core/components/rounded_password_field.dart';
 
-import 'package:school/app/core/service/navigation.dart';
-import 'package:school/app/core/service/validators.dart';
-import 'package:school/app/screens/auth/register/register_controller.dart';
+import '../../../core/service/navigation.dart';
+import '../../../core/service/validators.dart';
+import 'register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';

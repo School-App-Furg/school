@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:school/app/core/service/navigation.dart';
-import 'package:school/app/screens/repository/auth_repository.dart';
+import '../../../core/service/navigation.dart';
+import '../../repository/auth_repository.dart';
 
 class Splash extends StatefulWidget {
   @override

@@ -25,7 +25,7 @@ String? validateSenha(value) {
   if (isNull(value) || value.isEmpty)
     return 'Senha precisa ser preenchida';
   else if (value.length < 6)
-    return 'Sua senha necessita ter no mínimo 6 caracteres';
+    return 'Mínimo 6 caracteres';
   else
     return null;
 }

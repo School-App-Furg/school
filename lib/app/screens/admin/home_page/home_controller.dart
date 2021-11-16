@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'model/classrooms.dart';
-import 'model/classworks.dart';
-import 'model/comments.dart';
 part '../home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:school/app/screens/repository/auth_repository.dart';
 
-import 'package:school/app/screens/auth/welcome/welcome.dart';
-import 'screens/auth/login/login_screen.dart';
-import 'screens/auth/splash/splash_screen.dart';
-import 'screens/home/home.dart';
-
-import 'screens/auth/forgot_password/forgot.dart';
-
-import 'screens/auth/register/register.dart';
+import 'screens/admin/home_page/home_page.dart';
+import 'screens/repository/auth_repository.dart';
 
 import 'screens/auth/welcome/welcome.dart';
+import 'screens/auth/login/login_screen.dart';
+import 'screens/auth/splash/splash_screen.dart';
+import 'screens/auth/forgot_password/forgot.dart';
+import 'screens/auth/register/register.dart';
 
 class Run extends StatefulWidget {
   @override
@@ -35,7 +32,7 @@ class _RunState extends State<Run> {
         child: Splash(),
       ),
       routes: {
-        '/home': (context) => Home(),
+        '/home': (context) => HomePage(),
         '/login': (context) => LoginScreen(),
         '/welcome': (context) => Welcome(),
         '/register': (context) => Register(),

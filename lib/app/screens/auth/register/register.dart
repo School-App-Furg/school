@@ -1,6 +1,7 @@
 import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/components/rounded_password_field.dart';
 
@@ -92,12 +93,16 @@ class _RegisterState extends State<Register> {
                       validator: validateEmail,
                       icon: Icons.email,
                     ),
-                    RoundedPasswordField(
-                        hintSenha: "Senha",
-                        controller: _controller.senhaController,
-                        validator: validateSenha,
-                        obscureText: _controller.obscureText,
-                        onTap: _controller.mostrarSenhaUser),
+                    Observer(
+                      builder: (_) {
+                        return RoundedPasswordField(
+                            hintSenha: "Senha",
+                            controller: _controller.senhaController,
+                            validator: validateSenha,
+                            obscureText: _controller.obscureText,
+                            onTap: _controller.mostrarSenhaUser);
+                      },
+                    ),
                     RoundedButton(
                       text: "CADASTRAR",
                       onpressed: () => _controller.cadastrar(context),

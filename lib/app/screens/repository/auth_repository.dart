@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:school/app/core/errors/auth_error.dart';
 
 class AuthRepository extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,8 +34,8 @@ class AuthRepository extends ChangeNotifier {
       );
 
       return userCredential.user;
-    } on PlatformException catch (e) {
-      throw Exception(e);
+    } on FirebaseAuthException catch (e) {
+      throw authErrorHandler(e);
     }
   }
 
@@ -47,8 +47,8 @@ class AuthRepository extends ChangeNotifier {
         password: password,
       );
       return userCredential.user;
-    } on PlatformException catch (e) {
-      throw Exception(e);
+    } on FirebaseAuthException catch (e) {
+      throw authErrorHandler(e);
     }
   }
 

@@ -44,7 +44,6 @@ abstract class _RegisterControllerBase with Store {
             user.uid, nomeEscolaController.text, cnpjController.text, 0);
         if (inserted) {
           navigateToInsideApp(context);
-          overlay.hide();
         } else {
           overlay.hide();
           buildSnackBarUi(context, "Seu usuário não foi cadastrado!");

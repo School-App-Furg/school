@@ -9,20 +9,6 @@ part of 'login_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginController on _LoginControllerBase, Store {
-<<<<<<< HEAD
-  final _$isLoadingAtom = Atom(name: '_LoginControllerBase.isLoading');
-
-  @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
-  }
-
-  @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
-=======
   final _$emailControllerAtom =
       Atom(name: '_LoginControllerBase.emailController');
 
@@ -67,7 +53,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
   set formKey(GlobalKey<FormState> value) {
     _$formKeyAtom.reportWrite(value, super.formKey, () {
       super.formKey = value;
->>>>>>> develop
     });
   }
 
@@ -84,13 +69,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     _$obscureTextAtom.reportWrite(value, super.obscureText, () {
       super.obscureText = value;
     });
-  }
-
-  final _$loginAsyncAction = AsyncAction('_LoginControllerBase.login');
-
-  @override
-  Future<dynamic> login(BuildContext context) {
-    return _$loginAsyncAction.run(() => super.login(context));
   }
 
   final _$_LoginControllerBaseActionController =
@@ -110,13 +88,9 @@ mixin _$LoginController on _LoginControllerBase, Store {
   @override
   String toString() {
     return '''
-<<<<<<< HEAD
-isLoading: ${isLoading},
-=======
 emailController: ${emailController},
 senhaController: ${senhaController},
 formKey: ${formKey},
->>>>>>> develop
 obscureText: ${obscureText}
     ''';
   }

@@ -24,9 +24,6 @@ abstract class _LoginControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
 
   @observable
-  bool isLoading = false;
-
-  @observable
   bool obscureText = true;
 
   @action
@@ -45,7 +42,6 @@ abstract class _LoginControllerBase with Store {
         // ignore: unused_local_variable
         int type = await _userRepository.getUserType(user!.uid);
         navigateToInsideApp(context);
-        overlay.hide();
       } catch (e) {
         overlay.hide();
         buildSnackBarUi(context, e.toString());

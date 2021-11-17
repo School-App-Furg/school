@@ -23,7 +23,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final LoginController _controller = LoginController();
+  LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {

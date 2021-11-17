@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:school/app/core/components/loader/loader.dart';
 
 import '../../../core/service/navigation.dart';
+
 import '../../../core/service/snackbars.dart';
 import '../../repository/auth_repository.dart';
 import '../../repository/user_repository.dart';
@@ -14,8 +15,12 @@ class LoginController = _LoginControllerBase with _$LoginController;
 abstract class _LoginControllerBase with Store {
   AuthRepository _authRepository = AuthRepository();
   UsersRepository _userRepository = UsersRepository();
+
+  @observable
   TextEditingController emailController = TextEditingController();
+  @observable
   TextEditingController senhaController = TextEditingController();
+  @observable
   GlobalKey<FormState> formKey = GlobalKey();
 
   @observable

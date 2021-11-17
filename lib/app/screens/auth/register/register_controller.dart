@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/components/loader/loader.dart';
 import '../../../core/service/navigation.dart';
 import '../../../core/service/snackbars.dart';
 
@@ -29,8 +30,11 @@ abstract class _RegisterControllerBase with Store {
 
   //função de cadastro do usuário
   cadastrar(BuildContext context) async {
+    print(cnpjController.text.trim());
     if (formKey.currentState!.validate()) {
+      final overlay = LoadingOverlay.of(context);
       try {
+        overlay.show();
         User? user = await _authRepository.createUserWithEmailPass(
           emailController.text,
           senhaController.text,
@@ -41,9 +45,11 @@ abstract class _RegisterControllerBase with Store {
         if (inserted) {
           navigateToInsideApp(context);
         } else {
+          overlay.hide();
           buildSnackBarUi(context, "Seu usuário não foi cadastrado!");
         }
       } catch (e) {
+        overlay.hide();
         buildSnackBarUi(context, e.toString());
       }
     }

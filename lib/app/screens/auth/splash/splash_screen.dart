@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:school/app/core/styles/sizes.dart';
 
 import '../../../core/service/navigation.dart';
 import '../../repository/auth_repository.dart';
@@ -35,12 +36,22 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFf2f2f2),
-      child: Center(
-        child: Icon(
-          FontAwesomeIcons.graduationCap,
-          size: 70,
-          color: Color(0xFFdbdbdb),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            FontAwesomeIcons.graduationCap,
+            size: 70,
+            color: Colors.black26,
+          ),
+          SizedBox(
+            height: width(context, .4),
+          ),
+          CircularProgressIndicator(
+            color: Colors.black26,
+          )
+        ],
       ),
     );
   }

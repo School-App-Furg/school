@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:school/app/core/service/navigation.dart';
+import 'package:school/app/screens/repository/auth_repository.dart';
 import '../../../core/styles/sizes.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -8,6 +10,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthRepository _authRepository = AuthRepository();
     String _userAvatar = "https://randomuser.me/api/portraits/men/46.jpg";
     return Container(
       width: width(context, 0.8),
@@ -37,10 +40,13 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                    Colors.grey.withOpacity(0.0),
-                    Colors.white.withOpacity(0.2),
-                  ])),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.grey.withOpacity(0.0),
+                        Colors.white.withOpacity(0.2),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -97,7 +103,10 @@ class HomeDrawer extends StatelessWidget {
                       title: Text("Ajustes"),
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        _authRepository.logout();
+                        navigateToLoginPage(context);
+                      },
                       leading: Icon(
                         Icons.logout,
                         color: Colors.black,

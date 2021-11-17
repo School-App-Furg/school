@@ -29,6 +29,7 @@ abstract class _RegisterControllerBase with Store {
 
   //função de cadastro do usuário
   cadastrar(BuildContext context) async {
+    print(cnpjController.text.trim());
     if (formKey.currentState!.validate()) {
       try {
         User? user = await _authRepository.createUserWithEmailPass(

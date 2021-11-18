@@ -55,10 +55,14 @@ class _RegisterState extends State<Register> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      "assets/icons/welcome2.svg",
+                    Image.asset(
+                      "assets/images/welcome_ok.png",
                       height: widthAll(context),
                     ),
+                    /*SvgPicture.asset(
+                      "assets/icons/welcome2.svg",
+                      height: widthAll(context),
+                    ),*/
                     Text(
                       "CADASTRE A SUA ESCOLA",
                       style: TextStyle(fontWeight: FontWeight.bold),

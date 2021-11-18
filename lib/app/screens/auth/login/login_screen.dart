@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Observer(
       builder: (_) {
         return Scaffold(
@@ -62,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: height(context, 0.03),
                         ),
-                        SvgPicture.asset(
-                          "assets/icons/welcome2.svg",
-                          width: widthAll(context),
-                        ),
+                        Image.asset(
+                      "assets/images/welcome_ok.png",
+                      width: widthAll(context),
+                    ),
                         Text(
                           "LOGIN",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -89,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _controller.mostrarSenhaUser();
                               },
                             );
+
                           },
                         ),
                         ForgotPassword(

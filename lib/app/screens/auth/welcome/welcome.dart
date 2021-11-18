@@ -32,8 +32,12 @@ class Welcome extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: height(context, 0.05)),
-                  SvgPicture.asset("assets/icons/welcome2.svg",
-                      width: widthAll(context)),
+                  Image.asset(
+                    "assets/images/welcome_ok.png",
+                    width: widthAll(context),
+                  ),
+                  /*SvgPicture.asset("assets/icons/welcome2.svg",
+                      width: widthAll(context)),*/
                   SizedBox(
                     height: height(context, 0.05),
                   ),

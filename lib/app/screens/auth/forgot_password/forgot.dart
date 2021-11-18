@@ -51,10 +51,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      "assets/icons/welcome2.svg",
+                    Image.asset(
+                      "assets/images/welcome_ok.png",
                       height: widthAll(context),
                     ),
+                    /* SvgPicture.asset(
+                      "assets/icons/welcome2.svg",
+                      height: widthAll(context),
+                    ),*/
                     Text(
                       "RECUPERAR SENHA",
                       style: TextStyle(fontWeight: FontWeight.bold),

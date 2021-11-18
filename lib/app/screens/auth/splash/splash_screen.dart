@@ -35,22 +35,28 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFf2f2f2),
+
+      color: Color(0xFF5f9bbb),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             FontAwesomeIcons.graduationCap,
-            size: 70,
-            color: Colors.black26,
+            size: width(context, .21),
+            color: Color(0xFFdbdbdb),
           ),
           SizedBox(
-            height: width(context, .4),
+            height: width(context, .10),
           ),
-          CircularProgressIndicator(
-            color: Colors.black26,
-          )
+          SizedBox(
+            width: width(context, .10),
+            height: width(context, .10),
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          ),
+
         ],
       ),
     );

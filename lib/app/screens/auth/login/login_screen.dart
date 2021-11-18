@@ -58,10 +58,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: height(context, 0.03),
                     ),
-                    SvgPicture.asset(
-                      "assets/icons/welcome2.svg",
+                    Image.asset(
+                      "assets/images/welcome_ok.png",
                       width: widthAll(context),
                     ),
+                    /* SvgPicture.asset(
+                      "assets/icons/welcome2.svg",
+                      width: widthAll(context),
+                    ),*/
                     Text(
                       "LOGIN",
                       style: TextStyle(fontWeight: FontWeight.bold),

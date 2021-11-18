@@ -35,6 +35,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       color: Color(0xFF5f9bbb),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,6 +56,7 @@ class _SplashState extends State<Splash> {
               color: Colors.white,
             ),
           ),
+
         ],
       ),
     );

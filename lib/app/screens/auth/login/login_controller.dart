@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader.dart';
+
+import 'package:school/app/core/components/loader/loader_default.dart';
 
 import '../../../core/service/snackbars.dart';
 import '../../repository/auth_repository.dart';
@@ -33,17 +34,17 @@ abstract class _LoginControllerBase with Store {
   // funão que verifica o os dados de login e autoriza o acesso
   Future<void> login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      final overlay = LoadingOverlay.of(context);
+      final loader = LoaderDefault();
       try {
-        overlay.show();
+        loader.show();
         User? user = await _authRepository.signInEmailAndPassword(
             emailController.text, senhaController.text);
         // ignore: unused_local_variable
         int type = await _userRepository.getUserType(user!.uid);
-        overlay.hide();
+        loader.hide();
         Modular.to.pushReplacementNamed("/admin/");
       } catch (e) {
-        overlay.hide();
+        loader.hide();
         buildSnackBarUi(context, e.toString());
       }
     }

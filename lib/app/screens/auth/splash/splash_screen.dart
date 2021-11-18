@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+
 import 'package:school/app/core/styles/sizes.dart';
 
-import '../../../core/service/navigation.dart';
 import '../../repository/auth_repository.dart';
 
 class Splash extends StatefulWidget {
@@ -17,14 +17,14 @@ class _SplashState extends State<Splash> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback(
       (timeStamp) async {
-        final auth = Provider.of<AuthRepository>(context, listen: false);
+        final auth = Modular.get<AuthRepository>();
         Future.delayed(
           const Duration(seconds: 2),
           () {
             if (auth.usuario == null) {
-              navigateToWelcomePage(context);
+              Modular.to.pushNamed("/auth/");
             } else {
-              navigateToHomePage(context);
+              Modular.to.pushReplacementNamed("/admin/");
             }
           },
         );

@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:school/app/core/components/loader/loader.dart';
-
-import '../../../core/service/navigation.dart';
 
 import '../../../core/service/snackbars.dart';
 import '../../repository/auth_repository.dart';
@@ -41,7 +40,8 @@ abstract class _LoginControllerBase with Store {
             emailController.text, senhaController.text);
         // ignore: unused_local_variable
         int type = await _userRepository.getUserType(user!.uid);
-        navigateToInsideApp(context);
+        overlay.hide();
+        Modular.to.pushReplacementNamed("/admin/");
       } catch (e) {
         overlay.hide();
         buildSnackBarUi(context, e.toString());

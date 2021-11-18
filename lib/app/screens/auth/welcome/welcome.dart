@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../core/service/navigation.dart';
 
 import '../../../core/components/rounded_button.dart';
 import '../../../core/styles/colors.dart';
@@ -40,11 +40,11 @@ class Welcome extends StatelessWidget {
                   RoundedButton(
                       text: "LOGIN",
                       textColor: white,
-                      onpressed: () => navigateToLoginPage(context)),
+                      onpressed: () => Modular.to.pushNamed("./login")),
                   RoundedButton(
                     text: "CADASTRE SUA ESCOLA",
                     textColor: primary,
-                    onpressed: () => navigateToRegisterPage(context),
+                    onpressed: () => Modular.to.pushNamed("./register"),
                   ),
                 ],
               ),

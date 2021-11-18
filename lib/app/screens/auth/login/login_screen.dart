@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/components/already_have_an_account_button.dart';
@@ -7,7 +8,7 @@ import '../../../core/components/forgot_password_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/components/rounded_password_field.dart';
-import '../../../core/service/navigation.dart';
+
 import '../../../core/service/validators.dart';
 
 import '../../../core/styles/colors.dart';
@@ -91,8 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         ForgotPassword(
-                          press: () => navigateToForgotPage(context),
-                        ),
+                            press: () => Modular.to.pushNamed("./forgot")),
                         SizedBox(height: height(context, 0.03)),
                         RoundedButton(
                           text: "LOGIN",
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height(context, 0.03),
                         ),
                         AlreadyHaveAnAccountCheck(
-                          press: () => navigateToRegisterPage(context),
+                          press: () => Modular.to.pushNamed("./register"),
                         ),
                       ],
                     ),

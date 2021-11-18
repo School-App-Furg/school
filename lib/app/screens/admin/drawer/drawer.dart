@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:school/app/core/service/navigation.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:school/app/screens/repository/auth_repository.dart';
 import '../../../core/styles/sizes.dart';
 
@@ -105,7 +105,7 @@ class HomeDrawer extends StatelessWidget {
                     ListTile(
                       onTap: () {
                         _authRepository.logout();
-                        navigateToLoginPage(context);
+                        Modular.to.pushReplacementNamed("/auth/");
                       },
                       leading: Icon(
                         Icons.logout,

@@ -45,6 +45,7 @@ abstract class _RegisterControllerBase with Store {
         bool inserted = await _userRepository.insertUser(
             user.uid, nomeEscolaController.text, cnpjController.text, 0);
         if (inserted) {
+          loader.hide();
           Modular.to.pushReplacementNamed("/admin/");
         } else {
           loader.hide();

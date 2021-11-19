@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader.dart';
-import '../../../core/service/navigation.dart';
+
+import 'package:school/app/core/components/loader/loader_default.dart';
+
 import '../../../core/service/snackbars.dart';
 
 import '../../repository/auth_repository.dart';
@@ -32,9 +34,9 @@ abstract class _RegisterControllerBase with Store {
   cadastrar(BuildContext context) async {
     print(cnpjController.text.trim());
     if (formKey.currentState!.validate()) {
-      final overlay = LoadingOverlay.of(context);
+      final loader = LoaderDefault();
       try {
-        overlay.show();
+        loader.show();
         User? user = await _authRepository.createUserWithEmailPass(
           emailController.text,
           senhaController.text,
@@ -43,13 +45,13 @@ abstract class _RegisterControllerBase with Store {
         bool inserted = await _userRepository.insertUser(
             user.uid, nomeEscolaController.text, cnpjController.text, 0);
         if (inserted) {
-          navigateToInsideApp(context);
+          Modular.to.pushReplacementNamed("/admin/");
         } else {
-          overlay.hide();
+          loader.hide();
           buildSnackBarUi(context, "Seu usuário não foi cadastrado!");
         }
       } catch (e) {
-        overlay.hide();
+        loader.hide();
         buildSnackBarUi(context, e.toString());
       }
     }

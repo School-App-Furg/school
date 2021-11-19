@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/forgot_password_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/components/rounded_password_field.dart';
-import '../../../core/service/navigation.dart';
+
 import '../../../core/service/validators.dart';
 
 import '../../../core/styles/colors.dart';
@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Observer(
       builder: (_) {
         return Scaffold(
@@ -63,9 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height(context, 0.03),
                         ),
                         Image.asset(
-                      "assets/images/welcome_ok.png",
-                      width: widthAll(context),
-                    ),
+                          "assets/images/welcome_ok.png",
+                          width: widthAll(context),
+                        ),
                         Text(
                           "LOGIN",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -89,12 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _controller.mostrarSenhaUser();
                               },
                             );
-
                           },
                         ),
                         ForgotPassword(
-                          press: () => navigateToForgotPage(context),
-                        ),
+                            press: () => Modular.to.pushNamed("./forgot")),
                         SizedBox(height: height(context, 0.03)),
                         RoundedButton(
                           text: "LOGIN",
@@ -105,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height(context, 0.03),
                         ),
                         AlreadyHaveAnAccountCheck(
-                          press: () => navigateToRegisterPage(context),
+                          press: () => Modular.to.pushNamed("./register"),
                         ),
                       ],
                     ),

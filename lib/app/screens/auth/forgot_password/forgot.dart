@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../core/service/navigation.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
@@ -80,9 +80,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       height: height(context, 0.03),
                     ),
                     AlreadyHaveAnAccountCheck(
-                      login: false,
-                      press: () => navigateToLoginPage(context),
-                    ),
+                        login: false,
+                        press: () => Modular.to.pushNamed("./login")),
                   ],
                 ),
               ),

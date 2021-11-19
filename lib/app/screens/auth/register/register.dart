@@ -2,10 +2,10 @@ import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../core/components/rounded_password_field.dart';
 
-import '../../../core/service/navigation.dart';
 import '../../../core/service/validators.dart';
 import 'register_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
@@ -116,7 +116,7 @@ class _RegisterState extends State<Register> {
                       height: height(context, 0.05),
                       child: AlreadyHaveAnAccountCheck(
                         login: false,
-                        press: () => navigateToLoginPage(context),
+                        press: () => Modular.to.pushNamed("./login"),
                       ),
                     ),
                   ],

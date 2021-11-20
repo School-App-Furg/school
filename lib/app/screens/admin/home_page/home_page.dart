@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:school/app/core/components/popup_menu.dart';
+
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 
@@ -14,6 +15,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    controller.getUserInformations();
+  }
+
   final HomeController controller = HomeController();
 
   @override
@@ -25,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBarHome(
         onPressedDrawer: () =>
             controller.scaffoldKey.currentState?.openDrawer(),
-        text: 'Escola São Bento - Admin',
+        text: controller.userModel!.name,
         onPressedHistoric: () => Modular.to.pushNamed('./historic'),
         onPressedSubject: () => Modular.to.pushNamed('./register-subjects'),
       ),
@@ -55,19 +62,13 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                controller.classRoomList[index].anoTurma,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 5.0),
-                            ],
+                          Text(
+                            controller.classRoomList[index].anoTurma,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           IconButton(
                             onPressed: () => PopupMenu(),

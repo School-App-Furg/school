@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:school/app/core/components/popup_menu.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
@@ -23,12 +22,7 @@ class _HomePageState extends State<HomePage> {
       drawerScrimColor: Colors.transparent,
       drawer: HomeDrawer(),
       appBar: AppBarHome(
-        onPressedDrawer: () =>
-            controller.scaffoldKey.currentState?.openDrawer(),
-        text: 'Escola São Bento - Admin',
-        onPressedHistoric: () => Modular.to.pushNamed('./historic'),
-        onPressedSubject: () => Modular.to.pushNamed('./register-subjects'),
-      ),
+          onPressed: () => controller.scaffoldKey.currentState?.openDrawer()),
       body: ListView.builder(
         padding: EdgeInsets.all(10.0),
         itemCount: controller.classRoomList.length,

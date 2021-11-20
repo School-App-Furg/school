@@ -39,10 +39,17 @@ abstract class _LoginControllerBase with Store {
         loader.show();
         User? user = await _authRepository.signInEmailAndPassword(
             emailController.text, senhaController.text);
-        // ignore: unused_local_variable
         int type = await _userRepository.getUserType(user!.uid);
         loader.hide();
-        Modular.to.pushReplacementNamed("/admin/");
+        if (type == 0) {
+          Modular.to.pushReplacementNamed("/admin/");
+        } else if (type == 1) {
+          Modular.to.pushReplacementNamed("/gestor/");
+        } else if (type == 2) {
+          Modular.to.pushReplacementNamed("/professor/");
+        } else if (type == 3) {
+          Modular.to.pushReplacementNamed("/aluno/");
+        }
       } catch (e) {
         loader.hide();
         buildSnackBarUi(context, e.toString());

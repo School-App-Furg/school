@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
-  final Function()? onPressedDrawer;
-  final String text;
-  final Function()? onPressedSubject;
-  final Function()? onPressedHistoric;
+  final Function()? onPressed;
 
-  const AppBarHome(
-      {Key? key,
-      required this.onPressedDrawer,
-      required this.text,
-      this.onPressedSubject,
-      this.onPressedHistoric})
-      : super(key: key);
+  const AppBarHome({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +11,12 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0.5,
       leading: IconButton(
-        onPressed: onPressedDrawer,
+        onPressed: onPressed,
         icon: const Icon(Icons.menu),
         color: Colors.black,
       ),
-      title: Text(
-        text,
+      title: const Text(
+        'Escola São Bento - Aluno',
         style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.w500,
@@ -34,12 +25,12 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: onPressedSubject,
+          onPressed: () {},
           icon: const Icon(Icons.add),
           color: Colors.black,
         ),
         IconButton(
-          onPressed: onPressedHistoric,
+          onPressed: () {},
           icon: const Icon(Icons.more_vert),
           color: Colors.black,
         ),

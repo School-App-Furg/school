@@ -14,7 +14,7 @@ class HomeDrawer extends StatelessWidget {
     AuthRepository _authRepository = AuthRepository();
     String _userAvatar = "https://randomuser.me/api/portraits/men/46.jpg";
     return Container(
-      width: width(context, 0.7),
+      width: width(context, 0.8),
       height: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(180, 250, 250, 250),
@@ -72,49 +72,48 @@ class HomeDrawer extends StatelessWidget {
                 child: ListView(
                   children: [
                     ListTile(
+                      onTap: () {},
                       leading: Icon(
                         Icons.home,
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
-                      onTap: () => Modular.to
-                          .pushNamedAndRemoveUntil('/admin/', (_) => false),
                     ),
                     ListTile(
+                      onTap: () {},
                       leading: Icon(
                         Icons.person,
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
-                      onTap: () => Modular.to.pushNamed('./profile'),
                     ),
                     ListTile(
+                      onTap: () {},
                       leading: Icon(
                         Icons.app_registration_rounded,
                         color: Colors.black,
                       ),
                       title: Text("Cadastro\nProfessor/Aluno"),
-                      onTap: () => Modular.to.pushNamed('./register'),
                     ),
                     ListTile(
+                      onTap: () {},
                       leading: Icon(
                         Icons.settings,
                         color: Colors.black,
                       ),
                       title: Text("Ajustes"),
-                      onTap: () => Modular.to.pushNamed('./config'),
                     ),
                     ListTile(
-                      leading: Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                      title: Text("Sair"),
                       onTap: () {
                         _authRepository.logout();
                         Modular.to.pop();
                         Modular.to.pushReplacementNamed('/auth/');
                       },
+                      leading: Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                      title: Text("Sair"),
                     )
                   ],
                 ),

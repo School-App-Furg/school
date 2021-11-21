@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/screens/admin/profile/profile_controller.dart';
+import 'profile_controller.dart';
 
 class ProfilePage extends StatelessWidget {
+  final String name;
   final ProfileController controller = ProfileController();
+
+  ProfilePage({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,9 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('ProfilePage'),
       ),
-      body: Container(),
+      body: Container(
+        child: Text(name),
+      ),
     );
   }
 }

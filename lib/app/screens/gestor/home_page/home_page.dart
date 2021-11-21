@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:school/app/core/components/popup_menu.dart';
+import '../../../core/components/popup_menu.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 

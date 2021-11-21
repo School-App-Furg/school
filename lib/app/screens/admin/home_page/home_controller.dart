@@ -1,31 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:mobx/mobx.dart';
-import 'package:school/app/screens/repository/auth_repository.dart';
-import 'package:school/app/screens/repository/user_repository.dart';
+import 'package:school/app/core/models/classes.dart';
+import '../../../core/models/school_model.dart';
+
+import '../admin_service.dart';
+
 import 'model/classrooms.dart';
-import 'model/user_model.dart';
-part '../home_controller.g.dart';
+part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  AdminService adminService = AdminService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  //Solicita as informações do usuário ao firebase
   @observable
-  late UserModel? userModel;
+  SchoolModel? schoolModel = SchoolModel(
+      currentCycle: 0,
+      cnpj: '',
+      closingDate: DateTime.now(),
+      logo: '',
+      name: '',
+      regime: 0);
 
-  getUserInformations() async {
-    String id = Modular.get<AuthRepository>().usuario!.uid;
-    userModel = await Modular.get<UsersRepository>().getAdminById(id);
+  @observable
+  bool loading = false;
+
+  //Solicita as informações da escola ao firebase
+  @action
+  Future initHome() async {
+    loading = true;
+    schoolModel = await adminService.getSchoolInformations();
+    //classes = await adminService.getClasses();
+    loading = false;
   }
+
+  @observable
+  late List<Classes>? classes;
 
   List<ClassRooms> classRoomList = [
     ClassRooms(
       anoTurma: "5º" + " Ano",
       sala: "Sala " + "01",
-      turmas: "Turma(s) " + "A e B",
+      turmas: "Turma" + "A ",
       bannerImg:
           NetworkImage("https://gstatic.com/classroom/themes/USHistory.jpg"),
       clrs: [255, 233, 116, 57],

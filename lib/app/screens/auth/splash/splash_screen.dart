@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:school/app/core/styles/sizes.dart';
+import '../../../core/styles/sizes.dart';
 
 import '../../repository/auth_repository.dart';
 
@@ -35,7 +35,6 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       color: Color(0xFF5f9bbb),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,7 +55,6 @@ class _SplashState extends State<Splash> {
               color: Colors.white,
             ),
           ),
-
         ],
       ),
     );

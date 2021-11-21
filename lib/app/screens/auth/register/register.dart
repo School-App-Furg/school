@@ -116,7 +116,7 @@ class _RegisterState extends State<Register> {
                       height: height(context, 0.05),
                       child: AlreadyHaveAnAccountCheck(
                         login: false,
-                        press: () => Modular.to.pushNamed("./login"),
+                        press: () => Modular.to.navigate("./login"),
                       ),
                     ),
                   ],

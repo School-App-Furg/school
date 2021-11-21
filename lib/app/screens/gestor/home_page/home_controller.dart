@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/screens/repository/auth_repository.dart';
-import 'package:school/app/screens/repository/user_repository.dart';
 import 'model/classrooms.dart';
-import 'model/user_model.dart';
 part '../home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  //Solicita as informações do usuário ao firebase
-  @observable
-  late UserModel? userModel;
-
-  getUserInformations() async {
-    String id = Modular.get<AuthRepository>().usuario!.uid;
-    userModel = await Modular.get<UsersRepository>().getAdminById(id);
-  }
 
   List<ClassRooms> classRoomList = [
     ClassRooms(

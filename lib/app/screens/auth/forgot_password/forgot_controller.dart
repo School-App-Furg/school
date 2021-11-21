@@ -14,7 +14,7 @@ abstract class _ForgotControllerBase with Store {
   Future<void> recuperarSenha(BuildContext context) async {
     try {
       await _authRepository.requestNewPassword(emailController.text);
-      buildSnackBarUi(context, "Email de recuperação de senha enviado");
+      buildSnackBarUi(context, "E-mail de recuperação de senha enviado");
     } catch (e) {
       buildSnackBarUi(context, e.toString());
     }

@@ -1,12 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/classes.dart';
+import '../../../core/models/classes.dart';
+import '../../../core/models/user_admin.dart';
+import '../../repository/auth_repository.dart';
 import '../../../core/models/school_model.dart';
 
 import '../admin_service.dart';
 
-import 'model/classrooms.dart';
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
@@ -14,15 +17,12 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   AdminService adminService = AdminService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
-  SchoolModel? schoolModel = SchoolModel(
-      currentCycle: 0,
-      cnpj: '',
-      closingDate: DateTime.now(),
-      logo: '',
-      name: '',
-      regime: 0);
+  late SchoolModel? schoolModel;
+
+  late UserAdmin? userAdmin;
 
   @observable
   bool loading = false;
@@ -31,52 +31,42 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    schoolModel = await adminService.getSchoolInformations();
-    //classes = await adminService.getClasses();
+    userAdmin = await adminService.getUserAdminById(user!.uid);
+    schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolid);
+    classes = await adminService.getClasses(userAdmin!.schoolid);
     loading = false;
   }
 
+  //lista de turmas
   @observable
   late List<Classes>? classes;
 
-  List<ClassRooms> classRoomList = [
-    ClassRooms(
-      anoTurma: "5º" + " Ano",
-      sala: "Sala " + "01",
-      turmas: "Turma" + "A ",
-      bannerImg:
-          NetworkImage("https://gstatic.com/classroom/themes/USHistory.jpg"),
-      clrs: [255, 233, 116, 57],
-    ),
-    ClassRooms(
-      anoTurma: "6º" + " Ano",
-      sala: "Sala " + "02",
-      turmas: "Turma(s) " + "A e B",
-      bannerImg: NetworkImage(
-          "https://gstatic.com/classroom/themes/img_backtoschool.jpg"),
-      clrs: [255, 101, 237, 153],
-    ),
-    ClassRooms(
-      anoTurma: "6º" + " Ano",
-      sala: "Sala " + "03",
-      turmas: "Turma(s) " + "A e B",
-      bannerImg:
-          NetworkImage("https://gstatic.com/classroom/themes/Honors.jpg"),
-      clrs: [255, 111, 27, 198],
-    ),
-    ClassRooms(
-        anoTurma: "7º" + " Ano",
-        sala: "Sala " + "04",
-        turmas: "Turma(s) " + "A e B",
-        bannerImg: NetworkImage(
-            "https://gstatic.com/classroom/themes/WorldStudies.jpg"),
-        clrs: [255, 0, 0, 0]),
-    ClassRooms(
-        anoTurma: "8º" + " Ano",
-        sala: "Sala " + "05",
-        turmas: "Turma(s) " + "A e B",
-        bannerImg:
-            NetworkImage("https://gstatic.com/classroom/themes/Biology.jpg"),
-        clrs: [255, 102, 153, 204]),
+  //lista de imagens banner
+  List banners = [
+    "assets/banners/0.jpeg",
+    "assets/banners/1.jpeg",
+    "assets/banners/2.jpeg",
+    "assets/banners/3.jpeg",
+    "assets/banners/4.jpeg"
   ];
+
+  //funcao para alocar a sequencia de imagens banner
+  definiBanner(int index) {
+    var resto = index % 5;
+    if (index < 5) {
+      return banners[index];
+    } else {
+      if (resto == 0) {
+        return banners[0];
+      } else if (resto == 1) {
+        return banners[1];
+      } else if (resto == 2) {
+        return banners[2];
+      } else if (resto == 3) {
+        return banners[3];
+      } else if (resto == 4) {
+        return banners[4];
+      }
+    }
+  }
 }

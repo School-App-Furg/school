@@ -7,13 +7,12 @@ import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/user_admin.dart';
+import '../../../core/service/snackbars.dart';
+import '../../repository/auth_repository.dart';
 import '../../repository/cycle_repository.dart';
 import '../../repository/school_repository.dart';
-
-import '../../../core/service/snackbars.dart';
-
-import '../../repository/auth_repository.dart';
 import '../../repository/users_repository.dart';
+
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;

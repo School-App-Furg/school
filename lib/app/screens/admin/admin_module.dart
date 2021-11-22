@@ -1,13 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'config/config_page.dart';
+import 'historic/historic_page.dart';
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
 import 'register_all_users/register_all_users_page.dart';
 import 'register_class/register_class_page.dart';
 import 'register_subjects/register_subjects_page.dart';
-
-import 'historic/historic_page.dart';
 
 class AdminModule extends Module {
   @override

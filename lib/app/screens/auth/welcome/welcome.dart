@@ -43,11 +43,11 @@ class Welcome extends StatelessWidget {
                   RoundedButton(
                       text: "LOGIN",
                       textColor: white,
-                      onpressed: () => Modular.to.pushNamed("./login")),
+                      onpressed: () => Modular.to.navigate("./login")),
                   RoundedButton(
                     text: "CADASTRE SUA ESCOLA",
                     textColor: primary,
-                    onpressed: () => Modular.to.pushNamed("./register"),
+                    onpressed: () => Modular.to.navigate("./register"),
                   ),
                 ],
               ),

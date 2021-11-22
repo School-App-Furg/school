@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/auth/login/login_screen.dart';
-import 'package:school/app/screens/auth/register/register.dart';
-import 'package:school/app/screens/auth/welcome/welcome.dart';
+import 'login/login_screen.dart';
+import 'register/register.dart';
+import 'welcome/welcome.dart';
 
 import 'forgot_password/forgot.dart';
 

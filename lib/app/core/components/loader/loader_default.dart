@@ -1,7 +1,7 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../styles/colors.dart';
 
 class LoaderDefault {
   final entry = OverlayEntry(

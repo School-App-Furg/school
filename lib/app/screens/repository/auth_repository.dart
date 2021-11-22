@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:school/app/core/errors/auth_error.dart';
+import '../../core/errors/auth_error.dart';
 
 class AuthRepository extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,7 +24,7 @@ class AuthRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  // sign up with email
+  // cadastro por email
   Future<User?> createUserWithEmailPass(String email, String pass) async {
     try {
       UserCredential userCredential =
@@ -39,7 +39,7 @@ class AuthRepository extends ChangeNotifier {
     }
   }
 
-  // sign in with email and password
+  // acesso por email e senhaa
   Future<User?> signInEmailAndPassword(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -52,21 +52,10 @@ class AuthRepository extends ChangeNotifier {
     }
   }
 
-  // sign out
+  // logout do app
   Future<void> logout() async {
     await _auth.signOut();
     _getUser();
-  }
-
-  // check signIn
-  Stream<User?> isSignedIn() {
-    var currentUser = _auth.authStateChanges();
-    return currentUser;
-  }
-
-  // get current user
-  Future<User?> getCurrentUser() async {
-    return _auth.currentUser;
   }
 
   //Requisição de nova senha

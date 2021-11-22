@@ -2,17 +2,23 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../core/models/school_model.dart';
 
-import 'package:school/app/screens/repository/auth_repository.dart';
+import '../../repository/auth_repository.dart';
+
 import '../../../core/styles/sizes.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({Key? key}) : super(key: key);
+  final SchoolModel? schoolModel;
+  const HomeDrawer({
+    Key? key,
+    required this.schoolModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AuthRepository _authRepository = AuthRepository();
-    String _userAvatar = "https://randomuser.me/api/portraits/men/46.jpg";
+
     return Container(
       width: width(context, 0.7),
       height: double.infinity,
@@ -58,13 +64,13 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(_userAvatar),
+                      backgroundImage: NetworkImage(schoolModel!.logo),
                       radius: 30.0,
                     ),
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text("Administração\nEscolar")
+                    Text(schoolModel!.name)
                   ],
                 ),
               ),
@@ -77,8 +83,8 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
-                      onTap: () => Modular.to
-                          .pushNamedAndRemoveUntil('/admin/', (_) => false),
+                      onTap: () =>
+                          Modular.to.popUntil(ModalRoute.withName('/admin/')),
                     ),
                     ListTile(
                       leading: Icon(
@@ -86,7 +92,16 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
-                      onTap: () => Modular.to.pushNamed('./profile'),
+                      onTap: () => Modular.to.pushNamed('./profile',
+                          arguments: {'name': schoolModel!.name}),
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.app_registration_rounded,
+                        color: Colors.black,
+                      ),
+                      title: Text("Cadastrar turma"),
+                      onTap: () => Modular.to.pushNamed('./register-class'),
                     ),
                     ListTile(
                       leading: Icon(

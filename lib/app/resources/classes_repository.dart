@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../core/models/classes.dart';
+import '../core/models/classes.dart';
 
 class ClassesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;

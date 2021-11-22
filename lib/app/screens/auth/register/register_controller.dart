@@ -2,16 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../../resources/auth_repository.dart';
+import '../../../resources/cycle_repository.dart';
+import '../../../resources/school_repository.dart';
+import '../../../resources/users_repository.dart';
 
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/user_admin.dart';
 import '../../../core/service/snackbars.dart';
-import '../../repository/auth_repository.dart';
-import '../../repository/cycle_repository.dart';
-import '../../repository/school_repository.dart';
-import '../../repository/users_repository.dart';
 
 part 'register_controller.g.dart';
 

@@ -1,10 +1,11 @@
+import '../../resources/classes_repository.dart';
+import '../../resources/school_repository.dart';
+import '../../resources/users_repository.dart';
+
 import '../../core/models/classes.dart';
-import '../repository/classes_repository.dart';
+
 import '../../core/models/school_model.dart';
 import '../../core/models/user_admin.dart';
-
-import '../repository/school_repository.dart';
-import '../repository/users_repository.dart';
 
 class AdminService {
   SchoolRepository _schoolRepository = SchoolRepository();

@@ -1,23 +1,25 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:school/app/core/models/classes.dart';
+import '../../core/models/classes.dart';
 
 class ClassesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   Future<List<Classes>?> getClassesBySchoolId(String id) async {
-    List<Classes>? model;
+    List<Classes>? list = [];
     try {
-      QuerySnapshot snapshot = await firestoreInstance
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('classes')
           .where('schoolId', isEqualTo: id)
           .get();
       snapshot.docs.forEach(
         (element) {
-          model!.add(
+          list.add(
             Classes.fromJson(
-              json.encode(element.data),
+              json.encode(
+                element.data(),
+              ),
             ),
           );
         },
@@ -25,6 +27,6 @@ class ClassesRepository {
     } catch (error) {
       throw Exception(error);
     }
-    return model;
+    return list;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../styles/colors.dart';
 
 class ForgotPassword extends StatelessWidget {

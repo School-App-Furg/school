@@ -4,7 +4,7 @@ import '../core/models/cycle.dart';
 class CycleRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
-  //Cadastro da escola
+  //Cadastra um ciclo de uma escola
   Future<bool> insertCycleSchool(String cicleId, Cycle cycle) async {
     return await firestoreInstance.collection('cycles').doc(cicleId).set({
       'name': cycle.name,

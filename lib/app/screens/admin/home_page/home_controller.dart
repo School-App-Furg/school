@@ -21,7 +21,13 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
-  late SchoolModel? schoolModel;
+  SchoolModel? schoolModel = SchoolModel(
+      currentCycle: 0,
+      cnpj: "",
+      closingDate: DateTime.now(),
+      logo: '',
+      name: '',
+      regime: 0);
 
   late UserAdmin? userAdmin;
 

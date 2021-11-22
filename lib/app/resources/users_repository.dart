@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/models/management_user.dart';
+import '../core/models/student_user.dart';
+import '../core/models/teacher_user.dart';
 import '../core/models/user_admin.dart';
 
 class UsersRepository {
@@ -19,11 +22,11 @@ class UsersRepository {
     ).catchError((error) => throw Exception(error));
   }
 
-  //Pega as informações do user admin
-  Future<UserAdmin?> getUserAdminById(String id) async {
+  //Retorna as informações do user admin
+  Future<UserAdmin?> getUserAdminById(String userId) async {
     UserAdmin? model;
     try {
-      await firestoreInstance.collection('users').doc(id).get().then(
+      await firestoreInstance.collection('users').doc(userId).get().then(
         (DocumentSnapshot snapshot) {
           model = UserAdmin.fromJson(
             json.encode(snapshot.data()),
@@ -36,7 +39,98 @@ class UsersRepository {
     return model;
   }
 
-  //Verificação do tipo do usuário
+  //Cadastro de um gestor
+  Future<bool> insertManagement(
+      String userId, ManagementUser managementUser) async {
+    return await firestoreInstance.collection('users').doc(userId).set({
+      'school_id': managementUser.schoolid,
+      'name': managementUser.name,
+      'type': managementUser.type
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
+
+  //Retorna as informações de um gestor
+  Future<ManagementUser?> getUserManagementById(String userId) async {
+    ManagementUser? model;
+    try {
+      await firestoreInstance.collection('users').doc(userId).get().then(
+        (DocumentSnapshot snapshot) {
+          model = ManagementUser.fromJson(
+            json.encode(snapshot.data()),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return model;
+  }
+
+  //Cadastro de um professor
+  Future<bool> insertTeacher(String userId, TeacherUser teacherUser) async {
+    return await firestoreInstance.collection('users').doc(userId).set({
+      'school_id': teacherUser.schoolid,
+      'name': teacherUser.name,
+      'type': teacherUser.type
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
+
+  //Retorna as informações de um professor
+  Future<TeacherUser?> getUserTeacherById(String userId) async {
+    TeacherUser? model;
+    try {
+      await firestoreInstance.collection('users').doc(userId).get().then(
+        (DocumentSnapshot snapshot) {
+          model = TeacherUser.fromJson(
+            json.encode(snapshot.data()),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return model;
+  }
+
+  //Cadastro de um aluno/responsavel
+  Future<bool> insertStudent(String userId, StudentUser studentUser) async {
+    return await firestoreInstance.collection('users').doc(userId).set({
+      'school_id': studentUser.schoolid,
+      'name': studentUser.name,
+      'type': studentUser.type
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
+
+  //Retorna as informações de um aluno
+  Future<StudentUser?> getStudentById(String userId) async {
+    StudentUser? model;
+    try {
+      await firestoreInstance.collection('users').doc(userId).get().then(
+        (DocumentSnapshot snapshot) {
+          model = StudentUser.fromJson(
+            json.encode(snapshot.data()),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return model;
+  }
+
+  //Retorna o do usuário(0 = admin,1=gestor,2=professor,3=aluno)
   Future<int> getUserType(String userId) async {
     try {
       DocumentSnapshot documentSnapshot =

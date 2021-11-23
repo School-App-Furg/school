@@ -107,7 +107,7 @@ class HomeDrawer extends StatelessWidget {
                         Icons.app_registration_rounded,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastro\nProfessor/Aluno"),
+                      title: Text("Cadastro\nProfessor"),
                       onTap: () => Modular.to.pushNamed('./register'),
                     ),
                     ListTile(

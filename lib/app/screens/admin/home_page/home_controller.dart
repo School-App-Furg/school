@@ -20,7 +20,14 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
-  late SchoolModel? schoolModel;
+  SchoolModel? schoolModel = SchoolModel(
+      currentCycle: 3,
+      cnpj: "cnpj",
+      closingDate: DateTime(4),
+      logo:
+          "https://firebasestorage.googleapis.com/v0/b/school-973bf.appspot.com/o/logo_escola.jpg?alt=media&token=21836ae2-fc5b-49e9-b0ff-2fc920159fef",
+      name: "name",
+      regime: 1);
 
   late UserAdmin? userAdmin;
 

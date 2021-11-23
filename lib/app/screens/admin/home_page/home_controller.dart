@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:mobx/mobx.dart';
+import '../../../resources/auth_repository.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/models/user_admin.dart';
-import '../../repository/auth_repository.dart';
+
 import '../../../core/models/school_model.dart';
 
 import '../admin_service.dart';
@@ -20,7 +21,13 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
-  late SchoolModel? schoolModel;
+  SchoolModel? schoolModel = SchoolModel(
+      currentCycle: 0,
+      cnpj: "",
+      closingDate: DateTime.now(),
+      logo: '',
+      name: '',
+      regime: 0);
 
   late UserAdmin? userAdmin;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/components/popup_menu.dart';
 
+import '../../../../core/components/popup_menu.dart';
 import '../home_controller.dart';
 
 class ClassesCard extends StatelessWidget {

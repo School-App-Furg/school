@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../resources/auth_repository.dart';
 
 import '../../../core/models/school_model.dart';
 import '../../../core/styles/sizes.dart';
-import '../../repository/auth_repository.dart';
 
 class HomeDrawer extends StatelessWidget {
   final SchoolModel? schoolModel;

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:mobx/mobx.dart';
+import '../../../resources/auth_repository.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/models/user_admin.dart';
-import '../../repository/auth_repository.dart';
+
 import '../../../core/models/school_model.dart';
 
 import '../admin_service.dart';
@@ -21,13 +22,12 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   SchoolModel? schoolModel = SchoolModel(
-      currentCycle: 3,
-      cnpj: "cnpj",
-      closingDate: DateTime(4),
-      logo:
-          "https://firebasestorage.googleapis.com/v0/b/school-973bf.appspot.com/o/logo_escola.jpg?alt=media&token=21836ae2-fc5b-49e9-b0ff-2fc920159fef",
-      name: "name",
-      regime: 1);
+      currentCycle: 0,
+      cnpj: "",
+      closingDate: DateTime.now(),
+      logo: '',
+      name: '',
+      regime: 0);
 
   late UserAdmin? userAdmin;
 

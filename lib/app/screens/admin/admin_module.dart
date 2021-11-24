@@ -6,6 +6,7 @@ import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
 import 'register_class/register_class_page.dart';
+import 'register_student/register_student_page.dart';
 import 'register_subjects/register_subjects_page.dart';
 import 'register_teacher/register_teacher_page.dart';
 
@@ -28,6 +29,8 @@ class AdminModule extends Module {
             name: args.data['name'],
           ),
         ),
+        ChildRoute('/register-student',
+            child: (_, args) => RegisterStudentPage()),
         ChildRoute('/config', child: (_, args) => ConfigPage()),
         ChildRoute('/register-teacher',
             child: (_, args) => RegisterTeacherPage()),

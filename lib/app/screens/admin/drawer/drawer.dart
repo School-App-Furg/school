@@ -78,7 +78,7 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: Icon(
-                        Icons.home,
+                        Icons.home_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
@@ -87,7 +87,7 @@ class HomeDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.person,
+                        Icons.person_outline_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
@@ -96,7 +96,7 @@ class HomeDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.app_registration_rounded,
+                        Icons.class__outlined,
                         color: Colors.black,
                       ),
                       title: Text("Cadastrar turma"),
@@ -104,15 +104,23 @@ class HomeDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.app_registration_rounded,
+                        Icons.switch_account_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Cadastro\nProfessor"),
-                      onTap: () => Modular.to.pushNamed('./register'),
+                      onTap: () => Modular.to.pushNamed('./register-teacher'),
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.settings,
+                        Icons.switch_account_outlined,
+                        color: Colors.black,
+                      ),
+                      title: Text("Cadastro\nAluno"),
+                      onTap: () => Modular.to.pushNamed('./register-student'),
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.settings_applications_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Ajustes"),

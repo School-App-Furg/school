@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:school/app/core/form/dropdown.dart';
 import 'package:school/app/core/form/general_form.dart';
-import 'register_teacher_controller.dart';
+import 'register_student_controller.dart';
 
-class RegisterTeacherPage extends StatelessWidget {
-  final RegisterTeacherController controller = RegisterTeacherController();
+class RegisterStudentPage extends StatelessWidget {
+  final RegisterStudentController controller = RegisterStudentController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Professores'),
+        title: Text('Cadastro de Alunos'),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -29,8 +29,7 @@ class RegisterTeacherPage extends StatelessWidget {
 
               //Turmas alocadas
               MyDropDown(),
-              //Disciplina alocada
-              MyDropDown(),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,

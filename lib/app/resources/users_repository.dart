@@ -71,7 +71,7 @@ class UsersRepository {
   }
 
   //Cadastro de um professor
-  Future<bool> insertTeacher(String userId, TeacherUser teacherUser) async {
+  Future insertTeacher(String userId, TeacherUser teacherUser) async {
     return await firestoreInstance.collection('users').doc(userId).set({
       'school_id': teacherUser.schoolid,
       'name': teacherUser.name,

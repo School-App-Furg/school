@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:school/app/core/form/dropdown.dart';
 import 'package:school/app/core/form/general_form.dart';
+import 'package:school/app/core/service/validators.dart';
 import 'register_teacher_controller.dart';
 
 class RegisterTeacherPage extends StatelessWidget {
-  final RegisterTeacherController controller = RegisterTeacherController();
-  final _formKey = GlobalKey<FormState>();
+  final RegisterTeacherController _controller = RegisterTeacherController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,17 +15,19 @@ class RegisterTeacherPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: _controller.formKey,
           child: Column(
             children: [
               MyTextFormField(
                 hintText: 'Nome completo',
-                validator: (String value) {},
+                controller: _controller.nameController,
+                validator: validateName,
               ),
               MyTextFormField(
                 hintText: 'Email',
                 isEmail: true,
-                validator: (String value) {},
+                controller: _controller.emailController,
+                validator: validateEmail,
               ),
 
               //Turmas alocadas
@@ -35,7 +38,7 @@ class RegisterTeacherPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,
                 ),
-                onPressed: () {},
+                onPressed: () => _controller.cadastrar(context),
                 child: Text(
                   'Cadastrar',
                   style: TextStyle(

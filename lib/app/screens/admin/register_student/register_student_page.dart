@@ -17,15 +17,15 @@ class RegisterStudentPage extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: [
-              MyTextFormField(
+              /*MyTextFormField(
                 hintText: 'Nome completo',
-                validator: (String value) {},
+                validator: (String value) {}, 
               ),
               MyTextFormField(
                 hintText: 'Email',
                 isEmail: true,
                 validator: (String value) {},
-              ),
+              ),*/
 
               //Turmas alocadas
               MyDropDown(),

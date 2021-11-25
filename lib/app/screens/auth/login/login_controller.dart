@@ -32,7 +32,7 @@ abstract class _LoginControllerBase with Store {
     obscureText = !obscureText;
   }
 
-  // funão que verifica o os dados de login e autoriza o acesso
+  // função que verifica os dados de login e autoriza o acesso
   Future<void> login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();

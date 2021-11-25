@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school/app/core/models/teacher_user.dart';
 import '../../core/models/cycle.dart';
 import '../../core/models/school_model.dart';
 import '../../core/models/user_admin.dart';
@@ -30,6 +31,15 @@ class AuthService {
   Future<String> insertScholl(SchoolModel schoolModel) async {
     try {
       return await _schoolRepository.insertScholl(schoolModel);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de professores
+  Future<String> insertTeacher(String userId, TeacherUser teacherUser) async {
+    try {
+      return await _userRepository.insertTeacher(userId, teacherUser);
     } catch (error) {
       throw Exception(error);
     }

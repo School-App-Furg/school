@@ -28,20 +28,14 @@ abstract class _RegisterTeacherControllerBase with Store {
   @observable
   List<Classes>? classes = [];
 
-  @observable
-  List<String> classesString = [];
-
   //retorna a lista de classes com base na escola e no ciclo
   @action
   Future getClasses() async {
     classes = await _adminService.getClasses(schoolId, currentCycle);
-    for (var i = 0; i < classes!.length; i++) {
-      classesString.add(classes![i].name);
-    }
   }
 
-  @action
-  defineClasses(String? value) {}
+  @observable
+  List classesSelecionadas = [];
 
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {

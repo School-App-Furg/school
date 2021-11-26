@@ -24,19 +24,19 @@ mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
     });
   }
 
-  final _$classesStringAtom =
-      Atom(name: '_RegisterTeacherControllerBase.classesString');
+  final _$classesSelecionadasAtom =
+      Atom(name: '_RegisterTeacherControllerBase.classesSelecionadas');
 
   @override
-  List<String> get classesString {
-    _$classesStringAtom.reportRead();
-    return super.classesString;
+  List<dynamic> get classesSelecionadas {
+    _$classesSelecionadasAtom.reportRead();
+    return super.classesSelecionadas;
   }
 
   @override
-  set classesString(List<String> value) {
-    _$classesStringAtom.reportWrite(value, super.classesString, () {
-      super.classesString = value;
+  set classesSelecionadas(List<dynamic> value) {
+    _$classesSelecionadasAtom.reportWrite(value, super.classesSelecionadas, () {
+      super.classesSelecionadas = value;
     });
   }
 
@@ -48,25 +48,11 @@ mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
     return _$getClassesAsyncAction.run(() => super.getClasses());
   }
 
-  final _$_RegisterTeacherControllerBaseActionController =
-      ActionController(name: '_RegisterTeacherControllerBase');
-
-  @override
-  dynamic defineClasses(String? value) {
-    final _$actionInfo = _$_RegisterTeacherControllerBaseActionController
-        .startAction(name: '_RegisterTeacherControllerBase.defineClasses');
-    try {
-      return super.defineClasses(value);
-    } finally {
-      _$_RegisterTeacherControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
 classes: ${classes},
-classesString: ${classesString}
+classesSelecionadas: ${classesSelecionadas}
     ''';
   }
 }

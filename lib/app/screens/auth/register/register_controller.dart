@@ -47,7 +47,7 @@ abstract class _RegisterControllerBase with Store {
         //cadastra a escola e retorna o id da escola
         String idSchool = await _authService.insertScholl(
           SchoolModel(
-              currentCycle: 0,
+              currentCycle: user!.uid,
               cnpj: cnpjController.text,
               closingDate: DateTime.now(),
               logo:
@@ -58,7 +58,7 @@ abstract class _RegisterControllerBase with Store {
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
         bool insertedCycle = await _authService.insertCycleSchool(
-          user!.uid,
+          user.uid,
           Cycle(
             name: "Ciclo 0",
             idSchool: idSchool,

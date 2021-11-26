@@ -7,12 +7,13 @@ class ClassesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   //Retorna a lista de turmas cadastrada em uma determinada escola
-  Future<List<Classes>?> getClassesBySchoolId(String id) async {
+  Future<List<Classes>?> getClassesBySchoolId(String id, String cycle) async {
     List<Classes>? list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('classes')
           .where('schoolId', isEqualTo: id)
+          .where('cycleId', isEqualTo: cycle)
           .get();
       snapshot.docs.forEach(
         (element) {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class SchoolModel {
-  int currentCycle;
+  String currentCycle;
   String cnpj;
   DateTime closingDate;
   String logo;

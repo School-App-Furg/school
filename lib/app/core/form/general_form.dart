@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
   final String hintText;
-  final Function validator;
+  final String? Function(String?)? validator;
   final TextEditingController controller;
   final bool isPassword;
   final bool isEmail;
@@ -21,6 +21,7 @@ class MyTextFormField extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: TextFormField(
         controller: controller,
+        validator: validator,
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding: EdgeInsets.all(15.0),

@@ -22,7 +22,7 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   SchoolModel? schoolModel = SchoolModel(
-      currentCycle: 0,
+      currentCycle: "",
       cnpj: "",
       closingDate: DateTime.now(),
       logo: '',
@@ -40,7 +40,8 @@ abstract class _HomeControllerBase with Store {
     loading = true;
     userAdmin = await adminService.getUserAdminById(user!.uid);
     schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolid);
-    classes = await adminService.getClasses(userAdmin!.schoolid);
+    classes = await adminService.getClasses(
+        userAdmin!.schoolid, schoolModel!.currentCycle);
     loading = false;
   }
 

@@ -4,14 +4,11 @@ class TeacherUser {
   String schoolid;
   String name;
   int type;
-  List classes;
-  List subjects;
+
   TeacherUser({
     required this.schoolid,
     required this.name,
     required this.type,
-    required this.classes,
-    required this.subjects,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,8 +16,6 @@ class TeacherUser {
       'schoolid': schoolid,
       'name': name,
       'type': type,
-      'classes': classes,
-      'subjects': subjects,
     };
   }
 
@@ -29,8 +24,6 @@ class TeacherUser {
       schoolid: map['schoolid'],
       name: map['name'],
       type: map['type'],
-      classes: List.from(map['classes']),
-      subjects: List.from(map['subjects']),
     );
   }
 

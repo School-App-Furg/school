@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/form/dropdown.dart';
-import 'package:school/app/core/form/general_form.dart';
+
 import 'register_student_controller.dart';
 
 class RegisterStudentPage extends StatelessWidget {
@@ -28,7 +27,7 @@ class RegisterStudentPage extends StatelessWidget {
               ),*/
 
               //Turmas alocadas
-              MyDropDown(),
+              //MyDropDown(),
 
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

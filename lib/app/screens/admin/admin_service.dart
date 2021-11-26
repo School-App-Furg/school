@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school/app/core/models/student_user.dart';
 import 'package:school/app/core/models/teacher_user.dart';
 import 'package:school/app/resources/auth_repository.dart';
 
@@ -58,10 +59,19 @@ class AdminService {
     }
   }
 
-  //cadastro de usuários
+  //cadastro de professores
   Future<bool> insertTeacher(String userId, TeacherUser teacherUser) async {
     try {
       return await _userRepository.insertTeacher(userId, teacherUser);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de alunos
+  Future<bool> insertStudent(String userId, StudentUser studentUser) async {
+    try {
+      return await _userRepository.insertStudent(userId, studentUser);
     } catch (error) {
       throw Exception(error);
     }

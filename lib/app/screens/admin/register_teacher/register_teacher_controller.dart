@@ -58,7 +58,7 @@ abstract class _RegisterTeacherControllerBase with Store {
           buildSnackBarUi(context, "Professor cadastrado com sucesso!");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "Seu usuário não foi cadastrado!");
+          buildSnackBarUi(context, "Professor não foi cadastrado!");
         }
       } catch (e) {
         loader.hide();

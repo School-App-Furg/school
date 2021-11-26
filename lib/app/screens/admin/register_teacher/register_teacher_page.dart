@@ -69,11 +69,6 @@ class _RegisterTeacherPageState extends State<RegisterTeacherPage> {
                   );
                 },
               ),
-
-              //Listagem de turmas
-
-              //Listagem de disciplinas
-              //MyDropDown(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,

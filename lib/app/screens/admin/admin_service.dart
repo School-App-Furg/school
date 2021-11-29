@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:school/app/core/models/student_user.dart';
+import 'package:school/app/core/models/subject.dart';
 import 'package:school/app/core/models/teacher_user.dart';
 import 'package:school/app/resources/auth_repository.dart';
+import 'package:school/app/resources/subjects_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/school_model.dart';
@@ -14,6 +16,7 @@ class AdminService {
   SchoolRepository _schoolRepository = SchoolRepository();
   UsersRepository _userRepository = UsersRepository();
   ClassesRepository _classesRepository = ClassesRepository();
+  SubjectRepository _subjectRepository = SubjectRepository();
   AuthRepository _authRepository = AuthRepository();
 
   //serviço para solicitar as informações da escola atrelada ao usuario
@@ -36,11 +39,29 @@ class AdminService {
     }
   }
 
+  Future<bool> insertSubject(Subject subject) async {
+    try {
+      return await _subjectRepository.insertSubject(subject);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //serviço para solicitar lista de turmas
   Future<List<Classes>?> getClasses(String schoolid, String cycle) async {
     try {
       List<Classes>? list =
           await _classesRepository.getClassesBySchoolId(schoolid, cycle);
+      return list;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço para solicitar lista de disciplinas
+  Future<List<Subject>?> getSubjects(String schoolid) async {
+    try {
+      List<Subject>? list = await _subjectRepository.getSubjects(schoolid);
       return list;
     } catch (error) {
       throw Exception(error);

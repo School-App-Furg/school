@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:school/app/core/components/loader/loader_default.dart';
-import 'package:school/app/core/models/classes.dart';
 import 'package:school/app/core/models/student_user.dart';
 import 'package:school/app/core/service/snackbars.dart';
 import 'package:school/app/screens/admin/home_page/home_controller.dart';
@@ -24,19 +23,6 @@ abstract class _RegisterStudentControllerBase with Store {
 
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolid;
-  String currentCycle = Modular.get<HomeController>().schoolModel!.currentCycle;
-
-  @observable
-  List<Classes>? classes = [];
-
-  //retorna a lista de classes com base na escola e no ciclo
-  @action
-  Future getClasses() async {
-    classes = await _adminService.getClasses(schoolId, currentCycle);
-  }
-
-  @observable
-  List classesSelecionadas = [];
 
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {

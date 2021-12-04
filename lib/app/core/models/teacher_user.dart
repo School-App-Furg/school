@@ -1,19 +1,21 @@
 import 'dart:convert';
 
 class TeacherUser {
-  String schoolid;
+  String? id;
+  String schoolId;
   String name;
   int type;
-
   TeacherUser({
-    required this.schoolid,
+    this.id,
+    required this.schoolId,
     required this.name,
     required this.type,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'schoolid': schoolid,
+      'id': id,
+      'schoolId': schoolId,
       'name': name,
       'type': type,
     };
@@ -21,7 +23,8 @@ class TeacherUser {
 
   factory TeacherUser.fromMap(Map<String, dynamic> map) {
     return TeacherUser(
-      schoolid: map['schoolid'],
+      id: map['id'] != null ? map['id'] : null,
+      schoolId: map['schoolId'],
       name: map['name'],
       type: map['type'],
     );

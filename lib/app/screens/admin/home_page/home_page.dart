@@ -40,15 +40,19 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   text: controller.schoolModel!.name,
                   onPressedHistoric: () => Modular.to.pushNamed('./historic'),
                   onPressedSubject: () =>
-                      Modular.to.pushNamed('./register-subjects'),
+                      Modular.to.pushNamed('./register-class'),
                 ),
-                body: ListView.builder(
-                  padding: EdgeInsets.all(10.0),
-                  itemCount: controller.classes!.length,
-                  itemBuilder: (context, int index) {
-                    return ClassesCard(
-                      controller: controller,
-                      index: index,
+                body: Observer(
+                  builder: (_) {
+                    return ListView.builder(
+                      padding: EdgeInsets.all(10.0),
+                      itemCount: controller.classes!.length,
+                      itemBuilder: (context, int index) {
+                        return ClassesCard(
+                          controller: controller,
+                          index: index,
+                        );
+                      },
                     );
                   },
                 ),

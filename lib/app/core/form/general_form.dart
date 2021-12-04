@@ -5,15 +5,17 @@ class MyTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final bool isPassword;
-  final bool isEmail;
+
+  final TextInputType keyboardType;
 
   MyTextFormField({
+    Key? key,
     required this.hintText,
     required this.validator,
-    this.isPassword = false,
-    this.isEmail = false,
     required this.controller,
-  });
+    this.isPassword = false,
+    this.keyboardType = TextInputType.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class MyTextFormField extends StatelessWidget {
           fillColor: Colors.grey[200],
         ),
         obscureText: isPassword ? true : false,
-        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
+        keyboardType: keyboardType,
       ),
     );
   }

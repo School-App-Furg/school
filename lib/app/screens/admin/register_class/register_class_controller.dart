@@ -1,14 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader_default.dart';
-import 'package:school/app/core/models/classes.dart';
-import 'package:school/app/core/models/subject.dart';
-import 'package:school/app/core/models/teacher_user.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
-import 'package:school/app/screens/admin/home_page/home_controller.dart';
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/student_user.dart';
+import '../../../core/models/subject.dart';
+import '../../../core/models/subject_teacher.dart';
+import '../../../core/models/teacher_user.dart';
+
+import '../../../core/service/snackbars.dart';
+import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'register_class_controller.g.dart';
 
@@ -18,58 +19,89 @@ class RegisterClassController = _RegisterClassControllerBase
 abstract class _RegisterClassControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController roomController = TextEditingController();
+  TextEditingController yearController = TextEditingController();
   AdminService _adminService = AdminService();
 
-  //injeção de depencias da user admin
-  String schoolId = Modular.get<HomeController>().userAdmin!.schoolid;
+  //injeção de depencias do user admin
+  String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
   String currentCycle = Modular.get<HomeController>().schoolModel!.currentCycle;
 
+  //lista de estudandes da escola
   @observable
-  List<Classes>? classes = [];
+  List<StudentUser> students = [];
 
-  //retorna a lista de classes com base na escola e no ciclo
+  //get da lista de estudantes
   @action
-  Future getClasses() async {
-    classes = await _adminService.getClasses(schoolId, currentCycle);
+  Future getStudents() async {
+    students = await _adminService.getStudentsBySchoolId(schoolId);
   }
 
+  //lista de ids de estudantes selecionados
   @observable
-  List classesSelected = [];
+  List<String> studentsSelected = [];
+
+  //recebe os valores selecionados no multiSelect dos students
+  @action
+  setStudentsSelected(List values) {
+    values.forEach(
+      (element) {
+        subjectsSelected.add(element.id);
+      },
+    );
+  }
 
   @observable
   List<Subject>? subjects = [];
 
   @action
-  Future getSubjects() async {
+  Future getSubjectsAndTeachers() async {
     subjects = await _adminService.getSubjects(schoolId);
+    subjects!.forEach(
+      (subjectsList) {
+        subjectsList.teachers!.forEach(
+          (element) async {
+            TeacherUser? user = await _adminService.getUserTeacherById(element);
+            subjectTeacher.add(
+              SubjectTeacher(
+                  id: user!.id, subject: subjectsList.name, teacher: user.name),
+            );
+          },
+        );
+      },
+    );
   }
+
+  @observable
+  ObservableList<SubjectTeacher> subjectTeacher =
+      ObservableList<SubjectTeacher>();
 
   @observable
   List subjectsSelected = [];
 
+  //recebe os valores selecionados no multiSelect dos students
+  @action
+  setSubjectsSelected(List values) {
+    values.forEach(
+      (element) {
+        subjectsSelected.add(element.id);
+      },
+    );
+  }
+
+  bool inserted = true;
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
       try {
         loader.show();
 
-        //cadastra o user da escola
-        User? user = await _adminService.createUserWithEmailPass(
-          emailController.text,
-          "escola123",
-        );
-        //cadastra a escola e retorna o id da escola
-        bool inserted = await _adminService.insertTeacher(
-          user!.uid,
-          TeacherUser(name: nameController.text, schoolid: schoolId, type: 2),
-        );
         if (inserted) {
           loader.hide();
-          buildSnackBarUi(context, "Professor cadastrado com sucesso!");
+          buildSnackBarUi(context, "Turma cadastrada com sucesso!");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "Professor não foi cadastrado!");
+          buildSnackBarUi(context, "A turma não foi cadastrada corretamente!");
         }
       } catch (e) {
         loader.hide();

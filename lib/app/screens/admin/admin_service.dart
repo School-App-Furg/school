@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:school/app/core/models/student_user.dart';
-import 'package:school/app/core/models/subject.dart';
-import 'package:school/app/core/models/teacher_user.dart';
-import 'package:school/app/resources/auth_repository.dart';
-import 'package:school/app/resources/subjects_repository.dart';
+import 'package:mobx/mobx.dart';
+import '../../core/models/student_user.dart';
+import '../../core/models/subject.dart';
+
+import '../../core/models/teacher_user.dart';
+import '../../resources/auth_repository.dart';
+import '../../resources/subjects_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/school_model.dart';
@@ -20,10 +22,10 @@ class AdminService {
   AuthRepository _authRepository = AuthRepository();
 
   //serviço para solicitar as informações da escola atrelada ao usuario
-  Future<SchoolModel?> getSchoolInformations(String schoolid) async {
+  Future<SchoolModel?> getSchoolInformations(String schoolId) async {
     try {
       SchoolModel? schoolModel =
-          await _schoolRepository.getSchoolInformationsById(schoolid);
+          await _schoolRepository.getSchoolInformationsById(schoolId);
       return schoolModel;
     } catch (error) {
       throw Exception(error);
@@ -39,6 +41,15 @@ class AdminService {
     }
   }
 
+  //solicita as informacoes do user teacher
+  Future<TeacherUser?> getUserTeacherById(String userId) async {
+    try {
+      return await _userRepository.getUserTeacherById(userId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   Future<bool> insertSubject(Subject subject) async {
     try {
       return await _subjectRepository.insertSubject(subject);
@@ -47,11 +58,20 @@ class AdminService {
     }
   }
 
-  //serviço para solicitar lista de turmas
-  Future<List<Classes>?> getClasses(String schoolid, String cycle) async {
+  Future<bool> updateSubject(String id, List<String>? teachers) async {
     try {
-      List<Classes>? list =
-          await _classesRepository.getClassesBySchoolId(schoolid, cycle);
+      return await _subjectRepository.updateSubject(id, teachers!);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço para solicitar lista de turmas
+  Future<ObservableList<Classes>?> getClasses(
+      String schoolId, String cycle) async {
+    try {
+      ObservableList<Classes>? list =
+          await _classesRepository.getClassesBySchoolId(schoolId, cycle);
       return list;
     } catch (error) {
       throw Exception(error);
@@ -59,9 +79,9 @@ class AdminService {
   }
 
   //serviço para solicitar lista de disciplinas
-  Future<List<Subject>?> getSubjects(String schoolid) async {
+  Future<List<Subject>?> getSubjects(String schoolId) async {
     try {
-      List<Subject>? list = await _subjectRepository.getSubjects(schoolid);
+      List<Subject>? list = await _subjectRepository.getSubjects(schoolId);
       return list;
     } catch (error) {
       throw Exception(error);
@@ -93,6 +113,15 @@ class AdminService {
   Future<bool> insertStudent(String userId, StudentUser studentUser) async {
     try {
       return await _userRepository.insertStudent(userId, studentUser);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //listagem de alunos da escola
+  Future<List<StudentUser>> getStudentsBySchoolId(String schoolId) async {
+    try {
+      return await _userRepository.getStudentsBySchoolId(schoolId);
     } catch (error) {
       throw Exception(error);
     }

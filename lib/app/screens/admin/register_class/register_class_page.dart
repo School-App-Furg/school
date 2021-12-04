@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/form/multi_select.dart';
-import 'package:school/app/core/service/validators.dart';
+import '../../../core/form/general_form.dart';
+import '../../../core/form/multi_select.dart';
+import '../../../core/service/validators.dart';
 import 'register_class_controller.dart';
 
-class RegisterClassPage extends StatelessWidget {
+class RegisterClassPage extends StatefulWidget {
+  @override
+  State<RegisterClassPage> createState() => _RegisterClassPageState();
+}
+
+class _RegisterClassPageState extends State<RegisterClassPage> {
   final RegisterClassController _controller = RegisterClassController();
+  @override
+  void initState() {
+    _controller.getStudents();
+    _controller.getSubjectsAndTeachers();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Professores'),
+        title: Text('Cadastro de turmas'),
       ),
       body: SingleChildScrollView(
         child: Observer(
@@ -23,34 +34,41 @@ class RegisterClassPage extends StatelessWidget {
               child: Column(
                 children: [
                   MyTextFormField(
-                    hintText: 'Nome completo',
+                    hintText: 'Nome da turma',
                     controller: _controller.nameController,
-                    validator: validateName,
+                    validator: validateEmpty,
                   ),
                   MyTextFormField(
-                    hintText: 'Email',
-                    isEmail: true,
-                    controller: _controller.emailController,
-                    validator: validateEmail,
+                    hintText: 'Informe a sala desta turma',
+                    controller: _controller.roomController,
+                    validator: validateEmpty,
+                    keyboardType: TextInputType.number,
+                  ),
+                  MyTextFormField(
+                    hintText: 'Informe o ano desta turma',
+                    controller: _controller.yearController,
+                    keyboardType: TextInputType.number,
+                    validator: validateEmpty,
                   ),
                   MultiSelect(
-                    buttonText: "Selecione as turmas deste professor",
-                    title: "Selecione as turmas:",
-                    items: _controller.classes!
-                        .map((e) => MultiSelectItem(e, e.name))
-                        .toList(),
-                    onConfirm: (values) {
-                      _controller.classesSelected = values;
-                    },
-                  ),
-                  MultiSelect(
-                    buttonText: "Selecione as disciplinas deste professor",
-                    title: "Selecione as disciplinas:",
-                    items: _controller.subjects!
-                        .map((e) => MultiSelectItem(e, e.name))
-                        .toList(),
-                    onConfirm: (values) {
-                      _controller.subjectsSelected = values;
+                      buttonText: "Selecione os alunos desta turma",
+                      title: "Selecione os alunos:",
+                      items: _controller.students
+                          .map((e) => MultiSelectItem(e, e.name))
+                          .toList(),
+                      onConfirm: _controller.setStudentsSelected),
+                  Observer(
+                    builder: (_) {
+                      return MultiSelect(
+                        buttonText:
+                            "Selecione as disciplinas/professores desta turma",
+                        title: "Selecione as disciplinas:",
+                        items: _controller.subjectTeacher
+                            .map((e) => MultiSelectItem(
+                                e, '${e.subject} - ${e.teacher}'))
+                            .toList(),
+                        onConfirm: _controller.setSubjectsSelected,
+                      );
                     },
                   ),
                   ElevatedButton(

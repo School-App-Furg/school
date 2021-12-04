@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader_default.dart';
-import 'package:school/app/core/models/subject.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
-import 'package:school/app/screens/admin/home_page/home_controller.dart';
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/subject.dart';
+import '../../../core/service/snackbars.dart';
+import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'register_subjects_controller.g.dart';
 
@@ -19,7 +19,7 @@ abstract class _RegisterSubjectsControllerBase with Store {
   AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
-  String schoolId = Modular.get<HomeController>().userAdmin!.schoolid;
+  String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -32,6 +32,7 @@ abstract class _RegisterSubjectsControllerBase with Store {
             Subject(name: nameController.text, schoolId: schoolId));
 
         if (inserted) {
+          nameController.clear();
           loader.hide();
           buildSnackBarUi(context, "Disciplina cadastrada!");
         } else {

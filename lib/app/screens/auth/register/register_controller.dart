@@ -71,7 +71,7 @@ abstract class _RegisterControllerBase with Store {
         bool inserted = await _authService.insertUserAdmin(
           user.uid,
           UserAdmin(
-              schoolid: idSchool, name: nomeEscolaController.text, type: 0),
+              schoolId: idSchool, name: nomeEscolaController.text, type: 0),
         );
         if (inserted && insertedCycle) {
           loader.hide();

@@ -9,34 +9,34 @@ part of 'register_class_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
-  final _$classesAtom = Atom(name: '_RegisterClassControllerBase.classes');
+  final _$studentsAtom = Atom(name: '_RegisterClassControllerBase.students');
 
   @override
-  List<Classes>? get classes {
-    _$classesAtom.reportRead();
-    return super.classes;
+  List<StudentUser> get students {
+    _$studentsAtom.reportRead();
+    return super.students;
   }
 
   @override
-  set classes(List<Classes>? value) {
-    _$classesAtom.reportWrite(value, super.classes, () {
-      super.classes = value;
+  set students(List<StudentUser> value) {
+    _$studentsAtom.reportWrite(value, super.students, () {
+      super.students = value;
     });
   }
 
-  final _$classesSelectedAtom =
-      Atom(name: '_RegisterClassControllerBase.classesSelected');
+  final _$studentsSelectedAtom =
+      Atom(name: '_RegisterClassControllerBase.studentsSelected');
 
   @override
-  List<dynamic> get classesSelected {
-    _$classesSelectedAtom.reportRead();
-    return super.classesSelected;
+  List<String> get studentsSelected {
+    _$studentsSelectedAtom.reportRead();
+    return super.studentsSelected;
   }
 
   @override
-  set classesSelected(List<dynamic> value) {
-    _$classesSelectedAtom.reportWrite(value, super.classesSelected, () {
-      super.classesSelected = value;
+  set studentsSelected(List<String> value) {
+    _$studentsSelectedAtom.reportWrite(value, super.studentsSelected, () {
+      super.studentsSelected = value;
     });
   }
 
@@ -52,6 +52,22 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
   set subjects(List<Subject>? value) {
     _$subjectsAtom.reportWrite(value, super.subjects, () {
       super.subjects = value;
+    });
+  }
+
+  final _$subjectTeacherAtom =
+      Atom(name: '_RegisterClassControllerBase.subjectTeacher');
+
+  @override
+  ObservableList<SubjectTeacher> get subjectTeacher {
+    _$subjectTeacherAtom.reportRead();
+    return super.subjectTeacher;
+  }
+
+  @override
+  set subjectTeacher(ObservableList<SubjectTeacher> value) {
+    _$subjectTeacherAtom.reportWrite(value, super.subjectTeacher, () {
+      super.subjectTeacher = value;
     });
   }
 
@@ -71,28 +87,55 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
     });
   }
 
-  final _$getClassesAsyncAction =
-      AsyncAction('_RegisterClassControllerBase.getClasses');
+  final _$getStudentsAsyncAction =
+      AsyncAction('_RegisterClassControllerBase.getStudents');
 
   @override
-  Future<dynamic> getClasses() {
-    return _$getClassesAsyncAction.run(() => super.getClasses());
+  Future<dynamic> getStudents() {
+    return _$getStudentsAsyncAction.run(() => super.getStudents());
   }
 
-  final _$getSubjectsAsyncAction =
-      AsyncAction('_RegisterClassControllerBase.getSubjects');
+  final _$getSubjectsAndTeachersAsyncAction =
+      AsyncAction('_RegisterClassControllerBase.getSubjectsAndTeachers');
 
   @override
-  Future<dynamic> getSubjects() {
-    return _$getSubjectsAsyncAction.run(() => super.getSubjects());
+  Future<dynamic> getSubjectsAndTeachers() {
+    return _$getSubjectsAndTeachersAsyncAction
+        .run(() => super.getSubjectsAndTeachers());
+  }
+
+  final _$_RegisterClassControllerBaseActionController =
+      ActionController(name: '_RegisterClassControllerBase');
+
+  @override
+  dynamic setStudentsSelected(List<dynamic> values) {
+    final _$actionInfo = _$_RegisterClassControllerBaseActionController
+        .startAction(name: '_RegisterClassControllerBase.setStudentsSelected');
+    try {
+      return super.setStudentsSelected(values);
+    } finally {
+      _$_RegisterClassControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSubjectsSelected(List<dynamic> values) {
+    final _$actionInfo = _$_RegisterClassControllerBaseActionController
+        .startAction(name: '_RegisterClassControllerBase.setSubjectsSelected');
+    try {
+      return super.setSubjectsSelected(values);
+    } finally {
+      _$_RegisterClassControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-classes: ${classes},
-classesSelected: ${classesSelected},
+students: ${students},
+studentsSelected: ${studentsSelected},
 subjects: ${subjects},
+subjectTeacher: ${subjectTeacher},
 subjectsSelected: ${subjectsSelected}
     ''';
   }

@@ -2,12 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../resources/auth_repository.dart';
-import '../../../resources/users_repository.dart';
 
 import '../../../core/components/loader/loader_default.dart';
-
 import '../../../core/service/snackbars.dart';
+import '../../../resources/auth_repository.dart';
+import '../../../resources/users_repository.dart';
 
 part 'login_controller.g.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:school/app/core/form/general_form.dart';
 import 'package:school/app/core/service/validators.dart';
+
 import 'register_subjects_controller.dart';
 
 class RegisterSubjectsPage extends StatelessWidget {

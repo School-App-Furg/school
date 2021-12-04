@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/admin/subjects_list/subjects_list_page.dart';
 
 import 'config/config_page.dart';
 import 'historic/historic_page.dart';
@@ -9,6 +10,7 @@ import 'register_class/register_class_page.dart';
 import 'register_student/register_student_page.dart';
 import 'register_subjects/register_subjects_page.dart';
 import 'register_teacher/register_teacher_page.dart';
+import 'students_list_page/students_list_page.dart';
 
 class AdminModule extends Module {
   @override
@@ -22,6 +24,8 @@ class AdminModule extends Module {
           '/',
           child: (_, args) => HomePage(),
         ),
+        ChildRoute('/students-list', child: (_, args) => StudentsListPage()),
+        ChildRoute('/subjects', child: (_, args) => SubjectsListPage()),
         ChildRoute('/register', child: (_, args) => RegisterTeacherPage()),
         ChildRoute(
           '/profile',

@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:school/app/core/form/general_form.dart';
 
 import 'package:school/app/core/service/validators.dart';
+
 import 'register_teacher_controller.dart';
 
 class RegisterTeacherPage extends StatefulWidget {

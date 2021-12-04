@@ -1,29 +1,23 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import '../../../core/components/popup_menu.dart';
-import '../drawer/drawer.dart';
-import 'components/app_bar_home.dart';
 
-import 'home_controller.dart';
+import 'subjects_list_controller.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final HomeController controller = HomeController();
-
+class SubjectsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final SubjectsListController controller = SubjectsListController();
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Disciplinas'),
+      ),
       key: controller.scaffoldKey,
       drawerScrimColor: Colors.transparent,
-      drawer: HomeDrawer(),
-      appBar: AppBarHome(
-          onPressed: () => controller.scaffoldKey.currentState?.openDrawer()),
-      body: ListView.builder(
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 2.0,
+        ),
         padding: EdgeInsets.all(10.0),
         itemCount: controller.classRoomList.length,
         itemBuilder: (context, int index) {
@@ -31,13 +25,12 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Container(
-                  height: 170,
                   margin: const EdgeInsets.symmetric(vertical: 5.0),
                   padding: const EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     image: DecorationImage(
-                      image: controller.classRoomList[index].bannerImg,
+                      image: AssetImage(controller.definiBanner(index)),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -53,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.classRoomList[index].anoTurma,
+                                controller.classRoomList[index].name,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 22.0,
@@ -64,35 +57,20 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           IconButton(
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => PopupMenu(),
-                              ),
-                            ),
+                            onPressed: () {},
                             icon: const Icon(Icons.more_vert),
                             color: Colors.white,
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            controller.classRoomList[index].sala,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            controller.classRoomList[index].turmas,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        'Professor(a): ' +
+                            controller.classRoomList[index].teacher,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),

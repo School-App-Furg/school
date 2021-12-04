@@ -4,6 +4,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:school/app/core/form/general_form.dart';
 import 'package:school/app/core/form/multi_select.dart';
 import 'package:school/app/core/service/validators.dart';
+
 import 'register_class_controller.dart';
 
 class RegisterClassPage extends StatelessWidget {

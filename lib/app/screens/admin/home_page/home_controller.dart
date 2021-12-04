@@ -40,8 +40,8 @@ abstract class _HomeControllerBase with Store {
     loading = true;
     userAdmin = await adminService.getUserAdminById(user!.uid);
     schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolid);
-    classes = await adminService.getClasses(
-        userAdmin!.schoolid, schoolModel!.currentCycle);
+    /*classes = await adminService.getClasses(
+        userAdmin!.schoolid, schoolModel!.currentCycle);*/
     loading = false;
   }
 
@@ -54,8 +54,8 @@ abstract class _HomeControllerBase with Store {
     "assets/banners/0.jpeg",
     "assets/banners/1.jpeg",
     "assets/banners/2.jpeg",
-    "assets/banners/3.jpeg",
-    "assets/banners/4.jpeg"
+    "assets/banners/3.jpg",
+    "assets/banners/4.jpg"
   ];
 
   //funcao para alocar a sequencia de imagens banner

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../core/models/cycle.dart';
 import '../../core/models/school_model.dart';
 import '../../core/models/user_admin.dart';
 import '../../resources/auth_repository.dart';
-
 import '../../resources/cycle_repository.dart';
 import '../../resources/school_repository.dart';
 import '../../resources/users_repository.dart';

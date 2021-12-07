@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import '../service/validators.dart';
 import '../styles/colors.dart';
 
 class MultiSelect extends StatefulWidget {
@@ -32,6 +33,7 @@ class _MultiSelectState extends State<MultiSelect> {
         barrierColor: Colors.transparent.withOpacity(0.4),
         cancelText: Text("CANCELAR"),
         items: widget.items,
+        validator: validateEmptyMultiSelect,
         listType: MultiSelectListType.CHIP,
         chipDisplay: MultiSelectChipDisplay(
             decoration: BoxDecoration(color: Colors.grey[200])),

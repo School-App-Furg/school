@@ -12,6 +12,13 @@ String? validateEmpty(value) {
   return null;
 }
 
+String? validateEmptyMultiSelect(value) {
+  if (value == null || value.isEmpty) {
+    return 'Dados obrigatórios';
+  }
+  return null;
+}
+
 String? validateCnpj(value) {
   if (value!.isEmpty) {
     return 'Dados obrigatórios';

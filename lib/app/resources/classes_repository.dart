@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
+import '../core/models/insert_subject_teacher.dart';
 import '../core/models/subject_teacher.dart';
 import '../core/models/classes.dart';
 
@@ -20,8 +21,6 @@ class ClassesRepository {
           .get();
       snapshot.docs.forEach(
         (element) async {
-          List<SubjectTeacher> listSubjectsTeacher =
-              await getSubjetTeacher(element.id);
           Classes turma = Classes.fromJson(
             json.encode(
               element.data(),
@@ -29,12 +28,12 @@ class ClassesRepository {
           );
           list.add(
             Classes(
-                schoolId: turma.cycleId,
-                name: turma.name,
-                room: turma.room,
-                cycleId: turma.cycleId,
-                level: turma.level,
-                subjectTeacher: listSubjectsTeacher),
+              schoolId: turma.cycleId,
+              name: turma.name,
+              room: turma.room,
+              cycleId: turma.cycleId,
+              level: turma.level,
+            ),
           );
         },
       );
@@ -45,7 +44,7 @@ class ClassesRepository {
   }
 
   //retorna a lista de disciplinas e o seu professor cadastrado de cada turma
-  Future<List<SubjectTeacher>> getSubjetTeacher(String id) async {
+  Future<List<SubjectTeacher>> getSubjectTeacher(String id) async {
     List<SubjectTeacher>? list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
@@ -71,9 +70,25 @@ class ClassesRepository {
   }
 
   //cadastro de turmas
-  Future<bool> insertClass(Classes classe) async {
+  Future<String> insertClass(Classes classe) async {
     try {
-      await firestoreInstance.collection('classes').add(classe.toMap());
+      DocumentReference<Map<String, dynamic>> classeCadastrada =
+          await firestoreInstance.collection('classes').add(classe.toMap());
+      return classeCadastrada.id;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //cadastro da subclasse Subject teacher
+  Future<bool> insertSubjectTeacher(
+      InsertSubjectTeacher subjectTeacher, String doc) async {
+    try {
+      await firestoreInstance
+          .collection('classes')
+          .doc(doc)
+          .collection('subjectTeacher')
+          .add(subjectTeacher.toMap());
       return true;
     } catch (e) {
       throw Exception(e);

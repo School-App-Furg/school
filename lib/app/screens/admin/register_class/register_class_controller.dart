@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../../core/models/classes.dart';
+import '../../../core/models/insert_subject_teacher.dart';
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject.dart';
@@ -44,9 +46,10 @@ abstract class _RegisterClassControllerBase with Store {
   //recebe os valores selecionados no multiSelect dos students
   @action
   setStudentsSelected(List values) {
+    studentsSelected.clear();
     values.forEach(
       (element) {
-        subjectsSelected.add(element.id);
+        studentsSelected.add(element);
       },
     );
   }
@@ -64,7 +67,11 @@ abstract class _RegisterClassControllerBase with Store {
             TeacherUser? user = await _adminService.getUserTeacherById(element);
             subjectTeacher.add(
               SubjectTeacher(
-                  id: user!.id, subject: subjectsList.name, teacher: user.name),
+                  id: subjectsList.id,
+                  idSubject: subjectsList.id,
+                  idTeacher: user!.id,
+                  subject: subjectsList.name,
+                  teacher: user.name),
             );
           },
         );
@@ -82,22 +89,39 @@ abstract class _RegisterClassControllerBase with Store {
   //recebe os valores selecionados no multiSelect dos students
   @action
   setSubjectsSelected(List values) {
+    subjectsSelected.clear();
     values.forEach(
       (element) {
-        subjectsSelected.add(element.id);
+        subjectsSelected.add(
+          InsertSubjectTeacher(
+              idTeacher: element.idTeacher, idSubject: element.idSubject),
+        );
       },
     );
   }
 
-  bool inserted = true;
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
       try {
         loader.show();
-
-        if (inserted) {
+        Classes classes = Classes(
+            schoolId: schoolId,
+            name: nameController.text,
+            room: roomController.text,
+            cycleId: currentCycle,
+            level: yearController.text,
+            students: studentsSelected);
+        String doc = await _adminService.insertClasses(classes);
+        subjectsSelected.forEach(
+          (element) {
+            _adminService.insertSubjectTeacher(element, doc);
+          },
+        );
+        if (doc.isNotEmpty) {
+          _adminService.updateHome();
           loader.hide();
+          Modular.to.pop();
           buildSnackBarUi(context, "Turma cadastrada com sucesso!");
         } else {
           loader.hide();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+
 import '../../../core/form/general_form.dart';
 import '../../../core/form/multi_select.dart';
 import '../../../core/service/validators.dart';
@@ -54,22 +55,18 @@ class _RegisterClassPageState extends State<RegisterClassPage> {
                       buttonText: "Selecione os alunos desta turma",
                       title: "Selecione os alunos:",
                       items: _controller.students
-                          .map((e) => MultiSelectItem(e, e.name))
+                          .map((e) => MultiSelectItem(e.id, e.name))
                           .toList(),
                       onConfirm: _controller.setStudentsSelected),
-                  Observer(
-                    builder: (_) {
-                      return MultiSelect(
-                        buttonText:
-                            "Selecione as disciplinas/professores desta turma",
-                        title: "Selecione as disciplinas:",
-                        items: _controller.subjectTeacher
-                            .map((e) => MultiSelectItem(
-                                e, '${e.subject} - ${e.teacher}'))
-                            .toList(),
-                        onConfirm: _controller.setSubjectsSelected,
-                      );
-                    },
+                  MultiSelect(
+                    buttonText:
+                        "Selecione as disciplinas/professores desta turma",
+                    title: "Selecione as disciplinas:",
+                    items: _controller.subjectTeacher
+                        .map((e) =>
+                            MultiSelectItem(e, '${e.subject} - ${e.teacher}'))
+                        .toList(),
+                    onConfirm: _controller.setSubjectsSelected,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

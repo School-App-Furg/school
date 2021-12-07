@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../core/models/insert_subject_teacher.dart';
+import 'home_page/home_controller.dart';
 import '../../core/models/student_user.dart';
 import '../../core/models/subject.dart';
 
@@ -78,6 +81,25 @@ class AdminService {
     }
   }
 
+  //serviço de cadastro de turmas
+  Future<String> insertClasses(Classes classes) async {
+    try {
+      return await _classesRepository.insertClass(classes);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço de cadastro de turmas
+  Future<bool> insertSubjectTeacher(
+      InsertSubjectTeacher subjectTeacher, String doc) async {
+    try {
+      return await _classesRepository.insertSubjectTeacher(subjectTeacher, doc);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //serviço para solicitar lista de disciplinas
   Future<List<Subject>?> getSubjects(String schoolId) async {
     try {
@@ -125,5 +147,9 @@ class AdminService {
     } catch (error) {
       throw Exception(error);
     }
+  }
+
+  updateHome() {
+    Modular.get<HomeController>().initHome();
   }
 }

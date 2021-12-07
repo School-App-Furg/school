@@ -39,6 +39,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$classesAtom = Atom(name: '_HomeControllerBase.classes');
+
+  @override
+  ObservableList<Classes>? get classes {
+    _$classesAtom.reportRead();
+    return super.classes;
+  }
+
+  @override
+  set classes(ObservableList<Classes>? value) {
+    _$classesAtom.reportWrite(value, super.classes, () {
+      super.classes = value;
+    });
+  }
+
   final _$initHomeAsyncAction = AsyncAction('_HomeControllerBase.initHome');
 
   @override
@@ -50,7 +65,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 schoolModel: ${schoolModel},
-loading: ${loading}
+loading: ${loading},
+classes: ${classes}
     ''';
   }
 }

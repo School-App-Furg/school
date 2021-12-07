@@ -22,7 +22,7 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   SchoolModel? schoolModel = SchoolModel(
-      currentCycle: 0,
+      currentCycle: "",
       cnpj: "",
       closingDate: DateTime.now(),
       logo: '',
@@ -39,14 +39,15 @@ abstract class _HomeControllerBase with Store {
   Future initHome() async {
     loading = true;
     userAdmin = await adminService.getUserAdminById(user!.uid);
-    schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolid);
-    classes = await adminService.getClasses(userAdmin!.schoolid);
+    schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolId);
+    classes = await adminService.getClasses(
+        userAdmin!.schoolId, schoolModel!.currentCycle);
     loading = false;
   }
 
   //lista de turmas
   @observable
-  late List<Classes>? classes;
+  ObservableList<Classes>? classes = ObservableList<Classes>();
 
   //lista de imagens banner
   List banners = [

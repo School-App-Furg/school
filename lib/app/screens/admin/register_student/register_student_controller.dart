@@ -1,21 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import '../../../core/components/loader/loader_default.dart';
-import '../../../core/models/subject.dart';
+import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';
-import '../admin_service.dart';
 import '../home_page/home_controller.dart';
 
-part 'register_subjects_controller.g.dart';
+import '../admin_service.dart';
 
-class RegisterSubjectsController = _RegisterSubjectsControllerBase
-    with _$RegisterSubjectsController;
+part 'register_student_controller.g.dart';
 
-abstract class _RegisterSubjectsControllerBase with Store {
+class RegisterStudentController = _RegisterStudentControllerBase
+    with _$RegisterStudentController;
+
+abstract class _RegisterStudentControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-
+  TextEditingController emailController = TextEditingController();
   AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
@@ -28,16 +30,27 @@ abstract class _RegisterSubjectsControllerBase with Store {
         loader.show();
 
         //cadastra o user da escola
-        bool inserted = await _adminService.insertSubject(
-            Subject(name: nameController.text, schoolId: schoolId));
-
+        User? user = await _adminService.createUserWithEmailPass(
+          emailController.text,
+          "escola123",
+        );
+        //cadastra a escola e retorna o id da escola
+        bool inserted = await _adminService.insertStudent(
+          user!.uid,
+          StudentUser(
+            name: nameController.text,
+            schoolId: schoolId,
+            type: 3,
+          ),
+        );
         if (inserted) {
+          emailController.clear();
           nameController.clear();
           loader.hide();
-          buildSnackBarUi(context, "Disciplina cadastrada!");
+          buildSnackBarUi(context, "Aluno cadastrado com sucesso!");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "Erro ao cadastrar a disciplina!");
+          buildSnackBarUi(context, "Aluno não foi cadastrado!");
         }
       } catch (e) {
         loader.hide();

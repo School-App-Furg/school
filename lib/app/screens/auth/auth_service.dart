@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../core/models/cycle.dart';
 import '../../core/models/school_model.dart';
 import '../../core/models/user_admin.dart';
 import '../../resources/auth_repository.dart';
-
 import '../../resources/cycle_repository.dart';
 import '../../resources/school_repository.dart';
 import '../../resources/users_repository.dart';
@@ -45,9 +45,9 @@ class AuthService {
   }
 
   //Cadastro de ciclo da escola
-  Future<bool> insertCycleSchool(String userId, Cycle cycle) async {
+  Future<bool> insertCycleSchool(String cicleId, Cycle cycle) async {
     try {
-      return await _cycleRepository.insertCycleSchool(userId, cycle);
+      return await _cycleRepository.insertCycleSchool(cicleId, cycle);
     } catch (error) {
       throw Exception(error);
     }

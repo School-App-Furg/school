@@ -1,5 +1,62 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../core/models/subject.dart';
 
 class SubjectRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
+  //Retorna a lista de disciplinas cadastradas em uma determinada escola
+  Future<List<Subject>?> getSubjects(String id) async {
+    List<Subject>? list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('subjects')
+          .where('schoolId', isEqualTo: id)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          var teste = Subject.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            Subject(
+                id: element.id,
+                name: teste.name,
+                schoolId: teste.schoolId,
+                teachers: teste.teachers),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return list;
+  }
+
+  //cadastro de disciplinas
+  Future<bool> insertSubject(Subject subject) async {
+    return await firestoreInstance.collection('subjects').doc().set({
+      'schoolId': subject.schoolId,
+      'name': subject.name,
+      'teachers': []
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
+
+  //cadastro de disciplinas
+  Future<bool> updateSubject(String id, List<String> teachers) async {
+    return await firestoreInstance.collection('subjects').doc(id).update({
+      'teachers': teachers,
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
 }

@@ -1,36 +1,32 @@
 import 'dart:convert';
 
 class StudentUser {
-  String schoolid;
+  String? id;
+  String schoolId;
   String name;
   int type;
-  String currentClass;
-  List oldClasses;
   StudentUser({
-    required this.schoolid,
+    this.id,
+    required this.schoolId,
     required this.name,
     required this.type,
-    required this.currentClass,
-    required this.oldClasses,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'schoolid': schoolid,
+      'id': id,
+      'schoolId': schoolId,
       'name': name,
       'type': type,
-      'currentClass': currentClass,
-      'oldClasses': oldClasses,
     };
   }
 
   factory StudentUser.fromMap(Map<String, dynamic> map) {
     return StudentUser(
-      schoolid: map['schoolid'],
+      id: map['id'] != null ? map['id'] : null,
+      schoolId: map['schoolId'],
       name: map['name'],
       type: map['type'],
-      currentClass: map['currentClass'],
-      oldClasses: List.from(map['oldClasses']),
     );
   }
 

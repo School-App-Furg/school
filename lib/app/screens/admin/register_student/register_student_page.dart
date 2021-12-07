@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/service/validators.dart';
+import '../../../core/form/general_form.dart';
+import '../../../core/service/validators.dart';
 
 import 'register_student_controller.dart';
 
@@ -31,11 +31,11 @@ class _RegisterStudentPageState extends State<RegisterStudentPage> {
               MyTextFormField(
                 hintText: 'Nome completo do aluno',
                 controller: _controller.nameController,
-                validator: validateName,
+                validator: validateEmpty,
               ),
               MyTextFormField(
                 hintText: 'Email',
-                isEmail: true,
+                keyboardType: TextInputType.emailAddress,
                 controller: _controller.emailController,
                 validator: validateEmail,
               ),

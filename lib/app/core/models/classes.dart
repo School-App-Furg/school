@@ -6,16 +6,14 @@ class Classes {
   String room;
   String cycleId;
   String level;
-  List<String> idStudents;
-  List<String> idSubjects;
+  List<String>? students;
   Classes({
     required this.schoolId,
     required this.name,
     required this.room,
     required this.cycleId,
     required this.level,
-    required this.idStudents,
-    required this.idSubjects,
+    this.students,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,8 +23,7 @@ class Classes {
       'room': room,
       'cycleId': cycleId,
       'level': level,
-      'idStudents': idStudents,
-      'idSubjects': idSubjects,
+      'students': students,
     };
   }
 
@@ -37,8 +34,8 @@ class Classes {
       room: map['room'],
       cycleId: map['cycleId'],
       level: map['level'],
-      idStudents: List<String>.from(map['idStudents']),
-      idSubjects: List<String>.from(map['idSubjects']),
+      students:
+          map['students'] != null ? List<String>.from(map['students']) : null,
     );
   }
 

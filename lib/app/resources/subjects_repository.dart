@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:school/app/core/models/subject.dart';
+import '../core/models/subject.dart';
 
 class SubjectRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
@@ -16,12 +16,17 @@ class SubjectRepository {
           .get();
       snapshot.docs.forEach(
         (element) {
-          list.add(
-            Subject.fromJson(
-              json.encode(
-                element.data(),
-              ),
+          var teste = Subject.fromJson(
+            json.encode(
+              element.data(),
             ),
+          );
+          list.add(
+            Subject(
+                id: element.id,
+                name: teste.name,
+                schoolId: teste.schoolId,
+                teachers: teste.teachers),
           );
         },
       );
@@ -34,8 +39,20 @@ class SubjectRepository {
   //cadastro de disciplinas
   Future<bool> insertSubject(Subject subject) async {
     return await firestoreInstance.collection('subjects').doc().set({
-      'school_id': subject.schoolId,
+      'schoolId': subject.schoolId,
       'name': subject.name,
+      'teachers': []
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
+  }
+
+  //cadastro de disciplinas
+  Future<bool> updateSubject(String id, List<String> teachers) async {
+    return await firestoreInstance.collection('subjects').doc(id).update({
+      'teachers': teachers,
     }).then(
       (value) {
         return true;

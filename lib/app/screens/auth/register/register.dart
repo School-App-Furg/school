@@ -73,7 +73,7 @@ class _RegisterState extends State<Register> {
                     RoundedInput(
                         hintText: "Nome da Escola",
                         controller: _controller.nomeEscolaController,
-                        validator: validateName,
+                        validator: validateEmpty,
                         icon: Icons.school),
                     RoundedInput(
                       hintText: "CNPJ",

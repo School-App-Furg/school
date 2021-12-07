@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'school_report_controller.dart';
 
 class SchoolReportPage extends StatelessWidget {
   @override

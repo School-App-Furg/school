@@ -40,25 +40,22 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   text: controller.schoolModel!.name,
                   onPressedHistoric: () => Modular.to.pushNamed('./historic'),
                   onPressedSubject: () =>
-                      Modular.to.pushNamed('./register-subjects'),
+                      Modular.to.pushNamed('./register-class'),
                 ),
-                body: Column(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () =>
-                            Modular.to.pushNamed('./students-list'),
-                        child: Text('hey')),
-                    /*ListView.builder(
+                body: Observer(
+                  builder: (_) {
+                    return ListView.builder(
                       padding: EdgeInsets.all(10.0),
                       itemCount: controller.classes!.length,
                       itemBuilder: (context, int index) {
                         return ClassesCard(
                           controller: controller,
                           index: index,
+                          onTap: () => Modular.to.pushNamed("./students-list"),
                         );
                       },
-                    ),*/
-                  ],
+                    );
+                  },
                 ),
               );
       },

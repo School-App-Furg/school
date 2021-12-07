@@ -5,8 +5,15 @@ String? validateEmail(value) {
   return isEmail(value) ? null : 'E-mail inválido';
 }
 
-String? validateName(value) {
+String? validateEmpty(value) {
   if (value!.isEmpty) {
+    return 'Dados obrigatórios';
+  }
+  return null;
+}
+
+String? validateEmptyMultiSelect(value) {
+  if (value == null || value.isEmpty) {
     return 'Dados obrigatórios';
   }
   return null;

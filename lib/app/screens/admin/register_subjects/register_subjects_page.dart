@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/service/validators.dart';
-
+import '../../../core/form/general_form.dart';
+import '../../../core/service/validators.dart';
 import 'register_subjects_controller.dart';
 
 class RegisterSubjectsPage extends StatelessWidget {
@@ -21,7 +20,7 @@ class RegisterSubjectsPage extends StatelessWidget {
               MyTextFormField(
                 hintText: 'Nome da disciplina',
                 controller: _controller.nameController,
-                validator: validateName,
+                validator: validateEmpty,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

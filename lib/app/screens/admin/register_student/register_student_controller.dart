@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader_default.dart';
-import 'package:school/app/core/models/student_user.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/screens/admin/home_page/home_controller.dart';
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/student_user.dart';
+import '../../../core/service/snackbars.dart';
+import '../home_page/home_controller.dart';
 
 import '../admin_service.dart';
 
@@ -18,11 +18,10 @@ abstract class _RegisterStudentControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
   AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
-  String schoolId = Modular.get<HomeController>().userAdmin!.schoolid;
+  String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -33,19 +32,20 @@ abstract class _RegisterStudentControllerBase with Store {
         //cadastra o user da escola
         User? user = await _adminService.createUserWithEmailPass(
           emailController.text,
-          senhaController.text = "escola123",
+          "escola123",
         );
         //cadastra a escola e retorna o id da escola
         bool inserted = await _adminService.insertStudent(
           user!.uid,
           StudentUser(
-              name: nameController.text,
-              schoolid: schoolId,
-              type: 3,
-              currentClass: "",
-              oldClasses: []),
+            name: nameController.text,
+            schoolId: schoolId,
+            type: 3,
+          ),
         );
         if (inserted) {
+          emailController.clear();
+          nameController.clear();
           loader.hide();
           buildSnackBarUi(context, "Aluno cadastrado com sucesso!");
         } else {

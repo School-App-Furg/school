@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../../core/components/popup_menu.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: controller.classRoomList.length,
         itemBuilder: (context, int index) {
           return GestureDetector(
+            onTap: () => Modular.to.pushNamed('./school-report'),
             child: Stack(
               children: [
                 Container(

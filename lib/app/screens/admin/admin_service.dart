@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/models/cycle.dart';
 import '../../core/models/management_user.dart';
 import '../../core/models/insert_subject_teacher.dart';
 import 'home_page/home_controller.dart';
@@ -10,6 +11,7 @@ import '../../core/models/subject.dart';
 import '../../core/models/teacher_user.dart';
 import '../../resources/auth_repository.dart';
 import '../../resources/subjects_repository.dart';
+import '../../resources/cycle_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/school_model.dart';

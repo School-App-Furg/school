@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'register_managers/register_manager_page.dart';
 
 import 'config/config_page.dart';
 import 'historic/historic_page.dart';
@@ -42,5 +43,7 @@ class AdminModule extends Module {
             child: (_, args) => RegisterSubjectsPage()),
         ChildRoute('/historic', child: (_, args) => HistoricPage()),
         ChildRoute('/register-class', child: (_, args) => RegisterClassPage()),
+        ChildRoute('/register-manager',
+            child: (_, args) => RegisterManagerPage()),
       ];
 }

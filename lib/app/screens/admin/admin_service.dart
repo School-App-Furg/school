@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../core/models/management_user.dart';
 import '../../core/models/insert_subject_teacher.dart';
 import 'home_page/home_controller.dart';
 import '../../core/models/student_user.dart';
@@ -126,6 +127,16 @@ class AdminService {
   Future<bool> insertTeacher(String userId, TeacherUser teacherUser) async {
     try {
       return await _userRepository.insertTeacher(userId, teacherUser);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de auxiliares
+  Future<bool> insertManagement(
+      String userId, ManagementUser managementUser) async {
+    try {
+      return await _userRepository.insertManagement(userId, managementUser);
     } catch (error) {
       throw Exception(error);
     }

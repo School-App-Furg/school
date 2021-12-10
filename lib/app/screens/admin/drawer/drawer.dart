@@ -115,6 +115,14 @@ class HomeDrawer extends StatelessWidget {
                         Icons.switch_account_outlined,
                         color: Colors.black,
                       ),
+                      title: Text("Cadastrar\nAuxiliares"),
+                      onTap: () => Modular.to.pushNamed('./register-manager'),
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.switch_account_outlined,
+                        color: Colors.black,
+                      ),
                       title: Text("Cadastrar\nAluno"),
                       onTap: () => Modular.to.pushNamed('./register-student'),
                     ),

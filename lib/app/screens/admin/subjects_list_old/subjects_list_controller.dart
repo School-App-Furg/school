@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/subject_list.dart';
+import '../../../core/models/subject_list.dart';
 part 'subjects_list_controller.g.dart';
 
 class SubjectsListController = _SubjectsListControllerBase

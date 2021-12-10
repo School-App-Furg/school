@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: controller.classRoomList.length,
         itemBuilder: (context, int index) {
           return GestureDetector(
-            onTap: () => Modular.to.pushNamed('./school-report'),
+            onTap: () {},
             child: Stack(
               children: [
                 Container(

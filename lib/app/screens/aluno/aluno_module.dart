@@ -2,7 +2,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
-import 'school_report/school_report_page.dart';
 
 class AlunoModule extends Module {
   @override
@@ -13,6 +12,5 @@ class AlunoModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, args) => HomePage()),
-        ChildRoute('/school-report', child: (_, args) => SchoolReportPage()),
       ];
 }

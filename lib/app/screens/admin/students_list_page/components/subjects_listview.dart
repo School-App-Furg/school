@@ -53,7 +53,7 @@ class StudentsListView extends StatelessWidget {
                       trailing: Icon(Icons.keyboard_arrow_right,
                           color: blueicon, size: 30.0),
                       onTap: () {
-                        Modular.to.pushNamed('./subjects');
+                        Modular.to.pushNamed('./school-report');
                       },
                     ),
                   ),

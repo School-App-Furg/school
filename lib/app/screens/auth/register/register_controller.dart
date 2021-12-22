@@ -3,13 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../auth_service.dart';
-
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/user_admin.dart';
 import '../../../core/service/snackbars.dart';
+import '../auth_service.dart';
 
 part 'register_controller.g.dart';
 

@@ -40,12 +40,43 @@ mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
     });
   }
 
+  final _$teachersAtom = Atom(name: '_RegisterTeacherControllerBase.teachers');
+
+  @override
+  List<TeacherUser>? get teachers {
+    _$teachersAtom.reportRead();
+    return super.teachers;
+  }
+
+  @override
+  set teachers(List<TeacherUser>? value) {
+    _$teachersAtom.reportWrite(value, super.teachers, () {
+      super.teachers = value;
+    });
+  }
+
   final _$getSubjectsAsyncAction =
       AsyncAction('_RegisterTeacherControllerBase.getSubjects');
 
   @override
   Future getSubjects() {
     return _$getSubjectsAsyncAction.run(() => super.getSubjects());
+  }
+
+  final _$getTeachersAsyncAction =
+      AsyncAction('_RegisterTeacherControllerBase.getTeachers');
+
+  @override
+  Future<dynamic> getTeachers(BuildContext context) {
+    return _$getTeachersAsyncAction.run(() => super.getTeachers(context));
+  }
+
+  final _$excluirAsyncAction =
+      AsyncAction('_RegisterTeacherControllerBase.excluir');
+
+  @override
+  Future excluir(BuildContext context, String idTeacher) {
+    return _$excluirAsyncAction.run(() => super.excluir(context, idTeacher));
   }
 
   final _$_RegisterTeacherControllerBaseActionController =
@@ -67,7 +98,8 @@ mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
   String toString() {
     return '''
 subjects: ${subjects},
-subjectsSelected: ${subjectsSelected}
+subjectsSelected: ${subjectsSelected},
+teachers: ${teachers}
     ''';
   }
 }

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/cycle.dart';
 import '../../core/models/management_user.dart';
 import '../../core/models/insert_subject_teacher.dart';
 import 'home_page/home_controller.dart';
@@ -11,7 +10,6 @@ import '../../core/models/subject.dart';
 import '../../core/models/teacher_user.dart';
 import '../../resources/auth_repository.dart';
 import '../../resources/subjects_repository.dart';
-import '../../resources/cycle_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/school_model.dart';
@@ -113,6 +111,16 @@ class AdminService {
     }
   }
 
+  //serviço para solicitar lista de professores de uma escola
+  Future<List<TeacherUser>?> getTeachers(String schoolId) async {
+    try {
+      List<TeacherUser>? list = await _userRepository.getTeachers(schoolId);
+      return list;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //criação de usuários
   Future<User?>? createUserWithEmailPass(String email, String pass) async {
     try {
@@ -157,6 +165,24 @@ class AdminService {
   Future<List<StudentUser>> getStudentsBySchoolId(String schoolId) async {
     try {
       return await _userRepository.getStudentsBySchoolId(schoolId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //remover disciplina
+  Future<bool> removeSubject(String idSubject) async {
+    try {
+      return await _subjectRepository.removeSubject(idSubject);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //remover professor
+  Future<bool> removeTeacher(String idTeacher) async {
+    try {
+      return await _userRepository.removeTeacher(idTeacher);
     } catch (error) {
       throw Exception(error);
     }

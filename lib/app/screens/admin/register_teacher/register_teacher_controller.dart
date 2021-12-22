@@ -89,10 +89,92 @@ abstract class _RegisterTeacherControllerBase with Store {
             type: 2,
           ),
         );
+        getTeachers(context);
+        Navigator.of(context).pop();
         if (inserted) {
           loader.hide();
           buildSnackBarUi(context, "Professor cadastrado com sucesso!");
-          Modular.to.pop();
+        } else {
+          loader.hide();
+          buildSnackBarUi(context, "Professor não foi cadastrado!");
+        }
+      } catch (e) {
+        loader.hide();
+        buildSnackBarUi(context, e.toString());
+      }
+    }
+  }
+
+  //Lista de disciplinas
+  @observable
+  List<TeacherUser>? teachers = [];
+
+  //get de disciplinas
+  @action
+  Future getTeachers(BuildContext context) async {
+    final loader = LoaderDefault();
+    try {
+      loader.show();
+      teachers = await _adminService.getTeachers(schoolId);
+      loader.hide();
+    } catch (e) {
+      loader.hide();
+      buildSnackBarUi(context, e.toString());
+    }
+  }
+
+  //exclusão de professores
+  @action
+  excluir(BuildContext context, String idTeacher) async {
+    final loader = LoaderDefault();
+    try {
+      loader.show();
+      bool removed = await _adminService.removeTeacher(idTeacher);
+      getTeachers(context);
+      Navigator.of(context).pop();
+      if (removed) {
+        loader.hide();
+        buildSnackBarUi(context, "Professor removido!");
+      } else {
+        Navigator.of(context).pop();
+        loader.hide();
+        buildSnackBarUi(context, "Erro ao remover professor!");
+      }
+    } catch (e) {
+      loader.hide();
+      buildSnackBarUi(context, e.toString());
+    }
+  }
+
+  update(BuildContext context) async {
+    if (formKey.currentState!.validate() && subjectsSelected.isNotEmpty) {
+      final loader = LoaderDefault();
+      try {
+        loader.show();
+
+        //cadastra o user da escola
+        User? user = await _adminService.createUserWithEmailPass(
+          emailController.text,
+          "escola123",
+        );
+
+        //update da disciplina acrescentando o professor
+        await updateSubjects(user!.uid);
+
+        //cadastra a escola e retorna o id da escola
+        bool inserted = await _adminService.insertTeacher(
+          user.uid,
+          TeacherUser(
+            name: nameController.text,
+            schoolId: schoolId,
+            type: 2,
+          ),
+        );
+        getTeachers(context);
+        Navigator.of(context).pop();
+        if (inserted) {
+          loader.hide();
+          buildSnackBarUi(context, "Professor cadastrado com sucesso!");
         } else {
           loader.hide();
           buildSnackBarUi(context, "Professor não foi cadastrado!");

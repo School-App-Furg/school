@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/screens/admin/school_report/school_report_controller.dart';
+import '../../../core/styles/colors.dart';
 
 import 'components/school_report_list.dart';
 
@@ -11,8 +9,6 @@ class SchoolReportPage extends StatefulWidget {
 }
 
 class _SchoolReportPageState extends State<SchoolReportPage> {
-  final SchoolReportController _controller = SchoolReportController();
-
   @override
   void initState() {
     super.initState();

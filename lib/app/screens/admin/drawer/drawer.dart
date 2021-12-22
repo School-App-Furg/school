@@ -99,7 +99,7 @@ class HomeDrawer extends StatelessWidget {
                         Icons.class__outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastrar disciplina"),
+                      title: Text("Disciplinas"),
                       onTap: () => Modular.to.pushNamed('./register-subjects'),
                     ),
                     ListTile(
@@ -107,7 +107,7 @@ class HomeDrawer extends StatelessWidget {
                         Icons.switch_account_outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastrar\nProfessor"),
+                      title: Text("Professores"),
                       onTap: () => Modular.to.pushNamed('./register-teacher'),
                     ),
                     ListTile(

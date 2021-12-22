@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-import '../../../core/form/general_form.dart';
-import '../../../core/form/multi_select.dart';
+import '../../../core/components/loader/loader_page.dart';
 
-import '../../../core/service/validators.dart';
+import 'components/add_teacher_dialog.dart';
+import 'components/delete_dialog.dart';
 import 'register_teacher_controller.dart';
 
 class RegisterTeacherPage extends StatefulWidget {
@@ -20,59 +19,48 @@ class _RegisterTeacherPageState extends State<RegisterTeacherPage> {
   void initState() {
     super.initState();
     _controller.getSubjects();
+    WidgetsBinding.instance?.addPostFrameCallback(
+      (_) {
+        _controller.getTeachers(context);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Cadastro de Professores'),
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _controller.formKey,
-          child: Column(
-            children: [
-              MyTextFormField(
-                hintText: 'Nome completo',
-                controller: _controller.nameController,
-                validator: validateEmpty,
-              ),
-              MyTextFormField(
-                hintText: 'Email',
-                keyboardType: TextInputType.emailAddress,
-                controller: _controller.emailController,
-                validator: validateEmail,
-              ),
-              Observer(
-                builder: (_) {
-                  return MultiSelect(
-                    buttonText:
-                        "Selecione as disciplinas lecionadas por este professor:",
-                    title: "Selecione as disciplinas:",
-                    items: _controller.subjects!
-                        .map((e) => MultiSelectItem(e, e.name))
-                        .toList(),
-                    onConfirm: _controller.setSubjectsSelected,
-                  );
-                },
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blueAccent,
+    return Observer(
+      builder: (_) {
+        return _controller.teachers!.isEmpty
+            ? LoaderPage()
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Professores'),
+                  actions: [
+                    IconButton(
+                      onPressed: () =>
+                          showAddTeacherDialog(context, _controller),
+                      icon: Icon(Icons.add),
+                    )
+                  ],
                 ),
-                onPressed: () => _controller.cadastrar(context),
-                child: Text(
-                  'Cadastrar',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                body: ListView.builder(
+                  itemCount: _controller.teachers!.length,
+                  itemBuilder: (_, index) {
+                    var data = _controller.teachers![index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(data.name),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () =>
+                              showDeleteDialog(context, _controller, data.id),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
+              );
+      },
     );
   }
 }

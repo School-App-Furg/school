@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../core/models/cycle.dart';
 
 class CycleRepository {

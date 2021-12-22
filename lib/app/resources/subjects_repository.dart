@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../core/models/subject.dart';
 
 class SubjectRepository {
@@ -58,5 +59,20 @@ class SubjectRepository {
         return true;
       },
     ).catchError((error) => throw Exception(error));
+  }
+
+  //remover disciplina
+  Future<bool> removeSubject(String idSubject) async {
+    return await firestoreInstance
+        .collection('subjects')
+        .doc(idSubject)
+        .delete()
+        .then(
+      (value) {
+        return true;
+      },
+    ).catchError(
+      (error) => throw Exception(error),
+    );
   }
 }

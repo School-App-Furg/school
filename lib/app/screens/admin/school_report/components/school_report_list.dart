@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../../core/styles/colors.dart';
 
 class SchoolReportList extends StatelessWidget {
   const SchoolReportList({Key? key}) : super(key: key);

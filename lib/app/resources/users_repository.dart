@@ -106,6 +106,52 @@ class UsersRepository {
     return model;
   }
 
+  //Retorna uma lista de professores
+  Future<List<TeacherUser>?> getTeachers(String schoolId) async {
+    List<TeacherUser>? list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('users')
+          .where('schoolId', isEqualTo: schoolId)
+          .where('type', isEqualTo: 2)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          var teste = TeacherUser.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            TeacherUser(
+                id: element.id,
+                name: teste.name,
+                schoolId: teste.schoolId,
+                type: teste.type),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return list;
+  }
+
+  //remover professor
+  Future<bool> removeTeacher(String idTeacher) async {
+    return await firestoreInstance
+        .collection('users')
+        .doc(idTeacher)
+        .delete()
+        .then(
+      (value) {
+        return true;
+      },
+    ).catchError(
+      (error) => throw Exception(error),
+    );
+  }
+
   //Cadastro de um aluno/responsavel
   Future<bool> insertStudent(String userId, StudentUser studentUser) async {
     return await firestoreInstance.collection('users').doc(userId).set({

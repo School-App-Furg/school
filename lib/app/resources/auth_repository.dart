@@ -10,6 +10,7 @@ class AuthRepository extends ChangeNotifier {
     _authCheck();
   }
 
+  //verificação do usuário
   _authCheck() {
     _auth.authStateChanges().listen(
       (User? user) {
@@ -19,6 +20,7 @@ class AuthRepository extends ChangeNotifier {
     );
   }
 
+  //pegar o usuário existente em memória
   _getUser() {
     usuario = _auth.currentUser;
     notifyListeners();
@@ -35,6 +37,13 @@ class AuthRepository extends ChangeNotifier {
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
+      throw authErrorHandler(e);
+    }
+  }
+
+  //remover user
+  Future removeUser(User user) async {
+    try {} on FirebaseAuthException catch (e) {
       throw authErrorHandler(e);
     }
   }

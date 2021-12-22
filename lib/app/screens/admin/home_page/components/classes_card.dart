@@ -30,11 +30,10 @@ class _ClassesCardState extends State<ClassesCard> {
           child: Stack(
             children: [
               Container(
-                height: 170,
-                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                height: 140,
+                //margin: const EdgeInsets.symmetric(vertical: 5.0),
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
                   image: DecorationImage(
                     image: AssetImage(
                       widget.controller.definiBanner(widget.index),
@@ -57,11 +56,6 @@ class _ClassesCardState extends State<ClassesCard> {
                             fontSize: 22.0,
                             fontWeight: FontWeight.w600,
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () => PopupMenu(),
-                          icon: const Icon(Icons.more_vert),
-                          color: Colors.white,
                         ),
                       ],
                     ),

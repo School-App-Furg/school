@@ -50,6 +50,7 @@ dependencies:
   flutter_modular: ^4.2.0
   multi_select_flutter: ^4.0.0
   rounded_expansion_tile: ^0.0.13
+  flutter_slidable: ^1.1.0
   
   
 

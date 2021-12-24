@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../../../core/components/popup_menu.dart';
 import '../home_controller.dart';
 
 class ClassesCard extends StatefulWidget {

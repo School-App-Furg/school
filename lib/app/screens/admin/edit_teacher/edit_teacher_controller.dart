@@ -10,12 +10,12 @@ import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
 import '../home_page/home_controller.dart';
 
-part 'register_teacher_controller.g.dart';
+part 'edit_teacher_controller.g.dart';
 
-class RegisterTeacherController = _RegisterTeacherControllerBase
-    with _$RegisterTeacherController;
+class EditTeacherController = _EditTeacherControllerBase
+    with _$EditTeacherController;
 
-abstract class _RegisterTeacherControllerBase with Store {
+abstract class _EditTeacherControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -27,6 +27,19 @@ abstract class _RegisterTeacherControllerBase with Store {
   //lista de disciplinas da escola
   @observable
   List<Subject>? listOfsubjects = [];
+
+  @action
+  initEditPage(TeacherUser teacherUser) {
+    nameController.text = teacherUser.name;
+    getSubjects();
+  }
+
+  @observable
+  List<Subject>? listOfSubjectsSelected = [];
+
+  @action
+  defineSubjectSelected(TeacherUser teacherUser){teacherUser.subjects.for}
+
 
   //listagem de disciplinas da escoa
   @action
@@ -70,7 +83,7 @@ abstract class _RegisterTeacherControllerBase with Store {
               type: 2,
               subjects: subjectsSelected),
         );
-        getTeachers(context);
+
         Navigator.of(context).pop();
         if (inserted) {
           loader.hide();
@@ -86,24 +99,6 @@ abstract class _RegisterTeacherControllerBase with Store {
     }
   }
 
-  //Lista de disciplinas
-  @observable
-  List<TeacherUser>? teachers = [];
-
-  //get de disciplinas
-  @action
-  Future getTeachers(BuildContext context) async {
-    final loader = LoaderDefault();
-    try {
-      loader.show();
-      teachers = await _adminService.getTeachers(schoolId);
-      loader.hide();
-    } catch (e) {
-      loader.hide();
-      buildSnackBarUi(context, e.toString());
-    }
-  }
-
   //exclusão de professores
   @action
   excluir(BuildContext context, String idTeacher) async {
@@ -111,7 +106,7 @@ abstract class _RegisterTeacherControllerBase with Store {
     try {
       loader.show();
       bool removed = await _adminService.removeTeacher(idTeacher);
-      getTeachers(context);
+
       Navigator.of(context).pop();
       if (removed) {
         loader.hide();
@@ -148,7 +143,7 @@ abstract class _RegisterTeacherControllerBase with Store {
             type: 2,
           ),
         );
-        getTeachers(context);
+
         Navigator.of(context).pop();
         if (inserted) {
           loader.hide();

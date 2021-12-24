@@ -77,8 +77,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                               child: ClassesCard(
                                 controller: controller,
                                 index: index,
-                                onTap: () =>
-                                    Modular.to.pushNamed("./students-list"),
+                                onTap: () => Modular.to
+                                    .pushNamed("./students-list", arguments: {
+                                  'classe': controller.classes![index]
+                                }),
                               ),
                             ),
                           ),

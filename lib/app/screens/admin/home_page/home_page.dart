@@ -59,7 +59,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                 motion: ScrollMotion(),
                                 children: [
                                   SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) => Modular.to
+                                        .pushNamed("./edit-class", arguments: {
+                                      'class_year': controller.classes![index],
+                                    }),
                                     backgroundColor: grey,
                                     foregroundColor: Colors.white,
                                     icon: Icons.edit,

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'edit_class/edit_class_page.dart';
 import 'register_managers/register_manager_page.dart';
 
 import 'config/config_page.dart';
@@ -27,6 +28,10 @@ class AdminModule extends Module {
           '/',
           child: (_, args) => HomePage(),
         ),
+        ChildRoute('/edit-class',
+            child: (_, args) => EditClassPage(
+                  classes: args.data['class_year'],
+                )),
         ChildRoute('/students-list', child: (_, args) => StudentsListPage()),
         ChildRoute('/register', child: (_, args) => RegisterTeacherPage()),
         ChildRoute(

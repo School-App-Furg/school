@@ -2,19 +2,27 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/models/school_model.dart';
+import 'package:school/app/core/models/teacher_user.dart';
 
 import '../../../core/styles/sizes.dart';
 import '../../../resources/auth_repository.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({Key? key}) : super(key: key);
+  final SchoolModel? schoolModel;
+  final TeacherUser? teacherUser;
+  const HomeDrawer({
+    Key? key,
+    required this.schoolModel,
+    required this.teacherUser,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AuthRepository _authRepository = AuthRepository();
-    String _userAvatar = "https://randomuser.me/api/portraits/men/46.jpg";
+
     return Container(
-      width: width(context, 0.8),
+      width: width(context, 0.7),
       height: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(180, 250, 250, 250),
@@ -58,13 +66,13 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(_userAvatar),
+                      backgroundImage: NetworkImage(schoolModel!.logo),
                       radius: 30.0,
                     ),
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text("Administração\nEscolar")
+                    Text(teacherUser!.name)
                   ],
                 ),
               ),
@@ -72,48 +80,56 @@ class HomeDrawer extends StatelessWidget {
                 child: ListView(
                   children: [
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.home,
+                        Icons.home_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
+                      onTap: () {},
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.person,
+                        Icons.person_outline_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
+                      onTap: () => () {},
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.app_registration_rounded,
+                        Icons.class__outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastro\nProfessor/Aluno"),
+                      title: Text("Disciplinas"),
+                      onTap: () {},
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.settings,
+                        Icons.switch_account_outlined,
+                        color: Colors.black,
+                      ),
+                      title: Text("Cadastrar\nAluno"),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.settings_applications_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Ajustes"),
+                      onTap: () {},
                     ),
                     ListTile(
-                      onTap: () {
-                        _authRepository.logout();
-                        Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/');
-                      },
                       leading: Icon(
                         Icons.logout,
                         color: Colors.black,
                       ),
                       title: Text("Sair"),
+                      onTap: () {
+                        _authRepository.logout();
+                        Modular.to.pop();
+                        Modular.to.pushReplacementNamed('/auth/');
+                      },
                     )
                   ],
                 ),

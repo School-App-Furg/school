@@ -8,7 +8,7 @@ import '../../../core/components/loader/loader_page.dart';
 
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
-import 'components/classes_card.dart';
+import '../../../core/components/classes_card.dart';
 import 'home_controller.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -78,7 +78,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                 ],
                               ),
                               child: ClassesCard(
-                                controller: controller,
+                                assetimage: controller.definiBanner(index),
+                                text_first:
+                                    '${controller.classes![index].level}º ano',
+                                text_second:
+                                    'Sala ${controller.classes![index].room}',
+                                text_third: controller.classes![index].name,
                                 index: index,
                                 onTap: () =>
                                     Modular.to.pushNamed("./students-list"),

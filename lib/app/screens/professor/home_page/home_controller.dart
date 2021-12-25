@@ -36,8 +36,6 @@ abstract class _HomeControllerBase with Store {
     type: 2,
   );
 
-  late TeacherUser? userAdmin;
-
   @observable
   bool loading = false;
 
@@ -45,10 +43,11 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    userAdmin = await adminService.getUserTeacherById(user!.uid);
-    schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolId);
+    teacherUser = await adminService.getUserTeacherById(user!.uid);
+    schoolModel =
+        await adminService.getSchoolInformations(teacherUser!.schoolId);
     classes = await adminService.getClasses(
-        userAdmin!.schoolId, schoolModel!.currentCycle);
+        teacherUser!.schoolId, schoolModel!.currentCycle);
     loading = false;
   }
 

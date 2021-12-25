@@ -33,7 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 key: controller.scaffoldKey,
                 drawerScrimColor: Colors.transparent,
                 drawer: HomeDrawer(
-                  teacherUser: controller.userAdmin,
+                  teacherUser: controller.teacherUser,
                   schoolModel: controller.schoolModel,
                 ),
                 appBar: AppBarHome(
@@ -61,7 +61,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                   'Sala ${controller.classes![index].room}',
                               text_third: controller.classes![index].name,
                               index: index,
-                              onTap: () {},
+                              onTap: () {
+                                Modular.to.pushNamed("./students-list");
+                              },
                             ),
                           ),
                         );

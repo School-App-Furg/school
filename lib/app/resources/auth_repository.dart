@@ -41,13 +41,6 @@ class AuthRepository extends ChangeNotifier {
     }
   }
 
-  //remover user
-  Future removeUser(User user) async {
-    try {} on FirebaseAuthException catch (e) {
-      throw authErrorHandler(e);
-    }
-  }
-
   // acesso por email e senhaa
   Future<User?> signInEmailAndPassword(String email, String password) async {
     try {

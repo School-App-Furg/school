@@ -9,18 +9,19 @@ part of 'register_teacher_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
-  final _$subjectsAtom = Atom(name: '_RegisterTeacherControllerBase.subjects');
+  final _$listOfsubjectsAtom =
+      Atom(name: '_RegisterTeacherControllerBase.listOfsubjects');
 
   @override
-  List<Subject>? get subjects {
-    _$subjectsAtom.reportRead();
-    return super.subjects;
+  List<Subject>? get listOfsubjects {
+    _$listOfsubjectsAtom.reportRead();
+    return super.listOfsubjects;
   }
 
   @override
-  set subjects(List<Subject>? value) {
-    _$subjectsAtom.reportWrite(value, super.subjects, () {
-      super.subjects = value;
+  set listOfsubjects(List<Subject>? value) {
+    _$listOfsubjectsAtom.reportWrite(value, super.listOfsubjects, () {
+      super.listOfsubjects = value;
     });
   }
 
@@ -97,7 +98,7 @@ mixin _$RegisterTeacherController on _RegisterTeacherControllerBase, Store {
   @override
   String toString() {
     return '''
-subjects: ${subjects},
+listOfsubjects: ${listOfsubjects},
 subjectsSelected: ${subjectsSelected},
 teachers: ${teachers}
     ''';

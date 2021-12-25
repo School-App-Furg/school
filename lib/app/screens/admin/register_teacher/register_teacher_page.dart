@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:school/app/core/models/teacher_user.dart';
 
 import '../../../core/components/loader/loader_page.dart';
-
 import 'components/add_teacher_dialog.dart';
-import 'components/delete_dialog.dart';
+
 import 'register_teacher_controller.dart';
 
 class RegisterTeacherPage extends StatefulWidget {
@@ -12,16 +14,15 @@ class RegisterTeacherPage extends StatefulWidget {
   State<RegisterTeacherPage> createState() => _RegisterTeacherPageState();
 }
 
-class _RegisterTeacherPageState extends State<RegisterTeacherPage> {
-  final RegisterTeacherController _controller = RegisterTeacherController();
-
+class _RegisterTeacherPageState
+    extends ModularState<RegisterTeacherPage, RegisterTeacherController> {
   @override
   void initState() {
     super.initState();
-    _controller.getSubjects();
+    controller.getSubjects();
     WidgetsBinding.instance?.addPostFrameCallback(
       (_) {
-        _controller.getTeachers(context);
+        controller.getTeachers(context);
       },
     );
   }
@@ -30,7 +31,7 @@ class _RegisterTeacherPageState extends State<RegisterTeacherPage> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        return _controller.teachers!.isEmpty
+        return controller.teachers!.isEmpty
             ? LoaderPage()
             : Scaffold(
                 appBar: AppBar(
@@ -38,22 +39,24 @@ class _RegisterTeacherPageState extends State<RegisterTeacherPage> {
                   actions: [
                     IconButton(
                       onPressed: () =>
-                          showAddTeacherDialog(context, _controller),
+                          showAddTeacherDialog(context, controller),
                       icon: Icon(Icons.add),
                     )
                   ],
                 ),
                 body: ListView.builder(
-                  itemCount: _controller.teachers!.length,
+                  itemCount: controller.teachers!.length,
                   itemBuilder: (_, index) {
-                    var data = _controller.teachers![index];
+                    TeacherUser data = controller.teachers![index];
                     return Card(
                       child: ListTile(
                         title: Text(data.name),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () =>
-                              showDeleteDialog(context, _controller, data.id),
+                          icon: Icon(Icons.settings),
+                          onPressed: () => Modular.to.pushNamed(
+                              './edit-teacher',
+                              arguments: {'teacher': data},
+                              forRoot: true),
                         ),
                       ),
                     );

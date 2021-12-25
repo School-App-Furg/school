@@ -23,11 +23,7 @@ class SubjectRepository {
             ),
           );
           list.add(
-            Subject(
-                id: element.id,
-                name: teste.name,
-                schoolId: teste.schoolId,
-                teachers: teste.teachers),
+            Subject(id: element.id, name: teste.name, schoolId: teste.schoolId),
           );
         },
       );

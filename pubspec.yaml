@@ -52,6 +52,7 @@ dependencies:
   rounded_expansion_tile: ^0.0.13
   flutter_slidable: ^1.1.0
   dropdown_search: ^2.0.1
+  multiselect: ^0.0.4
   
 
 dev_dependencies:

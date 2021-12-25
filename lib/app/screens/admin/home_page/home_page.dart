@@ -85,8 +85,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                     'Sala ${controller.classes![index].room}',
                                 text_third: controller.classes![index].name,
                                 index: index,
-                                onTap: () =>
-                                    Modular.to.pushNamed("./students-list"),
+                                onTap: () => Modular.to
+                                    .pushNamed("./students-list", arguments: {
+                                  'classe': controller.classes![index]
+                                }),
                               ),
                             ),
                           ),

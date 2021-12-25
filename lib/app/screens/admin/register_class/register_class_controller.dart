@@ -7,7 +7,6 @@ import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject.dart';
 import '../../../core/models/subject_teacher.dart';
-import '../../../core/models/teacher_user.dart';
 
 import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
@@ -61,21 +60,7 @@ abstract class _RegisterClassControllerBase with Store {
   Future getSubjectsAndTeachers() async {
     subjects = await _adminService.getSubjects(schoolId);
     subjects!.forEach(
-      (subjectsList) {
-        subjectsList.teachers!.forEach(
-          (element) async {
-            TeacherUser? user = await _adminService.getUserTeacherById(element);
-            subjectTeacher.add(
-              SubjectTeacher(
-                  id: subjectsList.id,
-                  idSubject: subjectsList.id,
-                  idTeacher: user!.id,
-                  subject: subjectsList.name,
-                  teacher: user.name),
-            );
-          },
-        );
-      },
+      (subjectsList) {},
     );
   }
 

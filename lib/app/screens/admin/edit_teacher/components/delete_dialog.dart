@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../register_teacher_controller.dart';
+import '../edit_teacher_controller.dart';
 
-Future<void> showDeleteDialog(BuildContext context,
-    RegisterTeacherController controller, String? idSubject) async {
+Future<void> showDeleteTeacherDialog(BuildContext context,
+    EditTeacherController controller, String? idTeacher) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -18,7 +18,7 @@ Future<void> showDeleteDialog(BuildContext context,
           TextButton(
             child: const Text('Sim'),
             onPressed: () {
-              controller.excluir(context, idSubject!);
+              controller.excluir(context, idTeacher!);
             },
           ),
           TextButton(

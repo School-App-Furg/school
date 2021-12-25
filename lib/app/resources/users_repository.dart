@@ -30,7 +30,9 @@ class UsersRepository {
       await firestoreInstance.collection('users').doc(userId).get().then(
         (DocumentSnapshot snapshot) {
           model = UserAdmin.fromJson(
-            json.encode(snapshot.data()),
+            json.encode(
+              snapshot.data(),
+            ),
           );
         },
       );
@@ -76,7 +78,8 @@ class UsersRepository {
     return await firestoreInstance.collection('users').doc(userId).set({
       'schoolId': teacherUser.schoolId,
       'name': teacherUser.name,
-      'type': teacherUser.type
+      'type': teacherUser.type,
+      'subjects': teacherUser.subjects
     }).then(
       (value) {
         return true;
@@ -127,7 +130,8 @@ class UsersRepository {
                 id: element.id,
                 name: teste.name,
                 schoolId: teste.schoolId,
-                type: teste.type),
+                type: teste.type,
+                subjects: teste.subjects),
           );
         },
       );

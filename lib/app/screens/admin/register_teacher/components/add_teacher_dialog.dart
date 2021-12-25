@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+
 import '../../../../core/form/general_form.dart';
 import '../../../../core/form/multi_select.dart';
 import '../../../../core/service/validators.dart';
@@ -41,7 +42,7 @@ Future<void> showAddTeacherDialog(
                         return MultiSelect(
                           buttonText: "Selecione as disciplinas:",
                           title: "Selecione as disciplinas:",
-                          items: controller.subjects!
+                          items: controller.listOfsubjects!
                               .map((e) => MultiSelectItem(e, e.name))
                               .toList(),
                           onConfirm: controller.setSubjectsSelected,

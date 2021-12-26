@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$managerUserAtom = Atom(name: '_HomeControllerBase.managerUser');
+
+  @override
+  ManagementUser? get managerUser {
+    _$managerUserAtom.reportRead();
+    return super.managerUser;
+  }
+
+  @override
+  set managerUser(ManagementUser? value) {
+    _$managerUserAtom.reportWrite(value, super.managerUser, () {
+      super.managerUser = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
 
   @override
@@ -65,6 +80,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 schoolModel: ${schoolModel},
+managerUser: ${managerUser},
 loading: ${loading},
 classes: ${classes}
     ''';

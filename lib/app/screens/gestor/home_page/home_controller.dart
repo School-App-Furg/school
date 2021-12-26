@@ -7,7 +7,6 @@ import 'package:school/app/core/models/management_user.dart';
 import 'package:school/app/core/models/school_model.dart';
 import 'package:school/app/core/models/user_admin.dart';
 import 'package:school/app/resources/auth_repository.dart';
-import 'package:school/app/resources/users_repository.dart';
 import 'package:school/app/screens/admin/admin_service.dart';
 import 'model/classrooms.dart';
 part 'home_controller.g.dart';
@@ -15,7 +14,6 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  UsersRepository managerService = UsersRepository();
   AdminService adminService = AdminService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   User? user = Modular.get<AuthRepository>().usuario;
@@ -29,7 +27,12 @@ abstract class _HomeControllerBase with Store {
       name: '',
       regime: 0);
 
-  late ManagementUser? managerUser;
+  @observable
+  ManagementUser? managerUser = ManagementUser(
+    name: '',
+    schoolId: '',
+    type: 1,
+  );
 
   @observable
   bool loading = false;
@@ -38,7 +41,7 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    managerUser = await managerService.getUserManagementById(user!.uid);
+    managerUser = await adminService.getUserManagementById(user!.uid);
     schoolModel =
         await adminService.getSchoolInformations(managerUser!.schoolId);
     classes = await adminService.getClasses(

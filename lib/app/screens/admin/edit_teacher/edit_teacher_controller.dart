@@ -37,8 +37,8 @@ abstract class _EditTeacherControllerBase with Store {
   @observable
   List<Subject>? listOfSubjectsSelected = [];
 
-  @action
-  defineSubjectSelected(TeacherUser teacherUser){teacherUser.subjects.for}
+ /* @action
+  defineSubjectSelected(TeacherUser teacherUser){teacherUser.subjects.for}*/
 
 
   //listagem de disciplinas da escoa

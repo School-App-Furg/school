@@ -23,7 +23,8 @@ class _SplashState extends State<Splash> {
             if (auth.usuario == null) {
               Modular.to.pushNamed("/auth/");
             } else {
-              Modular.to.pushReplacementNamed("/professor/");
+              //ALTERANDO MANUALMENTE ATÉ RESOLVER O BUG
+              Modular.to.pushReplacementNamed("/gestor/");
             }
           },
         );

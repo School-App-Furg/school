@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,10 +5,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:school/app/core/components/classes_card.dart';
 import 'package:school/app/core/components/loader/loader_page.dart';
 import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/screens/admin/drawer/drawer.dart';
-import 'package:school/app/screens/admin/home_page/components/app_bar_home.dart';
-
-import '../../../core/components/popup_menu.dart';
+import 'package:school/app/screens/gestor/drawer/drawer.dart';
+import 'package:school/app/screens/gestor/home_page/components/app_bar_home.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {

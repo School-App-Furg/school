@@ -7,21 +7,21 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../core/components/rounded_password_field.dart';
 
 import '../../../core/service/validators.dart';
-import 'register_controller.dart';
+import 'register_school_controller.dart';
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 
-class Register extends StatefulWidget {
-  Register({Key? key}) : super(key: key);
+class RegisterSchool extends StatefulWidget {
+  RegisterSchool({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterSchool> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends State<RegisterSchool> {
   final RegisterController _controller = RegisterController();
 
   @override
@@ -59,10 +59,6 @@ class _RegisterState extends State<Register> {
                       "assets/images/welcome_ok.png",
                       height: widthAll(context),
                     ),
-                    /*SvgPicture.asset(
-                      "assets/icons/welcome2.svg",
-                      height: widthAll(context),
-                    ),*/
                     Text(
                       "CADASTRE A SUA ESCOLA",
                       style: TextStyle(fontWeight: FontWeight.bold),

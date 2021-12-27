@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'register_controller.dart';
+part of 'register_school_controller.dart';
 
 // **************************************************************************
 // StoreGenerator

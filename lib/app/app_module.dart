@@ -6,7 +6,6 @@ import 'screens/admin/admin_module.dart';
 import 'screens/aluno/aluno_module.dart';
 import 'screens/auth/auth_module.dart';
 import 'screens/auth/splash/splash_screen.dart';
-import 'screens/gestor/gestor_module.dart';
 import 'screens/professor/professor_module.dart';
 
 class AppModule extends Module {
@@ -21,7 +20,6 @@ class AppModule extends Module {
         ChildRoute(Modular.initialRoute, child: (_, args) => Splash()),
         ModuleRoute('/auth', module: AuthModule()),
         ModuleRoute('/admin', module: AdminModule()),
-        ModuleRoute('/gestor', module: GestorModule()),
         ModuleRoute('/professor', module: ProfessorModule()),
         ModuleRoute('/aluno', module: AlunoModule())
       ];

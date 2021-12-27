@@ -14,7 +14,7 @@ import 'register_class/register_class_page.dart';
 import 'register_student/register_student_page.dart';
 import 'register_subjects/register_subjects_controller.dart';
 import 'register_subjects/register_subjects_page.dart';
-import 'register_teacher/register_teacher_controller.dart';
+
 import 'register_teacher/register_teacher_page.dart';
 import 'school_report/school_report_page.dart';
 import 'students_list_page/students_list_page.dart';
@@ -24,7 +24,6 @@ class AdminModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton((i) => HomeController()),
         Bind.lazySingleton((i) => RegisterSubjectsController()),
-        Bind.lazySingleton((i) => RegisterTeacherController()),
         Bind.lazySingleton((i) => EditTeacherController()),
       ];
 

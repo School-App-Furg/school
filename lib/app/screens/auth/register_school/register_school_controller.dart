@@ -10,7 +10,7 @@ import '../../../core/models/user_admin.dart';
 import '../../../core/service/snackbars.dart';
 import '../auth_service.dart';
 
-part 'register_controller.g.dart';
+part 'register_school_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 

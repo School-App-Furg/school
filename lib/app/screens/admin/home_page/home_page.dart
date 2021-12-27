@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../core/styles/colors.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 
@@ -79,11 +79,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                               ),
                               child: ClassesCard(
                                 assetimage: controller.definiBanner(index),
-                                text_first:
+                                first:
                                     '${controller.classes![index].level}º ano',
-                                text_second:
+                                second:
                                     'Sala ${controller.classes![index].room}',
-                                text_third: controller.classes![index].name,
+                                third: controller.classes![index].name,
                                 index: index,
                                 onTap: () => Modular.to
                                     .pushNamed("./students-list", arguments: {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:school/app/core/models/classes.dart';
+import '../../../core/models/classes.dart';
 
 import 'components/subjects_listview.dart';
 

@@ -44,10 +44,8 @@ abstract class _LoginControllerBase with Store {
         if (type == 0) {
           Modular.to.pushReplacementNamed("/admin/");
         } else if (type == 1) {
-          Modular.to.pushReplacementNamed("/gestor/");
-        } else if (type == 2) {
           Modular.to.pushReplacementNamed("/professor/");
-        } else if (type == 3) {
+        } else if (type == 2) {
           Modular.to.pushReplacementNamed("/aluno/");
         }
       } catch (e) {

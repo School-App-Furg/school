@@ -2,14 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/classes.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/models/teacher_user.dart';
-import 'package:school/app/core/models/user_admin.dart';
-import 'package:school/app/resources/auth_repository.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
+import '../../../core/models/classes.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/models/teacher_user.dart';
 
-import 'model/classrooms.dart';
+import '../../../resources/auth_repository.dart';
+import '../../admin/admin_service.dart';
 
 part 'home_controller.g.dart';
 

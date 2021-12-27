@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/classes.dart';
-import 'package:school/app/core/models/subject.dart';
-import 'package:school/app/resources/auth_repository.dart';
+
+import '../../../core/models/subject.dart';
+import '../../../resources/auth_repository.dart';
 
 part 'edit_class_controller.g.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:school/app/core/models/teacher_user.dart';
+import '../../../core/models/teacher_user.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 import 'components/add_teacher_dialog.dart';

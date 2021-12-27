@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/service/validators.dart';
-import 'edit_school_report_controller.dart';
+import '../../../../core/form/general_form.dart';
+import '../../../../core/service/validators.dart';
+
 import 'package:dropdown_search/dropdown_search.dart';
 
 class EditSchoolReportPage extends StatefulWidget {

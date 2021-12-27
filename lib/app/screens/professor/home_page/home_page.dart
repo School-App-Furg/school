@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/components/classes_card.dart';
-import 'package:school/app/core/components/loader/loader_page.dart';
-import '../../../core/components/popup_menu.dart';
+import '../../../core/components/classes_card.dart';
+import '../../../core/components/loader/loader_page.dart';
+
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 
@@ -55,11 +53,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                             borderRadius: BorderRadius.circular(10),
                             child: ClassesCard(
                               assetimage: controller.definiBanner(index),
-                              text_first:
-                                  '${controller.classes![index].level}º ano',
-                              text_second:
-                                  'Sala ${controller.classes![index].room}',
-                              text_third: controller.classes![index].name,
+                              first: '${controller.classes![index].level}º ano',
+                              second: 'Sala ${controller.classes![index].room}',
+                              third: controller.classes![index].name,
                               index: index,
                               onTap: () {
                                 Modular.to.pushNamed("./students-list");

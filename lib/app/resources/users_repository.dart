@@ -215,7 +215,7 @@ class UsersRepository {
     return list;
   }
 
-  //Retorna o do usuário(0 = admin,1=gestor,2=professor,3=aluno)
+  //Retorna o do usuário(0 = admin,1=professor,2=aluno)
   Future<int> getUserType(String userId) async {
     try {
       DocumentSnapshot documentSnapshot =

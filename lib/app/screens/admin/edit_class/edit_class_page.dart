@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:school/app/core/form/general_form.dart';
+import '../../../core/form/general_form.dart';
 
-import 'package:school/app/core/models/classes.dart';
-import 'package:school/app/core/service/validators.dart';
+import '../../../core/models/classes.dart';
+import '../../../core/service/validators.dart';
 
 import 'edit_class_controller.dart';
 

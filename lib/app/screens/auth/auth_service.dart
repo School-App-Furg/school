@@ -52,4 +52,13 @@ class AuthService {
       throw Exception(error);
     }
   }
+
+  //Cadastro de ciclo da escola
+  Future<int> getUserType(String userId) async {
+    try {
+      return await _userRepository.getUserType(userId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/form/multi_select.dart';
+import '../../../core/form/general_form.dart';
+import '../../../core/form/multi_select.dart';
 
-import 'package:school/app/core/models/teacher_user.dart';
-import 'package:school/app/core/service/validators.dart';
+import '../../../core/models/teacher_user.dart';
+import '../../../core/service/validators.dart';
 
 import 'components/delete_dialog.dart';
 import 'edit_teacher_controller.dart';

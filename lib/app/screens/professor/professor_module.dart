@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/professor/school_report/school_report_page.dart';
-import 'package:school/app/screens/professor/students_list_page/students_list_page.dart';
+import 'school_report/school_report_page.dart';
+import 'students_list_page/students_list_page.dart';
 
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';

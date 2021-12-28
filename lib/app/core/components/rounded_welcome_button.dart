@@ -18,7 +18,7 @@ class RoundedWelcomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height(context, 0.08),
+      height: height(context, 0.07),
       margin: EdgeInsets.all(10),
       width: width(context, 0.29),
       child: ClipRRect(

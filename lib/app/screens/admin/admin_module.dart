@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'edit_teacher/edit_teacher_controller.dart';
 import 'edit_teacher/edit_teacher_page.dart';
 import 'edit_class/edit_class_page.dart';
-import 'register_managers/register_manager_page.dart';
 
 import 'config/config_page.dart';
 import 'historic/historic_page.dart';
@@ -68,7 +67,5 @@ class AdminModule extends Module {
             child: (_, args) => RegisterSubjectsPage()),
         ChildRoute('/historic', child: (_, args) => HistoricPage()),
         ChildRoute('/register-class', child: (_, args) => RegisterClassPage()),
-        ChildRoute('/register-manager',
-            child: (_, args) => RegisterManagerPage()),
       ];
 }

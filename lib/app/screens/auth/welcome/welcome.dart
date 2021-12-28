@@ -53,25 +53,30 @@ class Welcome extends StatelessWidget {
                           fontWeight: FontWeight.bold, color: Colors.black45),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RoundedWelcomeButton(
-                        text: "ESCOLA",
-                        textColor: primary,
-                        onpressed: () =>
-                            Modular.to.navigate("./register-school"),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedWelcomeButton(
+                            text: "ESCOLA",
+                            textColor: primary,
+                            onpressed: () =>
+                                Modular.to.navigate("./register-school"),
+                          ),
+                          RoundedWelcomeButton(
+                              text: "PROFESSOR",
+                              textColor: primary,
+                              onpressed: () => {}),
+                          RoundedWelcomeButton(
+                              text: "ALUNO",
+                              textColor: primary,
+                              onpressed: () => {}),
+                        ],
                       ),
-                      RoundedWelcomeButton(
-                          text: "PROFESSOR",
-                          textColor: primary,
-                          onpressed: () => {}),
-                      RoundedWelcomeButton(
-                          text: "ALUNO",
-                          textColor: primary,
-                          onpressed: () => {}),
-                    ],
-                  )
+                    ]),
+                  ),
                 ],
               ),
             ),

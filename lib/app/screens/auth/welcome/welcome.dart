@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/components/rounded_welcome_button.dart';
+import '../../../core/components/rounded_welcome_button.dart';
 
 import '../../../core/components/rounded_button.dart';
 import '../../../core/styles/colors.dart';
@@ -53,24 +53,31 @@ class Welcome extends StatelessWidget {
                           fontWeight: FontWeight.bold, color: Colors.black45),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RoundedWelcomeButton(
-                        text: "ESCOLA",
-                        textColor: primary,
-                        onpressed: () =>
-                            Modular.to.navigate("./register-school"),
-                      ),
-                      RoundedWelcomeButton(
-                          text: "PROFESSOR",
+                  SizedBox(
+                    width: width(context, 0.9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundedWelcomeButton(
+                          text: "ESCOLA",
                           textColor: primary,
-                          onpressed: () => {}),
-                      RoundedWelcomeButton(
-                          text: "ALUNO",
-                          textColor: primary,
-                          onpressed: () => {}),
-                    ],
+                          onpressed: () => Modular.to
+                              .pushNamed("./register-school", forRoot: true),
+                        ),
+                        RoundedWelcomeButton(
+                            text: "PROFESSOR",
+                            textColor: primary,
+                            onpressed: () => Modular.to.pushNamed(
+                                "./register-teacher",
+                                forRoot: true)),
+                        RoundedWelcomeButton(
+                            text: "ALUNO",
+                            textColor: primary,
+                            onpressed: () => Modular.to.pushNamed(
+                                "./register-student",
+                                forRoot: true)),
+                      ],
+                    ),
                   )
                 ],
               ),

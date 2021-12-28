@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -58,43 +57,6 @@ abstract class _EditTeacherControllerBase with Store {
     );
   }
 
-  cadastrar(BuildContext context) async {
-    if (formKey.currentState!.validate() && subjectsSelected.isNotEmpty) {
-      final loader = LoaderDefault();
-      try {
-        loader.show();
-
-        //cadastra o user da escola
-        var userTeacher = await _adminService.createUserWithEmailPass(
-          emailController.text,
-          "escola123",
-        );
-
-        //cadastra a escola e retorna o id da escola
-        bool inserted = await _adminService.insertTeacher(
-          userTeacher!.uid,
-          TeacherUser(
-              name: nameController.text,
-              schoolId: schoolId,
-              type: 2,
-              subjects: subjectsSelected),
-        );
-
-        Navigator.of(context).pop();
-        if (inserted) {
-          loader.hide();
-          buildSnackBarUi(context, "Professor cadastrado com sucesso!");
-        } else {
-          loader.hide();
-          buildSnackBarUi(context, "Professor não foi cadastrado!");
-        }
-      } catch (e) {
-        loader.hide();
-        buildSnackBarUi(context, e.toString());
-      }
-    }
-  }
-
   //exclusão de professores
   @action
   excluir(BuildContext context, String idTeacher) async {
@@ -115,43 +77,6 @@ abstract class _EditTeacherControllerBase with Store {
     } catch (e) {
       loader.hide();
       buildSnackBarUi(context, e.toString());
-    }
-  }
-
-  update(BuildContext context) async {
-    if (formKey.currentState!.validate() && subjectsSelected.isNotEmpty) {
-      final loader = LoaderDefault();
-      try {
-        loader.show();
-
-        //cadastra o user da escola
-        User? user = await _adminService.createUserWithEmailPass(
-          emailController.text,
-          "escola123",
-        );
-
-        //cadastra a escola e retorna o id da escola
-        bool inserted = await _adminService.insertTeacher(
-          user!.uid,
-          TeacherUser(
-            name: nameController.text,
-            schoolId: schoolId,
-            type: 2,
-          ),
-        );
-
-        Navigator.of(context).pop();
-        if (inserted) {
-          loader.hide();
-          buildSnackBarUi(context, "Professor cadastrado com sucesso!");
-        } else {
-          loader.hide();
-          buildSnackBarUi(context, "Professor não foi cadastrado!");
-        }
-      } catch (e) {
-        loader.hide();
-        buildSnackBarUi(context, e.toString());
-      }
     }
   }
 }

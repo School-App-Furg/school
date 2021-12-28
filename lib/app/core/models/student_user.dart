@@ -4,11 +4,13 @@ class StudentUser {
   String? id;
   String schoolId;
   String name;
+  String cpf;
   int type;
   StudentUser({
     this.id,
     required this.schoolId,
     required this.name,
+    required this.cpf,
     required this.type,
   });
 
@@ -17,16 +19,18 @@ class StudentUser {
       'id': id,
       'schoolId': schoolId,
       'name': name,
+      'cpf': cpf,
       'type': type,
     };
   }
 
   factory StudentUser.fromMap(Map<String, dynamic> map) {
     return StudentUser(
-      id: map['id'] != null ? map['id'] : null,
-      schoolId: map['schoolId'],
-      name: map['name'],
-      type: map['type'],
+      id: map['id'],
+      schoolId: map['schoolId'] ?? '',
+      name: map['name'] ?? '',
+      cpf: map['cpf'] ?? '',
+      type: map['type']?.toInt() ?? 0,
     );
   }
 

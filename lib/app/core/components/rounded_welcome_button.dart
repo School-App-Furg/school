@@ -18,11 +18,11 @@ class RoundedWelcomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height(context, 0.08),
+      height: height(context, 0.07),
       margin: EdgeInsets.all(10),
-      width: width(context, 0.29),
+      width: width(context, 0.25),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(29),
+        borderRadius: BorderRadius.circular(30),
         child: TextButton(
           style:
               ButtonStyle(backgroundColor: MaterialStateProperty.all(primary)),
@@ -32,7 +32,7 @@ class RoundedWelcomeButton extends StatelessWidget {
             style: TextStyle(
               color: white,
               fontWeight: FontWeight.w900,
-              fontSize: width(context, 0.040),
+              fontSize: width(context, 0.03),
             ),
           ),
         ),

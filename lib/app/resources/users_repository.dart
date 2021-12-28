@@ -100,7 +100,9 @@ class UsersRepository {
               id: snapshot.id,
               schoolId: teste.schoolId,
               name: teste.name,
-              type: teste.type);
+              type: teste.type,
+              subjects: teste.subjects,
+              cpf: teste.cpf);
         },
       );
     } catch (error) {
@@ -131,6 +133,7 @@ class UsersRepository {
                 name: teste.name,
                 schoolId: teste.schoolId,
                 type: teste.type,
+                cpf: teste.cpf,
                 subjects: teste.subjects),
           );
         },
@@ -206,7 +209,8 @@ class UsersRepository {
               id: element.id,
               schoolId: lista.schoolId,
               name: lista.name,
-              type: lista.type));
+              type: lista.type,
+              cpf: lista.cpf));
         },
       );
     } catch (error) {

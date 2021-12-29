@@ -100,7 +100,7 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Disciplinas"),
-                      onTap: () => Modular.to.pushNamed('./register-subjects'),
+                      onTap: () => Modular.to.pushNamed('./subjects-list'),
                     ),
                     ListTile(
                       leading: Icon(
@@ -108,23 +108,15 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Professores"),
-                      onTap: () => Modular.to.pushNamed('./register-teacher'),
+                      onTap: () => Modular.to.pushNamed('./teachers-list'),
                     ),
                     ListTile(
                       leading: Icon(
                         Icons.switch_account_outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastrar\nAuxiliares"),
-                      onTap: () => Modular.to.pushNamed('./register-manager'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Cadastrar\nAluno"),
-                      onTap: () => Modular.to.pushNamed('./register-student'),
+                      title: Text("Alunos"),
+                      onTap: () => Modular.to.pushNamed('./students-list'),
                     ),
                     ListTile(
                       leading: Icon(

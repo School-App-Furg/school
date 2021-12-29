@@ -7,19 +7,21 @@ import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
 import '../home_page/home_controller.dart';
 
-part 'register_subjects_controller.g.dart';
+part 'subject_list_controller.g.dart';
 
-class RegisterSubjectsController = _RegisterSubjectsControllerBase
-    with _$RegisterSubjectsController;
+class SubjectsListController = _SubjectsListControllerBase
+    with _$SubjectsListController;
 
-abstract class _RegisterSubjectsControllerBase with Store {
+abstract class _SubjectsListControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-
   AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
+
+  @observable
+  bool loading = false;
 
   //cadastro de disciplinas
   @action
@@ -58,7 +60,9 @@ abstract class _RegisterSubjectsControllerBase with Store {
     final loader = LoaderDefault();
     try {
       loader.show();
+      loading = true;
       subjects = await _adminService.getSubjects(schoolId);
+      loading = false;
       loader.hide();
     } catch (e) {
       loader.hide();

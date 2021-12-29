@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
+
 import '../../../../core/styles/colors.dart';
 
 class SchoolReportList extends StatelessWidget {

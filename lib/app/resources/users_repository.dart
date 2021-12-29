@@ -118,7 +118,7 @@ class UsersRepository {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('users')
           .where('schoolId', isEqualTo: schoolId)
-          .where('type', isEqualTo: 2)
+          .where('type', isEqualTo: 1)
           .get();
       snapshot.docs.forEach(
         (element) {
@@ -196,7 +196,7 @@ class UsersRepository {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('users')
           .where('schoolId', isEqualTo: schoolId)
-          .where('type', isEqualTo: 3)
+          .where('type', isEqualTo: 2)
           .get();
       snapshot.docs.forEach(
         (element) {

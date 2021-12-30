@@ -1,127 +1,110 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:school/app/core/form/general_form.dart';
+import 'package:school/app/core/service/validators.dart';
+
+import 'components/period_card.dart';
+import 'components/textfield_mask.dart';
 import 'config_controller.dart';
 
-class ConfigPage extends StatelessWidget {
+class ConfigPage extends StatefulWidget {
+  @override
+  State<ConfigPage> createState() => _ConfigPageState();
+}
+
+class _ConfigPageState extends State<ConfigPage> {
+  var _controller = TextEditingController();
+  //final ConfigController _controller = ConfigController();
+  DateTime _data = DateTime.now();
+
+  void _mostrarDataInicio() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    ).then((value) {
+      setState(() {
+        _data = value!;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var _controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text('Configurações'),
       ),
       body: SingleChildScrollView(
-        child: Form(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(18.0),
-                child: DropdownSearch<String>(
-                    mode: Mode.MENU,
-                    items: ["Bimestre", "Trimestre"],
-                    dropdownSearchDecoration: InputDecoration(
-                      labelText: "Selecione o regime escolar",
-                      labelStyle: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    onChanged: print,
-                    selectedItem: "Bimestre"),
-              ),
-              //Considerando que o admin pode cadastrar um bimestre/trimestre
-              //num determinado mês qualquer, é melhor deixar um prazo fixo de dias
-              //pra limite da postagem das notas, q contabilizam após finalizar
-              // o regime escolar definido.
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Limite para postagem de notas (em dias) após término do regime escolar',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    ),
-                    SfSlider(
-                        min: 0.0,
-                        max: 50.0,
-                        value: 15.0,
-                        interval: 5,
-                        showTicks: true,
-                        showLabels: true,
-                        enableTooltip: true,
-                        minorTicksPerInterval: 1,
-                        onChanged: (dynamic value) {}),
-                  ],
-                ),
-              ),
-
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Condição para aprovação (em %)',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    ),
-                    SfSlider(
-                        inactiveColor: Colors.green,
-                        activeColor: Colors.blue,
-                        min: 0.0,
-                        max: 100.0,
-                        value: 70.0,
-                        interval: 20,
-                        showTicks: true,
-                        showLabels: true,
-                        enableTooltip: true,
-                        minorTicksPerInterval: 1,
-                        onChanged: (dynamic value) {}),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Presenças mínimas para aprovação (com base na quantidade total de dias letivos, em %)',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
+        child: Observer(
+          builder: (_) {
+            return Form(
+              //key: _controller.formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: DropdownSearch<String>(
+                      mode: Mode.MENU,
+                      items: ["Bimestre", "Trimestre"],
+                      dropdownSearchDecoration: InputDecoration(
+                        labelText: "Selecione o regime escolar:",
+                        labelStyle: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      textAlign: TextAlign.center,
+                      onChanged: print,
+                      selectedItem: "Bimestre",
                     ),
-                    SfSlider(
-                        inactiveColor: Colors.green,
-                        activeColor: Colors.blue,
-                        min: 0.0,
-                        max: 100.0,
-                        value: 70.0,
-                        interval: 20,
-                        showTicks: true,
-                        showLabels: true,
-                        enableTooltip: true,
-                        minorTicksPerInterval: 1,
-                        onChanged: (dynamic value) {}),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blueAccent,
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Cadastrar',
-                  style: TextStyle(
-                    color: Colors.white,
                   ),
-                ),
+                  MyTextFormField(
+                    labelText: "Nome do bimestre/trimestre",
+                    hintText: "Bimestre A",
+                    validator: validateEmpty,
+                    isPassword: false,
+                    keyboardType: TextInputType.text,
+                    controller: _controller,
+                  ),
+                  PeriodCard(
+                    onPressed: _mostrarDataInicio,
+                    text: "Início do período",
+                    datepicker: _data.toString(),
+                  ),
+                  PeriodCard(
+                    onPressed: _mostrarDataInicio,
+                    text: "Limite postagem de notas",
+                    datepicker: _data.toString(),
+                  ),
+                  MaskTextField(
+                    hintText: "70,00",
+                    labelText: "Condição para aprovação (nota mínima) em %",
+                    controller: _controller,
+                  ),
+                  MaskTextField(
+                    hintText: "85,00",
+                    labelText: "Presenças mínima para aprovação em %",
+                    controller: _controller,
+                  ),
+                  SizedBox(height: 5),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      /*padding: EdgeInsets.only(
+                          left: 25, right: 25, bottom: 15, top: 15),*/
+                      primary: Colors.blueAccent,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

@@ -9,39 +9,48 @@ part of 'config_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ConfigController on _ConfigControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ConfigControllerBase.value');
+  final _$schoolModelAtom = Atom(name: '_ConfigControllerBase.schoolModel');
 
   @override
-  TextEditingController? get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  SchoolModel? get schoolModel {
+    _$schoolModelAtom.reportRead();
+    return super.schoolModel;
   }
 
   @override
-  set value(TextEditingController? value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set schoolModel(SchoolModel? value) {
+    _$schoolModelAtom.reportWrite(value, super.schoolModel, () {
+      super.schoolModel = value;
     });
   }
 
-  final _$_ConfigControllerBaseActionController =
-      ActionController(name: '_ConfigControllerBase');
+  final _$cycleAtom = Atom(name: '_ConfigControllerBase.cycle');
 
   @override
-  void setPeriodName() {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setPeriodName');
-    try {
-      return super.setPeriodName();
-    } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Cycle? get cycle {
+    _$cycleAtom.reportRead();
+    return super.cycle;
+  }
+
+  @override
+  set cycle(Cycle? value) {
+    _$cycleAtom.reportWrite(value, super.cycle, () {
+      super.cycle = value;
+    });
+  }
+
+  final _$cadastrarAsyncAction = AsyncAction('_ConfigControllerBase.cadastrar');
+
+  @override
+  Future cadastrar(BuildContext context) {
+    return _$cadastrarAsyncAction.run(() => super.cadastrar(context));
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+schoolModel: ${schoolModel},
+cycle: ${cycle}
     ''';
   }
 }

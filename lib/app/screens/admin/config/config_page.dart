@@ -15,16 +15,15 @@ class ConfigPage extends StatefulWidget {
 }
 
 class _ConfigPageState extends State<ConfigPage> {
-  var _controller = TextEditingController();
-  //final ConfigController _controller = ConfigController();
+  final ConfigController _controller = ConfigController();
   DateTime _data = DateTime.now();
 
   void _mostrarDataInicio() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2050),
     ).then((value) {
       setState(() {
         _data = value!;
@@ -42,7 +41,7 @@ class _ConfigPageState extends State<ConfigPage> {
         child: Observer(
           builder: (_) {
             return Form(
-              //key: _controller.formKey,
+              key: _controller.formKey,
               child: Column(
                 children: [
                   Padding(
@@ -54,8 +53,8 @@ class _ConfigPageState extends State<ConfigPage> {
                         labelText: "Selecione o regime escolar:",
                         labelStyle: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      onChanged: print,
-                      selectedItem: "Bimestre",
+                      onChanged: (value) => _controller.cyclePeriodController,
+                      validator: validateEmptyMultiSelect,
                     ),
                   ),
                   MyTextFormField(
@@ -64,7 +63,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     validator: validateEmpty,
                     isPassword: false,
                     keyboardType: TextInputType.text,
-                    controller: _controller,
+                    controller: _controller.cycleNameController,
                   ),
                   PeriodCard(
                     onPressed: _mostrarDataInicio,
@@ -79,12 +78,12 @@ class _ConfigPageState extends State<ConfigPage> {
                   MaskTextField(
                     hintText: "70,00",
                     labelText: "Condição para aprovação (nota mínima) em %",
-                    controller: _controller,
+                    controller: _controller.cycleLeastScoreController,
                   ),
                   MaskTextField(
                     hintText: "85,00",
                     labelText: "Presenças mínima para aprovação em %",
-                    controller: _controller,
+                    controller: _controller.cycleLeastAttendanceController,
                   ),
                   SizedBox(height: 5),
                   ElevatedButton(
@@ -93,7 +92,7 @@ class _ConfigPageState extends State<ConfigPage> {
                           left: 25, right: 25, bottom: 15, top: 15),*/
                       primary: Colors.blueAccent,
                     ),
-                    onPressed: () {},
+                    onPressed: () => _controller.cadastrar(context),
                     child: Text(
                       'Cadastrar',
                       style: TextStyle(

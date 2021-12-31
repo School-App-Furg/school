@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class SchoolModel {
+  String? id;
   String currentCycle;
   String cnpj;
   DateTime closingDate;
@@ -8,6 +9,7 @@ class SchoolModel {
   String name;
   int regime;
   SchoolModel({
+    this.id,
     required this.currentCycle,
     required this.cnpj,
     required this.closingDate,
@@ -18,6 +20,7 @@ class SchoolModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'currentCycle': currentCycle,
       'cnpj': cnpj,
       'closingDate': closingDate.millisecondsSinceEpoch,
@@ -29,12 +32,13 @@ class SchoolModel {
 
   factory SchoolModel.fromMap(Map<String, dynamic> map) {
     return SchoolModel(
-      currentCycle: map['currentCycle'],
-      cnpj: map['cnpj'],
+      id: map['id'],
+      currentCycle: map['currentCycle'] ?? '',
+      cnpj: map['cnpj'] ?? '',
       closingDate: DateTime.fromMillisecondsSinceEpoch(map['closingDate']),
-      logo: map['logo'],
-      name: map['name'],
-      regime: map['regime'],
+      logo: map['logo'] ?? '',
+      name: map['name'] ?? '',
+      regime: map['regime']?.toInt() ?? 0,
     );
   }
 

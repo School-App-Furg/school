@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../register_subjects_controller.dart';
+import '../subject_list_controller.dart';
 
 Future<void> showDeleteDialog(BuildContext context,
-    RegisterSubjectsController controller, String? idSubject) async {
+    SubjectsListController controller, String? idSubject) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!

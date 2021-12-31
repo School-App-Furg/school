@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../core/models/student_user.dart';
+import '../../core/models/teacher_user.dart';
 
 import '../../core/models/cycle.dart';
 import '../../core/models/school_model.dart';
@@ -35,6 +37,15 @@ class AuthService {
     }
   }
 
+  //listagem de escolas
+  Future<List<SchoolModel?>> getSchools() async {
+    try {
+      return await _schoolRepository.getSchools();
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //Cadastro de usuário admin
   Future<bool> insertUserAdmin(String userId, UserAdmin userAdmin) async {
     try {
@@ -57,6 +68,24 @@ class AuthService {
   Future<int> getUserType(String userId) async {
     try {
       return await _userRepository.getUserType(userId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de professores
+  Future<bool> insertTeacher(String userId, TeacherUser teacherUser) async {
+    try {
+      return await _userRepository.insertTeacher(userId, teacherUser);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de professores
+  Future<bool> insertStudent(String userId, StudentUser studentUser) async {
+    try {
+      return await _userRepository.insertStudent(userId, studentUser);
     } catch (error) {
       throw Exception(error);
     }

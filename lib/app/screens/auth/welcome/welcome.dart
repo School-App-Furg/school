@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/components/rounded_welcome_button.dart';
+import '../../../core/components/rounded_welcome_button.dart';
 
 import '../../../core/components/rounded_button.dart';
 import '../../../core/styles/colors.dart';
@@ -63,20 +63,26 @@ class Welcome extends StatelessWidget {
                             text: "ESCOLA",
                             textColor: primary,
                             onpressed: () =>
-                                Modular.to.navigate("./register-school"),
+                                Modular.to
+                              .pushNamed("./register-school", forRoot: true),
                           ),
                           RoundedWelcomeButton(
                               text: "PROFESSOR",
                               textColor: primary,
-                              onpressed: () => {}),
+                              onpressed: () => Modular.to.pushNamed(
+                                "./register-teacher",
+                                forRoot: true)),
                           RoundedWelcomeButton(
                               text: "ALUNO",
                               textColor: primary,
-                              onpressed: () => {}),
+                              onpressed: () =>  Modular.to.pushNamed(
+                                "./register-student",
+                                forRoot: true)),
                         ],
                       ),
                     ]),
                   ),
+
                 ],
               ),
             ),

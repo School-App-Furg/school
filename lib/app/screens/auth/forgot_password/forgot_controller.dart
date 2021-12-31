@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import '../../../resources/auth_repository.dart';
+
 import '../../../core/service/snackbars.dart';
+import '../../../resources/auth_repository.dart';
 
 part 'forgot_controller.g.dart';
 

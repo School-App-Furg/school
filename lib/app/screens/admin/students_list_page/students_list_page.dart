@@ -4,9 +4,9 @@ import '../../../core/models/classes.dart';
 
 import 'components/subjects_listview.dart';
 
-class StudentsListPage extends StatelessWidget {
+class StudentsListForClass extends StatelessWidget {
   final Classes classe;
-  const StudentsListPage({
+  const StudentsListForClass({
     Key? key,
     required this.classe,
   }) : super(key: key);

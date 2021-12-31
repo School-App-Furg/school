@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/styles/colors.dart';
 
+import '../../../core/styles/colors.dart';
 import 'components/school_report_list.dart';
 
 class SchoolReportPage extends StatefulWidget {

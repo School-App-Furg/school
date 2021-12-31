@@ -1,27 +1,31 @@
 import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
+import '../../../core/components/rounded_dropdown.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/components/rounded_password_field.dart';
-import '../../../core/service/validators.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-import 'register_school_controller.dart';
 
-class RegisterSchool extends StatefulWidget {
-  RegisterSchool({Key? key}) : super(key: key);
+import '../../../core/service/validators.dart';
 
+import 'register_student_controller.dart';
+
+class RegisterStudentPage extends StatefulWidget {
   @override
-  State<RegisterSchool> createState() => _RegisterState();
+  State<RegisterStudentPage> createState() => _RegisterStudentPageState();
 }
 
-class _RegisterState extends State<RegisterSchool> {
-  final RegisterController _controller = RegisterController();
+class _RegisterStudentPageState
+    extends ModularState<RegisterStudentPage, RegisterStudentController> {
+  @override
+  void initState() {
+    controller.getSchools();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,7 @@ class _RegisterState extends State<RegisterSchool> {
             ),
             SingleChildScrollView(
               child: Form(
-                key: _controller.formKey,
+                key: controller.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -59,27 +63,42 @@ class _RegisterState extends State<RegisterSchool> {
                       height: widthAll(context),
                     ),
                     Text(
-                      "CADASTRE A SUA ESCOLA",
+                      "VOCÊ É UM ALUNO? CADASTRE-SE",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     RoundedInput(
-                        hintText: "Nome da Escola",
-                        controller: _controller.nomeEscolaController,
+                        hintText: "Seu nome",
+                        controller: controller.nameController,
                         validator: validateEmpty,
-                        icon: Icons.school),
+                        icon: Icons.person),
                     RoundedInput(
-                      hintText: "CNPJ",
+                      hintText: "CPF",
                       mask: [
                         CnpjCpfFormatter(
-                          eDocumentType: EDocumentType.CNPJ,
+                          eDocumentType: EDocumentType.CPF,
                         )
                       ],
-                      validator: validateCnpj,
-                      controller: _controller.cnpjController,
+                      validator: validateCpf,
+                      controller: controller.cpfController,
                       icon: Icons.description_outlined,
+                    ),
+                    Observer(
+                      builder: (_) {
+                        return RoundedDropdown(
+                            value: controller.school,
+                            hint: 'Selecione a escola',
+                            items: controller.listOfSchools
+                                .map<DropdownMenuItem<String>>((e) {
+                              return DropdownMenuItem<String>(
+                                value: e!.id,
+                                child: Text(e.name),
+                              );
+                            }).toList(),
+                            onChanged: controller.setSchool);
+                      },
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -88,7 +107,7 @@ class _RegisterState extends State<RegisterSchool> {
                     RoundedInput(
                       hintText: "E-mail",
                       keyboardType: TextInputType.emailAddress,
-                      controller: _controller.emailController,
+                      controller: controller.emailController,
                       validator: validateEmail,
                       icon: Icons.email,
                     ),
@@ -96,15 +115,15 @@ class _RegisterState extends State<RegisterSchool> {
                       builder: (_) {
                         return RoundedPasswordField(
                             hintSenha: "Senha",
-                            controller: _controller.senhaController,
+                            controller: controller.senhaController,
                             validator: validateSenha,
-                            obscureText: _controller.obscureText,
-                            onTap: _controller.mostrarSenhaUser);
+                            obscureText: controller.obscureText,
+                            onTap: controller.mostrarSenhaUser);
                       },
                     ),
                     RoundedButton(
                       text: "CADASTRAR",
-                      onpressed: () => _controller.cadastrar(context),
+                      onpressed: () => controller.cadastrar(context),
                       textColor: blue,
                     ),
                     SizedBox(

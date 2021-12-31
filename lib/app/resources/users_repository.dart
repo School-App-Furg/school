@@ -100,7 +100,9 @@ class UsersRepository {
               id: snapshot.id,
               schoolId: teste.schoolId,
               name: teste.name,
-              type: teste.type);
+              type: teste.type,
+              subjects: teste.subjects,
+              cpf: teste.cpf);
         },
       );
     } catch (error) {
@@ -116,7 +118,7 @@ class UsersRepository {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('users')
           .where('schoolId', isEqualTo: schoolId)
-          .where('type', isEqualTo: 2)
+          .where('type', isEqualTo: 1)
           .get();
       snapshot.docs.forEach(
         (element) {
@@ -131,6 +133,7 @@ class UsersRepository {
                 name: teste.name,
                 schoolId: teste.schoolId,
                 type: teste.type,
+                cpf: teste.cpf,
                 subjects: teste.subjects),
           );
         },
@@ -193,7 +196,7 @@ class UsersRepository {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('users')
           .where('schoolId', isEqualTo: schoolId)
-          .where('type', isEqualTo: 3)
+          .where('type', isEqualTo: 2)
           .get();
       snapshot.docs.forEach(
         (element) {
@@ -206,7 +209,8 @@ class UsersRepository {
               id: element.id,
               schoolId: lista.schoolId,
               name: lista.name,
-              type: lista.type));
+              type: lista.type,
+              cpf: lista.cpf));
         },
       );
     } catch (error) {

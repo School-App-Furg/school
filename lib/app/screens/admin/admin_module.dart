@@ -1,4 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'student_list/student_list_controller.dart';
+import 'student_list/student_list_page.dart';
+import 'subject_list/subject_list_controller.dart';
+import 'teacher_list/teacher_list_controller.dart';
+import 'teacher_list/teacher_list_page.dart';
+import '../professor/students_list_page/students_list_page.dart';
 
 import 'edit_teacher/edit_teacher_controller.dart';
 import 'edit_teacher/edit_teacher_page.dart';
@@ -10,19 +16,18 @@ import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
 import 'register_class/register_class_page.dart';
-import 'register_student/register_student_page.dart';
-import 'register_subjects/register_subjects_controller.dart';
-import 'register_subjects/register_subjects_page.dart';
 
-import 'register_teacher/register_teacher_page.dart';
 import 'school_report/school_report_page.dart';
 import 'students_list_page/students_list_page.dart';
+import 'subject_list/subject_list_page.dart';
 
 class AdminModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton((i) => HomeController()),
-        Bind.lazySingleton((i) => RegisterSubjectsController()),
+        Bind.lazySingleton((i) => SubjectsListController()),
+        Bind.lazySingleton((i) => TeacherListController()),
+        Bind.lazySingleton((i) => StudentListController()),
         Bind.lazySingleton((i) => EditTeacherController()),
       ];
 
@@ -33,10 +38,18 @@ class AdminModule extends Module {
           child: (_, args) => HomePage(),
         ),
         ChildRoute(
-          '/students-list',
-          child: (_, args) => StudentsListPage(
+          '/students-list-class',
+          child: (_, args) => StudentsListForClass(
             classe: args.data['classe'],
           ),
+        ),
+        ChildRoute(
+          '/teachers-list',
+          child: (_, args) => TeacherListPage(),
+        ),
+        ChildRoute(
+          '/students-list',
+          child: (_, args) => StudentListPage(),
         ),
         ChildRoute(
           '/edit-class',
@@ -44,7 +57,6 @@ class AdminModule extends Module {
             classes: args.data['class_year'],
           ),
         ),
-        ChildRoute('/register', child: (_, args) => RegisterTeacherPage()),
         ChildRoute(
           '/profile',
           child: (_, args) => ProfilePage(
@@ -52,19 +64,14 @@ class AdminModule extends Module {
           ),
         ),
         ChildRoute('/school-report', child: (_, args) => SchoolReportPage()),
-        ChildRoute('/register-student',
-            child: (_, args) => RegisterStudentPage()),
         ChildRoute('/config', child: (_, args) => ConfigPage()),
-        ChildRoute('/register-teacher',
-            child: (_, args) => RegisterTeacherPage()),
         ChildRoute(
           '/edit-teacher',
           child: (_, args) => EditTeacherPage(
             teacherUser: args.data['teacher'],
           ),
         ),
-        ChildRoute('/register-subjects',
-            child: (_, args) => RegisterSubjectsPage()),
+        ChildRoute('/subjects-list', child: (_, args) => SubjectsListPage()),
         ChildRoute('/historic', child: (_, args) => HistoricPage()),
         ChildRoute('/register-class', child: (_, args) => RegisterClassPage()),
       ];

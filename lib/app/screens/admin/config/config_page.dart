@@ -1,11 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:school/app/core/components/date.dart';
 
 import 'package:school/app/core/form/general_form.dart';
 import 'package:school/app/core/service/validators.dart';
-
-import 'components/period_card.dart';
 import 'components/textfield_mask.dart';
 import 'config_controller.dart';
 
@@ -16,20 +15,9 @@ class ConfigPage extends StatefulWidget {
 
 class _ConfigPageState extends State<ConfigPage> {
   final ConfigController _controller = ConfigController();
-  DateTime _data = DateTime.now();
-
-  void _mostrarDataInicio() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2050),
-    ).then((value) {
-      setState(() {
-        _data = value!;
-      });
-    });
-  }
+  final Function dataInicioFimCiclo = () {};
+  DateTime? ini;
+  DateTime? fim;
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +53,30 @@ class _ConfigPageState extends State<ConfigPage> {
                     keyboardType: TextInputType.text,
                     controller: _controller.cycleNameController,
                   ),
-                  PeriodCard(
-                    onPressed: _mostrarDataInicio,
-                    text: "Início do período",
-                    datepicker: _data.toString(),
+                  Text("Início do período:",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[700],
+                          fontSize: 14.0)),
+                  BasicDateTimeField(
+                    hintText: "Selecione o início do período",
+                    onChange: (value) {
+                      ini = value;
+                    },
                   ),
-                  PeriodCard(
-                    onPressed: _mostrarDataInicio,
-                    text: "Limite postagem de notas",
-                    datepicker: _data.toString(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("Limite postagem de notas:",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[700],
+                          fontSize: 14.0)),
+                  BasicDateTimeField(
+                    hintText: "Selecione o limite p/ postagem de notas",
+                    onChange: (value) {
+                      fim = value;
+                    },
                   ),
                   MaskTextField(
                     hintText: "70,00",
@@ -92,7 +95,10 @@ class _ConfigPageState extends State<ConfigPage> {
                           left: 25, right: 25, bottom: 15, top: 15),*/
                       primary: Colors.blueAccent,
                     ),
-                    onPressed: () => _controller.cadastrar(context),
+                    onPressed: () {
+                      _controller.cadastrar(context);
+                      dataInicioFimCiclo(ini, fim);
+                    },
                     child: Text(
                       'Cadastrar',
                       style: TextStyle(

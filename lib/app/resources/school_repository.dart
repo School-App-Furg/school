@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../core/models/school_model.dart';
 
 class SchoolRepository {
@@ -32,5 +33,35 @@ class SchoolRepository {
       throw Exception(error);
     }
     return model;
+  }
+
+  Future<List<SchoolModel?>> getSchools() async {
+    List<SchoolModel?> list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance.collection('schools').get();
+      snapshot.docs.forEach(
+        (element) {
+          var school = SchoolModel.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            SchoolModel(
+                id: element.id,
+                currentCycle: school.currentCycle,
+                cnpj: school.cnpj,
+                closingDate: school.closingDate,
+                logo: school.logo,
+                name: school.name,
+                regime: school.regime),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return list;
   }
 }

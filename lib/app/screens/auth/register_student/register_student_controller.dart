@@ -1,13 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:mobx/mobx.dart';
+import '../../../core/models/school_model.dart';
+
+import '../auth_service.dart';
+
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';
-import '../home_page/home_controller.dart';
-
-import '../admin_service.dart';
 
 part 'register_student_controller.g.dart';
 
@@ -18,10 +19,37 @@ abstract class _RegisterStudentControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  AdminService _adminService = AdminService();
+  TextEditingController cpfController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+  AuthService _authService = AuthService();
 
-  //injeção de depencias da user admin
-  String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
+  @observable
+  bool obscureText = true;
+
+  @action
+  void mostrarSenhaUser() {
+    obscureText = !obscureText;
+  }
+
+  //listagem de escolas existentes no app
+  @action
+  getSchools() async {
+    listOfSchools = await _authService.getSchools();
+  }
+
+  //lista de escolas
+  @observable
+  List<SchoolModel?> listOfSchools = [];
+
+  //função para setar escola selecionada
+  @action
+  setSchool(String? value) {
+    school = value!;
+  }
+
+  // escola selecionada
+  @observable
+  String school = '';
 
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -30,27 +58,28 @@ abstract class _RegisterStudentControllerBase with Store {
         loader.show();
 
         //cadastra o user da escola
-        User? user = await _adminService.createUserWithEmailPass(
+        var userStudent = await _authService.createUserWithEmailPass(
           emailController.text,
-          "escola123",
+          senhaController.text,
         );
+
         //cadastra a escola e retorna o id da escola
-        bool inserted = await _adminService.insertStudent(
-          user!.uid,
+        bool inserted = await _authService.insertStudent(
+          userStudent!.uid,
           StudentUser(
             name: nameController.text,
-            schoolId: schoolId,
-            type: 3,
+            schoolId: school,
+            type: 2,
+            cpf: cpfController.text,
           ),
         );
+
         if (inserted) {
-          emailController.clear();
-          nameController.clear();
           loader.hide();
-          buildSnackBarUi(context, "Aluno cadastrado com sucesso!");
+          Modular.to.pushReplacementNamed("/aluno/");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "Aluno não foi cadastrado!");
+          buildSnackBarUi(context, "Professor não foi cadastrado!");
         }
       } catch (e) {
         loader.hide();

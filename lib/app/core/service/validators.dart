@@ -28,6 +28,15 @@ String? validateCnpj(value) {
   return null;
 }
 
+String? validateCpf(value) {
+  if (value!.isEmpty) {
+    return 'Dados obrigatórios';
+  } else if (Validator.cpf(value)) {
+    return "CPF inválido";
+  }
+  return null;
+}
+
 String? validateSenha(value) {
   if (isNull(value) || value.isEmpty)
     return 'Senha precisa ser preenchida';

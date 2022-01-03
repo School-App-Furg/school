@@ -128,7 +128,7 @@ class HomeDrawer extends StatelessWidget {
                       onTap: () {
                         _authRepository.logout();
                         Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/');
+                        Modular.to.pushReplacementNamed('/auth/login');
                       },
                     )
                   ],

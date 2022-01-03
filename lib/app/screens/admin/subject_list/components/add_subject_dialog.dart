@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/styles/sizes.dart';
 import '../../../../core/form/general_form.dart';
 import '../../../../core/service/validators.dart';
-import '../register_subjects_controller.dart';
+import '../subject_list_controller.dart';
 
 Future<void> showAddSubjectDialog(
-    BuildContext context, RegisterSubjectsController controller) async {
+    BuildContext context, SubjectsListController controller) async {
   return await showDialog(
     context: context,
     barrierDismissible: true, // user must tap button!

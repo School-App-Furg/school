@@ -28,11 +28,8 @@ abstract class _HomeControllerBase with Store {
       regime: 0);
 
   @observable
-  TeacherUser? teacherUser = TeacherUser(
-    name: '',
-    schoolId: '',
-    type: 2,
-  );
+  TeacherUser? teacherUser =
+      TeacherUser(name: '', schoolId: '', type: 2, cpf: '');
 
   @observable
   bool loading = false;

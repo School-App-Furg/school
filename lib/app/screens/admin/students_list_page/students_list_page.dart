@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/models/classes.dart';
-
 import 'components/subjects_listview.dart';
 
 class StudentsListForClass extends StatelessWidget {

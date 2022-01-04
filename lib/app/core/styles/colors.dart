@@ -13,3 +13,4 @@ const lightred = Color(0xFFFE4A49);
 const blue = Color(0xFF7cabff);
 const blueicon = Color(0xff6B97E3);
 const navyblue = Color(0xff161b33);
+const defaultblue = Colors.blue;

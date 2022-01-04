@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../core/models/cycle.dart';
+import '../../resources/cycle_repository.dart';
 import '../../core/models/management_user.dart';
 import '../../core/models/insert_subject_teacher.dart';
 import 'home_page/home_controller.dart';
@@ -24,6 +26,7 @@ class AdminService {
   ClassesRepository _classesRepository = ClassesRepository();
   SubjectRepository _subjectRepository = SubjectRepository();
   AuthRepository _authRepository = AuthRepository();
+  CycleRepository _cycleRepository = CycleRepository();
 
   //serviço para solicitar as informações da escola atrelada ao usuario
   Future<SchoolModel?> getSchoolInformations(String schoolId) async {
@@ -183,6 +186,42 @@ class AdminService {
   Future<bool> removeTeacher(String idTeacher) async {
     try {
       return await _userRepository.removeTeacher(idTeacher);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //pegar dados do ciclo
+  Future<Cycle?> getCurrentCycle(String uid) async {
+    try {
+      return await _cycleRepository.getCurrentCycle(uid);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //Cadastro de ciclo da escola
+  Future<String> insertCycle(Cycle cycle) async {
+    try {
+      return await _cycleRepository.insertCycle(cycle);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //atualização de ciclo da escola
+  Future<bool> updateCycle(String cicleId, Cycle cycle) async {
+    try {
+      return await _cycleRepository.updateCycle(cicleId, cycle);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //atualização de ciclo da escola
+  Future<bool> updateCycleSchool(String cycleId, String schoolId) async {
+    try {
+      return await _schoolRepository.updateCycleSchool(cycleId, schoolId);
     } catch (error) {
       throw Exception(error);
     }

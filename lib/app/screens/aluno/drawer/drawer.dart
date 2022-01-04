@@ -62,10 +62,10 @@ class HomeDrawer extends StatelessWidget {
               DrawerHeader(
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    /*CircleAvatar(
                       backgroundImage: NetworkImage(schoolModel!.logo),
                       radius: 30.0,
-                    ),
+                    ),*/
                     SizedBox(
                       width: width(context, 0.05),
                     ),

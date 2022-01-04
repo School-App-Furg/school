@@ -7,12 +7,9 @@ import '../../../core/components/forgot_password_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/components/rounded_password_field.dart';
-
 import '../../../core/service/validators.dart';
-
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-
 import 'login_controller.dart';
 
 class LoginScreen extends StatefulWidget {

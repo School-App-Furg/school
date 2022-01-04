@@ -53,32 +53,36 @@ class Welcome extends StatelessWidget {
                           fontWeight: FontWeight.bold, color: Colors.black45),
                     ),
                   ),
-                  SizedBox(
-                    width: width(context, 0.9),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RoundedWelcomeButton(
-                          text: "ESCOLA",
-                          textColor: primary,
-                          onpressed: () => Modular.to
-                              .pushNamed("./register-school", forRoot: true),
-                        ),
-                        RoundedWelcomeButton(
-                            text: "PROFESSOR",
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedWelcomeButton(
+                            text: "ESCOLA",
                             textColor: primary,
-                            onpressed: () => Modular.to.pushNamed(
+                            onpressed: () =>
+                                Modular.to
+                              .pushNamed("./register-school", forRoot: true),
+                          ),
+                          RoundedWelcomeButton(
+                              text: "PROFESSOR",
+                              textColor: primary,
+                              onpressed: () => Modular.to.pushNamed(
                                 "./register-teacher",
                                 forRoot: true)),
-                        RoundedWelcomeButton(
-                            text: "ALUNO",
-                            textColor: primary,
-                            onpressed: () => Modular.to.pushNamed(
+                          RoundedWelcomeButton(
+                              text: "ALUNO",
+                              textColor: primary,
+                              onpressed: () =>  Modular.to.pushNamed(
                                 "./register-student",
                                 forRoot: true)),
-                      ],
-                    ),
-                  )
+                        ],
+                      ),
+                    ]),
+                  ),
+
                 ],
               ),
             ),

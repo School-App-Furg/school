@@ -2,19 +2,24 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/models/school_model.dart';
 import '../../../resources/auth_repository.dart';
 
 import '../../../core/styles/sizes.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({Key? key}) : super(key: key);
+  final SchoolModel? schoolModel;
+  const HomeDrawer({
+    Key? key,
+    required this.schoolModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AuthRepository _authRepository = AuthRepository();
-    String _userAvatar = "https://randomuser.me/api/portraits/men/46.jpg";
+
     return Container(
-      width: width(context, 0.8),
+      width: width(context, 0.7),
       height: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(180, 250, 250, 250),
@@ -58,13 +63,13 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(_userAvatar),
+                      backgroundImage: NetworkImage(schoolModel!.logo),
                       radius: 30.0,
                     ),
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text("Administração\nEscolar")
+                    Text(schoolModel!.name)
                   ],
                 ),
               ),
@@ -72,48 +77,66 @@ class HomeDrawer extends StatelessWidget {
                 child: ListView(
                   children: [
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.home,
+                        Icons.home_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
+                      onTap: () =>
+                          Modular.to.popUntil(ModalRoute.withName('/admin/')),
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.person,
+                        Icons.person_outline_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
+                      onTap: () => Modular.to.pushNamed('./profile',
+                          arguments: {'name': schoolModel!.name}),
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.app_registration_rounded,
+                        Icons.class__outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Cadastro\nProfessor/Aluno"),
+                      title: Text("Disciplinas"),
+                      onTap: () => Modular.to.pushNamed('./subjects-list'),
                     ),
                     ListTile(
-                      onTap: () {},
                       leading: Icon(
-                        Icons.settings,
+                        Icons.switch_account_outlined,
+                        color: Colors.black,
+                      ),
+                      title: Text("Professores"),
+                      onTap: () => Modular.to.pushNamed('./teachers-list'),
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.switch_account_outlined,
+                        color: Colors.black,
+                      ),
+                      title: Text("Alunos"),
+                      onTap: () => Modular.to.pushNamed('./students-list'),
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.settings_applications_outlined,
                         color: Colors.black,
                       ),
                       title: Text("Ajustes"),
+                      onTap: () => Modular.to.pushNamed('./config'),
                     ),
                     ListTile(
-                      onTap: () {
-                        _authRepository.logout();
-                        Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/');
-                      },
                       leading: Icon(
                         Icons.logout,
                         color: Colors.black,
                       ),
                       title: Text("Sair"),
+                      onTap: () {
+                        _authRepository.logout();
+                        Modular.to.pop();
+                        Modular.to.pushReplacementNamed('/auth/');
+                      },
                     )
                   ],
                 ),

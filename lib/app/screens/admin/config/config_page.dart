@@ -1,117 +1,175 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:school/app/core/components/date.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:school/app/core/form/general_form.dart';
-import 'package:school/app/core/service/validators.dart';
-import 'components/textfield_mask.dart';
+import '../../../core/components/loader/loader_page.dart';
+
+import '../../../core/components/date.dart';
+import '../../../core/components/rounded_dropdown.dart';
+import '../../../core/form/general_form.dart';
+import '../../../core/service/validators.dart';
+import '../../../core/styles/sizes.dart';
+
+import 'components/label_text.dart';
 import 'config_controller.dart';
 
 class ConfigPage extends StatefulWidget {
+  final String schoolId;
+  const ConfigPage({
+    Key? key,
+    required this.schoolId,
+  }) : super(key: key);
   @override
   State<ConfigPage> createState() => _ConfigPageState();
 }
 
-class _ConfigPageState extends State<ConfigPage> {
-  final ConfigController _controller = ConfigController();
-  final Function dataInicioFimCiclo = () {};
-  DateTime? ini;
-  DateTime? fim;
+class _ConfigPageState extends ModularState<ConfigPage, ConfigController> {
+  @override
+  void initState() {
+    super.initState();
+    controller.getCurrentCycle();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Configurações'),
-      ),
-      body: SingleChildScrollView(
-        child: Observer(
-          builder: (_) {
-            return Form(
-              key: _controller.formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: DropdownSearch<String>(
-                      mode: Mode.MENU,
-                      items: ["Bimestre", "Trimestre"],
-                      dropdownSearchDecoration: InputDecoration(
-                        labelText: "Selecione o regime escolar:",
-                        labelStyle: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      onChanged: (value) => _controller.cyclePeriodController,
-                      validator: validateEmptyMultiSelect,
+    return Observer(
+      builder: (_) {
+        return controller.loadingPage
+            ? LoaderPage()
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Configurações da escola'),
+                  actions: [
+                    IconButton(
+                        onPressed: () => Modular.to.pushNamed('./new-cycle'),
+                        icon: Icon(Icons.add))
+                  ],
+                ),
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: SingleChildScrollView(
+                    child: Observer(
+                      builder: (_) {
+                        return Form(
+                          key: controller.formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              LabelText(
+                                text: 'Ciclo atual:',
+                              ),
+                              MyTextFormField(
+                                hintText: "2020/1",
+                                validator: validateEmpty,
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: controller.cycleName,
+                              ),
+                              LabelText(
+                                text: 'Padrão de avaliação:',
+                              ),
+                              RoundedDropdown(
+                                value: controller.cyclePeriod,
+                                onChanged: controller.setCyclePeriod,
+                                hint: "Selecione o regime escolar:",
+                                items: controller.periodOptions
+                                    .map<DropdownMenuItem<String>>(
+                                  (e) {
+                                    return DropdownMenuItem<String>(
+                                      value: e,
+                                      child: Text(e),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
+                              LabelText(
+                                text: 'Período de postagem de notas:',
+                              ),
+                              Observer(
+                                builder: (_) {
+                                  return Row(
+                                    children: [
+                                      BasicDateTimeField(
+                                        currentValue: controller.initialDate,
+                                        hintText: "Data inicial",
+                                        onChanged: controller.setinitialDate,
+                                      ),
+                                      BasicDateTimeField(
+                                        currentValue: controller.finalDate,
+                                        hintText: "Data final",
+                                        onChanged: controller.setFinalDate,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              LabelText(
+                                text: 'Padrão de aprovação por nota:',
+                              ),
+                              RoundedDropdown(
+                                value: controller.score,
+                                onChanged: controller.setScore,
+                                hint:
+                                    "Selecione o padrão de aprovação por nota:",
+                                items: controller.scoreList
+                                    .map<DropdownMenuItem<String>>(
+                                  (e) {
+                                    return DropdownMenuItem<String>(
+                                      value: e,
+                                      child: Text(e),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
+                              LabelText(
+                                text: 'Padrão de aprovação por presenças:',
+                              ),
+                              RoundedDropdown(
+                                value: controller.attendance,
+                                onChanged: controller.setAttendance,
+                                hint:
+                                    "Selecione o padrão de aprovação por presença:",
+                                items: controller.attendanceList
+                                    .map<DropdownMenuItem<String>>(
+                                  (e) {
+                                    return DropdownMenuItem<String>(
+                                      value: e,
+                                      child: Text(e),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueAccent,
+                                      minimumSize: Size(80, 50),
+                                    ),
+                                    onPressed: () {
+                                      controller.update(context);
+                                    },
+                                    child: Text(
+                                      'Atualizar',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: width(context, .04),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  MyTextFormField(
-                    labelText: "Nome do bimestre/trimestre",
-                    hintText: "Bimestre A",
-                    validator: validateEmpty,
-                    isPassword: false,
-                    keyboardType: TextInputType.text,
-                    controller: _controller.cycleNameController,
-                  ),
-                  Text("Início do período:",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
-                          fontSize: 14.0)),
-                  BasicDateTimeField(
-                    hintText: "Selecione o início do período",
-                    onChange: (value) {
-                      ini = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Limite postagem de notas:",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
-                          fontSize: 14.0)),
-                  BasicDateTimeField(
-                    hintText: "Selecione o limite p/ postagem de notas",
-                    onChange: (value) {
-                      fim = value;
-                    },
-                  ),
-                  MaskTextField(
-                    hintText: "70,00",
-                    labelText: "Condição para aprovação (nota mínima) em %",
-                    controller: _controller.cycleLeastScoreController,
-                  ),
-                  MaskTextField(
-                    hintText: "85,00",
-                    labelText: "Presenças mínima para aprovação em %",
-                    controller: _controller.cycleLeastAttendanceController,
-                  ),
-                  SizedBox(height: 5),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      /*padding: EdgeInsets.only(
-                          left: 25, right: 25, bottom: 15, top: 15),*/
-                      primary: Colors.blueAccent,
-                    ),
-                    onPressed: () {
-                      _controller.cadastrar(context);
-                      dataInicioFimCiclo(ini, fim);
-                    },
-                    child: Text(
-                      'Cadastrar',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
+                ),
+              );
+      },
     );
   }
 }

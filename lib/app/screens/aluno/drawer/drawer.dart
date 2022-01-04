@@ -88,22 +88,6 @@ class HomeDrawer extends StatelessWidget {
                       title: Text("Perfil"),
                     ),
                     ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.app_registration_rounded,
-                        color: Colors.black,
-                      ),
-                      title: Text("Cadastro\nProfessor/Aluno"),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      leading: Icon(
-                        Icons.settings,
-                        color: Colors.black,
-                      ),
-                      title: Text("Ajustes"),
-                    ),
-                    ListTile(
                       onTap: () {
                         _authRepository.logout();
                         Modular.to.pop();

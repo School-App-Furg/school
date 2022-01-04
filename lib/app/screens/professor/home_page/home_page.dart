@@ -37,7 +37,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 appBar: AppBarHome(
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
-                  text: controller.schoolModel!.name,
+                  text: controller.teacherUser!.name,
                   onPressedHistoric: () {},
                   onPressedSubject: () {},
                 ),

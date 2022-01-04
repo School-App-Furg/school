@@ -46,23 +46,23 @@ abstract class _RegisterControllerBase with Store {
         //cadastra a escola e retorna o id da escola
         String idSchool = await _authService.insertScholl(
           SchoolModel(
-              currentCycle: user!.uid,
-              cnpj: cnpjController.text,
-              closingDate: DateTime.now(),
-              logo:
-                  'https://firebasestorage.googleapis.com/v0/b/school-973bf.appspot.com/o/logo_escola.jpg?alt=media&token=21836ae2-fc5b-49e9-b0ff-2fc920159fef',
-              name: nomeEscolaController.text,
-              regime: 0),
+            currentCycle: user!.uid,
+            cnpj: cnpjController.text,
+            name: nomeEscolaController.text,
+          ),
         );
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
         bool insertedCycle = await _authService.insertCycleSchool(
           user.uid,
           Cycle(
-            name: "Ciclo 0",
+            name: DateTime.now().year.toString(),
             idSchool: idSchool,
-            initialDate: DateTime.now(),
-            finalDate: DateTime.now(),
+            finalDate: DateTime.now().millisecondsSinceEpoch,
+            initialDate: DateTime.now().millisecondsSinceEpoch,
+            approvalAttendance: '70%',
+            approvalPattern: '70%',
+            evaluationStandard: 'Bimestral',
           ),
         );
 

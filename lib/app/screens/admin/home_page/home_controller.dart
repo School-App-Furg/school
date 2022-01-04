@@ -20,12 +20,10 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   SchoolModel? schoolModel = SchoolModel(
-      currentCycle: "",
-      cnpj: "",
-      closingDate: DateTime.now(),
-      logo: '',
-      name: '',
-      regime: 0);
+    currentCycle: "",
+    cnpj: "",
+    name: '',
+  );
 
   late UserAdmin? userAdmin;
 

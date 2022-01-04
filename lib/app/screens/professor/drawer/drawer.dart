@@ -66,7 +66,7 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(schoolModel!.logo),
+                      backgroundImage: AssetImage('assets/images/school.png'),
                       radius: 30.0,
                     ),
                     SizedBox(
@@ -94,30 +94,6 @@ class HomeDrawer extends StatelessWidget {
                       ),
                       title: Text("Perfil"),
                       onTap: () => () {},
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.class__outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Disciplinas"),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Cadastrar\nAluno"),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.settings_applications_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Ajustes"),
-                      onTap: () {},
                     ),
                     ListTile(
                       leading: Icon(

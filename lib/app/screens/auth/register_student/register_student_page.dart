@@ -2,16 +2,15 @@ import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../core/components/already_have_an_account_button.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_dropdown.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/components/rounded_password_field.dart';
+import '../../../core/service/validators.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-
-import '../../../core/service/validators.dart';
-
 import 'register_student_controller.dart';
 
 class RegisterStudentPage extends StatefulWidget {

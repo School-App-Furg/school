@@ -63,7 +63,7 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(schoolModel!.logo),
+                      backgroundImage: AssetImage('assets/images/school.png'),
                       radius: 30.0,
                     ),
                     SizedBox(
@@ -123,8 +123,9 @@ class HomeDrawer extends StatelessWidget {
                         Icons.settings_applications_outlined,
                         color: Colors.black,
                       ),
-                      title: Text("Ajustes"),
-                      onTap: () => Modular.to.pushNamed('./config'),
+                      title: Text("Configurações"),
+                      onTap: () => Modular.to.pushNamed('./config',
+                          arguments: {'schoolId': schoolModel!.id}),
                     ),
                     ListTile(
                       leading: Icon(

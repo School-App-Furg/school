@@ -1,80 +1,147 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/components/loader/loader_default.dart';
-import 'package:school/app/core/models/cycle.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/screens/admin/home_page/home_controller.dart';
-import 'package:school/app/screens/auth/auth_service.dart';
-
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/cycle.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'config_controller.g.dart';
 
 class ConfigController = _ConfigControllerBase with _$ConfigController;
 
 abstract class _ConfigControllerBase with Store {
-  GlobalKey<FormState> formKey = GlobalKey();
-  AuthService _authService = AuthService();
-  AdminService adminService = AdminService();
-  User? user;
-  TextEditingController cycleNameController = TextEditingController();
-  TextEditingController cycleLeastScoreController = TextEditingController();
-  TextEditingController cycleLeastAttendanceController =
-      TextEditingController();
-  TextEditingController cyclePeriodController = TextEditingController();
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
+  GlobalKey<FormState> formKey = GlobalKey();
+  AdminService _adminService = AdminService();
+
+  @observable
+  TextEditingController cycleName = TextEditingController();
+
+  @action
+  Future getCurrentCycle() async {
+    loadingPage = true;
+
+    schoolModel = await _adminService.getSchoolInformations(schoolId);
+    cycle = await _adminService.getCurrentCycle(schoolModel!.currentCycle);
+    cycleName.text = cycle!.name;
+    cyclePeriod = cycle!.evaluationStandard;
+    attendance = cycle!.approvalAttendance;
+    score = cycle!.approvalPattern;
+    initialDate = DateTime.fromMillisecondsSinceEpoch(cycle!.initialDate);
+    finalDate = DateTime.fromMillisecondsSinceEpoch(cycle!.finalDate);
+    loadingPage = false;
+  }
+
+  @observable
+  bool loadingPage = false;
+
+  //configuração do padrão de avaliação
+
+  List periodOptions = ['Bimestral', 'Trimestral'];
+
+  @observable
+  String cyclePeriod = '';
+
+  @action
+  setCyclePeriod(e) {
+    cyclePeriod = e;
+  }
+
+  //configuração do periodo do ciclo
+
+  @observable
+  DateTime initialDate = DateTime(2022, 1, 9);
+
+  @action
+  setinitialDate(e) {
+    if (e == null)
+      initialDate = DateTime.now();
+    else
+      initialDate = e;
+  }
+
+  @observable
+  DateTime finalDate = DateTime(2022, 1, 9);
+
+  @action
+  setFinalDate(e) {
+    if (e == null)
+      finalDate = DateTime.now();
+    else
+      finalDate = e;
+  }
+
+  //configuração de padrão de aprovação por nota
+  List scoreList = ['60%', '70%'];
+
+  @observable
+  String score = '';
+
+  @action
+  setScore(e) {
+    score = e;
+  }
+
+  //configuração de padrão de aprovação por presenças
+  List attendanceList = ['60%', '70%'];
+
+  @observable
+  String attendance = '';
+
+  @action
+  setAttendance(e) {
+    attendance = e;
+  }
+
   @observable
   SchoolModel? schoolModel = SchoolModel(
-      currentCycle: "",
-      cnpj: "",
-      closingDate: DateTime.now(),
-      logo: '',
-      name: '',
-      regime: 0);
+    currentCycle: "",
+    cnpj: "",
+    name: '',
+  );
 
   @observable
   Cycle? cycle = Cycle(
-      name: "",
-      finalDate: DateTime.now(),
-      idSchool: "",
-      initialDate: DateTime.now());
+    name: "",
+    idSchool: "",
+    finalDate: DateTime.now().millisecondsSinceEpoch,
+    initialDate: DateTime.now().millisecondsSinceEpoch,
+    approvalAttendance: '',
+    approvalPattern: '',
+    evaluationStandard: '',
+  );
 
-  @action
-
-  //função de cadastro do ciclo
-  cadastrar(BuildContext context) async {
+  //função de atualização do ciclo
+  update(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
       try {
         loader.show();
 
-        //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
-        bool insertedCycle = await _authService.insertCycleSchool(
-          user!.uid,
+        bool updatedCycle = await _adminService.updateCycle(
+          schoolModel!.currentCycle,
           Cycle(
-            name: cycleNameController.text,
-            idSchool: schoolId,
-            //***A FAZER*** -> Retornar os valores inseridos dos períodos do ciclo
-            initialDate: DateTime.now(),
-            finalDate: DateTime.now(),
-          ),
+              name: cycleName.text,
+              idSchool: schoolId,
+              finalDate: finalDate.millisecondsSinceEpoch,
+              initialDate: initialDate.millisecondsSinceEpoch,
+              approvalAttendance: attendance,
+              approvalPattern: score,
+              evaluationStandard: cyclePeriod),
         );
 
-        if (insertedCycle) {
-          cyclePeriodController.clear();
-          cycleLeastScoreController.clear();
-          cycleLeastAttendanceController.clear();
+        if (updatedCycle) {
           loader.hide();
-          buildSnackBarUi(context, "Ciclo cadastrado com sucesso!");
-          Modular.to.pushReplacementNamed("/admin/");
+          buildSnackBarUi(context, "Ciclo atualizado com sucesso!");
+          Modular.to.pop();
         } else {
           loader.hide();
-          buildSnackBarUi(context, "Seu ciclo não foi cadastrado!");
+          buildSnackBarUi(context, "Seu ciclo não foi atualizado!");
         }
       } catch (e) {
         loader.hide();

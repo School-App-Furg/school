@@ -22,12 +22,18 @@ class SchoolRepository {
   Future<SchoolModel?> getSchoolInformationsById(String id) async {
     SchoolModel? model;
     try {
-      await firestoreInstance.collection('schools').doc(id).get().then(
-        (DocumentSnapshot snapshot) {
-          model = SchoolModel.fromJson(
-            json.encode(snapshot.data()),
-          );
-        },
+      var snapshot =
+          await firestoreInstance.collection('schools').doc(id).get();
+      var school = SchoolModel.fromJson(
+        json.encode(
+          snapshot.data(),
+        ),
+      );
+      model = SchoolModel(
+        id: snapshot.id,
+        currentCycle: school.currentCycle,
+        cnpj: school.cnpj,
+        name: school.name,
       );
     } catch (error) {
       throw Exception(error);
@@ -49,13 +55,11 @@ class SchoolRepository {
           );
           list.add(
             SchoolModel(
-                id: element.id,
-                currentCycle: school.currentCycle,
-                cnpj: school.cnpj,
-                closingDate: school.closingDate,
-                logo: school.logo,
-                name: school.name,
-                regime: school.regime),
+              id: element.id,
+              currentCycle: school.currentCycle,
+              cnpj: school.cnpj,
+              name: school.name,
+            ),
           );
         },
       );
@@ -63,5 +67,16 @@ class SchoolRepository {
       throw Exception(error);
     }
     return list;
+  }
+
+  //update do ciclo da escola
+  Future<bool> updateCycleSchool(String cycleId, String schoolId) async {
+    return await firestoreInstance.collection('schools').doc(schoolId).update({
+      'currentCycle': cycleId,
+    }).then(
+      (value) {
+        return true;
+      },
+    ).catchError((error) => throw Exception(error));
   }
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'config_controller.dart';
+part of 'new_cycle_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'config_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ConfigController on _ConfigControllerBase, Store {
-  final _$cycleNameAtom = Atom(name: '_ConfigControllerBase.cycleName');
+mixin _$NewCycleController on _NewCycleControllerBase, Store {
+  final _$cycleNameAtom = Atom(name: '_NewCycleControllerBase.cycleName');
 
   @override
   TextEditingController get cycleName {
@@ -24,7 +24,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$loadingPageAtom = Atom(name: '_ConfigControllerBase.loadingPage');
+  final _$loadingPageAtom = Atom(name: '_NewCycleControllerBase.loadingPage');
 
   @override
   bool get loadingPage {
@@ -39,7 +39,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$cyclePeriodAtom = Atom(name: '_ConfigControllerBase.cyclePeriod');
+  final _$cyclePeriodAtom = Atom(name: '_NewCycleControllerBase.cyclePeriod');
 
   @override
   String get cyclePeriod {
@@ -54,7 +54,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$initialDateAtom = Atom(name: '_ConfigControllerBase.initialDate');
+  final _$initialDateAtom = Atom(name: '_NewCycleControllerBase.initialDate');
 
   @override
   DateTime get initialDate {
@@ -69,7 +69,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$finalDateAtom = Atom(name: '_ConfigControllerBase.finalDate');
+  final _$finalDateAtom = Atom(name: '_NewCycleControllerBase.finalDate');
 
   @override
   DateTime get finalDate {
@@ -84,7 +84,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$scoreAtom = Atom(name: '_ConfigControllerBase.score');
+  final _$scoreAtom = Atom(name: '_NewCycleControllerBase.score');
 
   @override
   String get score {
@@ -99,7 +99,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$attendanceAtom = Atom(name: '_ConfigControllerBase.attendance');
+  final _$attendanceAtom = Atom(name: '_NewCycleControllerBase.attendance');
 
   @override
   String get attendance {
@@ -114,7 +114,7 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$schoolModelAtom = Atom(name: '_ConfigControllerBase.schoolModel');
+  final _$schoolModelAtom = Atom(name: '_NewCycleControllerBase.schoolModel');
 
   @override
   SchoolModel? get schoolModel {
@@ -129,84 +129,61 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$cycleAtom = Atom(name: '_ConfigControllerBase.cycle');
-
-  @override
-  Cycle? get cycle {
-    _$cycleAtom.reportRead();
-    return super.cycle;
-  }
-
-  @override
-  set cycle(Cycle? value) {
-    _$cycleAtom.reportWrite(value, super.cycle, () {
-      super.cycle = value;
-    });
-  }
-
-  final _$getCurrentCycleAsyncAction =
-      AsyncAction('_ConfigControllerBase.getCurrentCycle');
-
-  @override
-  Future<dynamic> getCurrentCycle() {
-    return _$getCurrentCycleAsyncAction.run(() => super.getCurrentCycle());
-  }
-
-  final _$_ConfigControllerBaseActionController =
-      ActionController(name: '_ConfigControllerBase');
+  final _$_NewCycleControllerBaseActionController =
+      ActionController(name: '_NewCycleControllerBase');
 
   @override
   dynamic setCyclePeriod(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setCyclePeriod');
+    final _$actionInfo = _$_NewCycleControllerBaseActionController.startAction(
+        name: '_NewCycleControllerBase.setCyclePeriod');
     try {
       return super.setCyclePeriod(e);
     } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
+      _$_NewCycleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic setinitialDate(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setinitialDate');
+    final _$actionInfo = _$_NewCycleControllerBaseActionController.startAction(
+        name: '_NewCycleControllerBase.setinitialDate');
     try {
       return super.setinitialDate(e);
     } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
+      _$_NewCycleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic setFinalDate(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setFinalDate');
+    final _$actionInfo = _$_NewCycleControllerBaseActionController.startAction(
+        name: '_NewCycleControllerBase.setFinalDate');
     try {
       return super.setFinalDate(e);
     } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
+      _$_NewCycleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic setScore(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setScore');
+    final _$actionInfo = _$_NewCycleControllerBaseActionController.startAction(
+        name: '_NewCycleControllerBase.setScore');
     try {
       return super.setScore(e);
     } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
+      _$_NewCycleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic setAttendance(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setAttendance');
+    final _$actionInfo = _$_NewCycleControllerBaseActionController.startAction(
+        name: '_NewCycleControllerBase.setAttendance');
     try {
       return super.setAttendance(e);
     } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
+      _$_NewCycleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -220,8 +197,7 @@ initialDate: ${initialDate},
 finalDate: ${finalDate},
 score: ${score},
 attendance: ${attendance},
-schoolModel: ${schoolModel},
-cycle: ${cycle}
+schoolModel: ${schoolModel}
     ''';
   }
 }

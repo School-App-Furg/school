@@ -31,7 +31,7 @@ class MyTextFormField extends StatelessWidget {
         decoration: InputDecoration(
             icon: icon,
             hintText: hintText,
-            contentPadding: EdgeInsets.all(15.0),
+            contentPadding: EdgeInsets.all(10.0),
             border: InputBorder.none,
             filled: true,
             fillColor: Colors.grey[200],

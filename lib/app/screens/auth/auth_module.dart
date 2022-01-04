@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'forgot_password/forgot.dart';
 import 'login/login_screen.dart';
 import 'register_school/register_school.dart';
 import 'register_student/register_student_controller.dart';
@@ -7,8 +8,6 @@ import 'register_student/register_student_page.dart';
 import 'register_teacher/register_teacher_controller.dart';
 import 'register_teacher/register_teacher_page.dart';
 import 'welcome/welcome.dart';
-
-import 'forgot_password/forgot.dart';
 
 class AuthModule extends Module {
   @override

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../core/styles/colors.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
-
+import '../../../core/styles/colors.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
-import '../../../core/components/classes_card.dart';
 import 'home_controller.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HomePage extends StatefulWidget {
   @override

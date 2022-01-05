@@ -3,15 +3,19 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:school/app/core/models/school_model.dart';
+import 'package:school/app/core/models/student_user.dart';
+import 'package:school/app/core/styles/colors.dart';
 import '../../../resources/auth_repository.dart';
 
 import '../../../core/styles/sizes.dart';
 
 class HomeDrawer extends StatelessWidget {
   final SchoolModel? schoolModel;
+  final StudentUser? studentUser;
   const HomeDrawer({
     Key? key,
     required this.schoolModel,
+    required this.studentUser,
   }) : super(key: key);
 
   @override
@@ -62,14 +66,15 @@ class HomeDrawer extends StatelessWidget {
               DrawerHeader(
                 child: Row(
                   children: [
-                    /*CircleAvatar(
-                      backgroundImage: NetworkImage(schoolModel!.logo),
+                    CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/student.jpg'),
                       radius: 30.0,
-                    ),*/
+                      backgroundColor: white,
+                    ),
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text(schoolModel!.name)
+                    Text(schoolModel!.name + " - " + studentUser!.name)
                   ],
                 ),
               ),
@@ -83,7 +88,7 @@ class HomeDrawer extends StatelessWidget {
                       ),
                       title: Text("Tela inicial"),
                       onTap: () =>
-                          Modular.to.popUntil(ModalRoute.withName('/admin/')),
+                          Modular.to.popUntil(ModalRoute.withName('/aluno/')),
                     ),
                     ListTile(
                       leading: Icon(
@@ -96,38 +101,6 @@ class HomeDrawer extends StatelessWidget {
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.class__outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Disciplinas"),
-                      onTap: () => Modular.to.pushNamed('./subjects-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Professores"),
-                      onTap: () => Modular.to.pushNamed('./teachers-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Alunos"),
-                      onTap: () => Modular.to.pushNamed('./students-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.settings_applications_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Ajustes"),
-                      onTap: () => Modular.to.pushNamed('./config'),
-                    ),
-                    ListTile(
-                      leading: Icon(
                         Icons.logout,
                         color: Colors.black,
                       ),
@@ -135,7 +108,7 @@ class HomeDrawer extends StatelessWidget {
                       onTap: () {
                         _authRepository.logout();
                         Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/');
+                        Modular.to.pushReplacementNamed('/aluno/');
                       },
                     )
                   ],

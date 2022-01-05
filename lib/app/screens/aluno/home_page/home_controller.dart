@@ -33,23 +33,22 @@ abstract class _HomeControllerBase with Store {
   @observable
   bool loading = false;
 
-  //lista de turmas
-  @observable
-  List<Subject>? subjects = ObservableList<Subject>();
-
   //Solicita as informações do aluno ao firebase
   @action
   Future initHome() async {
     loading = true;
-    userStudent =
-        (await adminService.getStudentsBySchoolId(user!.uid)) as StudentUser?;
+    userStudent = await adminService.getUserStudentById(user!.uid);
     schoolModel =
         await adminService.getSchoolInformations(userStudent!.schoolId);
-
+    //Acredito que esta parte não esteja ok - precisa ajustar
     subjects = await adminService.getSubjects(userStudent!.schoolId);
 
     loading = false;
   }
+
+  //lista de turmas
+  @observable
+  List<Subject>? subjects = ObservableList<Subject>();
 
   //lista de turmas
   @observable

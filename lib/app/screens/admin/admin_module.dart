@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
+
 import 'new_cycle/config/new_cycle_controller.dart';
 import 'new_cycle/config/new_cycle_page.dart';
 import 'student_list/student_list_controller.dart';
@@ -50,7 +51,9 @@ class AdminModule extends Module {
             child: (_, args) =>
                 EditClassPage(classes: args.data['class_year'])),
         ChildRoute('/profile',
-            child: (_, args) => ProfilePage(name: args.data['name'])),
+            child: (_, args) => ProfilePage(
+                  schoolModel: args.data['schoolModel'],
+                )),
         ChildRoute('/school-report', child: (_, args) => SchoolReportPage()),
         ChildRoute('/config',
             child: (_, args) => ConfigPage(schoolId: args.data['schoolId'])),

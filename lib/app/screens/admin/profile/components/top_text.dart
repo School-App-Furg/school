@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 class RightTextProfile extends StatelessWidget {
   final String name;
-  final String currentCycle;
 
-  const RightTextProfile(
-      {Key? key, required this.name, required this.currentCycle})
-      : super(key: key);
+  const RightTextProfile({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,6 @@ class RightTextProfile extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                currentCycle,
-                style: TextStyle(fontWeight: FontWeight.w400),
               ),
             ],
           )

@@ -35,6 +35,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   schoolModel: controller.schoolModel,
                 ),
                 appBar: AppBarHome(
+                  //Adição do cyclePeriod na tela do admin conforme seleção do ciclo
+                  cyclePeriod: "Ciclo: 2021/2",
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   text: controller.schoolModel!.name,

@@ -111,6 +111,29 @@ class UsersRepository {
     return model;
   }
 
+  //Retorna as informações de um professor
+  Future<StudentUser?> getUserStudentById(String userId) async {
+    StudentUser? model;
+    try {
+      await firestoreInstance.collection('users').doc(userId).get().then(
+        (DocumentSnapshot snapshot) {
+          var teste = StudentUser.fromJson(
+            json.encode(snapshot.data()),
+          );
+          model = StudentUser(
+              id: snapshot.id,
+              schoolId: teste.schoolId,
+              name: teste.name,
+              type: teste.type,
+              cpf: teste.cpf);
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return model;
+  }
+
   //Retorna uma lista de professores
   Future<List<TeacherUser>?> getTeachers(String schoolId) async {
     List<TeacherUser>? list = [];

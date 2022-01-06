@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/models/school_model.dart';
+import 'package:school/app/core/models/student_user.dart';
+import 'package:school/app/resources/auth_repository.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
-  final Function()? onPressed;
+  final Function()? onPressedDrawer;
 
-  const AppBarHome({Key? key, required this.onPressed}) : super(key: key);
+  final Function()? onPressedHistoric;
+  final SchoolModel? schoolModel;
+  final StudentUser? studentUser;
+
+  const AppBarHome(
+      {Key? key,
+      required this.onPressedDrawer,
+      this.onPressedHistoric,
+      this.schoolModel,
+      this.studentUser})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthRepository _authRepository = AuthRepository();
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0.5,
       leading: IconButton(
-        onPressed: onPressed,
+        onPressed: onPressedDrawer,
         icon: const Icon(Icons.menu),
         color: Colors.black,
       ),
-      title: const Text(
-        'Escola São Bento - Aluno',
+      title: Text(
+        schoolModel!.name + " - " + studentUser!.name,
         style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.w500,
@@ -25,12 +39,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          color: Colors.black,
-        ),
-        IconButton(
-          onPressed: () {},
+          onPressed: onPressedHistoric,
           icon: const Icon(Icons.more_vert),
           color: Colors.black,
         ),

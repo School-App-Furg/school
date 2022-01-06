@@ -9,9 +9,11 @@ import '../../../core/styles/sizes.dart';
 
 class HomeDrawer extends StatelessWidget {
   final SchoolModel? schoolModel;
+  final AuthRepository? authRepository;
   const HomeDrawer({
     Key? key,
     required this.schoolModel,
+    this.authRepository,
   }) : super(key: key);
 
   @override
@@ -92,7 +94,10 @@ class HomeDrawer extends StatelessWidget {
                       ),
                       title: Text("Perfil"),
                       onTap: () => Modular.to.pushNamed('./profile',
-                          arguments: {'name': schoolModel!.name}),
+                          arguments: {
+                            'schoolModel': schoolModel,
+                            'authRepository': authRepository
+                          }),
                     ),
                     ListTile(
                       leading: Icon(

@@ -21,7 +21,7 @@ class _SchoolReportPageState extends State<SchoolReportPage> {
     return Scaffold(
       appBar: AppBarReport(
         textButton: "Gerar Boletim Aluno",
-        onPressed: () {},
+        onPressed: () => Modular.to.pushNamed('./generate-report'),
         text: 'Boletim',
         onPressedHistoric: () => Modular.to.pushNamed('./historic'),
         onPressedSubject: () => Modular.to.pushNamed('./register-class'),

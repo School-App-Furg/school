@@ -3,6 +3,7 @@ import 'config/config_controller.dart';
 
 import 'new_cycle/config/new_cycle_controller.dart';
 import 'new_cycle/config/new_cycle_page.dart';
+import 'school_report_generator/school_report_generator_page.dart';
 import 'student_list/student_list_controller.dart';
 import 'student_list/student_list_page.dart';
 import 'subject_list/subject_list_controller.dart';
@@ -42,6 +43,8 @@ class AdminModule extends Module {
           '/',
           child: (_, args) => HomePage(),
         ),
+        ChildRoute('/generate-report',
+            child: (_, args) => SchoolReportGeneratorPage()),
         ChildRoute('/students-list-class',
             child: (_, args) =>
                 StudentsListForClass(classe: args.data['classe'])),

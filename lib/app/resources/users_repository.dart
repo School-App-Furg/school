@@ -144,13 +144,14 @@ class UsersRepository {
     return list;
   }
 
-  //remover professor
-  Future<bool> removeTeacher(String idTeacher) async {
+  //editar professor
+  Future<bool> updateTeacher(TeacherUser teacherUser) async {
     return await firestoreInstance
         .collection('users')
-        .doc(idTeacher)
-        .delete()
-        .then(
+        .doc(teacherUser.id)
+        .update(
+      {'name': teacherUser.name, 'subjects': teacherUser.subjects},
+    ).then(
       (value) {
         return true;
       },

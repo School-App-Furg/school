@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
-import 'new_cycle/config/new_cycle_controller.dart';
-import 'new_cycle/config/new_cycle_page.dart';
+import 'new_cycle/new_cycle_controller.dart';
+import 'new_cycle/new_cycle_page.dart';
 import 'student_list/student_list_controller.dart';
 import 'student_list/student_list_page.dart';
 import 'subject_list/subject_list_controller.dart';

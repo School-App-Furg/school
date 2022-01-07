@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../config/config_controller.dart';
-import '../../../../core/components/loader/loader_default.dart';
-import '../../../../core/models/cycle.dart';
-import '../../../../core/models/school_model.dart';
-import '../../../../core/service/snackbars.dart';
-import '../../home_page/home_controller.dart';
+import '../config/config_controller.dart';
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/cycle.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/service/snackbars.dart';
+import '../home_page/home_controller.dart';
 
-import '../../admin_service.dart';
+import '../admin_service.dart';
 
 part 'new_cycle_controller.g.dart';
 

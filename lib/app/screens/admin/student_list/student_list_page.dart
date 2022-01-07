@@ -44,11 +44,8 @@ class _StudentListPageState
                               var data = controller.students![index];
                               return Card(
                                 child: ListTile(
+                                  leading: Icon(Icons.person),
                                   title: Text(data.name),
-                                  trailing: IconButton(
-                                    icon: Icon(Icons.settings),
-                                    onPressed: () => {},
-                                  ),
                                 ),
                               );
                             },

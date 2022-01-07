@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/models/teacher_user.dart';
 
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
@@ -56,17 +57,38 @@ abstract class _RegisterClassControllerBase with Store {
   @observable
   List<Subject>? subjects = [];
 
+  @observable
+  List<TeacherUser>? teachers = [];
+
   @action
   Future getSubjectsAndTeachers() async {
     subjects = await _adminService.getSubjects(schoolId);
-    subjects!.forEach(
-      (subjectsList) {},
+    teachers = await _adminService.getTeachers(schoolId);
+    teachers!.forEach(
+      (elementTeacher) {
+        elementTeacher.subjects!.forEach(
+          (elementTeacherSubject) {
+            subjects!.forEach(
+              (elementSubject) {
+                if (elementTeacherSubject == elementSubject.id) {
+                  subjectTeacher.add(
+                    SubjectTeacher(
+                        idSubject: elementSubject.id,
+                        subject: elementSubject.name,
+                        idTeacher: elementTeacher.id,
+                        teacher: elementTeacher.name),
+                  );
+                }
+              },
+            );
+          },
+        );
+      },
     );
   }
 
   @observable
-  ObservableList<SubjectTeacher> subjectTeacher =
-      ObservableList<SubjectTeacher>();
+  List<SubjectTeacher> subjectTeacher = [];
 
   @observable
   List subjectsSelected = [];

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:school/app/core/components/loader/loader_page.dart';
+import 'package:school/app/core/styles/sizes.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/form/multi_select.dart';
 
 import '../../../core/models/teacher_user.dart';
 import '../../../core/service/validators.dart';
 
-import 'components/delete_dialog.dart';
 import 'edit_teacher_controller.dart';
 
 class EditTeacherPage extends StatefulWidget {
@@ -31,45 +32,64 @@ class _EditTeacherPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Editar professor'),
-        actions: [
-          IconButton(
-            onPressed: () => showDeleteTeacherDialog(
-                context, controller, widget.teacherUser.id),
-            icon: Icon(Icons.delete),
-          )
-        ],
-      ),
-      body: Form(
-        key: controller.formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MyTextFormField(
-              hintText: 'Nome completo',
-              controller: controller.nameController,
-              validator: validateEmpty,
-            ),
-            Observer(
-              builder: (_) {
-                return MultiSelect(
-                  buttonText: "Selecione as disciplinas:",
-                  title: "Selecione as disciplinas:",
-                  items: controller.listOfsubjects!
-                      .map((e) => MultiSelectItem(e, e.name))
-                      .toList(),
-                  onConfirm: controller.setSubjectsSelected,
-                  initialValue: [
-                    controller.listOfsubjects!.toList(),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+    return Observer(
+      builder: (_) {
+        return controller.listOfsubjects!.isEmpty
+            ? LoaderPage()
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Editar professor'),
+                  centerTitle: true,
+                ),
+                body: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      MyTextFormField(
+                        hintText: 'Nome completo',
+                        controller: controller.nameController,
+                        validator: validateEmpty,
+                      ),
+                      Observer(
+                        builder: (_) {
+                          return MultiSelect(
+                            buttonText: "Selecione as disciplinas:",
+                            title: "Selecione as disciplinas:",
+                            items: controller.listOfsubjects!
+                                .map((e) => MultiSelectItem(e, e.name))
+                                .toList(),
+                            onConfirm: controller.setSubjectsSelected,
+                            initialValue: controller.listOfSubjectsSelected,
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blueAccent,
+                              minimumSize: Size(80, 50),
+                            ),
+                            onPressed: () {
+                              controller.update(context);
+                            },
+                            child: Text(
+                              'Atualizar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: width(context, .04),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+      },
     );
   }
 }

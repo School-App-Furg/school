@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/models/student_user.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/models/student_user.dart';
+import '../../../core/styles/colors.dart';
 import '../../../resources/auth_repository.dart';
 
 import '../../../core/styles/sizes.dart';

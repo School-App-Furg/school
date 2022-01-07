@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../styles/sizes.dart';
-
 import '../styles/colors.dart';
+import '../styles/sizes.dart';
 
 class RoundedDropdown extends StatelessWidget {
   final String value;

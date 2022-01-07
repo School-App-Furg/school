@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/models/student_user.dart';
-import 'package:school/app/resources/auth_repository.dart';
+import '../../../../core/models/school_model.dart';
+import '../../../../core/models/student_user.dart';
+import '../../../../resources/auth_repository.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;

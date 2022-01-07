@@ -50,7 +50,9 @@ class AdminModule extends Module {
             child: (_, args) =>
                 EditClassPage(classes: args.data['class_year'])),
         ChildRoute('/profile',
-            child: (_, args) => ProfilePage(name: args.data['name'])),
+            child: (_, args) => ProfilePage(
+                  schoolModel: args.data['schoolModel'],
+                )),
         ChildRoute('/school-report', child: (_, args) => SchoolReportPage()),
         ChildRoute('/config',
             child: (_, args) => ConfigPage(schoolId: args.data['schoolId'])),

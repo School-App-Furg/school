@@ -57,6 +57,15 @@ class AdminService {
     }
   }
 
+  //solicita as informacoes do user teacher
+  Future<StudentUser?> getUserStudentById(String userId) async {
+    try {
+      return await _userRepository.getUserStudentById(userId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   Future<bool> insertSubject(Subject subject) async {
     try {
       return await _subjectRepository.insertSubject(subject);

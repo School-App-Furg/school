@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:school/app/core/form/multi_select.dart';
 import './school_report_generator_controller.dart';
-import 'api/pdf_api.dart';
-import 'api/pdf_invoice_api.dart';
-import 'model/customer.dart';
-import 'model/invoice.dart';
-import 'model/supplier.dart';
+
+import 'model/boletim_model.dart';
+
+import 'pdf_gerar/gerar_boletim_pdfi.dart';
+import 'pdf_gerar/open_pdf.dart';
 import 'widget/button_widget.dart';
-import 'widget/title_widget.dart';
 
 class SchoolReportGeneratorPage extends StatefulWidget {
   @override
@@ -15,11 +16,13 @@ class SchoolReportGeneratorPage extends StatefulWidget {
 }
 
 class _SchoolReportGeneratorPageState extends State<SchoolReportGeneratorPage> {
+  final SchoolReportGeneratorController _controller =
+      SchoolReportGeneratorController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SchoolReportGeneratorPage'),
+        title: Text('Gerar Boletim'),
       ),
       body: Container(
         padding: EdgeInsets.all(32),
@@ -27,89 +30,102 @@ class _SchoolReportGeneratorPageState extends State<SchoolReportGeneratorPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TitleWidget(
-                icon: Icons.picture_as_pdf,
-                text: 'Generate Invoice',
-              ),
+              MultiSelect(
+                  buttonText: "Selecione os alunos desta turma",
+                  title: "Selecione os alunos:",
+                  items: _controller.students
+                      .map((e) => MultiSelectItem(e.id, e.name))
+                      .toList(),
+                  onConfirm: _controller.setStudentsSelected),
               const SizedBox(height: 48),
               ButtonWidget(
-                text: 'Invoice PDF',
+                text: 'Gerar PDF',
                 onClicked: () async {
-                  final date = DateTime.now();
-                  final dueDate = date.add(Duration(days: 7));
-
-                  final invoice = Invoice(
-                    supplier: Supplier(
-                      name: 'Sarah Field',
-                      address: 'Sarah Street 9, Beijing, China',
-                      paymentInfo: 'https://paypal.me/sarahfieldzz',
-                    ),
-                    customer: Customer(
-                      name: 'Apple Inc.',
-                      address: 'Apple Street, Cupertino, CA 95014',
-                    ),
-                    info: InvoiceInfo(
-                      date: date,
-                      dueDate: dueDate,
-                      description: 'My description...',
-                      number: '${DateTime.now().year}-9999',
-                    ),
+                  final boletim = Boletim(
                     items: [
-                      InvoiceItem(
-                        description: 'Coffee',
-                        date: DateTime.now(),
-                        quantity: 3,
-                        vat: 0.19,
-                        unitPrice: 5.99,
+                      ItensBoletim(
+                        disciplinas: 'Português',
+                        notaBim1: 7.5,
+                        notaBim2: 7.5,
+                        notaBim3: 7.5,
+                        notaBim4: 7.5,
+                        faltaBim1: 3,
+                        faltaBim2: 3,
+                        faltaBim3: 3,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Water',
-                        date: DateTime.now(),
-                        quantity: 8,
-                        vat: 0.19,
-                        unitPrice: 0.99,
+                      ItensBoletim(
+                        disciplinas: 'Matemática',
+                        notaBim1: 7.5,
+                        notaBim2: 7.5,
+                        notaBim3: 7.5,
+                        notaBim4: 7.5,
+                        faltaBim1: 3,
+                        faltaBim2: 3,
+                        faltaBim3: 3,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Orange',
-                        date: DateTime.now(),
-                        quantity: 3,
-                        vat: 0.19,
-                        unitPrice: 2.99,
+                      ItensBoletim(
+                        disciplinas: 'Ciências',
+                        notaBim1: 7.5,
+                        notaBim2: 7.5,
+                        notaBim3: 7.5,
+                        notaBim4: 7.5,
+                        faltaBim1: 3,
+                        faltaBim2: 3,
+                        faltaBim3: 3,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Apple',
-                        date: DateTime.now(),
-                        quantity: 8,
-                        vat: 0.19,
-                        unitPrice: 3.99,
+                      ItensBoletim(
+                        disciplinas: 'História',
+                        notaBim1: 7.5,
+                        notaBim2: 7.5,
+                        notaBim3: 7.5,
+                        notaBim4: 7.5,
+                        faltaBim1: 3,
+                        faltaBim2: 3,
+                        faltaBim3: 3,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Mango',
-                        date: DateTime.now(),
-                        quantity: 1,
-                        vat: 0.19,
-                        unitPrice: 1.59,
+                      ItensBoletim(
+                        disciplinas: 'Geografia',
+                        notaBim1: 7.5,
+                        notaBim2: 1,
+                        notaBim3: 7.5,
+                        notaBim4: 10,
+                        faltaBim1: 3,
+                        faltaBim2: 5,
+                        faltaBim3: 3,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Blue Berries',
-                        date: DateTime.now(),
-                        quantity: 5,
-                        vat: 0.19,
-                        unitPrice: 0.99,
+                      ItensBoletim(
+                        disciplinas: 'Artes',
+                        notaBim1: 7.5,
+                        notaBim2: 7.5,
+                        notaBim3: 10,
+                        notaBim4: 7.5,
+                        faltaBim1: 3,
+                        faltaBim2: 3,
+                        faltaBim3: 0,
+                        faltaBim4: 3,
                       ),
-                      InvoiceItem(
-                        description: 'Lemon',
-                        date: DateTime.now(),
-                        quantity: 4,
-                        vat: 0.19,
-                        unitPrice: 1.29,
+                      ItensBoletim(
+                        disciplinas: 'Educação Física',
+                        notaBim1: 8,
+                        notaBim2: 7.5,
+                        notaBim3: 4,
+                        notaBim4: 7.5,
+                        faltaBim1: 1,
+                        faltaBim2: 1,
+                        faltaBim3: 2,
+                        faltaBim4: 3,
                       ),
                     ],
                   );
 
-                  final pdfFile = await PdfInvoiceApi.generate(invoice);
+                  final pdfFile = await ReportGenerator.generate(boletim);
 
-                  PdfApi.openFile(pdfFile);
+                  PdfOpen.openFile(pdfFile);
                 },
               ),
             ],

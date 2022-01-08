@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class ButtonWidget extends StatelessWidget {
         child: FittedBox(
           child: Text(
             text,
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20, color: white),
           ),
         ),
         onPressed: onClicked,

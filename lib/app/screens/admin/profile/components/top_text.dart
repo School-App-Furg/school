@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../../core/styles/colors.dart';
 
 class RightTextProfile extends StatelessWidget {
   final String name;

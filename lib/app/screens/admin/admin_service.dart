@@ -192,9 +192,9 @@ class AdminService {
   }
 
   //remover professor
-  Future<bool> removeTeacher(String idTeacher) async {
+  Future<bool> updateTeacher(TeacherUser teacher) async {
     try {
-      return await _userRepository.removeTeacher(idTeacher);
+      return await _userRepository.updateTeacher(teacher);
     } catch (error) {
       throw Exception(error);
     }

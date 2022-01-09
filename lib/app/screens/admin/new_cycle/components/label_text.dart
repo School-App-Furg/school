@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/styles/sizes.dart';
+import '../../../../core/styles/sizes.dart';
 
 class LabelText extends StatelessWidget {
   final String text;

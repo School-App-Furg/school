@@ -55,17 +55,32 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
     });
   }
 
+  final _$teachersAtom = Atom(name: '_RegisterClassControllerBase.teachers');
+
+  @override
+  List<TeacherUser>? get teachers {
+    _$teachersAtom.reportRead();
+    return super.teachers;
+  }
+
+  @override
+  set teachers(List<TeacherUser>? value) {
+    _$teachersAtom.reportWrite(value, super.teachers, () {
+      super.teachers = value;
+    });
+  }
+
   final _$subjectTeacherAtom =
       Atom(name: '_RegisterClassControllerBase.subjectTeacher');
 
   @override
-  ObservableList<SubjectTeacher> get subjectTeacher {
+  List<SubjectTeacher> get subjectTeacher {
     _$subjectTeacherAtom.reportRead();
     return super.subjectTeacher;
   }
 
   @override
-  set subjectTeacher(ObservableList<SubjectTeacher> value) {
+  set subjectTeacher(List<SubjectTeacher> value) {
     _$subjectTeacherAtom.reportWrite(value, super.subjectTeacher, () {
       super.subjectTeacher = value;
     });
@@ -135,6 +150,7 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
 students: ${students},
 studentsSelected: ${studentsSelected},
 subjects: ${subjects},
+teachers: ${teachers},
 subjectTeacher: ${subjectTeacher},
 subjectsSelected: ${subjectsSelected}
     ''';

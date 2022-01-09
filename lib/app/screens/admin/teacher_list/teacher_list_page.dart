@@ -44,10 +44,16 @@ class _TeacherListPageState
                               var data = controller.teachers![index];
                               return Card(
                                 child: ListTile(
+                                  leading: Icon(Icons.person),
                                   title: Text(data.name),
                                   trailing: IconButton(
                                     icon: Icon(Icons.settings),
-                                    onPressed: () => {},
+                                    onPressed: () => Modular.to.pushNamed(
+                                      './edit-teacher',
+                                      arguments: {
+                                        'teacher': data,
+                                      },
+                                    ),
                                   ),
                                 ),
                               );

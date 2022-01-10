@@ -27,10 +27,10 @@ class SubjectRepository {
           );
         },
       );
+      return list;
     } catch (error) {
       throw Exception(error);
     }
-    return list;
   }
 
   //cadastro de disciplinas

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/service/snackbars.dart';
-import 'package:school/app/resources/auth_repository.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/service/snackbars.dart';
+import '../../../resources/auth_repository.dart';
 
 part 'profile_controller.g.dart';
 

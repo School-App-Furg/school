@@ -20,6 +20,10 @@ abstract class _EditTeacherControllerBase with Store {
   TextEditingController emailController = TextEditingController();
   AdminService _adminService = AdminService();
 
+  @observable
+  TeacherUser _teacherUser =
+      TeacherUser(schoolId: '', name: '', cpf: '', type: 0);
+
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
@@ -28,19 +32,30 @@ abstract class _EditTeacherControllerBase with Store {
   List<Subject>? listOfsubjects = [];
 
   @action
-  initEditPage(TeacherUser teacherUser) {
+  initEditPage(TeacherUser teacherUser) async {
+    _teacherUser = teacherUser;
     nameController.text = teacherUser.name;
-    getSubjects();
+    listOfsubjects = await _adminService.getSubjects(schoolId);
+    getSubjectsPreviusSelected(teacherUser);
+  }
+
+  @action
+  getSubjectsPreviusSelected(TeacherUser teacherUser) {
+    teacherUser.subjects!.forEach(
+      (subjectId) {
+        listOfsubjects!.forEach(
+          (element) {
+            if (subjectId == element.id) {
+              listOfSubjectsSelected!.add(element);
+            }
+          },
+        );
+      },
+    );
   }
 
   @observable
   List<Subject>? listOfSubjectsSelected = [];
-
-  //listagem de disciplinas da escoa
-  @action
-  getSubjects() async {
-    listOfsubjects = await _adminService.getSubjects(schoolId);
-  }
 
   //disciplinas selecionadas
   @observable
@@ -57,22 +72,23 @@ abstract class _EditTeacherControllerBase with Store {
     );
   }
 
-  //exclusão de professores
+  //edição de professores
   @action
-  excluir(BuildContext context, String idTeacher) async {
+  update(BuildContext context) async {
     final loader = LoaderDefault();
     try {
       loader.show();
-      bool removed = await _adminService.removeTeacher(idTeacher);
-
-      Navigator.of(context).pop();
-      if (removed) {
+      _teacherUser.name = nameController.text;
+      _teacherUser.subjects = subjectsSelected;
+      bool updated = await _adminService.updateTeacher(_teacherUser);
+      Modular.to.pop();
+      if (updated) {
         loader.hide();
-        buildSnackBarUi(context, "Professor removido!");
+        buildSnackBarUi(context, "Professor atualizado!");
       } else {
-        Navigator.of(context).pop();
+        Modular.to.pop();
         loader.hide();
-        buildSnackBarUi(context, "Erro ao remover professor!");
+        buildSnackBarUi(context, "Erro ao atualizar o professor!");
       }
     } catch (e) {
       loader.hide();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/components/rounded_button.dart';
-import 'package:school/app/core/components/rounded_input.dart';
-import 'package:school/app/core/models/school_model.dart';
-import 'package:school/app/core/service/validators.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/resources/auth_repository.dart';
+import '../../../core/components/rounded_button.dart';
+import '../../../core/components/rounded_input.dart';
+import '../../../core/models/school_model.dart';
+import '../../../core/service/validators.dart';
+import '../../../core/styles/colors.dart';
+import '../../../resources/auth_repository.dart';
 
 import 'components/background_image.dart';
 import 'components/perfil_image.dart';

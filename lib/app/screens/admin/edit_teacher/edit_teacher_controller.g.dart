@@ -9,6 +9,22 @@ part of 'edit_teacher_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$EditTeacherController on _EditTeacherControllerBase, Store {
+  final _$_teacherUserAtom =
+      Atom(name: '_EditTeacherControllerBase._teacherUser');
+
+  @override
+  TeacherUser get _teacherUser {
+    _$_teacherUserAtom.reportRead();
+    return super._teacherUser;
+  }
+
+  @override
+  set _teacherUser(TeacherUser value) {
+    _$_teacherUserAtom.reportWrite(value, super._teacherUser, () {
+      super._teacherUser = value;
+    });
+  }
+
   final _$listOfsubjectsAtom =
       Atom(name: '_EditTeacherControllerBase.listOfsubjects');
 
@@ -58,31 +74,31 @@ mixin _$EditTeacherController on _EditTeacherControllerBase, Store {
     });
   }
 
-  final _$getSubjectsAsyncAction =
-      AsyncAction('_EditTeacherControllerBase.getSubjects');
+  final _$initEditPageAsyncAction =
+      AsyncAction('_EditTeacherControllerBase.initEditPage');
 
   @override
-  Future getSubjects() {
-    return _$getSubjectsAsyncAction.run(() => super.getSubjects());
+  Future initEditPage(TeacherUser teacherUser) {
+    return _$initEditPageAsyncAction.run(() => super.initEditPage(teacherUser));
   }
 
-  final _$excluirAsyncAction =
-      AsyncAction('_EditTeacherControllerBase.excluir');
+  final _$updateAsyncAction = AsyncAction('_EditTeacherControllerBase.update');
 
   @override
-  Future excluir(BuildContext context, String idTeacher) {
-    return _$excluirAsyncAction.run(() => super.excluir(context, idTeacher));
+  Future update(BuildContext context) {
+    return _$updateAsyncAction.run(() => super.update(context));
   }
 
   final _$_EditTeacherControllerBaseActionController =
       ActionController(name: '_EditTeacherControllerBase');
 
   @override
-  dynamic initEditPage(TeacherUser teacherUser) {
-    final _$actionInfo = _$_EditTeacherControllerBaseActionController
-        .startAction(name: '_EditTeacherControllerBase.initEditPage');
+  dynamic getSubjectsPreviusSelected(TeacherUser teacherUser) {
+    final _$actionInfo =
+        _$_EditTeacherControllerBaseActionController.startAction(
+            name: '_EditTeacherControllerBase.getSubjectsPreviusSelected');
     try {
-      return super.initEditPage(teacherUser);
+      return super.getSubjectsPreviusSelected(teacherUser);
     } finally {
       _$_EditTeacherControllerBaseActionController.endAction(_$actionInfo);
     }

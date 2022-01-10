@@ -18,7 +18,7 @@ class _SchoolReportPageState extends State<SchoolReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Boletim'),
+        title: Text('Boletim - 4º ano, sala 3'),
       ),
       body: SchoolReportList(),
       backgroundColor: lightGrey,

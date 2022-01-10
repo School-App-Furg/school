@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
-
 import 'package:school/app/core/components/profiles/background_image.dart';
 import 'package:school/app/core/components/profiles/perfil_image.dart';
 import 'package:school/app/core/components/profiles/top_text.dart';
-import '../../../core/components/rounded_button.dart';
-import '../../../core/components/rounded_input.dart';
-import '../../../core/models/school_model.dart';
-import '../../../core/service/validators.dart';
-import '../../../core/styles/colors.dart';
-
+import 'package:school/app/core/components/rounded_button.dart';
+import 'package:school/app/core/components/rounded_input.dart';
+import 'package:school/app/core/models/teacher_user.dart';
+import 'package:school/app/core/service/validators.dart';
+import 'package:school/app/core/styles/colors.dart';
 import 'profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
-  final SchoolModel schoolModel;
-
+  final TeacherUser teacherModel;
   ProfilePage({
     Key? key,
-    required this.schoolModel,
+    required this.teacherModel,
   }) : super(key: key);
-
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   final ProfileController _controller = ProfileController();
-
   @override
   void initState() {
-    _controller.initProfile(widget.schoolModel);
+    _controller.initProfile(widget.teacherModel);
 
     super.initState();
   }
@@ -47,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 BackgroundImage(),
                 PerfilImage(
-                  image: AssetImage("assets/images/school.png"),
+                  image: AssetImage("assets/images/teacher.png"),
                 ),
               ],
             ),
@@ -59,8 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   RoundedInput(
-                    controller: _controller.cnpjController,
-                    hintText: "CNPJ",
+                    controller: _controller.cpfController,
+                    hintText: "CPF",
                     icon: Icons.corporate_fare_rounded,
                     keyboardType: TextInputType.number,
                     validator: validateCnpj,
@@ -87,9 +82,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
-      /*Container(
-        child: Text(name),
-      ),*/
     );
   }
 }

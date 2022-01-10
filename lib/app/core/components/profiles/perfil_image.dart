@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PerfilImage extends StatelessWidget {
+  final AssetImage image;
+
+  const PerfilImage({Key? key, required this.image}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,7 +23,7 @@ class PerfilImage extends StatelessWidget {
               ),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/school.png"),
+                image: image,
               ),
             ),
           ),

@@ -1,5 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
+import 'new_cycle/config/new_cycle_controller.dart';
+import 'new_cycle/config/new_cycle_page.dart';
+import 'school_report_generator/school_report_generator_page.dart';
 import 'new_cycle/new_cycle_controller.dart';
 import 'new_cycle/new_cycle_page.dart';
 import 'student_list/student_list_controller.dart';
@@ -7,18 +10,15 @@ import 'student_list/student_list_page.dart';
 import 'subject_list/subject_list_controller.dart';
 import 'teacher_list/teacher_list_controller.dart';
 import 'teacher_list/teacher_list_page.dart';
-
 import 'edit_teacher/edit_teacher_controller.dart';
 import 'edit_teacher/edit_teacher_page.dart';
 import 'edit_class/edit_class_page.dart';
-
 import 'config/config_page.dart';
 import 'historic/historic_page.dart';
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
 import 'register_class/register_class_page.dart';
-
 import 'school_report/school_report_page.dart';
 import 'students_list_page/students_list_page.dart';
 import 'subject_list/subject_list_page.dart';
@@ -41,6 +41,8 @@ class AdminModule extends Module {
           '/',
           child: (_, args) => HomePage(),
         ),
+        ChildRoute('/generate-report',
+            child: (_, args) => SchoolReportGeneratorPage()),
         ChildRoute('/students-list-class',
             child: (_, args) =>
                 StudentsListForClass(classe: args.data['classe'])),

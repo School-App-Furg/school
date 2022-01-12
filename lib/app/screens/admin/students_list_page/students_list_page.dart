@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/components/app_bar_report.dart';
 
 import '../../../core/models/classes.dart';
+
 import 'components/subjects_listview.dart';
 
 class StudentsListForClass extends StatelessWidget {
@@ -12,8 +15,12 @@ class StudentsListForClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(classe.name),
+      appBar: AppBarReport(
+        textButton: "Gerar Relatório Disciplina",
+        onPressed: () {},
+        text: 'Alunos',
+        onPressedHistoric: () => Modular.to.pushNamed('./historic'),
+        onPressedSubject: () => Modular.to.pushNamed('./register-class'),
       ),
       body: StudentsListView(),
     );

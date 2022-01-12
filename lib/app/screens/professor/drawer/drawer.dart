@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/styles/colors.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/teacher_user.dart';
 
@@ -9,12 +10,14 @@ import '../../../core/styles/sizes.dart';
 import '../../../resources/auth_repository.dart';
 
 class HomeDrawer extends StatelessWidget {
+  final AuthRepository? authRepository;
   final SchoolModel? schoolModel;
   final TeacherUser? teacherUser;
   const HomeDrawer({
     Key? key,
     required this.schoolModel,
     required this.teacherUser,
+    this.authRepository,
   }) : super(key: key);
 
   @override
@@ -66,8 +69,9 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/school.png'),
+                      backgroundImage: AssetImage('assets/images/teacher.png'),
                       radius: 30.0,
+                      backgroundColor: white,
                     ),
                     SizedBox(
                       width: width(context, 0.05),
@@ -85,7 +89,8 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Tela inicial"),
-                      onTap: () {},
+                      onTap: () => Modular.to
+                          .popUntil(ModalRoute.withName('/professor/')),
                     ),
                     ListTile(
                       leading: Icon(
@@ -93,7 +98,11 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
-                      onTap: () => () {},
+                      onTap: () => Modular.to.pushNamed('./profile-page',
+                          arguments: {
+                            'teacherModel': teacherUser,
+                            'authRepository': authRepository
+                          }),
                     ),
                     ListTile(
                       leading: Icon(

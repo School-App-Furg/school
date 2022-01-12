@@ -26,7 +26,12 @@ class SchoolReportList extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  title: Text('Disciplina #$index'),
+                  title: Text('Aluno #$index'),
+                  leading: Container(
+                    height: 40,
+                    padding: EdgeInsets.only(right: 12.0),
+                    child: Icon(Icons.person_rounded, color: blueicon),
+                  ),
                   children: [
                     DataTable(
                       headingTextStyle:

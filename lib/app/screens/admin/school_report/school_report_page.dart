@@ -20,7 +20,6 @@ class _SchoolReportPageState extends State<SchoolReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarReport(
-        textButton: "Gerar Boletim Aluno",
         onPressed: () => Modular.to.pushNamed('./generate-report'),
         text: 'Boletim',
         onPressedHistoric: () => Modular.to.pushNamed('./historic'),

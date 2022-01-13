@@ -42,17 +42,12 @@ abstract class _HomeControllerBase with Store {
         await adminService.getSchoolInformations(userStudent!.schoolId);
     //Acredito que esta parte não esteja ok - precisa ajustar
     subjects = await adminService.getSubjects(userStudent!.schoolId);
-
     loading = false;
   }
 
-  //lista de turmas
+  //lista de disciplinas
   @observable
-  List<Subject>? subjects = ObservableList<Subject>();
-
-  //lista de turmas
-  @observable
-  ObservableList<Classes>? classes = ObservableList<Classes>();
+  List<Subject>? subjects = [];
 
   //lista de imagens banner
   List banners = [

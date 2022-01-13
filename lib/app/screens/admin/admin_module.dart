@@ -1,6 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
-
 import 'school_report_generator/school_report_generator_page.dart';
 import 'new_cycle/new_cycle_controller.dart';
 import 'new_cycle/new_cycle_page.dart';

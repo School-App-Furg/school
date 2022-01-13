@@ -143,7 +143,7 @@ class HomeDrawer extends StatelessWidget {
                         Modular.to.pop();
                         Modular.to.pushReplacementNamed('/auth/');
                       },
-                    )
+                    ),
                   ],
                 ),
               )

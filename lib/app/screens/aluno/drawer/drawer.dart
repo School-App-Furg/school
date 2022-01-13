@@ -97,7 +97,7 @@ class HomeDrawer extends StatelessWidget {
                       ),
                       title: Text("Perfil"),
                       onTap: () => Modular.to.pushNamed('./profile',
-                          arguments: {'name': schoolModel!.name}),
+                          arguments: {'studentModel': studentUser}),
                     ),
                     ListTile(
                       leading: Icon(
@@ -108,7 +108,7 @@ class HomeDrawer extends StatelessWidget {
                       onTap: () {
                         _authRepository.logout();
                         Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/aluno/');
+                        Modular.to.pushReplacementNamed('/auth/login');
                       },
                     )
                   ],

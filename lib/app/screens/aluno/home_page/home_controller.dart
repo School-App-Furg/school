@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../core/models/classes.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject.dart';
@@ -42,17 +41,12 @@ abstract class _HomeControllerBase with Store {
         await adminService.getSchoolInformations(userStudent!.schoolId);
     //Acredito que esta parte não esteja ok - precisa ajustar
     subjects = await adminService.getSubjects(userStudent!.schoolId);
-
     loading = false;
   }
 
-  //lista de turmas
+  //lista de disciplinas
   @observable
-  List<Subject>? subjects = ObservableList<Subject>();
-
-  //lista de turmas
-  @observable
-  ObservableList<Classes>? classes = ObservableList<Classes>();
+  List<Subject>? subjects = [];
 
   //lista de imagens banner
   List banners = [

@@ -1,25 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../core/models/subject_teacher.dart';
-import '../../core/models/cycle.dart';
-import '../../resources/cycle_repository.dart';
-import '../../core/models/management_user.dart';
-
-import 'home_page/home_controller.dart';
-import '../../core/models/student_user.dart';
-import '../../core/models/subject.dart';
-
-import '../../core/models/teacher_user.dart';
-import '../../resources/auth_repository.dart';
-import '../../resources/subjects_repository.dart';
 
 import '../../core/models/classes.dart';
+import '../../core/models/cycle.dart';
+import '../../core/models/management_user.dart';
 import '../../core/models/school_model.dart';
+import '../../core/models/student_user.dart';
+import '../../core/models/subject.dart';
+import '../../core/models/subject_teacher.dart';
+import '../../core/models/teacher_user.dart';
 import '../../core/models/user_admin.dart';
+import '../../resources/auth_repository.dart';
 import '../../resources/classes_repository.dart';
+import '../../resources/cycle_repository.dart';
 import '../../resources/school_repository.dart';
+import '../../resources/subjects_repository.dart';
 import '../../resources/users_repository.dart';
+import 'home_page/home_controller.dart';
 
 class AdminService {
   SchoolRepository _schoolRepository = SchoolRepository();

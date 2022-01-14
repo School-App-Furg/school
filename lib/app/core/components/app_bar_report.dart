@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import '../styles/colors.dart';
 
 class AppBarReport extends StatelessWidget implements PreferredSizeWidget {
   final String text;
-  final String textButton;
+
   final Function()? onPressed;
   final Function()? onPressedSubject;
   final Function()? onPressedHistoric;
 
-  const AppBarReport(
-      {Key? key,
-      required this.text,
-      this.onPressedSubject,
-      this.onPressedHistoric,
-      required this.onPressed,
-      required this.textButton})
-      : super(key: key);
+  const AppBarReport({
+    Key? key,
+    required this.text,
+    this.onPressedSubject,
+    this.onPressedHistoric,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +22,9 @@ class AppBarReport extends StatelessWidget implements PreferredSizeWidget {
         text,
       ),
       actions: [
-        TextButton.icon(
-          label: Text(textButton),
+        IconButton(
           icon: Icon(Icons.receipt_sharp),
           onPressed: onPressed,
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(white),
-          ),
         ),
       ],
     );

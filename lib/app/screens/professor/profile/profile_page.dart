@@ -24,7 +24,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     _controller.initProfile(widget.teacherModel);
-
     super.initState();
   }
 

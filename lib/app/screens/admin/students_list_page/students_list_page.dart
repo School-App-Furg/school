@@ -15,7 +15,6 @@ class StudentsListForClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarReport(
-        textButton: "Gerar Relatório Disciplina",
         onPressed: () {},
         text: 'Alunos',
         onPressedHistoric: () => Modular.to.pushNamed('./historic'),

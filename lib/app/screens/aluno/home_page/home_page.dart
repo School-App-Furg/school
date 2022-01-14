@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
-
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 import 'home_controller.dart';
@@ -34,6 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   studentUser: controller.userStudent,
                 ),
                 appBar: AppBarHome(
+                  cyclePeriod: "Ciclo: 2021/2",
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   schoolModel: controller.schoolModel,
@@ -44,7 +44,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   builder: (_) {
                     return ListView.builder(
                       padding: EdgeInsets.all(10.0),
-                      itemCount: controller.classes!.length,
+                      itemCount: controller.subjects!.length,
                       itemBuilder: (context, int index) {
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 5.0),
@@ -57,7 +57,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                     'ID ${controller.subjects![index].schoolId}',
                                 third: "",
                                 index: index,
-                                onTap: () {}),
+                                onTap: () {
+                                  Modular.to.pushNamed('./student-report');
+                                }),
                           ),
                         );
                       },

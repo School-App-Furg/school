@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/components/cycle_period.dart';
 import '../../../../core/models/school_model.dart';
 import '../../../../core/models/student_user.dart';
 import '../../../../resources/auth_repository.dart';
@@ -9,13 +11,15 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedHistoric;
   final SchoolModel? schoolModel;
   final StudentUser? studentUser;
+  final String cyclePeriod;
 
   const AppBarHome(
       {Key? key,
       required this.onPressedDrawer,
       this.onPressedHistoric,
       this.schoolModel,
-      this.studentUser})
+      this.studentUser,
+      required this.cyclePeriod})
       : super(key: key);
 
   @override
@@ -38,6 +42,15 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
+        InkWell(
+          child: Visibility(
+            child: CyclePeriod(
+              label: cyclePeriod,
+            ),
+            visible: true,
+          ),
+          onTap: () => Modular.to.pushNamed('./historic'),
+        ),
         IconButton(
           onPressed: onPressedHistoric,
           icon: const Icon(Icons.more_vert),

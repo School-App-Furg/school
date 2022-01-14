@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:school/app/core/components/cycle_period.dart';
 
-import 'components/cycle_period.dart';
 import 'historic_controller.dart';
 
 class HistoricPage extends StatefulWidget {

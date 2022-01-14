@@ -70,6 +70,22 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
     });
   }
 
+  final _$loadingTestAtom =
+      Atom(name: '_RegisterClassControllerBase.loadingTest');
+
+  @override
+  bool get loadingTest {
+    _$loadingTestAtom.reportRead();
+    return super.loadingTest;
+  }
+
+  @override
+  set loadingTest(bool value) {
+    _$loadingTestAtom.reportWrite(value, super.loadingTest, () {
+      super.loadingTest = value;
+    });
+  }
+
   final _$subjectTeacherAtom =
       Atom(name: '_RegisterClassControllerBase.subjectTeacher');
 
@@ -114,7 +130,7 @@ mixin _$RegisterClassController on _RegisterClassControllerBase, Store {
       AsyncAction('_RegisterClassControllerBase.getSubjectsAndTeachers');
 
   @override
-  Future<dynamic> getSubjectsAndTeachers() {
+  Future getSubjectsAndTeachers() {
     return _$getSubjectsAndTeachersAsyncAction
         .run(() => super.getSubjectsAndTeachers());
   }
@@ -151,6 +167,7 @@ students: ${students},
 studentsSelected: ${studentsSelected},
 subjects: ${subjects},
 teachers: ${teachers},
+loadingTest: ${loadingTest},
 subjectTeacher: ${subjectTeacher},
 subjectsSelected: ${subjectsSelected}
     ''';

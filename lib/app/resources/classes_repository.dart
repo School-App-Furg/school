@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
-import '../core/models/insert_subject_teacher.dart';
+
 import '../core/models/subject_teacher.dart';
 import '../core/models/classes.dart';
 
@@ -28,12 +28,13 @@ class ClassesRepository {
           );
           list.add(
             Classes(
-              schoolId: turma.cycleId,
-              name: turma.name,
-              room: turma.room,
-              cycleId: turma.cycleId,
-              level: turma.level,
-            ),
+                id: element.id,
+                schoolId: turma.cycleId,
+                name: turma.name,
+                room: turma.room,
+                cycleId: turma.cycleId,
+                level: turma.level,
+                students: turma.students),
           );
         },
       );
@@ -44,7 +45,7 @@ class ClassesRepository {
   }
 
   //retorna a lista de disciplinas e o seu professor cadastrado de cada turma
-  Future<List<SubjectTeacher>> getSubjectTeacher(String id) async {
+  Future<List<SubjectTeacher>> getSubjectTeacher(String? id) async {
     List<SubjectTeacher>? list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
@@ -54,12 +55,18 @@ class ClassesRepository {
           .get();
       snapshot.docs.forEach(
         (element) async {
-          list.add(
-            SubjectTeacher.fromJson(
-              json.encode(
-                element.data(),
-              ),
+          SubjectTeacher teste = SubjectTeacher.fromJson(
+            json.encode(
+              element.data(),
             ),
+          );
+          list.add(
+            SubjectTeacher(
+                id: element.id,
+                idSubject: teste.idSubject,
+                idTeacher: teste.idTeacher,
+                subject: teste.subject,
+                teacher: teste.teacher),
           );
         },
       );
@@ -82,13 +89,54 @@ class ClassesRepository {
 
   //cadastro da subclasse Subject teacher
   Future<bool> insertSubjectTeacher(
-      InsertSubjectTeacher subjectTeacher, String doc) async {
+      SubjectTeacher subjectTeacher, String doc) async {
     try {
       await firestoreInstance
           .collection('classes')
           .doc(doc)
           .collection('subjectTeacher')
           .add(subjectTeacher.toMap());
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //editar uma turma
+  Future<bool> updateClass(Classes classe) async {
+    try {
+      await firestoreInstance.collection('classes').doc(classe.id).update({
+        'name': classe.name,
+        'room': classe.room,
+        'level': classe.level,
+        'students': classe.students
+      });
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //cadastro da subclasse Subject teacher
+  Future<bool> deleteSubjectTeacher(
+      SubjectTeacher subjectTeacher, String doc) async {
+    try {
+      await firestoreInstance
+          .collection('classes')
+          .doc(doc)
+          .collection('subjectTeacher')
+          .doc(subjectTeacher.id)
+          .delete();
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //cadastro da subclasse Subject teacher
+  Future<bool> deleteClass(String idClass) async {
+    try {
+      await firestoreInstance.collection('classes').doc(idClass).delete();
       return true;
     } catch (e) {
       throw Exception(e);

@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../../core/components/loader/loader_default.dart';
+import '../../../core/service/snackbars.dart';
 
 import '../../../core/models/classes.dart';
 import '../../../core/models/school_model.dart';
@@ -71,6 +73,25 @@ abstract class _HomeControllerBase with Store {
       } else if (resto == 4) {
         return banners[4];
       }
+    }
+  }
+
+  deleteClass(BuildContext context, String classId) async {
+    final loader = LoaderDefault();
+    try {
+      loader.show();
+      bool deleted = await adminService.deleteClass(classId);
+      if (deleted) {
+        adminService.updateHome();
+        loader.hide();
+        buildSnackBarUi(context, "Turma excluida com sucesso!");
+      } else {
+        loader.hide();
+        buildSnackBarUi(context, "A turma não foi excluida corretamente!");
+      }
+    } catch (e) {
+      loader.hide();
+      buildSnackBarUi(context, e.toString());
     }
   }
 }

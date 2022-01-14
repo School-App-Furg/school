@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/service/snackbars.dart';
-import '../../../resources/auth_repository.dart';
 
 part 'profile_controller.g.dart';
 
@@ -10,7 +9,6 @@ class ProfileController = _ProfileControllerBase with _$ProfileController;
 
 abstract class _ProfileControllerBase with Store {
   TextEditingController nameController = TextEditingController();
-  AuthRepository _authRepository = AuthRepository();
   TextEditingController cnpjController = TextEditingController();
 
   //Carregar por rota perfil da escola

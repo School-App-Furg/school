@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
-import 'new_cycle/config/new_cycle_controller.dart';
-import 'new_cycle/config/new_cycle_page.dart';
+import 'edit_class/edit_class_controller.dart';
+import 'register_class/register_class_controller.dart';
 import 'school_report_generator/school_report_generator_page.dart';
 import 'new_cycle/new_cycle_controller.dart';
 import 'new_cycle/new_cycle_page.dart';
@@ -33,6 +33,8 @@ class AdminModule extends Module {
         Bind.lazySingleton((i) => EditTeacherController()),
         Bind.lazySingleton((i) => ConfigController()),
         Bind.lazySingleton((i) => NewCycleController()),
+        Bind.lazySingleton((i) => EditClassController()),
+        Bind.lazySingleton((i) => RegisterClassController()),
       ];
 
   @override

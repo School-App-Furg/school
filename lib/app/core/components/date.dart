@@ -21,8 +21,6 @@ class BasicDateTimeField extends StatefulWidget {
 }
 
 class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
-  final format = DateFormat("dd/MM/yyyy");
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -36,7 +34,7 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
           border: InputBorder.none,
         ),
         initialValue: widget.currentValue,
-        format: format,
+        format: DateFormat("dd/MM/yyyy"),
         onChanged: widget.onChanged,
         onShowPicker: (context, currentValue) async {
           DateTime? date = await showDatePicker(

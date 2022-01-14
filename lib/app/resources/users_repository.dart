@@ -135,7 +135,7 @@ class UsersRepository {
   }
 
   //Retorna uma lista de professores
-  Future<List<TeacherUser>?> getTeachers(String schoolId) async {
+  Future<List<TeacherUser>> getTeachers(String schoolId) async {
     List<TeacherUser>? list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance

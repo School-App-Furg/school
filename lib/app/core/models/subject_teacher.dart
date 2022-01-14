@@ -2,15 +2,15 @@ import 'dart:convert';
 
 class SubjectTeacher {
   String? id;
-  String? idSubject;
+  String idSubject;
   String subject;
-  String? idTeacher;
+  String idTeacher;
   String teacher;
   SubjectTeacher({
     this.id,
-    this.idSubject,
+    required this.idSubject,
     required this.subject,
-    this.idTeacher,
+    required this.idTeacher,
     required this.teacher,
   });
 
@@ -26,11 +26,11 @@ class SubjectTeacher {
 
   factory SubjectTeacher.fromMap(Map<String, dynamic> map) {
     return SubjectTeacher(
-      id: map['id'] != null ? map['id'] : null,
-      idSubject: map['idSubject'] != null ? map['idSubject'] : null,
-      subject: map['subject'],
-      idTeacher: map['idTeacher'] != null ? map['idTeacher'] : null,
-      teacher: map['teacher'],
+      id: map['id'],
+      idSubject: map['idSubject'] ?? '',
+      subject: map['subject'] ?? '',
+      idTeacher: map['idTeacher'] ?? '',
+      teacher: map['teacher'] ?? '',
     );
   }
 

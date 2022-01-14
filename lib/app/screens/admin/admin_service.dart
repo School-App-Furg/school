@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../core/models/subject_teacher.dart';
 import '../../core/models/cycle.dart';
 import '../../resources/cycle_repository.dart';
 import '../../core/models/management_user.dart';
-import '../../core/models/insert_subject_teacher.dart';
+
 import 'home_page/home_controller.dart';
 import '../../core/models/student_user.dart';
 import '../../core/models/subject.dart';
@@ -104,8 +105,26 @@ class AdminService {
   }
 
   //serviço de cadastro de turmas
+  Future<bool> updateClass(Classes classes) async {
+    try {
+      return await _classesRepository.updateClass(classes);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço de cadastro de turmas
+  Future<bool> deleteClass(String classId) async {
+    try {
+      return await _classesRepository.deleteClass(classId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço de cadastro de turmas
   Future<bool> insertSubjectTeacher(
-      InsertSubjectTeacher subjectTeacher, String doc) async {
+      SubjectTeacher subjectTeacher, String doc) async {
     try {
       return await _classesRepository.insertSubjectTeacher(subjectTeacher, doc);
     } catch (error) {
@@ -113,10 +132,29 @@ class AdminService {
     }
   }
 
-  //serviço para solicitar lista de disciplinas
-  Future<List<Subject>?> getSubjects(String schoolId) async {
+  //serviço de remoção de cadastro professor - disciplina
+  Future<bool> deleteSubjectTeacher(
+      SubjectTeacher subjectTeacher, String doc) async {
     try {
-      List<Subject>? list = await _subjectRepository.getSubjects(schoolId);
+      return await _classesRepository.deleteSubjectTeacher(subjectTeacher, doc);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço de listagem de disciplinas e seu professor
+  Future<List<SubjectTeacher>> getSubjectTeacher(String? classeId) async {
+    try {
+      return await _classesRepository.getSubjectTeacher(classeId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //serviço para solicitar lista de disciplinas
+  Future<List<Subject>> getSubjects(String schoolId) async {
+    try {
+      List<Subject> list = await _subjectRepository.getSubjects(schoolId);
       return list;
     } catch (error) {
       throw Exception(error);
@@ -124,9 +162,9 @@ class AdminService {
   }
 
   //serviço para solicitar lista de professores de uma escola
-  Future<List<TeacherUser>?> getTeachers(String schoolId) async {
+  Future<List<TeacherUser>> getTeachers(String schoolId) async {
     try {
-      List<TeacherUser>? list = await _userRepository.getTeachers(schoolId);
+      List<TeacherUser> list = await _userRepository.getTeachers(schoolId);
       return list;
     } catch (error) {
       throw Exception(error);

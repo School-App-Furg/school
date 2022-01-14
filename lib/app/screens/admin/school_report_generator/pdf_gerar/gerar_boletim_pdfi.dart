@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-import 'package:school/app/screens/admin/school_report_generator/model/boletim_model.dart';
+import '../model/boletim_model.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'open_pdf.dart';
 

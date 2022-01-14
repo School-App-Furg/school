@@ -46,7 +46,7 @@ abstract class _EditTeacherControllerBase with Store {
         listOfsubjects!.forEach(
           (element) {
             if (subjectId == element.id) {
-              listOfSubjectsSelected!.add(element);
+              listOfSubjectsSelected.add(element);
             }
           },
         );
@@ -55,7 +55,7 @@ abstract class _EditTeacherControllerBase with Store {
   }
 
   @observable
-  List<Subject>? listOfSubjectsSelected = [];
+  List<Subject> listOfSubjectsSelected = [];
 
   //disciplinas selecionadas
   @observable

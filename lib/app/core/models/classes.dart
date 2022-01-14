@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Classes {
+  String? id;
   String schoolId;
   String name;
   String room;
@@ -8,6 +9,7 @@ class Classes {
   String level;
   List<String>? students;
   Classes({
+    this.id,
     required this.schoolId,
     required this.name,
     required this.room,
@@ -18,6 +20,7 @@ class Classes {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'schoolId': schoolId,
       'name': name,
       'room': room,
@@ -29,13 +32,13 @@ class Classes {
 
   factory Classes.fromMap(Map<String, dynamic> map) {
     return Classes(
-      schoolId: map['schoolId'],
-      name: map['name'],
-      room: map['room'],
-      cycleId: map['cycleId'],
-      level: map['level'],
-      students:
-          map['students'] != null ? List<String>.from(map['students']) : null,
+      id: map['id'],
+      schoolId: map['schoolId'] ?? '',
+      name: map['name'] ?? '',
+      room: map['room'] ?? '',
+      cycleId: map['cycleId'] ?? '',
+      level: map['level'] ?? '',
+      students: List<String>.from(map['students']),
     );
   }
 

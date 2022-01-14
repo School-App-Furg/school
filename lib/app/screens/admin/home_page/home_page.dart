@@ -69,7 +69,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                     label: 'Editar',
                                   ),
                                   SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) =>
+                                        controller.deleteClass(
+                                            context,
+                                            controller.classes![index].id ??
+                                                ''),
                                     backgroundColor: lightred,
                                     foregroundColor: Colors.white,
                                     icon: Icons.delete,

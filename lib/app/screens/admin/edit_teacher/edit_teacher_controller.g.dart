@@ -45,13 +45,13 @@ mixin _$EditTeacherController on _EditTeacherControllerBase, Store {
       Atom(name: '_EditTeacherControllerBase.listOfSubjectsSelected');
 
   @override
-  List<Subject>? get listOfSubjectsSelected {
+  List<Subject> get listOfSubjectsSelected {
     _$listOfSubjectsSelectedAtom.reportRead();
     return super.listOfSubjectsSelected;
   }
 
   @override
-  set listOfSubjectsSelected(List<Subject>? value) {
+  set listOfSubjectsSelected(List<Subject> value) {
     _$listOfSubjectsSelectedAtom
         .reportWrite(value, super.listOfSubjectsSelected, () {
       super.listOfSubjectsSelected = value;

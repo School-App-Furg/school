@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/models/school_model.dart';
 import '../../../../core/models/student_user.dart';
-import '../../../../resources/auth_repository.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;
@@ -20,7 +19,6 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthRepository _authRepository = AuthRepository();
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0.5,

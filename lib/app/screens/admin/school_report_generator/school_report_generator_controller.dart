@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/student_user.dart';
-import 'package:school/app/screens/admin/home_page/home_controller.dart';
+import '../../../core/models/student_user.dart';
+import '../home_page/home_controller.dart';
 
 import '../admin_service.dart';
 

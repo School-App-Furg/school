@@ -5,7 +5,6 @@ import '../../../core/models/teacher_user.dart';
 
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
-import '../../../core/models/insert_subject_teacher.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject.dart';
 import '../../../core/models/subject_teacher.dart';
@@ -60,8 +59,12 @@ abstract class _RegisterClassControllerBase with Store {
   @observable
   List<TeacherUser>? teachers = [];
 
+  @observable
+  bool loadingTest = false;
+
   @action
-  Future getSubjectsAndTeachers() async {
+  getSubjectsAndTeachers() async {
+    loadingTest = true;
     subjects = await _adminService.getSubjects(schoolId);
     teachers = await _adminService.getTeachers(schoolId);
     teachers!.forEach(
@@ -73,9 +76,9 @@ abstract class _RegisterClassControllerBase with Store {
                 if (elementTeacherSubject == elementSubject.id) {
                   subjectTeacher.add(
                     SubjectTeacher(
-                        idSubject: elementSubject.id,
+                        idSubject: elementSubject.id ?? '',
                         subject: elementSubject.name,
-                        idTeacher: elementTeacher.id,
+                        idTeacher: elementTeacher.id ?? '',
                         teacher: elementTeacher.name),
                   );
                 }
@@ -85,6 +88,7 @@ abstract class _RegisterClassControllerBase with Store {
         );
       },
     );
+    loadingTest = false;
   }
 
   @observable
@@ -100,8 +104,11 @@ abstract class _RegisterClassControllerBase with Store {
     values.forEach(
       (element) {
         subjectsSelected.add(
-          InsertSubjectTeacher(
-              idTeacher: element.idTeacher, idSubject: element.idSubject),
+          SubjectTeacher(
+              idTeacher: element.idTeacher,
+              idSubject: element.idSubject,
+              subject: element.subject,
+              teacher: element.teacher),
         );
       },
     );

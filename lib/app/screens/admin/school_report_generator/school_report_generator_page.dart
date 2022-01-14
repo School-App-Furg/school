@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:school/app/core/form/multi_select.dart';
-import './school_report_generator_controller.dart';
+import '../../../core/form/multi_select.dart';
+import 'school_report_generator_controller.dart';
 
 import 'model/boletim_model.dart';
 

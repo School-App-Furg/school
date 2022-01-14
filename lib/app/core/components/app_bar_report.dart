@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/core/styles/sizes.dart';
+import '../styles/colors.dart';
 
 class AppBarReport extends StatelessWidget implements PreferredSizeWidget {
   final String text;

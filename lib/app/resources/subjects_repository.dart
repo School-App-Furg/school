@@ -8,7 +8,7 @@ class SubjectRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
-  Future<List<Subject>?> getSubjects(String id) async {
+  Future<List<Subject>> getSubjects(String id) async {
     List<Subject>? list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance

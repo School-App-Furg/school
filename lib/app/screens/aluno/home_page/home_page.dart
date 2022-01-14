@@ -33,6 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   studentUser: controller.userStudent,
                 ),
                 appBar: AppBarHome(
+                  cyclePeriod: "Ciclo: 2021/2",
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   schoolModel: controller.schoolModel,
@@ -56,7 +57,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                     'ID ${controller.subjects![index].schoolId}',
                                 third: "",
                                 index: index,
-                                onTap: () {}),
+                                onTap: () {
+                                  Modular.to.pushNamed('./student-report');
+                                }),
                           ),
                         );
                       },

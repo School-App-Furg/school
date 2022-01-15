@@ -74,7 +74,12 @@ class HomeDrawer extends StatelessWidget {
                     SizedBox(
                       width: width(context, 0.05),
                     ),
-                    Text(schoolModel!.name + " - " + studentUser!.name)
+                    Flexible(
+                      child: Text(
+                        studentUser!.name,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               ),

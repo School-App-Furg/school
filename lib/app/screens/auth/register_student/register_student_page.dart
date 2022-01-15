@@ -86,17 +86,20 @@ class _RegisterStudentPageState
                     ),
                     Observer(
                       builder: (_) {
-                        return RoundedDropdown(
-                            value: controller.school,
-                            hint: 'Selecione a escola',
-                            items: controller.listOfSchools
-                                .map<DropdownMenuItem<String>>((e) {
-                              return DropdownMenuItem<String>(
-                                value: e!.id,
-                                child: Text(e.name),
-                              );
-                            }).toList(),
-                            onChanged: controller.setSchool);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                          child: RoundedDropdown(
+                              value: controller.school,
+                              hint: 'Selecione a escola',
+                              items: controller.listOfSchools
+                                  .map<DropdownMenuItem<String>>((e) {
+                                return DropdownMenuItem<String>(
+                                  value: e!.id,
+                                  child: Text(e.name),
+                                );
+                              }).toList(),
+                              onChanged: controller.setSchool),
+                        );
                       },
                     ),
                     Padding(

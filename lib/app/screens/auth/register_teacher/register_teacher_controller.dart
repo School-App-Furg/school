@@ -68,7 +68,8 @@ abstract class _RegisterTeacherControllerBase with Store {
               name: nameController.text,
               schoolId: school,
               type: 1,
-              cpf: cpfController.text),
+              cpf: cpfController.text,
+              subjects: []),
         );
 
         if (inserted) {

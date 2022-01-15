@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: height(context, 0.03),
                         ),
                         AlreadyHaveAnAccountCheck(
-                          press: () => Modular.to.navigate("./register"),
+                          press: () => Modular.to.navigate("./"),
                         ),
                       ],
                     ),

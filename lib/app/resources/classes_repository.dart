@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 
-import '../core/models/subject_teacher.dart';
 import '../core/models/classes.dart';
+import '../core/models/subject_teacher.dart';
 
 class ClassesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;

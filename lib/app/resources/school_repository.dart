@@ -79,4 +79,17 @@ class SchoolRepository {
       },
     ).catchError((error) => throw Exception(error));
   }
+
+  //atualizar escola
+  Future<bool> updateSchool(SchoolModel _schoolModel) async {
+    try {
+      await firestoreInstance
+          .collection('schools')
+          .doc(_schoolModel.id)
+          .set(_schoolModel.toMap());
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

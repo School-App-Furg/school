@@ -227,10 +227,19 @@ class AdminService {
     }
   }
 
-  //remover professor
+  //atualizar professor
   Future<bool> updateTeacher(TeacherUser teacher) async {
     try {
       return await _userRepository.updateTeacher(teacher);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //atualizar escola
+  Future<bool> updateSchool(SchoolModel schoolModel) async {
+    try {
+      return await _schoolRepository.updateSchool(schoolModel);
     } catch (error) {
       throw Exception(error);
     }
@@ -267,6 +276,15 @@ class AdminService {
   Future<bool> updateCycleSchool(String cycleId, String schoolId) async {
     try {
       return await _schoolRepository.updateCycleSchool(cycleId, schoolId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  Future<bool> requestNewPassword(String mail) async {
+    try {
+      await _authRepository.requestNewPassword(mail);
+      return true;
     } catch (error) {
       throw Exception(error);
     }

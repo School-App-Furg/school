@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/screens/admin/config/components/label_text.dart';
 
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';
-import '../../../core/components/profiles/top_text.dart';
 import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/models/school_model.dart';
@@ -51,13 +51,23 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            RightTextProfile(
-              name: _controller.nameController.text,
-            ),
             Padding(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  LabelText(
+                    text: 'Nome da escola:',
+                  ),
+                  RoundedInput(
+                    controller: _controller.nameController,
+                    hintText: "Nome da escola",
+                    icon: Icons.school,
+                    validator: validateEmpty,
+                  ),
+                  LabelText(
+                    text: 'CNPJ da escola:',
+                  ),
                   RoundedInput(
                     controller: _controller.cnpjController,
                     hintText: "CNPJ",
@@ -66,11 +76,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     validator: validateCnpj,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   RoundedButton(
-                    text: "Redefinir Senha",
-                    onpressed: () => _controller.recuperarSenha(context),
+                    text: "Atualizar",
+                    onpressed: () => _controller.update(context),
                     textColor: white,
                   ),
                 ],
@@ -80,16 +90,21 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 10,
             ),
             Divider(
-              thickness: 4,
-              endIndent: 100,
-              indent: 100,
+              thickness: 2,
+              endIndent: 20,
+              indent: 20,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RoundedButton(
+              text: "Redefinir Senha",
+              onpressed: () => _controller.redefinirSenha(context),
+              textColor: white,
             ),
           ],
         ),
       ),
-      /*Container(
-        child: Text(name),
-      ),*/
     );
   }
 }

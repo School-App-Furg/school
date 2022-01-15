@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../core/models/student_user.dart';
-import '../home_page/home_controller.dart';
 
+import '../../../core/models/student_user.dart';
 import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'school_report_generator_controller.g.dart';
 

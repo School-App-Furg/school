@@ -56,9 +56,18 @@ class AuthService {
   }
 
   //Cadastro de ciclo da escola
-  Future<bool> insertCycleSchool(String cicleId, Cycle cycle) async {
+  Future<String> insertCycleSchool(String cicleId, Cycle cycle) async {
     try {
-      await _cycleRepository.insertCycle(cycle);
+      return await _cycleRepository.insertCycle(cycle);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //Cadastro do primeiro ciclo da escola
+  Future<bool> insertFirstCycleSchool(String cicleId, Cycle cycle) async {
+    try {
+      await _cycleRepository.insertFirstCycle(cicleId, cycle);
       return true;
     } catch (error) {
       throw Exception(error);

@@ -53,7 +53,7 @@ abstract class _RegisterControllerBase with Store {
         );
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
-        bool insertedCycle = await _authService.insertCycleSchool(
+        bool insertedCycle = await _authService.insertFirstCycleSchool(
           user.uid,
           Cycle(
             name: DateTime.now().year.toString(),

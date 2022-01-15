@@ -18,6 +18,19 @@ class CycleRepository {
     }
   }
 
+  //cadastro de turmas
+  Future<bool> insertFirstCycle(String idCycle, Cycle cycle) async {
+    try {
+      await firestoreInstance
+          .collection('cycles')
+          .doc(idCycle)
+          .set(cycle.toMap());
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   //Cadastra um ciclo de uma escola
   Future<Cycle?> getCurrentCycle(String uid) async {
     Cycle? model;

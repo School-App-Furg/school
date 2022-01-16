@@ -46,60 +46,69 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 ),
                 body: Observer(
                   builder: (_) {
-                    return ListView.builder(
-                      padding: EdgeInsets.all(10.0),
-                      itemCount: controller.classes!.length,
-                      itemBuilder: (context, int index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Slidable(
-                              endActionPane: ActionPane(
-                                motion: ScrollMotion(),
-                                children: [
-                                  SlidableAction(
-                                    onPressed: (context) => Modular.to
-                                        .pushNamed("./edit-class", arguments: {
-                                      'class_year': controller.classes![index],
-                                    }),
-                                    backgroundColor: grey,
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.edit,
-                                    label: 'Editar',
+                    return controller.classes!.length == 0
+                        ? Center(
+                            child: Text('Nenhuma turma foi cadastrada!'),
+                          )
+                        : ListView.builder(
+                            padding: EdgeInsets.all(10.0),
+                            itemCount: controller.classes!.length,
+                            itemBuilder: (context, int index) {
+                              return Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Slidable(
+                                    endActionPane: ActionPane(
+                                      motion: ScrollMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          onPressed: (context) => Modular.to
+                                              .pushNamed("./edit-class",
+                                                  arguments: {
+                                                'class_year':
+                                                    controller.classes![index],
+                                              }),
+                                          backgroundColor: grey,
+                                          foregroundColor: Colors.white,
+                                          icon: Icons.edit,
+                                          label: 'Editar',
+                                        ),
+                                        SlidableAction(
+                                          onPressed: (context) =>
+                                              controller.deleteClass(
+                                                  context,
+                                                  controller
+                                                          .classes![index].id ??
+                                                      ''),
+                                          backgroundColor: lightred,
+                                          foregroundColor: Colors.white,
+                                          icon: Icons.delete,
+                                          label: 'Excluir',
+                                        ),
+                                      ],
+                                    ),
+                                    child: ClassesCard(
+                                      assetimage:
+                                          controller.definiBanner(index),
+                                      first:
+                                          '${controller.classes![index].level}º ano',
+                                      second:
+                                          'Sala ${controller.classes![index].room}',
+                                      third: controller.classes![index].name,
+                                      index: index,
+                                      onTap: () => Modular.to.pushNamed(
+                                          "./students-list-class",
+                                          arguments: {
+                                            'classe': controller.classes![index]
+                                          }),
+                                    ),
                                   ),
-                                  SlidableAction(
-                                    onPressed: (context) =>
-                                        controller.deleteClass(
-                                            context,
-                                            controller.classes![index].id ??
-                                                ''),
-                                    backgroundColor: lightred,
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.delete,
-                                    label: 'Excluir',
-                                  ),
-                                ],
-                              ),
-                              child: ClassesCard(
-                                assetimage: controller.definiBanner(index),
-                                first:
-                                    '${controller.classes![index].level}º ano',
-                                second:
-                                    'Sala ${controller.classes![index].room}',
-                                third: controller.classes![index].name,
-                                index: index,
-                                onTap: () => Modular.to.pushNamed(
-                                    "./students-list-class",
-                                    arguments: {
-                                      'classe': controller.classes![index]
-                                    }),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
+                                ),
+                              );
+                            },
+                          );
                   },
                 ),
               );

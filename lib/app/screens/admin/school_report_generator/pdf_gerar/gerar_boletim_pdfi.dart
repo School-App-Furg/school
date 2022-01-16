@@ -1,8 +1,10 @@
 import 'dart:io';
+
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
+
 import '../model/boletim_model.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'open_pdf.dart';
 
 class ReportGenerator {

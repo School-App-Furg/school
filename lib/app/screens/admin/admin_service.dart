@@ -73,9 +73,9 @@ class AdminService {
     }
   }
 
-  Future<bool> updateSubject(String id, List<String>? teachers) async {
+  Future<bool> updateSubject(Subject subject) async {
     try {
-      return await _subjectRepository.updateSubject(id, teachers!);
+      return await _subjectRepository.updateSubject(subject);
     } catch (error) {
       throw Exception(error);
     }

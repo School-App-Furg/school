@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
 import '../drawer/drawer.dart';

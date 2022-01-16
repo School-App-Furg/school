@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../core/components/loader/loader_page.dart';
 import 'components/add_subject_dialog.dart';
-import 'components/delete_dialog.dart';
-
 import 'subject_list_controller.dart';
 
 class SubjectsListPage extends StatefulWidget {
@@ -55,9 +53,13 @@ class _SubjectsListPageState
                                 child: ListTile(
                                   title: Text(data.name),
                                   trailing: IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () => showDeleteDialog(
-                                        context, controller, data.id),
+                                    icon: Icon(Icons.settings),
+                                    onPressed: () => Modular.to.pushNamed(
+                                      './edit-subject',
+                                      arguments: {
+                                        'subject': data,
+                                      },
+                                    ),
                                   ),
                                 ),
                               );

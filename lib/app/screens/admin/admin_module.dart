@@ -1,6 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'config/config_controller.dart';
 import 'edit_class/edit_class_controller.dart';
+import 'edit_subject/edit_subject_controller.dart';
+import 'edit_subject/edit_subject_page.dart';
 import 'register_class/register_class_controller.dart';
 import 'school_report_generator/school_report_generator_page.dart';
 import 'new_cycle/new_cycle_controller.dart';
@@ -35,6 +37,7 @@ class AdminModule extends Module {
         Bind.lazySingleton((i) => NewCycleController()),
         Bind.lazySingleton((i) => EditClassController()),
         Bind.lazySingleton((i) => RegisterClassController()),
+        Bind.lazySingleton((i) => EditSubjectController()),
       ];
 
   @override
@@ -65,6 +68,8 @@ class AdminModule extends Module {
             child: (_, args) =>
                 EditTeacherPage(teacherUser: args.data['teacher'])),
         ChildRoute('/subjects-list', child: (_, args) => SubjectsListPage()),
+        ChildRoute('/edit-subject',
+            child: (_, args) => EditSubjectPage(subject: args.data['subject'])),
         ChildRoute('/historic', child: (_, args) => HistoricPage()),
         ChildRoute('/register-class', child: (_, args) => RegisterClassPage()),
       ];

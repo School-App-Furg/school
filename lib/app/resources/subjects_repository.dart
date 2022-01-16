@@ -46,10 +46,13 @@ class SubjectRepository {
     ).catchError((error) => throw Exception(error));
   }
 
-  //cadastro de disciplinas
-  Future<bool> updateSubject(String id, List<String> teachers) async {
-    return await firestoreInstance.collection('subjects').doc(id).update({
-      'teachers': teachers,
+  //atualização de dados de uma disciplina
+  Future<bool> updateSubject(Subject subject) async {
+    return await firestoreInstance
+        .collection('subjects')
+        .doc(subject.id)
+        .update({
+      'name': subject.name,
     }).then(
       (value) {
         return true;

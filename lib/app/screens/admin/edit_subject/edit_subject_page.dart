@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
+
+import '../../../core/models/subject.dart';
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/styles/sizes.dart';
 import '../../../core/form/general_form.dart';
-import '../../../core/form/multi_select.dart';
 
-import '../../../core/models/teacher_user.dart';
 import '../../../core/service/validators.dart';
 
-import 'edit_teacher_controller.dart';
+import 'edit_subject_controller.dart';
 
-class EditTeacherPage extends StatefulWidget {
-  final TeacherUser teacherUser;
-  const EditTeacherPage({
+class EditSubjectPage extends StatefulWidget {
+  final Subject subject;
+  const EditSubjectPage({
     Key? key,
-    required this.teacherUser,
+    required this.subject,
   }) : super(key: key);
   @override
-  State<EditTeacherPage> createState() => _EditTeacherPageState();
+  State<EditSubjectPage> createState() => _EditSubjectPageState();
 }
 
-class _EditTeacherPageState
-    extends ModularState<EditTeacherPage, EditTeacherController> {
+class _EditSubjectPageState
+    extends ModularState<EditSubjectPage, EditSubjectController> {
   @override
   void initState() {
     super.initState();
-    controller.initEditPage(widget.teacherUser);
+    controller.initEditPage(widget.subject);
   }
 
   @override
@@ -38,7 +37,7 @@ class _EditTeacherPageState
             ? LoaderPage()
             : Scaffold(
                 appBar: AppBar(
-                  title: Text('Editar professor'),
+                  title: Text('Editar disciplina'),
                   centerTitle: true,
                 ),
                 body: Form(
@@ -47,22 +46,9 @@ class _EditTeacherPageState
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       MyTextFormField(
-                        hintText: 'Nome completo',
+                        hintText: 'Disciplina',
                         controller: controller.nameController,
                         validator: validateEmpty,
-                      ),
-                      Observer(
-                        builder: (_) {
-                          return MultiSelect(
-                            buttonText: "Selecione as disciplinas:",
-                            title: "Selecione as disciplinas:",
-                            items: controller.listOfsubjects!
-                                .map((e) => MultiSelectItem(e, e.name))
-                                .toList(),
-                            onConfirm: controller.setSubjectsSelected,
-                            initialValue: controller.listOfSubjectsSelected,
-                          );
-                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

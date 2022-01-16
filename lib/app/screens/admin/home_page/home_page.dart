@@ -48,7 +48,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   builder: (_) {
                     return controller.classes!.length == 0
                         ? Center(
-                            child: Text('Nenhuma turma foi cadastrada!'),
+                            child: Text(
+                                'Sua escola ainda não possui turmas cadastradas neste ciclo!'),
                           )
                         : ListView.builder(
                             padding: EdgeInsets.all(10.0),

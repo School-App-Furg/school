@@ -31,12 +31,17 @@ abstract class _EditTeacherControllerBase with Store {
   @observable
   List<Subject>? listOfsubjects = [];
 
+  @observable
+  bool loading = false;
+
   @action
   initEditPage(TeacherUser teacherUser) async {
+    loading = true;
     _teacherUser = teacherUser;
     nameController.text = teacherUser.name;
     listOfsubjects = await _adminService.getSubjects(schoolId);
-    getSubjectsPreviusSelected(teacherUser);
+    await getSubjectsPreviusSelected(teacherUser);
+    loading = false;
   }
 
   @action

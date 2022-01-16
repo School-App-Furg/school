@@ -41,6 +41,21 @@ mixin _$EditTeacherController on _EditTeacherControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_EditTeacherControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$listOfSubjectsSelectedAtom =
       Atom(name: '_EditTeacherControllerBase.listOfSubjectsSelected');
 
@@ -119,6 +134,7 @@ mixin _$EditTeacherController on _EditTeacherControllerBase, Store {
   String toString() {
     return '''
 listOfsubjects: ${listOfsubjects},
+loading: ${loading},
 listOfSubjectsSelected: ${listOfSubjectsSelected},
 subjectsSelected: ${subjectsSelected}
     ''';

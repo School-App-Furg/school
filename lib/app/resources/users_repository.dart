@@ -183,6 +183,24 @@ class UsersRepository {
     );
   }
 
+  //editar aluno
+  Future<bool> updateStudent(StudentUser studentUser) async {
+    return await firestoreInstance
+        .collection('users')
+        .doc(studentUser.id)
+        .update(
+      {
+        'name': studentUser.name,
+      },
+    ).then(
+      (value) {
+        return true;
+      },
+    ).catchError(
+      (error) => throw Exception(error),
+    );
+  }
+
   //Cadastro de um aluno/responsavel
   Future<bool> insertStudent(String userId, StudentUser studentUser) async {
     return await firestoreInstance.collection('users').doc(userId).set({

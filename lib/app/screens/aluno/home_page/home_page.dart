@@ -30,7 +30,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 key: controller.scaffoldKey,
                 drawerScrimColor: Colors.transparent,
                 drawer: HomeDrawer(
-                  schoolModel: controller.schoolModel,
                   studentUser: controller.userStudent,
                 ),
                 appBar: AppBarHome(

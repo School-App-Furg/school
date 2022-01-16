@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/resources/users_repository.dart';
 
 import '../../../core/models/school_model.dart';
 import '../../../core/models/student_user.dart';
@@ -10,11 +11,9 @@ import '../../../core/styles/sizes.dart';
 import '../../../resources/auth_repository.dart';
 
 class HomeDrawer extends StatelessWidget {
-  final SchoolModel? schoolModel;
   final StudentUser? studentUser;
   const HomeDrawer({
     Key? key,
-    required this.schoolModel,
     required this.studentUser,
   }) : super(key: key);
 
@@ -101,8 +100,10 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
-                      onTap: () => Modular.to.pushNamed('./profile',
-                          arguments: {'studentModel': studentUser}),
+                      onTap: () =>
+                          Modular.to.pushNamed('./profile', arguments: {
+                        'studentModel': studentUser,
+                      }),
                     ),
                     ListTile(
                       leading: Icon(

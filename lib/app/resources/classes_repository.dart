@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mobx/mobx.dart';
 
 import '../core/models/classes.dart';
 import '../core/models/subject_teacher.dart';
@@ -10,9 +9,8 @@ class ClassesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   //Retorna a lista de turmas cadastrada em uma determinada escola
-  Future<ObservableList<Classes>?> getClassesBySchoolId(
-      String id, String cycle) async {
-    ObservableList<Classes>? list = ObservableList<Classes>();
+  Future<List<Classes>> getClassesBySchoolId(String id, String cycle) async {
+    List<Classes> list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('classes')
@@ -20,7 +18,7 @@ class ClassesRepository {
           .where('cycleId', isEqualTo: cycle)
           .get();
       snapshot.docs.forEach(
-        (element) async {
+        (element) {
           Classes turma = Classes.fromJson(
             json.encode(
               element.data(),
@@ -28,13 +26,14 @@ class ClassesRepository {
           );
           list.add(
             Classes(
-                id: element.id,
-                schoolId: turma.cycleId,
-                name: turma.name,
-                room: turma.room,
-                cycleId: turma.cycleId,
-                level: turma.level,
-                students: turma.students),
+              id: element.id,
+              schoolId: turma.cycleId,
+              name: turma.name,
+              room: turma.room,
+              cycleId: turma.cycleId,
+              level: turma.level,
+              students: turma.students,
+            ),
           );
         },
       );

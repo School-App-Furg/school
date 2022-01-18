@@ -42,13 +42,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$classesAtom = Atom(name: '_HomeControllerBase.classes');
 
   @override
-  ObservableList<Classes>? get classes {
+  List<Classes>? get classes {
     _$classesAtom.reportRead();
     return super.classes;
   }
 
   @override
-  set classes(ObservableList<Classes>? value) {
+  set classes(List<Classes>? value) {
     _$classesAtom.reportWrite(value, super.classes, () {
       super.classes = value;
     });
@@ -59,6 +59,15 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   Future<dynamic> initHome() {
     return _$initHomeAsyncAction.run(() => super.initHome());
+  }
+
+  final _$setSubjectTeacherAsyncAction =
+      AsyncAction('_HomeControllerBase.setSubjectTeacher');
+
+  @override
+  Future setSubjectTeacher(List<Classes> classes) {
+    return _$setSubjectTeacherAsyncAction
+        .run(() => super.setSubjectTeacher(classes));
   }
 
   @override

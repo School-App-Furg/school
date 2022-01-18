@@ -46,7 +46,7 @@ abstract class _HomeControllerBase with Store {
 
   //lista de turmas
   @observable
-  ObservableList<Classes>? classes = ObservableList<Classes>();
+  List<Classes> classes = [];
 
   //lista de imagens banner
   List banners = [

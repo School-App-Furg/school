@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:school/app/core/components/slider_confirmation_dialog.dart';
-
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/styles/colors.dart';
@@ -79,12 +77,44 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                         ),
                                         SlidableAction(
                                           onPressed: (context) =>
-                                              showAlert(context, () {
-                                            controller.deleteClass(
-                                                context,
-                                                controller.classes![index].id ??
-                                                    '');
-                                          }),
+                                              showDialog<void>(
+                                            context: context,
+                                            barrierDismissible:
+                                                false, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                actionsAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                title: const Text('ATENÇÃO:'),
+                                                content: SingleChildScrollView(
+                                                  child: Text(
+                                                      'Tem certeza que deseja excluir? Esta ação não poderá ser revertida!'),
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    child: const Text('Sim'),
+                                                    onPressed: () {
+                                                      controller.deleteClass(
+                                                          context,
+                                                          controller
+                                                                  .classes![
+                                                                      index]
+                                                                  .id ??
+                                                              '');
+                                                    },
+                                                  ),
+                                                  TextButton(
+                                                    child: const Text('Não'),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
                                           backgroundColor: lightred,
                                           foregroundColor: Colors.white,
                                           icon: Icons.delete,
@@ -102,11 +132,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                       third: controller.classes![index].name,
                                       index: index,
                                       onTap: () => Modular.to.pushNamed(
-                                        "./students-list-class",
-                                        arguments: {
-                                          'classe': controller.classes![index]
-                                        },
-                                      ),
+                                          "./students-list-class",
+                                          arguments: {
+                                            'classe': controller.classes![index]
+                                          }),
                                     ),
                                   ),
                                 ),

@@ -81,6 +81,7 @@ abstract class _HomeControllerBase with Store {
     try {
       loader.show();
       bool deleted = await adminService.deleteClass(classId);
+      Navigator.of(context).pop();
       if (deleted) {
         adminService.updateHome();
         loader.hide();

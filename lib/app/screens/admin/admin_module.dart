@@ -9,6 +9,8 @@ import 'new_cycle/new_cycle_controller.dart';
 import 'new_cycle/new_cycle_page.dart';
 import 'student_list/student_list_controller.dart';
 import 'student_list/student_list_page.dart';
+import 'students_list_for_class/students_list_for_class_controller.dart';
+import 'students_list_for_class/students_list_for_class_page.dart';
 import 'subject_list/subject_list_controller.dart';
 import 'teacher_list/teacher_list_controller.dart';
 import 'teacher_list/teacher_list_page.dart';
@@ -22,7 +24,7 @@ import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
 import 'register_class/register_class_page.dart';
 import 'school_report/school_report_page.dart';
-import 'students_list_page/students_list_page.dart';
+
 import 'subject_list/subject_list_page.dart';
 
 class AdminModule extends Module {
@@ -38,6 +40,7 @@ class AdminModule extends Module {
         Bind.lazySingleton((i) => EditClassController()),
         Bind.lazySingleton((i) => RegisterClassController()),
         Bind.lazySingleton((i) => EditSubjectController()),
+        Bind.lazySingleton((i) => StudentsListForClassController()),
       ];
 
   @override

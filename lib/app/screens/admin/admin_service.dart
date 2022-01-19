@@ -286,6 +286,15 @@ class AdminService {
     }
   }
 
+  //atualização de ciclo da escola
+  Future<List<StudentUser>> getStudentsForClass(List<String> list) async {
+    try {
+      return await _userRepository.getStudentsForClass(list);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   updateHome() {
     Modular.get<HomeController>().initHome();
   }

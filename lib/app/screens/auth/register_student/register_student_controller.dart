@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:mobx/mobx.dart';
-import '../../../core/models/school_model.dart';
-
-import '../auth_service.dart';
 
 import '../../../core/components/loader/loader_default.dart';
+import '../../../core/models/school_model.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';
+import '../auth_service.dart';
 
 part 'register_student_controller.g.dart';
 

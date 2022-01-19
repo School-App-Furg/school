@@ -6,7 +6,6 @@ import '../../../core/components/rounded_button.dart';
 import '../../../core/components/rounded_input.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-
 import 'forgot_controller.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

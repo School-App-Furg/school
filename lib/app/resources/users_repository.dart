@@ -56,21 +56,27 @@ class UsersRepository {
     ).catchError((error) => throw Exception(error));
   }
 
-  //Retorna as informações de um gestor
-  Future<ManagementUser?> getUserManagementById(String userId) async {
-    ManagementUser? model;
+  //Retorna os estudantes de uma turma
+  Future<List<StudentUser>> getStudentsForClass(List list) async {
     try {
-      await firestoreInstance.collection('users').doc(userId).get().then(
-        (DocumentSnapshot snapshot) {
-          model = ManagementUser.fromJson(
-            json.encode(snapshot.data()),
+      List<StudentUser> data = [];
+      list.forEach(
+        (element) async {
+          await firestoreInstance.collection('users').doc(element).get().then(
+            (DocumentSnapshot snapshot) {
+              data.add(
+                StudentUser.fromJson(
+                  json.encode(snapshot.data()),
+                ),
+              );
+            },
           );
         },
       );
+      return data;
     } catch (error) {
       throw Exception(error);
     }
-    return model;
   }
 
   //Cadastro de um professor
@@ -114,25 +120,21 @@ class UsersRepository {
 
   //Retorna as informações de um professor
   Future<StudentUser?> getUserStudentById(String userId) async {
-    StudentUser? model;
     try {
-      await firestoreInstance.collection('users').doc(userId).get().then(
-        (DocumentSnapshot snapshot) {
-          var teste = StudentUser.fromJson(
-            json.encode(snapshot.data()),
-          );
-          model = StudentUser(
-              id: snapshot.id,
-              schoolId: teste.schoolId,
-              name: teste.name,
-              type: teste.type,
-              cpf: teste.cpf);
-        },
+      DocumentSnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance.collection('users').doc(userId).get();
+      var data = StudentUser.fromJson(
+        json.encode(snapshot.data()),
       );
+      return StudentUser(
+          id: snapshot.id,
+          schoolId: data.schoolId,
+          name: data.name,
+          type: data.type,
+          cpf: data.cpf);
     } catch (error) {
       throw Exception(error);
     }
-    return model;
   }
 
   //Retorna uma lista de professores

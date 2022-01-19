@@ -232,6 +232,15 @@ class AdminService {
     }
   }
 
+  //atualizar professor
+  Future<bool> updateStudent(StudentUser student) async {
+    try {
+      return await _userRepository.updateStudent(student);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //atualizar escola
   Future<bool> updateSchool(SchoolModel schoolModel) async {
     try {

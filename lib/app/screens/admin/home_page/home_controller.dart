@@ -94,7 +94,8 @@ abstract class _HomeControllerBase with Store {
       classes.subjectTeachers!.forEach((element) async {
         await adminService.deleteSubjectTeacher(element, classes.id!);
       });
-      bool deleted = await adminService.deleteClass(classes.id!);
+      bool deleted = await adminService.deleteClass(classes.id!);     
+      Navigator.of(context).pop();
       if (deleted) {
         adminService.updateHome();
         loader.hide();

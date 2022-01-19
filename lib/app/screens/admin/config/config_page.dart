@@ -12,6 +12,9 @@ import '../../../core/form/general_form.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/sizes.dart';
 
+
+import '../../../core/components/label_text.dart';
+
 import 'config_controller.dart';
 
 class ConfigPage extends StatefulWidget {

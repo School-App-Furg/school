@@ -1,9 +1,8 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:school/app/screens/admin/home_page/components/alert_dialog_confirmation.dart';
+import 'components/alert_dialog_confirmation.dart';
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/styles/colors.dart';

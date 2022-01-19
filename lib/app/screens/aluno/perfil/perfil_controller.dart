@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/resources/auth_repository.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
+import '../../../resources/auth_repository.dart';
+import '../../admin/admin_service.dart';
 
 import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../core/components/cycle_period.dart';
 import '../../../../core/models/school_model.dart';
 import '../../../../core/models/student_user.dart';

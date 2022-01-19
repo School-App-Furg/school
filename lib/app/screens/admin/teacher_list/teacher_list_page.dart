@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../core/components/loader/loader_page.dart';
 
+import '../../../core/components/loader/loader_page.dart';
 import 'teacher_list_controller.dart';
 
 class TeacherListPage extends StatefulWidget {

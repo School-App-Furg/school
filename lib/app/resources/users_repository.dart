@@ -79,7 +79,8 @@ class UsersRepository {
       'schoolId': teacherUser.schoolId,
       'name': teacherUser.name,
       'type': teacherUser.type,
-      'subjects': teacherUser.subjects
+      'subjects': teacherUser.subjects,
+      'cpf': teacherUser.cpf
     }).then(
       (value) {
         return true;
@@ -206,7 +207,8 @@ class UsersRepository {
     return await firestoreInstance.collection('users').doc(userId).set({
       'schoolId': studentUser.schoolId,
       'name': studentUser.name,
-      'type': studentUser.type
+      'type': studentUser.type,
+      'cpf': studentUser.cpf
     }).then(
       (value) {
         return true;

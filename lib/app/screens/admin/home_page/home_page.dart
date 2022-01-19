@@ -112,10 +112,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                       third: controller.classes![index].name,
                                       index: index,
                                       onTap: () => Modular.to.pushNamed(
-                                          "./students-list-class",
-                                          arguments: {
-                                            'classe': controller.classes![index]
-                                          }),
+                                        "./students-list-class",
+                                        arguments: {
+                                          'classe': controller.classes![index]
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),

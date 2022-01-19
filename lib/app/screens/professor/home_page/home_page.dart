@@ -42,7 +42,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.classes!.length == 0
+                    return controller.classes.length == 0
                         ? Center(
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -54,7 +54,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                           )
                         : ListView.builder(
                             padding: EdgeInsets.all(10.0),
-                            itemCount: controller.classes!.length,
+                            itemCount: controller.classes.length,
                             itemBuilder: (context, int index) {
                               return Container(
                                 margin:
@@ -64,10 +64,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                   child: ClassesCard(
                                     assetimage: controller.definiBanner(index),
                                     first:
-                                        '${controller.classes![index].level}º ano',
+                                        '${controller.classes[index].level}º ano',
                                     second:
-                                        'Sala ${controller.classes![index].room}',
-                                    third: controller.classes![index].name,
+                                        'Sala ${controller.classes[index].room}',
+                                    third: controller.classes[index].name,
                                     index: index,
                                     onTap: () {
                                       Modular.to.pushNamed('./school-report');

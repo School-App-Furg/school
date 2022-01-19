@@ -8,7 +8,7 @@ import '../../../core/form/multi_select.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/service/validators.dart';
-import 'components/label_text.dart';
+import '../../../core/components/label_text.dart';
 import 'edit_class_controller.dart';
 
 class EditClassPage extends StatefulWidget {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+
 import '../../../core/form/multi_select.dart';
-import 'school_report_generator_controller.dart';
-
 import 'model/boletim_model.dart';
-
 import 'pdf_gerar/gerar_boletim_pdfi.dart';
 import 'pdf_gerar/open_pdf.dart';
+import 'school_report_generator_controller.dart';
 import 'widget/button_widget.dart';
 
 class SchoolReportGeneratorPage extends StatefulWidget {

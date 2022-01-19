@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/cycle.dart';
@@ -82,12 +81,9 @@ class AdminService {
   }
 
   //serviço para solicitar lista de turmas
-  Future<ObservableList<Classes>?> getClasses(
-      String schoolId, String cycle) async {
+  Future<List<Classes>> getClasses(String schoolId, String cycle) async {
     try {
-      ObservableList<Classes>? list =
-          await _classesRepository.getClassesBySchoolId(schoolId, cycle);
-      return list;
+      return await _classesRepository.getClassesBySchoolId(schoolId, cycle);
     } catch (error) {
       throw Exception(error);
     }
@@ -294,6 +290,15 @@ class AdminService {
     try {
       await _authRepository.requestNewPassword(mail);
       return true;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //atualização de ciclo da escola
+  Future<List<StudentUser>> getStudentsForClass(List<String> list) async {
+    try {
+      return await _userRepository.getStudentsForClass(list);
     } catch (error) {
       throw Exception(error);
     }

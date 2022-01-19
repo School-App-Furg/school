@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+
 import '../../../core/components/loader/loader_page.dart';
-import '../../../core/styles/sizes.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/form/multi_select.dart';
-
 import '../../../core/models/teacher_user.dart';
 import '../../../core/service/validators.dart';
-
+import '../../../core/styles/sizes.dart';
 import 'edit_teacher_controller.dart';
 
 class EditTeacherPage extends StatefulWidget {

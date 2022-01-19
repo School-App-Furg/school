@@ -40,12 +40,23 @@ abstract class _HomeControllerBase with Store {
     schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolId);
     classes = await adminService.getClasses(
         userAdmin!.schoolId, schoolModel!.currentCycle);
+    await setSubjectTeacher(classes!);
     loading = false;
+  }
+
+  @action
+  setSubjectTeacher(List<Classes> classes) async {
+    classes.forEach(
+      (element) async {
+        element.subjectTeachers =
+            await adminService.getSubjectTeacher(element.id);
+      },
+    );
   }
 
   //lista de turmas
   @observable
-  ObservableList<Classes>? classes = ObservableList<Classes>();
+  List<Classes>? classes = [];
 
   //lista de imagens banner
   List banners = [
@@ -76,11 +87,14 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
-  deleteClass(BuildContext context, String classId) async {
+  deleteClass(BuildContext context, Classes classes) async {
     final loader = LoaderDefault();
     try {
       loader.show();
-      bool deleted = await adminService.deleteClass(classId);
+      classes.subjectTeachers!.forEach((element) async {
+        await adminService.deleteSubjectTeacher(element, classes.id!);
+      });
+      bool deleted = await adminService.deleteClass(classes.id!);
       if (deleted) {
         adminService.updateHome();
         loader.hide();

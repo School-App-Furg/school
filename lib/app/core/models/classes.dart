@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'subject_teacher.dart';
+
 class Classes {
   String? id;
   String schoolId;
@@ -8,6 +10,7 @@ class Classes {
   String cycleId;
   String level;
   List<String>? students;
+  List<SubjectTeacher>? subjectTeachers;
   Classes({
     this.id,
     required this.schoolId,
@@ -16,6 +19,7 @@ class Classes {
     required this.cycleId,
     required this.level,
     this.students,
+    this.subjectTeachers,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +31,7 @@ class Classes {
       'cycleId': cycleId,
       'level': level,
       'students': students,
+      'subjectTeachers': subjectTeachers?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -39,6 +44,10 @@ class Classes {
       cycleId: map['cycleId'] ?? '',
       level: map['level'] ?? '',
       students: List<String>.from(map['students']),
+      subjectTeachers: map['subjectTeachers'] != null
+          ? List<SubjectTeacher>.from(
+              map['subjectTeachers']?.map((x) => SubjectTeacher.fromMap(x)))
+          : null,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
 import '../../../core/components/cycle_period.dart';
 
 class HistoricPage extends StatelessWidget {

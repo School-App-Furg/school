@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/models/student_user.dart';
+import '../../../core/models/subject.dart';
 import '../../../core/models/subject_teacher.dart';
 import '../../../core/models/teacher_user.dart';
 import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
 import '../home_page/home_controller.dart';
-
-import '../../../core/models/subject.dart';
 
 part 'edit_class_controller.g.dart';
 

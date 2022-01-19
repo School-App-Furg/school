@@ -88,9 +88,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                 onPressed: () {
                                                   controller.deleteClass(
                                                       context,
-                                                      controller.classes![index]
-                                                              .id ??
-                                                          '');
+                                                      controller
+                                                          .classes![index]);
                                                 },
                                               );
                                             },

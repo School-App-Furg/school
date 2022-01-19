@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/components/label_text.dart';
 
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';
@@ -41,30 +42,40 @@ class _PerfilPageState extends State<PerfilPage> {
               children: [
                 BackgroundImage(),
                 PerfilImage(
-                  image: AssetImage("assets/images/teacher.png"),
+                  image: AssetImage("assets/images/student.jpg"),
                 ),
               ],
             ),
-            RightTextProfile(
-              name: _controller.nameController.text,
-            ),
             Padding(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  LabelText(
+                    text: 'Nome do aluno:',
+                  ),
+                  RoundedInput(
+                    controller: _controller.nameController,
+                    hintText: "Nome do aluno",
+                    icon: Icons.school,
+                    validator: validateEmpty,
+                  ),
+                  LabelText(
+                    text: 'CPF do aluno:',
+                  ),
                   RoundedInput(
                     controller: _controller.cpfController,
                     hintText: "CPF",
-                    icon: Icons.corporate_fare_rounded,
+                    icon: Icons.description_rounded,
                     keyboardType: TextInputType.number,
-                    validator: validateCnpj,
+                    validator: validateCpf,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   RoundedButton(
-                    text: "Redefinir Senha",
-                    onpressed: () => _controller.recuperarSenha(context),
+                    text: "Atualizar",
+                    onpressed: () => _controller.update(context),
                     textColor: white,
                   ),
                 ],
@@ -74,9 +85,17 @@ class _PerfilPageState extends State<PerfilPage> {
               height: 10,
             ),
             Divider(
-              thickness: 4,
-              endIndent: 100,
-              indent: 100,
+              thickness: 2,
+              endIndent: 20,
+              indent: 20,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RoundedButton(
+              text: "Redefinir Senha",
+              onpressed: () => _controller.recuperarSenha(context),
+              textColor: white,
             ),
           ],
         ),

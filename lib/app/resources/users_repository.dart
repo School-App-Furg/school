@@ -60,16 +60,18 @@ class UsersRepository {
   Future<List<StudentUser>> getStudentsForClass(List list) async {
     try {
       List<StudentUser> data = [];
-      list.forEach(
-        (element) async {
-          await firestoreInstance.collection('users').doc(element).get().then(
-            (DocumentSnapshot snapshot) {
-              data.add(
-                StudentUser.fromJson(
-                  json.encode(snapshot.data()),
-                ),
-              );
-            },
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('users')
+          .where(FieldPath.documentId, whereIn: list)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          data.add(
+            StudentUser.fromJson(
+              json.encode(
+                element.data(),
+              ),
+            ),
           );
         },
       );

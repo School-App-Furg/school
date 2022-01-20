@@ -20,7 +20,19 @@ class SubjectCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
-        title: Text(subjectTeacher.subject),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Disciplina: ' + subjectTeacher.subject,
+              style: TextStyle(fontSize: 15),
+            ),
+            Text(
+              'Professor(a): ' + subjectTeacher.teacher,
+              style: TextStyle(fontSize: 15),
+            ),
+          ],
+        ),
         leading: Container(
           height: 40,
           padding: EdgeInsets.only(right: 12.0),

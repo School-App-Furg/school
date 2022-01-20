@@ -8,6 +8,8 @@ import '../../../core/components/loader/loader_page.dart';
 import '../../../core/styles/colors.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
+
+import 'components/selected_cycle.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,7 +38,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 ),
                 appBar: AppBarHome(
                   //Adição do cyclePeriod na tela do admin conforme seleção do ciclo
-                  cyclePeriod: "Ciclo: 2021/2",
+
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   text: controller.schoolModel!.name,
@@ -51,75 +53,92 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                             child: Text(
                                 'Sua escola ainda não possui turmas cadastradas neste ciclo!'),
                           )
-                        : ListView.builder(
-                            padding: EdgeInsets.all(10.0),
-                            itemCount: controller.classes!.length,
-                            itemBuilder: (context, int index) {
-                              return Container(
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Slidable(
-                                    endActionPane: ActionPane(
-                                      motion: ScrollMotion(),
-                                      children: [
-                                        SlidableAction(
-                                          onPressed: (context) => Modular.to
-                                              .pushNamed("./edit-class",
-                                                  arguments: {
-                                                'class_year':
-                                                    controller.classes![index],
-                                              }),
-                                          backgroundColor: grey,
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.edit,
-                                          label: 'Editar',
-                                        ),
-                                        SlidableAction(
-                                          onPressed: (context) =>
-                                              showDialog<void>(
-                                            context: context,
-                                            barrierDismissible:
-                                                false, // user must tap button!
-                                            builder: (BuildContext context) {
-                                              return AlertDialogConfirmation(
-                                                onPressed: () {
-                                                  controller.deleteClass(
-                                                      context,
-                                                      controller
-                                                          .classes![index]);
-                                                },
-                                              );
-                                            },
-                                          ),
-                                          backgroundColor: lightred,
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.delete,
-                                          label: 'Excluir',
-                                        ),
-                                      ],
-                                    ),
-                                    child: ClassesCard(
-                                      assetimage:
-                                          controller.definiBanner(index),
-                                      first:
-                                          '${controller.classes![index].level}º ano',
-                                      second:
-                                          'Sala ${controller.classes![index].room}',
-                                      third: controller.classes![index].name,
-                                      index: index,
-                                      onTap: () => Modular.to.pushNamed(
-                                        "./students-list-class",
-                                        arguments: {
-                                          'classe': controller.classes![index]
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                        : SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Column(
+                              children: [
+                                SelectedCyclePeriod(
+                                  cycleName: 'Ciclo selecionado: 2021/2',
+                                  onTap: () =>
+                                      Modular.to.pushNamed('./historic'),
                                 ),
-                              );
-                            },
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.all(10.0),
+                                  itemCount: controller.classes!.length,
+                                  itemBuilder: (context, int index) {
+                                    return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Slidable(
+                                          endActionPane: ActionPane(
+                                            motion: ScrollMotion(),
+                                            children: [
+                                              SlidableAction(
+                                                onPressed: (context) => Modular
+                                                    .to
+                                                    .pushNamed("./edit-class",
+                                                        arguments: {
+                                                      'class_year': controller
+                                                          .classes![index],
+                                                    }),
+                                                backgroundColor: grey,
+                                                foregroundColor: Colors.white,
+                                                icon: Icons.edit,
+                                                label: 'Editar',
+                                              ),
+                                              SlidableAction(
+                                                onPressed: (context) =>
+                                                    showDialog<void>(
+                                                  context: context,
+                                                  barrierDismissible:
+                                                      false, // user must tap button!
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialogConfirmation(
+                                                      onPressed: () {
+                                                        controller.deleteClass(
+                                                            context,
+                                                            controller.classes![
+                                                                index]);
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                                backgroundColor: lightred,
+                                                foregroundColor: Colors.white,
+                                                icon: Icons.delete,
+                                                label: 'Excluir',
+                                              ),
+                                            ],
+                                          ),
+                                          child: ClassesCard(
+                                            assetimage:
+                                                controller.definiBanner(index),
+                                            first:
+                                                '${controller.classes![index].level}º ano',
+                                            second:
+                                                'Sala ${controller.classes![index].room}',
+                                            third:
+                                                controller.classes![index].name,
+                                            index: index,
+                                            onTap: () => Modular.to.pushNamed(
+                                              "./students-list-class",
+                                              arguments: {
+                                                'classe':
+                                                    controller.classes![index]
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           );
                   },
                 ),

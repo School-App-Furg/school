@@ -44,23 +44,29 @@ class UsersRepository {
   //Retorna os estudantes de uma turma
   Future<List<StudentUser>> getStudentsForClass(List list) async {
     try {
-      List<StudentUser> data = [];
+      List<StudentUser> model = [];
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('users')
           .where(FieldPath.documentId, whereIn: list)
           .get();
       snapshot.docs.forEach(
         (element) {
-          data.add(
-            StudentUser.fromJson(
-              json.encode(
-                element.data(),
-              ),
+          var data = StudentUser.fromJson(
+            json.encode(
+              element.data(),
             ),
+          );
+          model.add(
+            StudentUser(
+                id: element.id,
+                schoolId: data.schoolId,
+                name: data.name,
+                cpf: data.cpf,
+                type: data.type),
           );
         },
       );
-      return data;
+      return model;
     } catch (error) {
       throw Exception(error);
     }

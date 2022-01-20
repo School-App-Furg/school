@@ -37,8 +37,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   schoolModel: controller.schoolModel,
                 ),
                 appBar: AppBarHome(
-                  //Adição do cyclePeriod na tela do admin conforme seleção do ciclo
-
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   text: controller.schoolModel!.name,
@@ -59,8 +57,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                               children: [
                                 SelectedCyclePeriod(
                                   cycleName: 'Ciclo selecionado: 2021/2',
-                                  onTap: () =>
-                                      Modular.to.pushNamed('./historic'),
                                 ),
                                 ListView.builder(
                                   shrinkWrap: true,

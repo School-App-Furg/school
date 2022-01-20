@@ -58,13 +58,13 @@ class _StudentsListForClassState
                               var data = controller.students[index];
                               return StudentCard(
                                 studentUser: data!,
-                                onTap: () => Modular.to.pushNamed(
-                                    './school-report',
-                                    arguments: {
-                                      'classe': widget.classe,
-                                      'student': data
-                                    },
-                                    forRoot: true),
+                                onTap: () =>
+                                    Modular.to.pushNamed('./school-report',
+                                        arguments: {
+                                          'classe': widget.classe,
+                                          'studentId': data.id,
+                                        },
+                                        forRoot: true),
                               );
                             },
                           );

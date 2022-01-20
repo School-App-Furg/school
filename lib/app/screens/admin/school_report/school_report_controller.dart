@@ -1,10 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../core/models/subject.dart';
-
-import '../home_page/home_controller.dart';
+import 'package:school/app/core/models/classes.dart';
+import 'package:school/app/core/models/school_model.dart';
+import 'package:school/app/core/models/student_user.dart';
 
 import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'school_report_controller.g.dart';
 
@@ -13,15 +14,19 @@ class SchoolReportController = _SchoolReportControllerBase
 
 abstract class _SchoolReportControllerBase with Store {
   AdminService _adminService = AdminService();
-  String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
+  SchoolModel? school = Modular.get<HomeController>().schoolModel;
 
-  //lista de disciplinas da escola
   @observable
-  List<Subject>? subjects = [];
+  Classes classReceived =
+      Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
-  //listagem de disciplinas da escola
+  @observable
+  StudentUser studentReceived =
+      StudentUser(schoolId: '', name: '', cpf: '', type: 0);
+
   @action
-  getSubjects() async {
-    subjects = await _adminService.getSubjects(schoolId);
+  initSchoolReport(Classes classes, StudentUser studentUser) async {
+    classReceived = classes;
+    studentReceived = studentUser;
   }
 }

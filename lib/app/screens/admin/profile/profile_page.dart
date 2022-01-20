@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/components/label_text.dart';
 
+import '../../../core/components/label_text.dart';
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';
 import '../../../core/components/rounded_button.dart';
@@ -8,7 +8,6 @@ import '../../../core/components/rounded_input.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/colors.dart';
-
 import 'profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {

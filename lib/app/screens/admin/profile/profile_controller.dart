@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../resources/auth_repository.dart';
-import '../admin_service.dart';
+
 import '../../../core/models/school_model.dart';
 import '../../../core/service/snackbars.dart';
+import '../../../resources/auth_repository.dart';
+import '../admin_service.dart';
 
 part 'profile_controller.g.dart';
 

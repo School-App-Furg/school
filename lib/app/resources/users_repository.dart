@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../core/models/management_user.dart';
 import '../core/models/student_user.dart';
 import '../core/models/teacher_user.dart';
 import '../core/models/user_admin.dart';
@@ -42,34 +41,22 @@ class UsersRepository {
     return model;
   }
 
-  //Cadastro de um gestor
-  Future<bool> insertManagement(
-      String userId, ManagementUser managementUser) async {
-    return await firestoreInstance.collection('users').doc(userId).set({
-      'schoolId': managementUser.schoolId,
-      'name': managementUser.name,
-      'type': managementUser.type
-    }).then(
-      (value) {
-        return true;
-      },
-    ).catchError((error) => throw Exception(error));
-  }
-
   //Retorna os estudantes de uma turma
   Future<List<StudentUser>> getStudentsForClass(List list) async {
     try {
       List<StudentUser> data = [];
-      list.forEach(
-        (element) async {
-          await firestoreInstance.collection('users').doc(element).get().then(
-            (DocumentSnapshot snapshot) {
-              data.add(
-                StudentUser.fromJson(
-                  json.encode(snapshot.data()),
-                ),
-              );
-            },
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('users')
+          .where(FieldPath.documentId, whereIn: list)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          data.add(
+            StudentUser.fromJson(
+              json.encode(
+                element.data(),
+              ),
+            ),
           );
         },
       );

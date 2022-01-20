@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../core/models/student_user.dart';
 import '../../../../core/styles/colors.dart';
 
 class StudentCard extends StatefulWidget {
   final StudentUser studentUser;
+  final Function()? onTap;
   const StudentCard({
     Key? key,
     required this.studentUser,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -18,7 +20,7 @@ class _StudentCardState extends State<StudentCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20, left: 20, top: 3),
+      padding: const EdgeInsets.only(right: 10, left: 10, top: 3),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.0),
@@ -41,9 +43,7 @@ class _StudentCardState extends State<StudentCard> {
             ),
             trailing:
                 Icon(Icons.keyboard_arrow_right, color: blueicon, size: 30.0),
-            onTap: () {
-              Modular.to.pushNamed('./school-report');
-            },
+            onTap: widget.onTap,
           ),
         ),
       ),

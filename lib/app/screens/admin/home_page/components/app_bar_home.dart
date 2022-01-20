@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import '../../../../core/styles/colors.dart';
 
-import 'different_cycle.dart';
+import '../../../../core/styles/colors.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;
   final String text;
   final Function()? onPressedSubject;
   final Function()? onPressedHistoric;
-  final String cyclePeriod;
 
-  const AppBarHome(
-      {Key? key,
-      required this.onPressedDrawer,
-      required this.text,
-      this.onPressedSubject,
-      this.onPressedHistoric,
-      required this.cyclePeriod})
-      : super(key: key);
+  const AppBarHome({
+    Key? key,
+    required this.onPressedDrawer,
+    required this.text,
+    this.onPressedSubject,
+    this.onPressedHistoric,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +35,6 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        InkWell(
-          child: Visibility(
-            child: CyclePeriod(
-              label: cyclePeriod,
-            ),
-            visible: true,
-          ),
-          onTap: () => Modular.to.pushNamed('./historic'),
-        ),
         IconButton(
           onPressed: onPressedSubject,
           icon: const Icon(Icons.add),

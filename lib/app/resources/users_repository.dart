@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../core/models/management_user.dart';
 import '../core/models/student_user.dart';
 import '../core/models/teacher_user.dart';
 import '../core/models/user_admin.dart';
@@ -40,20 +39,6 @@ class UsersRepository {
       throw Exception(error);
     }
     return model;
-  }
-
-  //Cadastro de um gestor
-  Future<bool> insertManagement(
-      String userId, ManagementUser managementUser) async {
-    return await firestoreInstance.collection('users').doc(userId).set({
-      'schoolId': managementUser.schoolId,
-      'name': managementUser.name,
-      'type': managementUser.type
-    }).then(
-      (value) {
-        return true;
-      },
-    ).catchError((error) => throw Exception(error));
   }
 
   //Retorna os estudantes de uma turma

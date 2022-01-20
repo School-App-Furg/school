@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/cycle.dart';
-import '../../core/models/management_user.dart';
+
 import '../../core/models/school_model.dart';
 import '../../core/models/student_user.dart';
 import '../../core/models/subject.dart';
@@ -186,16 +186,6 @@ class AdminService {
     }
   }
 
-  //cadastro de auxiliares
-  Future<bool> insertManagement(
-      String userId, ManagementUser managementUser) async {
-    try {
-      return await _userRepository.insertManagement(userId, managementUser);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
   //cadastro de alunos
   Future<bool> insertStudent(String userId, StudentUser studentUser) async {
     try {
@@ -295,7 +285,7 @@ class AdminService {
     }
   }
 
-  //atualização de ciclo da escola
+  //listagem de estudantes de uma turma
   Future<List<StudentUser>> getStudentsForClass(List<String> list) async {
     try {
       return await _userRepository.getStudentsForClass(list);

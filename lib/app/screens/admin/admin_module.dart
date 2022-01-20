@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/admin/school_report/school_report_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';
@@ -41,6 +42,7 @@ class AdminModule extends Module {
         Bind.lazySingleton((i) => RegisterClassController()),
         Bind.lazySingleton((i) => EditSubjectController()),
         Bind.lazySingleton((i) => StudentsListForClassController()),
+        Bind.lazySingleton((i) => SchoolReportController()),
       ];
 
   @override
@@ -63,7 +65,13 @@ class AdminModule extends Module {
             child: (_, args) => ProfilePage(
                   schoolModel: args.data['schoolModel'],
                 )),
-        ChildRoute('/school-report', child: (_, args) => SchoolReportPage()),
+        ChildRoute(
+          '/school-report',
+          child: (_, args) => SchoolReportPage(
+            classe: args.data['classe'],
+            studentUser: args.data['student'],
+          ),
+        ),
         ChildRoute('/config',
             child: (_, args) => ConfigPage(schoolId: args.data['schoolId'])),
         ChildRoute('/new-cycle', child: (_, args) => NewCyclePage()),

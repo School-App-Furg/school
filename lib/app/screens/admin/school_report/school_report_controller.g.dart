@@ -9,6 +9,21 @@ part of 'school_report_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
+  final _$loadingAtom = Atom(name: '_SchoolReportControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$classReceivedAtom =
       Atom(name: '_SchoolReportControllerBase.classReceived');
 
@@ -64,9 +79,24 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
         .run(() => super.initSchoolReport(classes, studentId));
   }
 
+  final _$_SchoolReportControllerBaseActionController =
+      ActionController(name: '_SchoolReportControllerBase');
+
+  @override
+  List<Grade> filterGrades(String subject, String teacher) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.filterGrades');
+    try {
+      return super.filterGrades(subject, teacher);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+loading: ${loading},
 classReceived: ${classReceived},
 grades: ${grades},
 cycle: ${cycle}

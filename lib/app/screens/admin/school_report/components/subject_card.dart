@@ -150,8 +150,8 @@ class _SubjectCardState extends State<SubjectCard> {
     var myDouble = double.parse(
         (widget.cycle.approvalPattern.replaceAll(RegExp('%'), '')));
     assert(myDouble is double);
-    if ((nota < (myDouble / 10))) return red;
-    if (nota > (myDouble / 10)) return green;
+    if ((nota <= (myDouble / 10))) return red;
+    if (nota >= (myDouble / 10)) return green;
     return Colors.blue;
   }
 }

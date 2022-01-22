@@ -92,8 +92,10 @@ class _SubjectCardState extends State<SubjectCard> {
                         modelList[2].faltas),
                     laneBimestre(modelList[3].periodo, modelList[3].nota,
                         modelList[3].faltas),
-                    media(resultModel.note.toString(),
-                        resultModel.faults.toString())
+                    media(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        getColor(double.parse(resultModel.note)))
                   ]
                 : [
                     laneTrimestre(modelList[0].periodo, modelList[0].nota,
@@ -102,8 +104,10 @@ class _SubjectCardState extends State<SubjectCard> {
                         modelList[1].faltas),
                     laneTrimestre(modelList[2].periodo, modelList[2].nota,
                         modelList[2].faltas),
-                    media(resultModel.note.toString(),
-                        resultModel.faults.toString())
+                    media(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        getColor(double.parse(resultModel.note)))
                   ],
           ),
         ],
@@ -131,13 +135,23 @@ class _SubjectCardState extends State<SubjectCard> {
     );
   }
 
-  DataRow media(String nota, String faltas) {
+  DataRow media(String nota, String faltas, Color color) {
     return DataRow(
       cells: [
         DataCell(Text('Média', style: TextStyle(fontWeight: FontWeight.bold))),
-        DataCell(Text(nota, style: TextStyle(fontWeight: FontWeight.bold))),
+        DataCell(Text(nota,
+            style: TextStyle(fontWeight: FontWeight.bold, color: color))),
         DataCell(Text(faltas, style: TextStyle(fontWeight: FontWeight.bold))),
       ],
     );
+  }
+
+  Color getColor(nota) {
+    var myDouble = double.parse(
+        (widget.cycle.approvalPattern.replaceAll(RegExp('%'), '')));
+    assert(myDouble is double);
+    if ((nota < (myDouble / 10))) return red;
+    if (nota > (myDouble / 10)) return green;
+    return Colors.blue;
   }
 }

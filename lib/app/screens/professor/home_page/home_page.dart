@@ -43,13 +43,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 body: Observer(
                   builder: (_) {
                     return controller.classes.length == 0
-                        ? Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                'Você ainda não pertence a nenhuma turma, solicite ao administrador da escola!',
-                                textAlign: TextAlign.center,
-                              ),
+                        ? Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Text(
+                              'Você ainda não pertence a nenhuma turma, solicite ao administrador da escola!',
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
                             ),
                           )
                         : ListView.builder(

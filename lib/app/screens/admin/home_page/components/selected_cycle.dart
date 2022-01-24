@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/core/styles/sizes.dart';
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/sizes.dart';
 
 class SelectedCyclePeriod extends StatelessWidget {
   final Function()? onTap;

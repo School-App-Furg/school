@@ -99,21 +99,6 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
     });
   }
 
-  final _$attendanceAtom = Atom(name: '_ConfigControllerBase.attendance');
-
-  @override
-  String get attendance {
-    _$attendanceAtom.reportRead();
-    return super.attendance;
-  }
-
-  @override
-  set attendance(String value) {
-    _$attendanceAtom.reportWrite(value, super.attendance, () {
-      super.attendance = value;
-    });
-  }
-
   final _$schoolModelAtom = Atom(name: '_ConfigControllerBase.schoolModel');
 
   @override
@@ -200,17 +185,6 @@ mixin _$ConfigController on _ConfigControllerBase, Store {
   }
 
   @override
-  dynamic setAttendance(dynamic e) {
-    final _$actionInfo = _$_ConfigControllerBaseActionController.startAction(
-        name: '_ConfigControllerBase.setAttendance');
-    try {
-      return super.setAttendance(e);
-    } finally {
-      _$_ConfigControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 cycleName: ${cycleName},
@@ -219,7 +193,6 @@ cyclePeriod: ${cyclePeriod},
 initialDate: ${initialDate},
 finalDate: ${finalDate},
 score: ${score},
-attendance: ${attendance},
 schoolModel: ${schoolModel},
 cycle: ${cycle}
     ''';

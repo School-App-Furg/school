@@ -108,7 +108,6 @@ abstract class _NewCycleControllerBase with Store {
             idSchool: schoolId,
             initialDate: initialDate.millisecondsSinceEpoch,
             finalDate: finalDate.millisecondsSinceEpoch,
-            approvalAttendance: attendance,
             approvalPattern: score,
             evaluationStandard: cyclePeriod,
           ),

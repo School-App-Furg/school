@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import 'package:school/app/resources/users_repository.dart';
+import '../../../core/models/subject_teacher.dart';
+import '../aluno_service.dart';
 
 import '../../../core/models/school_model.dart';
 import '../../../core/models/student_user.dart';
-import '../../../core/models/subject.dart';
 
 import '../../../resources/auth_repository.dart';
-import '../../admin/admin_service.dart';
 
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  AdminService adminService = AdminService();
+  AlunoService alunoService = AlunoService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   User? user = Modular.get<AuthRepository>().usuario;
 
@@ -39,17 +38,17 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    userStudent = await adminService.getUserStudentById(user!.uid);
+    userStudent = await alunoService.getUserStudentById(user!.uid);
     schoolModel =
-        await adminService.getSchoolInformations(userStudent!.schoolId);
-    //Acredito que esta parte não esteja ok - precisa ajustar
-    subjects = await adminService.getSubjects(userStudent!.schoolId);
+        await alunoService.getSchoolInformations(userStudent!.schoolId);
+    subjects = await alunoService.getSubjectsForStudent(
+        schoolModel!.id!, schoolModel!.currentCycle, userStudent!.id!);
     loading = false;
   }
 
   //lista de disciplinas
   @observable
-  List<Subject>? subjects = [];
+  List<SubjectTeacher> subjects = [];
 
   //lista de imagens banner
   List banners = [

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 
-import 'package:school/app/core/models/cycle.dart';
-import 'package:school/app/core/models/grade.dart';
-import 'package:school/app/core/models/subject_teacher.dart';
-import 'package:school/app/core/styles/colors.dart';
-import 'package:school/app/core/styles/sizes.dart';
-import 'package:school/app/screens/admin/school_report/components/result_model.dart';
-import 'package:school/app/screens/admin/school_report/school_report_controller.dart';
+import '../../../../core/models/cycle.dart';
+import '../../../../core/models/grade.dart';
+import '../../../../core/models/subject_teacher.dart';
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/sizes.dart';
+import 'result_model.dart';
+import '../school_report_controller.dart';
 
 import 'model_table.dart';
 
@@ -15,13 +15,13 @@ class SubjectCard extends StatefulWidget {
   final Cycle cycle;
   final List<Grade> grade;
   final SubjectTeacher subjectTeacher;
-  final SchoolReportController schoolReportController;
+  final SchoolReportController controller;
   SubjectCard({
     Key? key,
     required this.cycle,
     required this.grade,
     required this.subjectTeacher,
-    required this.schoolReportController,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -34,12 +34,11 @@ class _SubjectCardState extends State<SubjectCard> {
   @override
   void initState() {
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? modelList = widget.schoolReportController.setGrades(4, widget.grade)
-        : modelList = widget.schoolReportController.setGrades(3, widget.grade);
+        ? modelList = widget.controller.setGrades(4, widget.grade)
+        : modelList = widget.controller.setGrades(3, widget.grade);
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? resultModel = widget.schoolReportController.calculate(widget.grade, 4)
-        : resultModel =
-            widget.schoolReportController.calculate(widget.grade, 3);
+        ? resultModel = widget.controller.calculate(widget.grade, 4)
+        : resultModel = widget.controller.calculate(widget.grade, 3);
     super.initState();
   }
 
@@ -95,8 +94,9 @@ class _SubjectCardState extends State<SubjectCard> {
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        getColorGrade(double.parse(resultModel.note)),
-                        getColorAttendence(double.parse(resultModel.faults)))
+                        widget.controller.getColorGrade(resultModel.note,
+                            widget.grade, widget.cycle.approvalPattern),
+                        Colors.black)
                   ]
                 : [
                     laneTrimestre(modelList[0].periodo, modelList[0].nota,
@@ -108,8 +108,9 @@ class _SubjectCardState extends State<SubjectCard> {
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        getColorGrade(double.parse(resultModel.note)),
-                        getColorAttendence(double.parse(resultModel.faults)))
+                        widget.controller.getColorGrade(resultModel.note,
+                            widget.grade, widget.cycle.approvalPattern),
+                        Colors.black)
                   ],
           ),
         ],
@@ -149,31 +150,5 @@ class _SubjectCardState extends State<SubjectCard> {
                 fontWeight: FontWeight.bold, color: colorAttendence))),
       ],
     );
-  }
-
-  Color getColorGrade(nota) {
-    //chamo a média definida, tiro o caractere '%' e converto string pra double
-    var notaMinima = double.parse(
-        (widget.cycle.approvalPattern.replaceAll(RegExp('%'), '')));
-    assert(notaMinima is double);
-    //em seguida faço os cálculos com base no valor da nota média
-    //e retorno a cor resultante
-    if ((nota < (notaMinima / 10))) return red;
-    if (nota >= (notaMinima / 10)) return green;
-    //Em caso de erro
-    return Colors.blue;
-  }
-
-  Color getColorAttendence(faltas) {
-    //chamo a média definida, tiro o caractere '%' e converto string pra double
-    var faltasMaximas = double.parse(
-        (widget.cycle.approvalAttendance.replaceAll(RegExp('%'), '')));
-    assert(faltasMaximas is double);
-    //Precisa ser ajustado aqui. Quem sabe o professor já seta um valor X de
-    //faltas máximas
-    if ((faltas < (faltasMaximas))) return green;
-    if (faltas >= (faltasMaximas)) return red;
-    //Em caso de erro
-    return Colors.blue;
   }
 }

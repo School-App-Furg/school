@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/components/loader/loader_page.dart';
+import '../../../core/components/loader/loader_page.dart';
 
-import 'package:school/app/core/models/classes.dart';
+import '../../../core/models/classes.dart';
 
-import 'package:school/app/screens/admin/school_report/school_report_controller.dart';
+import 'school_report_controller.dart';
 
 import '../../../core/styles/colors.dart';
 import 'components/subject_card.dart';
@@ -60,7 +60,7 @@ class _SchoolReportPageState
                       grade: controller.filterGrades(
                           data.idSubject, data.idTeacher),
                       cycle: controller.cycle!,
-                      schoolReportController: controller,
+                      controller: controller,
                     );
                   },
                 ),

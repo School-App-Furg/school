@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/models/grade.dart';
-import 'package:school/app/resources/grades_repository.dart';
+import '../../core/models/grade.dart';
+import '../../resources/grades_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/cycle.dart';
@@ -225,7 +225,7 @@ class AdminService {
     }
   }
 
-  //atualizar professor
+  //atualizar aluno
   Future<bool> updateStudent(StudentUser student) async {
     try {
       return await _userRepository.updateStudent(student);

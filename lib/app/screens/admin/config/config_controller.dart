@@ -30,7 +30,6 @@ abstract class _ConfigControllerBase with Store {
     cycle = await _adminService.getCurrentCycle(schoolModel!.currentCycle);
     cycleName.text = cycle!.name;
     cyclePeriod = cycle!.evaluationStandard;
-    attendance = cycle!.approvalAttendance;
     score = cycle!.approvalPattern;
     initialDate = DateTime.fromMillisecondsSinceEpoch(cycle!.initialDate);
     finalDate = DateTime.fromMillisecondsSinceEpoch(cycle!.finalDate);
@@ -87,17 +86,6 @@ abstract class _ConfigControllerBase with Store {
     score = e;
   }
 
-  //configuração de padrão de aprovação por presenças
-  List attendanceList = ['60%', '70%'];
-
-  @observable
-  String attendance = '';
-
-  @action
-  setAttendance(e) {
-    attendance = e;
-  }
-
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
@@ -111,7 +99,6 @@ abstract class _ConfigControllerBase with Store {
     idSchool: "",
     finalDate: DateTime.now().millisecondsSinceEpoch,
     initialDate: DateTime.now().millisecondsSinceEpoch,
-    approvalAttendance: '',
     approvalPattern: '',
     evaluationStandard: '',
   );
@@ -130,7 +117,6 @@ abstract class _ConfigControllerBase with Store {
               idSchool: schoolId,
               finalDate: finalDate.millisecondsSinceEpoch,
               initialDate: initialDate.millisecondsSinceEpoch,
-              approvalAttendance: attendance,
               approvalPattern: score,
               evaluationStandard: cyclePeriod),
         );

@@ -141,4 +141,43 @@ class ClassesRepository {
       throw Exception(e);
     }
   }
+
+  //---------------------------------Aluno ---------------------------------------------
+
+  //Retorna a turma de um aluno
+  Future<List<Classes>?> getClassesForStudent(
+      String schoolId, String cycle, String studentId) async {
+    List<Classes> list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('classes')
+          .where('schoolId', isEqualTo: schoolId)
+          .where('cycleId', isEqualTo: cycle)
+          .where('students', arrayContains: studentId)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          Classes turma = Classes.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            Classes(
+              id: element.id,
+              schoolId: turma.cycleId,
+              name: turma.name,
+              room: turma.room,
+              cycleId: turma.cycleId,
+              level: turma.level,
+              students: turma.students,
+            ),
+          );
+        },
+      );
+      return list;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 }

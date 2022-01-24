@@ -1,8 +1,8 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../core/form/general_form.dart';
 import '../../../../core/service/validators.dart';
-
-import 'package:dropdown_search/dropdown_search.dart';
 
 class EditSchoolReportPage extends StatefulWidget {
   @override

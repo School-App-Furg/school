@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,9 +10,6 @@ import '../../../core/components/rounded_dropdown.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/sizes.dart';
-
-
-import '../../../core/components/label_text.dart';
 
 import 'config_controller.dart';
 
@@ -115,24 +112,6 @@ class _ConfigPageState extends ModularState<ConfigPage, ConfigController> {
                                 hint:
                                     "Selecione o padrão de aprovação por nota:",
                                 items: controller.scoreList
-                                    .map<DropdownMenuItem<String>>(
-                                  (e) {
-                                    return DropdownMenuItem<String>(
-                                      value: e,
-                                      child: Text(e),
-                                    );
-                                  },
-                                ).toList(),
-                              ),
-                              LabelText(
-                                text: 'Padrão de aprovação por presenças:',
-                              ),
-                              RoundedDropdown(
-                                value: controller.attendance,
-                                onChanged: controller.setAttendance,
-                                hint:
-                                    "Selecione o padrão de aprovação por presença:",
-                                items: controller.attendanceList
                                     .map<DropdownMenuItem<String>>(
                                   (e) {
                                     return DropdownMenuItem<String>(

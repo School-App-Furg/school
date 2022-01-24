@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/resources/users_repository.dart';
-import '../../../core/models/school_model.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
@@ -64,7 +62,8 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/student.jpg'),
+                      backgroundImage:
+                          AssetImage('assets/images/student-1.jpg'),
                       radius: 30.0,
                       backgroundColor: white,
                     ),

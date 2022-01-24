@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/admin/school_report/school_report_controller.dart';
+import 'school_report/school_report_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';

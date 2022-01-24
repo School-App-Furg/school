@@ -3,7 +3,7 @@ import 'dart:convert';
 class Cycle {
   String name;
   String idSchool;
-  String approvalAttendance;
+
   String approvalPattern;
   String evaluationStandard;
   int initialDate;
@@ -11,7 +11,6 @@ class Cycle {
   Cycle({
     required this.name,
     required this.idSchool,
-    required this.approvalAttendance,
     required this.approvalPattern,
     required this.evaluationStandard,
     required this.initialDate,
@@ -22,7 +21,6 @@ class Cycle {
     return {
       'name': name,
       'idSchool': idSchool,
-      'approvalAttendance': approvalAttendance,
       'approvalPattern': approvalPattern,
       'evaluationStandard': evaluationStandard,
       'initialDate': initialDate,
@@ -34,7 +32,6 @@ class Cycle {
     return Cycle(
       name: map['name'] ?? '',
       idSchool: map['idSchool'] ?? '',
-      approvalAttendance: map['approvalAttendance'] ?? '',
       approvalPattern: map['approvalPattern'] ?? '',
       evaluationStandard: map['evaluationStandard'] ?? '',
       initialDate: map['initialDate']?.toInt() ?? 0,

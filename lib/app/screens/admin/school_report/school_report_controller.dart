@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/core/models/classes.dart';
-import 'package:school/app/core/models/cycle.dart';
-import 'package:school/app/core/models/grade.dart';
-import 'package:school/app/core/models/school_model.dart';
+import '../../../core/styles/colors.dart';
+import '../../../core/models/classes.dart';
+import '../../../core/models/cycle.dart';
+import '../../../core/models/grade.dart';
+import '../../../core/models/school_model.dart';
 
 import '../admin_service.dart';
 import '../home_page/home_controller.dart';
@@ -32,7 +34,6 @@ abstract class _SchoolReportControllerBase with Store {
   Cycle? cycle = Cycle(
       name: '',
       idSchool: '',
-      approvalAttendance: '',
       approvalPattern: '',
       evaluationStandard: '',
       initialDate: 0,
@@ -83,5 +84,21 @@ abstract class _SchoolReportControllerBase with Store {
     });
     average = average / numberOfLines;
     return ResultModel(note: average.toString(), faults: faults.toString());
+  }
+
+  Color getColorGrade(String nota, List<Grade> grade, String approvalPattern) {
+    Color cor;
+    if (grade.length == 4) {
+      double media =
+          double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
+      if (double.parse(nota) >= media) {
+        cor = green;
+      } else {
+        cor = red;
+      }
+    } else {
+      cor = Colors.black;
+    }
+    return cor;
   }
 }

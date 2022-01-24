@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../../core/components/cycle_period.dart';
-import '../../../../core/models/school_model.dart';
-import '../../../../core/models/student_user.dart';
+import '../../../../core/styles/colors.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;
+  final String text;
 
   final Function()? onPressedHistoric;
-  final SchoolModel? schoolModel;
-  final StudentUser? studentUser;
-  final String cyclePeriod;
 
-  const AppBarHome(
-      {Key? key,
-      required this.onPressedDrawer,
-      this.onPressedHistoric,
-      this.schoolModel,
-      this.studentUser,
-      required this.cyclePeriod})
-      : super(key: key);
+  const AppBarHome({
+    Key? key,
+    required this.onPressedDrawer,
+    required this.text,
+    this.onPressedHistoric,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +25,18 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         color: Colors.black,
       ),
       title: Text(
-        schoolModel!.name + " - " + studentUser!.name,
+        text,
         style: TextStyle(
-          color: Colors.black,
+          color: black,
           fontWeight: FontWeight.w500,
           fontSize: 17,
         ),
       ),
       actions: [
-        InkWell(
-          child: Visibility(
-            child: CyclePeriod(
-              label: cyclePeriod,
-            ),
-            visible: true,
-          ),
-          onTap: () => Modular.to.pushNamed('./historic'),
-        ),
         IconButton(
           onPressed: onPressedHistoric,
           icon: const Icon(Icons.more_vert),
-          color: Colors.black,
+          color: black,
         ),
       ],
     );

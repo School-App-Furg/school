@@ -57,13 +57,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$subjectsAtom = Atom(name: '_HomeControllerBase.subjects');
 
   @override
-  List<Subject>? get subjects {
+  List<SubjectTeacher> get subjects {
     _$subjectsAtom.reportRead();
     return super.subjects;
   }
 
   @override
-  set subjects(List<Subject>? value) {
+  set subjects(List<SubjectTeacher> value) {
     _$subjectsAtom.reportWrite(value, super.subjects, () {
       super.subjects = value;
     });

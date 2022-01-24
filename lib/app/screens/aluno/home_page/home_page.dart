@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
 import '../drawer/drawer.dart';
+
 import 'components/app_bar_home.dart';
 import 'home_controller.dart';
 
@@ -33,23 +34,21 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   studentUser: controller.userStudent,
                 ),
                 appBar: AppBarHome(
-                  cyclePeriod: "Ciclo: 2021/2",
+                  text: controller.schoolModel!.name,
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
-                  schoolModel: controller.schoolModel,
-                  studentUser: controller.userStudent,
                   onPressedHistoric: () => Modular.to.pushNamed('./historic'),
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.subjects!.length == 0
+                    return controller.subjects.length == 0
                         ? Center(
                             child: Text(
                                 'Nenhuma disciplina foi cadastrada até o momento!'),
                           )
                         : ListView.builder(
                             padding: EdgeInsets.all(10.0),
-                            itemCount: controller.subjects!.length,
+                            itemCount: controller.subjects.length,
                             itemBuilder: (context, int index) {
                               return Container(
                                 margin:
@@ -57,18 +56,23 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: ClassesCard(
-                                      assetimage:
-                                          controller.definiBanner(index),
-                                      first:
-                                          '${controller.subjects![index].name}',
-                                      second:
-                                          'ID ${controller.subjects![index].schoolId}',
-                                      third: "",
-                                      index: index,
-                                      onTap: () {
-                                        Modular.to
-                                            .pushNamed('./student-report');
-                                      }),
+                                    assetimage: controller.definiBanner(index),
+                                    first: controller.subjects[index].subject,
+                                    second: controller.subjects[index].teacher,
+                                    third: "",
+                                    index: index,
+                                    onTap: () {
+                                      Modular.to.pushNamed(
+                                        './student-report',
+                                        arguments: {
+                                          'studentId':
+                                              controller.userStudent!.id,
+                                          'subjectTeacher':
+                                              controller.subjects[index]
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
                               );
                             },

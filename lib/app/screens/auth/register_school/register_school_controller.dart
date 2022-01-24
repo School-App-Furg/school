@@ -60,7 +60,6 @@ abstract class _RegisterControllerBase with Store {
             idSchool: idSchool,
             finalDate: DateTime.now().millisecondsSinceEpoch,
             initialDate: DateTime.now().millisecondsSinceEpoch,
-            approvalAttendance: '70%',
             approvalPattern: '70%',
             evaluationStandard: 'Bimestral',
           ),

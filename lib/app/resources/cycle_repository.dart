@@ -57,7 +57,6 @@ class CycleRepository {
       'finalDate': cycle.finalDate,
       'evaluationStandard': cycle.evaluationStandard,
       'approvalPattern': cycle.approvalPattern,
-      'approvalAttendance': cycle.approvalAttendance
     }).then(
       (value) {
         return true;

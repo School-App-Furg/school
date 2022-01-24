@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../aluno_service.dart';
 
 import '../../../resources/auth_repository.dart';
-import '../../admin/admin_service.dart';
-
 
 import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';
@@ -14,7 +13,7 @@ part 'perfil_controller.g.dart';
 class PerfilController = _PerfilControllerBase with _$PerfilController;
 
 abstract class _PerfilControllerBase with Store {
-  AdminService adminService = AdminService();
+  AlunoService alunoService = AlunoService();
   TextEditingController nameController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
 
@@ -32,7 +31,7 @@ abstract class _PerfilControllerBase with Store {
 
   Future<void> recuperarSenha(BuildContext context) async {
     try {
-      await adminService.requestNewPassword(mail!);
+      await alunoService.requestNewPassword(mail!);
       buildSnackBarUi(context, "E-mail de recuperação de senha enviado");
     } catch (e) {
       buildSnackBarUi(context, e.toString());
@@ -44,8 +43,8 @@ abstract class _PerfilControllerBase with Store {
     try {
       student.name = nameController.text;
       student.cpf = cpfController.text;
-      await adminService.updateStudent(student);
-      adminService.updateHome();
+      await alunoService.updateStudent(student);
+      alunoService.updateHome();
       buildSnackBarUi(context, "Aluno atualizado");
     } catch (e) {
       buildSnackBarUi(context, e.toString());

@@ -47,9 +47,13 @@ class _StudentsListForClassState
                 body: Observer(
                   builder: (_) {
                     return controller.students.length == 0
-                        ? Center(
+                        ? Padding(
+                            padding: const EdgeInsets.all(40.0),
                             child: Text(
-                                'Esta turma ainda não possui nenhum aluno cadastrado!'),
+                              'Esta turma ainda não possui nenhum aluno cadastrado!',
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
                           )
                         : ListView.builder(
                             padding: EdgeInsets.only(top: 10),

@@ -47,9 +47,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 body: Observer(
                   builder: (_) {
                     return controller.classes!.length == 0
-                        ? Center(
+                        ? Padding(
+                            padding: const EdgeInsets.all(40.0),
                             child: Text(
-                                'Sua escola ainda não possui turmas cadastradas neste ciclo!'),
+                              'Sua escola ainda não possui turmas cadastradas neste ciclo!',
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
                           )
                         : SingleChildScrollView(
                             physics: ScrollPhysics(),

@@ -92,8 +92,11 @@ class _SubjectCardState extends State<SubjectCard> {
                         modelList[2].faltas),
                     laneBimestre(modelList[3].periodo, modelList[3].nota,
                         modelList[3].faltas),
-                    media(resultModel.note.toString(),
-                        resultModel.faults.toString())
+                    media(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        getColorGrade(double.parse(resultModel.note)),
+                        getColorAttendence(double.parse(resultModel.faults)))
                   ]
                 : [
                     laneTrimestre(modelList[0].periodo, modelList[0].nota,
@@ -102,8 +105,11 @@ class _SubjectCardState extends State<SubjectCard> {
                         modelList[1].faltas),
                     laneTrimestre(modelList[2].periodo, modelList[2].nota,
                         modelList[2].faltas),
-                    media(resultModel.note.toString(),
-                        resultModel.faults.toString())
+                    media(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        getColorGrade(double.parse(resultModel.note)),
+                        getColorAttendence(double.parse(resultModel.faults)))
                   ],
           ),
         ],
@@ -131,13 +137,43 @@ class _SubjectCardState extends State<SubjectCard> {
     );
   }
 
-  DataRow media(String nota, String faltas) {
+  DataRow media(
+      String nota, String faltas, Color colorGrade, Color colorAttendence) {
     return DataRow(
       cells: [
         DataCell(Text('Média', style: TextStyle(fontWeight: FontWeight.bold))),
-        DataCell(Text(nota, style: TextStyle(fontWeight: FontWeight.bold))),
-        DataCell(Text(faltas, style: TextStyle(fontWeight: FontWeight.bold))),
+        DataCell(Text(nota,
+            style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
+        DataCell(Text(faltas,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: colorAttendence))),
       ],
     );
+  }
+
+  Color getColorGrade(nota) {
+    //chamo a média definida, tiro o caractere '%' e converto string pra double
+    var notaMinima = double.parse(
+        (widget.cycle.approvalPattern.replaceAll(RegExp('%'), '')));
+    assert(notaMinima is double);
+    //em seguida faço os cálculos com base no valor da nota média
+    //e retorno a cor resultante
+    if ((nota < (notaMinima / 10))) return red;
+    if (nota >= (notaMinima / 10)) return green;
+    //Em caso de erro
+    return Colors.blue;
+  }
+
+  Color getColorAttendence(faltas) {
+    //chamo a média definida, tiro o caractere '%' e converto string pra double
+    var faltasMaximas = double.parse(
+        (widget.cycle.approvalAttendance.replaceAll(RegExp('%'), '')));
+    assert(faltasMaximas is double);
+    //Precisa ser ajustado aqui. Quem sabe o professor já seta um valor X de
+    //faltas máximas
+    if ((faltas < (faltasMaximas))) return green;
+    if (faltas >= (faltasMaximas)) return red;
+    //Em caso de erro
+    return Colors.blue;
   }
 }

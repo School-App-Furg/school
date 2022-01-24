@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/components/label_text.dart';
+
 
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';

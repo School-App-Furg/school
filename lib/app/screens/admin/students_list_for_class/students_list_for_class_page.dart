@@ -47,9 +47,13 @@ class _StudentsListForClassState
                 body: Observer(
                   builder: (_) {
                     return controller.students.length == 0
-                        ? Center(
+                        ? Padding(
+                            padding: const EdgeInsets.all(40.0),
                             child: Text(
-                                'Esta turma ainda não possui nenhum aluno cadastrado!'),
+                              'Esta turma ainda não possui nenhum aluno cadastrado!',
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
                           )
                         : ListView.builder(
                             padding: EdgeInsets.only(top: 10),
@@ -58,13 +62,13 @@ class _StudentsListForClassState
                               var data = controller.students[index];
                               return StudentCard(
                                 studentUser: data!,
-                                onTap: () => Modular.to.pushNamed(
-                                    './school-report',
-                                    arguments: {
-                                      'classe': widget.classe,
-                                      'student': data
-                                    },
-                                    forRoot: true),
+                                onTap: () =>
+                                    Modular.to.pushNamed('./school-report',
+                                        arguments: {
+                                          'classe': widget.classe,
+                                          'studentId': data.id,
+                                        },
+                                        forRoot: true),
                               );
                             },
                           );

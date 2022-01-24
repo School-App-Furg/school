@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/models/grade.dart';
+import 'package:school/app/resources/grades_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/cycle.dart';
@@ -25,6 +27,7 @@ class AdminService {
   SubjectRepository _subjectRepository = SubjectRepository();
   AuthRepository _authRepository = AuthRepository();
   CycleRepository _cycleRepository = CycleRepository();
+  GradesRepository _gradesRepository = GradesRepository();
 
   //serviço para solicitar as informações da escola atrelada ao usuario
   Future<SchoolModel?> getSchoolInformations(String schoolId) async {
@@ -289,6 +292,14 @@ class AdminService {
   Future<List<StudentUser>> getStudentsForClass(List<String> list) async {
     try {
       return await _userRepository.getStudentsForClass(list);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  Future<List<Grade>> getGrades(String studentId, String cycleId) async {
+    try {
+      return await _gradesRepository.getGrades(studentId, cycleId);
     } catch (error) {
       throw Exception(error);
     }

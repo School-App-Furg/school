@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school/app/core/styles/colors.dart';
+import 'package:school/app/core/styles/sizes.dart';
 
 class SelectedCyclePeriod extends StatelessWidget {
   final Function()? onTap;
@@ -9,20 +10,16 @@ class SelectedCyclePeriod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.all(15.0),
-        height: 40.0,
-        width: 400.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0), color: defaultblue),
-        child: Center(
-          child: Text(
-            cycleName,
-            style: TextStyle(
-                color: white, fontWeight: FontWeight.w600, fontSize: 18),
-          ),
+    return Container(
+      height: 20.0,
+      decoration: BoxDecoration(color: Colors.red),
+      child: Center(
+        child: Text(
+          cycleName,
+          style: TextStyle(
+              color: white,
+              fontWeight: FontWeight.w600,
+              fontSize: width(context, .025)),
         ),
       ),
     );

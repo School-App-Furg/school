@@ -62,16 +62,13 @@ class AdminModule extends Module {
             child: (_, args) =>
                 EditClassPage(classes: args.data['class_year'])),
         ChildRoute('/profile',
-            child: (_, args) => ProfilePage(
-                  schoolModel: args.data['schoolModel'],
+            child: (_, args) =>
+                ProfilePage(schoolModel: args.data['schoolModel'])),
+        ChildRoute('/school-report',
+            child: (_, args) => SchoolReportPage(
+                  classe: args.data['classe'],
+                  studentId: args.data['studentId'],
                 )),
-        ChildRoute(
-          '/school-report',
-          child: (_, args) => SchoolReportPage(
-            classe: args.data['classe'],
-            studentUser: args.data['student'],
-          ),
-        ),
         ChildRoute('/config',
             child: (_, args) => ConfigPage(schoolId: args.data['schoolId'])),
         ChildRoute('/new-cycle', child: (_, args) => NewCyclePage()),

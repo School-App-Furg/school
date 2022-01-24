@@ -27,12 +27,26 @@ Future<void> showAddSubjectDialog(
             ),
             title: Text('Cadastrar disciplina'),
             actions: [
-              TextButton(
-                child: const Text('Cadastrar'),
-                onPressed: () {
-                  controller.cadastrar(context);
-                },
-              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      child: const Text('Cadastrar'),
+                      onPressed: () {
+                        controller.cadastrar(context);
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              )
             ],
           );
         },

@@ -43,7 +43,7 @@ class _SubjectCardState extends State<SubjectCard> {
   @override
   Widget build(BuildContext context) {
     return DataTable(
-      columnSpacing: width(context, .265),
+      columnSpacing: width(context, .210),
       headingTextStyle: TextStyle(fontWeight: FontWeight.bold, color: white),
       headingRowColor: MaterialStateProperty.resolveWith((states) => primary),
       columns: [

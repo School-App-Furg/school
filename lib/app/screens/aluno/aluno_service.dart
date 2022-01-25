@@ -27,6 +27,15 @@ class AlunoService {
   GradesRepository _gradesRepository = GradesRepository();
   AuthRepository _authRepository = AuthRepository();
 
+  //listagem de alunos da escola
+  Future<List<StudentUser>> getStudentsBySchoolId(String schoolId) async {
+    try {
+      return await _userRepository.getStudentsBySchoolId(schoolId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   //solicita as informacoes do user admin
   Future<StudentUser?> getUserStudentById(String userId) async {
     try {

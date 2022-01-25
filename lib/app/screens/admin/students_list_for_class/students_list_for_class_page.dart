@@ -37,12 +37,6 @@ class _StudentsListForClassState
                   title: Text(
                     'Alunos',
                   ),
-                  actions: [
-                    IconButton(
-                      icon: Icon(Icons.receipt_sharp),
-                      onPressed: () {},
-                    ),
-                  ],
                 ),
                 body: Observer(
                   builder: (_) {

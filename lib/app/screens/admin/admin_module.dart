@@ -18,7 +18,7 @@ import 'profile/profile_page.dart';
 import 'register_class/register_class_controller.dart';
 import 'register_class/register_class_page.dart';
 import 'school_report/school_report_page.dart';
-import 'school_report_generator/school_report_generator_page.dart';
+
 import 'student_list/student_list_controller.dart';
 import 'student_list/student_list_page.dart';
 import 'students_list_for_class/students_list_for_class_controller.dart';
@@ -51,8 +51,6 @@ class AdminModule extends Module {
           '/',
           child: (_, args) => HomePage(),
         ),
-        ChildRoute('/generate-report',
-            child: (_, args) => SchoolReportGeneratorPage()),
         ChildRoute('/students-list-class',
             child: (_, args) =>
                 StudentsListForClass(classe: args.data['classe'])),

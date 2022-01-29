@@ -61,7 +61,7 @@ class ReportGenerator {
           (item.notaBim1 + item.notaBim2 + item.notaBim3 + item.notaBim4) / 4;
 
       return [
-        item.disciplinas,
+        item.disciplina,
         '${item.notaBim1}',
         '${item.notaBim2}',
         '${item.notaBim3}',
@@ -105,15 +105,15 @@ class ReportGenerator {
               children: [
                 buildText(
                   title: 'Escola:',
-                  value: 'Escola Exemplo',
+                  value: boletim.schoolName,
                 ),
                 buildText(
                   title: 'Nome Aluno:',
-                  value: 'Pedro',
+                  value: boletim.studentName,
                 ),
                 buildText(
                   title: 'Ciclo:',
-                  value: '2021/1',
+                  value: boletim.cycleName,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),
                 Container(height: 1, color: PdfColors.grey400),

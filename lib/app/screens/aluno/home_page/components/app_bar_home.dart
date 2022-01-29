@@ -4,6 +4,7 @@ import '../../../../core/styles/colors.dart';
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;
   final String text;
+  final Function()? onPressedReport;
 
   final Function()? onPressedHistoric;
 
@@ -12,6 +13,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
     required this.onPressedDrawer,
     required this.text,
     this.onPressedHistoric,
+    required this.onPressedReport,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,12 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
+        IconButton(
+            icon: Icon(
+              Icons.receipt_sharp,
+              color: black,
+            ),
+            onPressed: onPressedReport),
         IconButton(
           onPressed: onPressedHistoric,
           icon: const Icon(Icons.more_vert),

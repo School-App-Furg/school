@@ -1,13 +1,19 @@
 class Boletim {
-  final List<ItensBoletim> items;
+  List<ItensBoletim> items;
+  String schoolName;
+  String studentName;
+  String cycleName;
 
-  const Boletim({
+  Boletim({
     required this.items,
+    required this.schoolName,
+    required this.studentName,
+    required this.cycleName,
   });
 }
 
 class ItensBoletim {
-  final String disciplinas;
+  final String disciplina;
   final double notaBim1;
   final double notaBim2;
   final double notaBim3;
@@ -18,7 +24,7 @@ class ItensBoletim {
   final int faltaBim4;
 
   const ItensBoletim({
-    required this.disciplinas,
+    required this.disciplina,
     required this.notaBim1,
     required this.notaBim2,
     required this.notaBim3,

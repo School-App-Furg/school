@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'school_report/school_report_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';
@@ -17,8 +16,8 @@ import 'new_cycle/new_cycle_page.dart';
 import 'profile/profile_page.dart';
 import 'register_class/register_class_controller.dart';
 import 'register_class/register_class_page.dart';
+import 'school_report/school_report_controller.dart';
 import 'school_report/school_report_page.dart';
-
 import 'student_list/student_list_controller.dart';
 import 'student_list/student_list_page.dart';
 import 'students_list_for_class/students_list_for_class_controller.dart';

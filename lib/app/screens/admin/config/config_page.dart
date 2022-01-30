@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,7 +9,6 @@ import '../../../core/components/rounded_dropdown.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/sizes.dart';
-
 import 'config_controller.dart';
 
 class ConfigPage extends StatefulWidget {

@@ -1,21 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../core/models/cycle.dart';
-import '../../core/models/grade.dart';
-import '../../resources/auth_repository.dart';
-import '../../resources/cycle_repository.dart';
-import '../../resources/grades_repository.dart';
 
 import '../../core/models/classes.dart';
-
+import '../../core/models/cycle.dart';
+import '../../core/models/grade.dart';
 import '../../core/models/school_model.dart';
 import '../../core/models/student_user.dart';
-
 import '../../core/models/subject_teacher.dart';
-
+import '../../resources/auth_repository.dart';
 import '../../resources/classes_repository.dart';
-
+import '../../resources/cycle_repository.dart';
+import '../../resources/grades_repository.dart';
 import '../../resources/school_repository.dart';
-
 import '../../resources/users_repository.dart';
 import 'home_page/home_controller.dart';
 

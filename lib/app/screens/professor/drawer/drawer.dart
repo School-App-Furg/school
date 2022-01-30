@@ -69,7 +69,8 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/teacher.png'),
+                      backgroundImage:
+                          AssetImage('assets/images/teacher-3.jpg'),
                       radius: 30.0,
                       backgroundColor: white,
                     ),
@@ -103,11 +104,10 @@ class HomeDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text("Perfil"),
-                      onTap: () => Modular.to.pushNamed('./profile-page',
-                          arguments: {
-                            'teacherModel': teacherUser,
-                            'authRepository': authRepository
-                          }),
+                      onTap: () =>
+                          Modular.to.pushNamed('./profile-page', arguments: {
+                        'teacherUser': teacherUser,
+                      }),
                     ),
                     ListTile(
                       leading: Icon(

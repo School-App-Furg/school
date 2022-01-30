@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../../core/models/model_table.dart';
+import '../../../core/models/result_model.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject_teacher.dart';
 import '../home_page/home_controller.dart';
@@ -10,9 +12,6 @@ import '../../../core/models/cycle.dart';
 import '../../../core/models/grade.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/styles/colors.dart';
-
-import 'components/model_table.dart';
-import 'components/result_model.dart';
 
 part 'school_report_controller.g.dart';
 
@@ -31,9 +30,6 @@ abstract class _SchoolReportControllerBase with Store {
       Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
   @observable
-  List<Grade> grades = [];
-
-  @observable
   Cycle? cycle = Cycle(
       name: '',
       idSchool: '',
@@ -42,6 +38,7 @@ abstract class _SchoolReportControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
+  @observable
   SubjectTeacher subjectTeacherReceived =
       SubjectTeacher(idSubject: '', subject: '', idTeacher: '', teacher: '');
 
@@ -51,18 +48,27 @@ abstract class _SchoolReportControllerBase with Store {
     classReceived = classe;
     subjectTeacherReceived = subjectTeacher;
     students = await _professorService.getStudentsForClass(classe.students!);
-    await getGrades();
-    cycle = await _professorService.getCurrentCycle(school!.currentCycle);
-    loading = false;
-  }
-
-  @action
-  getGrades() async {
     grades = await _professorService.getGradesForTeacher(
         classReceived.students!,
         classReceived.cycleId,
         subjectTeacherReceived.idSubject,
         subjectTeacherReceived.idTeacher);
+    cycle = await _professorService.getCurrentCycle(school!.currentCycle);
+    loading = false;
+  }
+
+  @observable
+  ObservableList<Grade> grades = ObservableList();
+
+  @action
+  getGrades() async {
+    loading = true;
+    grades = await _professorService.getGradesForTeacher(
+        classReceived.students!,
+        classReceived.cycleId,
+        subjectTeacherReceived.idSubject,
+        subjectTeacherReceived.idTeacher);
+    loading = false;
   }
 
   @observable
@@ -77,25 +83,24 @@ abstract class _SchoolReportControllerBase with Store {
     return lista;
   }
 
+  @action
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
     List<ModelTable> list = [];
-    grade.forEach((element) {
+    for (var a = 0; a < numberOfLines; a++) {
       list.add(ModelTable(
-          id: element.id,
-          periodo: element.timeCourse.toString(),
-          nota: element.note.toString(),
-          faltas: element.faults.toString()));
-    });
-    for (var a = 0; a < (numberOfLines - grade.length); a++) {
-      list.add(ModelTable(
-          id: '',
-          periodo: (grade.length + (a + 1)).toString(),
-          nota: '-',
-          faltas: '-'));
+          id: '', periodo: (a + 1).toString(), nota: '-', faltas: '-'));
     }
+    grade.forEach((element) {
+      list[element.timeCourse.toInt()] = ModelTable(
+          id: element.id,
+          periodo: (element.timeCourse + 1).toString(),
+          nota: element.note.toString(),
+          faltas: element.faults.toString());
+    });
     return list;
   }
 
+  @action
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
     num faults = 0;
@@ -107,6 +112,7 @@ abstract class _SchoolReportControllerBase with Store {
     return ResultModel(note: average.toString(), faults: faults.toString());
   }
 
+  @action
   Color getColorGrade(String nota, List<Grade> grade, String approvalPattern) {
     Color cor;
     if (grade.length == 4) {

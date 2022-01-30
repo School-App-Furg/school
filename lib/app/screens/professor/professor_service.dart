@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 import '../../core/models/student_user.dart';
 import '../../core/models/cycle.dart';
 import '../../core/models/grade.dart';
@@ -105,8 +106,8 @@ class ProfessorService {
     }
   }
 
-  Future<List<Grade>> getGradesForTeacher(List<String> students, String cycleId,
-      String idSubject, String idTeacher) async {
+  Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
+      String cycleId, String idSubject, String idTeacher) async {
     try {
       return await _gradesRepository.getGradesForTeacher(
           students, cycleId, idSubject, idTeacher);

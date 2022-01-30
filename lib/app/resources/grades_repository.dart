@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mobx/mobx.dart';
 import '../core/models/grade.dart';
 
 class GradesRepository {
@@ -60,9 +61,9 @@ class GradesRepository {
   }
 
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
-  Future<List<Grade>> getGradesForTeacher(List<String> students, String cycleId,
-      String idSubject, String idTeacher) async {
-    List<Grade> list = [];
+  Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
+      String cycleId, String idSubject, String idTeacher) async {
+    ObservableList<Grade> list = ObservableList();
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('grades')

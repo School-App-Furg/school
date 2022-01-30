@@ -58,4 +58,67 @@ class GradesRepository {
       throw Exception(error);
     }
   }
+
+  //Retorna a lista de disciplinas cadastradas em uma determinada escola
+  Future<List<Grade>> getGradesForTeacher(List<String> students, String cycleId,
+      String idSubject, String idTeacher) async {
+    List<Grade> list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('grades')
+          .where('student', whereIn: students)
+          .where('cycle', isEqualTo: cycleId)
+          .where('subject', isEqualTo: idSubject)
+          .where('teacher', isEqualTo: idTeacher)
+          .orderBy('timeCourse')
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          var data = Grade.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            Grade(
+                id: element.id,
+                student: data.student,
+                cycle: data.cycle,
+                subject: data.subject,
+                note: data.note,
+                timeCourse: data.timeCourse,
+                faults: data.faults,
+                teacher: data.teacher,
+                classe: data.classe),
+          );
+        },
+      );
+      return list;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //cadastro de uma nota
+  Future<bool> insertGrade(Grade grade) async {
+    try {
+      await firestoreInstance.collection('grades').add(grade.toMap());
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //editar uma nota
+  Future<bool> updateGrade(String id, num note, num faults) async {
+    try {
+      await firestoreInstance.collection('grades').doc(id).update({
+        'note': note,
+        'faults': faults,
+      });
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

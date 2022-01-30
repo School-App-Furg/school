@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/aluno/student_report/student_report_generator/model/boletim_model.dart';
-import 'package:school/app/screens/aluno/student_report/student_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
-import 'package:school/app/screens/aluno/student_report/student_report_generator/pdf_gerar/open_pdf.dart';
+import 'student_report_generator/model/boletim_model.dart';
+import 'student_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
+import 'student_report_generator/pdf_gerar/open_pdf.dart';
 
 import '../../../core/models/subject_teacher.dart';
 

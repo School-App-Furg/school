@@ -79,6 +79,7 @@ class _StudentCardState extends State<StudentCard> {
               DataColumn(label: Text('Faltas')),
               DataColumn(label: SizedBox())
             ],
+            columnSpacing: width(context, .08),
             rows: widget.cycle.evaluationStandard == 'Bimestral'
                 ? [
                     laneBimestre(modelList[0]),

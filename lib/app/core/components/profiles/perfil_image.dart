@@ -3,7 +3,6 @@ import 'package:school/app/core/styles/colors.dart';
 
 class PerfilImage extends StatelessWidget {
   final AssetImage image;
-
   const PerfilImage({Key? key, required this.image}) : super(key: key);
   @override
   Widget build(BuildContext context) {

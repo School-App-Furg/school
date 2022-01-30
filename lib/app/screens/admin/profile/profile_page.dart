@@ -1,3 +1,4 @@
+import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/label_text.dart';
@@ -68,6 +69,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     text: 'CNPJ da escola:',
                   ),
                   RoundedInput(
+                    mask: [
+                      CnpjCpfFormatter(
+                        eDocumentType: EDocumentType.CNPJ,
+                      )
+                    ],
                     controller: _controller.cnpjController,
                     hintText: "CNPJ",
                     icon: Icons.corporate_fare_rounded,

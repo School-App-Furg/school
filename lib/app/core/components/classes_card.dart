@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 class ClassesCard extends StatefulWidget {
   const ClassesCard({
@@ -52,7 +53,7 @@ class _ClassesCardState extends State<ClassesCard> {
                     Text(
                       widget.first,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: defaultWhite,
                         fontSize: 22.0,
                         fontWeight: FontWeight.w600,
                       ),
@@ -65,7 +66,7 @@ class _ClassesCardState extends State<ClassesCard> {
                     Text(
                       widget.second,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: defaultWhite,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
                       ),
@@ -73,7 +74,7 @@ class _ClassesCardState extends State<ClassesCard> {
                     Text(
                       widget.third,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: defaultWhite,
                         fontSize: 18.0,
                       ),
                     ),

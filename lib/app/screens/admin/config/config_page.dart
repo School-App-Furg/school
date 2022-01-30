@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 import '../../../core/components/date.dart';
 import '../../../core/components/label_text.dart';
@@ -81,7 +82,8 @@ class _ConfigPageState extends ModularState<ConfigPage, ConfigController> {
                                 ).toList(),
                               ),
                               LabelText(
-                                text: 'Período de postagem de notas:',
+                                text:
+                                    'Período de postagem/atualização de notas:',
                               ),
                               Observer(
                                 builder: (_) {
@@ -133,7 +135,7 @@ class _ConfigPageState extends ModularState<ConfigPage, ConfigController> {
                                     child: Text(
                                       'Atualizar',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: defaultWhite,
                                         fontSize: width(context, .04),
                                       ),
                                     ),

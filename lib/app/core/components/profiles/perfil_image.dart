@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 class PerfilImage extends StatelessWidget {
   final AssetImage image;
@@ -15,10 +16,10 @@ class PerfilImage extends StatelessWidget {
             height: 140, //140
             width: 140,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: defaultWhite,
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white,
+                color: defaultWhite,
                 width: 4, //8
               ),
               image: DecorationImage(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/styles/colors.dart';
 import '../../../core/components/label_text.dart';
 import '../../../core/components/date.dart';
 
@@ -63,7 +64,7 @@ class _NewCyclePageState
                       ).toList(),
                     ),
                     LabelText(
-                      text: 'Período de postagem de notas:',
+                      text: 'Período de postagem/atualização de notas:',
                     ),
                     Row(
                       children: [
@@ -124,7 +125,7 @@ class _NewCyclePageState
                           child: Text(
                             'Cadastrar',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: defaultWhite,
                               fontSize: width(context, .04),
                             ),
                           ),

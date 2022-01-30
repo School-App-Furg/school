@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/form/general_form.dart';
@@ -77,7 +78,7 @@ class _EditTeacherPageState
                             child: Text(
                               'Atualizar',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: defaultWhite,
                                 fontSize: width(context, .04),
                               ),
                             ),

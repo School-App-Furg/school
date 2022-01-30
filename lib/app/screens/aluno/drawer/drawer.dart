@@ -48,7 +48,7 @@ class HomeDrawer extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         Colors.grey.withOpacity(0.0),
-                        Colors.white.withOpacity(0.2),
+                        defaultWhite.withOpacity(0.2),
                       ],
                     ),
                   ),

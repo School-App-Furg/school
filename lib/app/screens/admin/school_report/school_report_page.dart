@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/admin/school_report/school_report_generator/model/boletim_model.dart';
-import 'package:school/app/screens/admin/school_report/school_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
-import 'package:school/app/screens/admin/school_report/school_report_generator/pdf_gerar/open_pdf.dart';
+import 'school_report_generator/model/boletim_model.dart';
+import 'school_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
+import 'school_report_generator/pdf_gerar/open_pdf.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 

@@ -4,7 +4,6 @@ class Grade {
   String? id;
   String student;
   String cycle;
-
   String subject;
   num note;
   num timeCourse;

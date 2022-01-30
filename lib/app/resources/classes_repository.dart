@@ -180,4 +180,65 @@ class ClassesRepository {
       throw Exception(error);
     }
   }
+
+  //---------------------------------Professor ---------------------------------------------
+
+  //Retorna a turma de um aluno
+  Future<List<Classes>?> getClassesForTeacher(
+      String schoolId, String cycle, String teacherId) async {
+    List<Classes> list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('classes')
+          .where('schoolId', isEqualTo: schoolId)
+          .where('cycleId', isEqualTo: cycle)
+          .get();
+      snapshot.docs.forEach(
+        (elementClass) async {
+          bool exist =
+              await getSubjectTeacherForTeacher(elementClass.id, teacherId);
+          if (exist) {
+            Classes turma = Classes.fromJson(
+              json.encode(
+                elementClass.data(),
+              ),
+            );
+            list.add(
+              Classes(
+                id: elementClass.id,
+                schoolId: turma.cycleId,
+                name: turma.name,
+                room: turma.room,
+                cycleId: turma.cycleId,
+                level: turma.level,
+                students: turma.students,
+              ),
+            );
+          }
+        },
+      );
+      return list;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //retorna a lista de disciplinas e o seu professor cadastrado de cada turma
+  Future<bool> getSubjectTeacherForTeacher(String id, String teacherId) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('classes')
+          .doc(id)
+          .collection('subjectTeacher')
+          .where('idTeacher', isEqualTo: teacherId)
+          .get();
+      if (snapshot.docs.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 }

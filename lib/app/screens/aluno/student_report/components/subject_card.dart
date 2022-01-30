@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/models/model_table.dart';
+import '../../../../core/models/result_model.dart';
 
 import '../../../../core/models/cycle.dart';
 import '../../../../core/models/grade.dart';
@@ -6,8 +8,6 @@ import '../../../../core/models/subject_teacher.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/sizes.dart';
 import '../student_report_controller.dart';
-import 'model_table.dart';
-import 'result_model.dart';
 
 class SubjectCard extends StatefulWidget {
   final Cycle cycle;
@@ -42,46 +42,48 @@ class _SubjectCardState extends State<SubjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columnSpacing: width(context, .210),
-      headingTextStyle: TextStyle(fontWeight: FontWeight.bold, color: white),
-      headingRowColor: MaterialStateProperty.resolveWith((states) => primary),
-      columns: [
-        DataColumn(label: Text('Avaliação')),
-        DataColumn(label: Text('Nota Final')),
-        DataColumn(label: Text('Faltas')),
-      ],
-      rows: widget.cycle.evaluationStandard == 'Bimestral'
-          ? [
-              laneBimestre(
-                  modelList[0].periodo, modelList[0].nota, modelList[0].faltas),
-              laneBimestre(
-                  modelList[1].periodo, modelList[1].nota, modelList[1].faltas),
-              laneBimestre(
-                  modelList[2].periodo, modelList[2].nota, modelList[2].faltas),
-              laneBimestre(
-                  modelList[3].periodo, modelList[3].nota, modelList[3].faltas),
-              media(
-                  resultModel.note.toString(),
-                  resultModel.faults.toString(),
-                  widget.controller.getColorGrade(resultModel.note,
-                      widget.grade, widget.cycle.approvalPattern),
-                  Colors.black)
-            ]
-          : [
-              laneTrimestre(
-                  modelList[0].periodo, modelList[0].nota, modelList[0].faltas),
-              laneTrimestre(
-                  modelList[1].periodo, modelList[1].nota, modelList[1].faltas),
-              laneTrimestre(
-                  modelList[2].periodo, modelList[2].nota, modelList[2].faltas),
-              media(
-                  resultModel.note.toString(),
-                  resultModel.faults.toString(),
-                  widget.controller.getColorGrade(resultModel.note,
-                      widget.grade, widget.cycle.approvalPattern),
-                  Colors.black)
-            ],
+    return SizedBox(
+      width: widthAll(context),
+      child: DataTable(
+        headingTextStyle: TextStyle(fontWeight: FontWeight.bold, color: white),
+        headingRowColor: MaterialStateProperty.resolveWith((states) => primary),
+        columns: [
+          DataColumn(label: Text('Avaliação')),
+          DataColumn(label: Text('Nota Final')),
+          DataColumn(label: Text('Faltas')),
+        ],
+        rows: widget.cycle.evaluationStandard == 'Bimestral'
+            ? [
+                laneBimestre(modelList[0].periodo, modelList[0].nota,
+                    modelList[0].faltas),
+                laneBimestre(modelList[1].periodo, modelList[1].nota,
+                    modelList[1].faltas),
+                laneBimestre(modelList[2].periodo, modelList[2].nota,
+                    modelList[2].faltas),
+                laneBimestre(modelList[3].periodo, modelList[3].nota,
+                    modelList[3].faltas),
+                media(
+                    resultModel.note.toString(),
+                    resultModel.faults.toString(),
+                    widget.controller.getColorGrade(resultModel.note,
+                        widget.grade, widget.cycle.approvalPattern),
+                    Colors.black)
+              ]
+            : [
+                laneTrimestre(modelList[0].periodo, modelList[0].nota,
+                    modelList[0].faltas),
+                laneTrimestre(modelList[1].periodo, modelList[1].nota,
+                    modelList[1].faltas),
+                laneTrimestre(modelList[2].periodo, modelList[2].nota,
+                    modelList[2].faltas),
+                media(
+                    resultModel.note.toString(),
+                    resultModel.faults.toString(),
+                    widget.controller.getColorGrade(resultModel.note,
+                        widget.grade, widget.cycle.approvalPattern),
+                    Colors.black)
+              ],
+      ),
     );
   }
 

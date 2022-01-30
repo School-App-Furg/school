@@ -40,21 +40,6 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
     });
   }
 
-  final _$gradesAtom = Atom(name: '_SchoolReportControllerBase.grades');
-
-  @override
-  List<Grade> get grades {
-    _$gradesAtom.reportRead();
-    return super.grades;
-  }
-
-  @override
-  set grades(List<Grade> value) {
-    _$gradesAtom.reportWrite(value, super.grades, () {
-      super.grades = value;
-    });
-  }
-
   final _$cycleAtom = Atom(name: '_SchoolReportControllerBase.cycle');
 
   @override
@@ -67,6 +52,38 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
   set cycle(Cycle? value) {
     _$cycleAtom.reportWrite(value, super.cycle, () {
       super.cycle = value;
+    });
+  }
+
+  final _$subjectTeacherReceivedAtom =
+      Atom(name: '_SchoolReportControllerBase.subjectTeacherReceived');
+
+  @override
+  SubjectTeacher get subjectTeacherReceived {
+    _$subjectTeacherReceivedAtom.reportRead();
+    return super.subjectTeacherReceived;
+  }
+
+  @override
+  set subjectTeacherReceived(SubjectTeacher value) {
+    _$subjectTeacherReceivedAtom
+        .reportWrite(value, super.subjectTeacherReceived, () {
+      super.subjectTeacherReceived = value;
+    });
+  }
+
+  final _$gradesAtom = Atom(name: '_SchoolReportControllerBase.grades');
+
+  @override
+  ObservableList<Grade> get grades {
+    _$gradesAtom.reportRead();
+    return super.grades;
+  }
+
+  @override
+  set grades(ObservableList<Grade> value) {
+    _$gradesAtom.reportWrite(value, super.grades, () {
+      super.grades = value;
     });
   }
 
@@ -117,12 +134,46 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
   }
 
   @override
+  List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.setGrades');
+    try {
+      return super.setGrades(numberOfLines, grade);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  ResultModel calculate(List<Grade> grade, int numberOfLines) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.calculate');
+    try {
+      return super.calculate(grade, numberOfLines);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Color getColorGrade(String nota, List<Grade> grade, String approvalPattern) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.getColorGrade');
+    try {
+      return super.getColorGrade(nota, grade, approvalPattern);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 loading: ${loading},
 classReceived: ${classReceived},
-grades: ${grades},
 cycle: ${cycle},
+subjectTeacherReceived: ${subjectTeacherReceived},
+grades: ${grades},
 students: ${students}
     ''';
   }

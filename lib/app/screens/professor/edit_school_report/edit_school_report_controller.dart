@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:mobx/mobx.dart';
+import '../../../core/models/model_table.dart';
 import '../../../core/components/loader/loader_default.dart';
 
 import '../../../core/models/cycle.dart';
@@ -11,7 +12,6 @@ import '../../../core/service/snackbars.dart';
 
 import '../professor_service.dart';
 
-import '../school_report/components/model_table.dart';
 import '../school_report/school_report_controller.dart';
 
 part 'edit_school_report_controller.g.dart';
@@ -49,7 +49,6 @@ abstract class _EditSchoolReportControllerBase with Store {
   initEditSchoolReport(Cycle cycle, ModelTable modelTable) {
     cycleReceived = cycle;
     modelTableReceived = modelTable;
-
     if (modelTable.nota != '-') {
       noteController.text = modelTable.nota;
       faultsController.text = modelTable.faltas;
@@ -74,7 +73,7 @@ abstract class _EditSchoolReportControllerBase with Store {
             cycle: cycleId,
             subject: subjectId,
             note: int.parse(noteController.text),
-            timeCourse: int.parse(modelTableReceived.periodo),
+            timeCourse: int.parse(modelTableReceived.periodo) - 1,
             faults: int.parse(faultsController.text),
             teacher: teacherId,
             classe: classId);

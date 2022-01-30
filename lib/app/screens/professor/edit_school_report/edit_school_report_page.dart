@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../core/models/model_table.dart';
 
 import '../../../core/components/label_text.dart';
 import '../../../core/components/rounded_label.dart';
 import '../../../core/models/cycle.dart';
 import '../../../core/styles/sizes.dart';
 import 'edit_school_report_controller.dart';
-import '../school_report/components/model_table.dart';
 
 import '../../../core/form/general_form.dart';
 import '../../../core/service/validators.dart';

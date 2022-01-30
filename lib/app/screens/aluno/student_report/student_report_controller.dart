@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import '../../../core/models/model_table.dart';
+import '../../../core/models/result_model.dart';
 
 import '../../../core/models/cycle.dart';
 import '../../../core/models/grade.dart';
@@ -9,8 +11,6 @@ import '../../../core/models/subject_teacher.dart';
 import '../../../core/styles/colors.dart';
 import '../aluno_service.dart';
 import '../home_page/home_controller.dart';
-import 'components/model_table.dart';
-import 'components/result_model.dart';
 
 part 'student_report_controller.g.dart';
 
@@ -46,18 +46,17 @@ abstract class _StudentReportControllerBase with Store {
 
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
     List<ModelTable> list = [];
-    grade.forEach((element) {
+    for (var a = 0; a < numberOfLines; a++) {
       list.add(ModelTable(
-          periodo: element.timeCourse.toString(),
-          nota: element.note.toString(),
-          faltas: element.faults.toString()));
-    });
-    for (var a = 0; a < (numberOfLines - grade.length); a++) {
-      list.add(ModelTable(
-          periodo: (grade.length + (a + 1)).toString(),
-          nota: '-',
-          faltas: '-'));
+          id: '', periodo: (a + 1).toString(), nota: '-', faltas: '-'));
     }
+    grade.forEach((element) {
+      list[element.timeCourse.toInt()] = ModelTable(
+          id: element.id,
+          periodo: (element.timeCourse + 1).toString(),
+          nota: element.note.toString(),
+          faltas: element.faults.toString());
+    });
     return list;
   }
 

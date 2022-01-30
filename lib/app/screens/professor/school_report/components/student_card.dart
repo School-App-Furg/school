@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
+import '../../../../core/models/model_table.dart';
+import '../../../../core/models/result_model.dart';
 
 import '../../../../core/models/student_user.dart';
 
@@ -9,8 +12,6 @@ import '../../../../core/models/grade.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/sizes.dart';
 import '../school_report_controller.dart';
-import 'model_table.dart';
-import 'result_model.dart';
 
 class StudentCard extends StatefulWidget {
   final Cycle cycle;
@@ -37,6 +38,7 @@ class StudentCard extends StatefulWidget {
 class _StudentCardState extends State<StudentCard> {
   List<ModelTable> modelList = [];
   ResultModel resultModel = ResultModel(note: '', faults: '');
+
   @override
   void initState() {
     widget.cycle.evaluationStandard == 'Bimestral'
@@ -54,9 +56,6 @@ class _StudentCardState extends State<StudentCard> {
       elevation: 0,
       color: Colors.white,
       child: RoundedExpansionTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
         title: Text(
           widget.studentUser.name,
           style: TextStyle(fontSize: width(context, .04)),
@@ -68,16 +67,24 @@ class _StudentCardState extends State<StudentCard> {
         ),
         children: [
           DataTable(
-            headingRowHeight: 50,
-            headingTextStyle:
-                TextStyle(fontWeight: FontWeight.bold, color: white),
+            headingTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: white,
+                fontSize: width(context, .04)),
             headingRowColor:
                 MaterialStateProperty.resolveWith((states) => blueicon),
             columns: [
               DataColumn(label: Text('Avaliação')),
-              DataColumn(label: Text('Nota Final')),
+              DataColumn(label: Text('Nota')),
               DataColumn(label: Text('Faltas')),
-              DataColumn(label: SizedBox())
+              if (widget.cycle.initialDate <
+                      DateTime.now().millisecondsSinceEpoch &&
+                  widget.cycle.finalDate >
+                      DateTime.now().millisecondsSinceEpoch)
+                DataColumn(
+                    label: SizedBox(
+                  width: 2,
+                ))
             ],
             rows: widget.cycle.evaluationStandard == 'Bimestral'
                 ? [
@@ -93,12 +100,9 @@ class _StudentCardState extends State<StudentCard> {
                         Colors.black),
                   ]
                 : [
-                    laneTrimestre(modelList[0].periodo, modelList[0].nota,
-                        modelList[0].faltas, '0'),
-                    laneTrimestre(modelList[1].periodo, modelList[1].nota,
-                        modelList[1].faltas, '1'),
-                    laneTrimestre(modelList[2].periodo, modelList[2].nota,
-                        modelList[2].faltas, '2'),
+                    laneTrimestre(modelList[0]),
+                    laneTrimestre(modelList[1]),
+                    laneTrimestre(modelList[2]),
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
@@ -118,46 +122,66 @@ class _StudentCardState extends State<StudentCard> {
         DataCell(Text(modelTable.periodo.toString() + 'º Bimestre')),
         DataCell(Text(modelTable.nota.toString())),
         DataCell(Text(modelTable.faltas.toString())),
-        DataCell(IconButton(
-            onPressed: () {
-              Modular.to.pushNamed("./edit-report", arguments: {
-                'cycle': widget.cycle,
-                'modelTable': modelTable,
-                'studentId': widget.studentUser.id,
-                'classId': widget.controller.classReceived.id,
-                'cycleId': widget.controller.classReceived.cycleId,
-                'subjectId': widget.subjectId,
-                'teacherId': widget.teacherId,
-                'gradeId': modelTable.id
-              });
-            },
-            icon: Icon(
-              Icons.edit,
-              color: blueicon,
-            )))
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(
+            IconButton(
+              onPressed: () {
+                Modular.to.pushNamed(
+                  "./edit-report",
+                  arguments: {
+                    'cycle': widget.cycle,
+                    'modelTable': modelTable,
+                    'studentId': widget.studentUser.id,
+                    'classId': widget.controller.classReceived.id,
+                    'cycleId': widget.controller.classReceived.cycleId,
+                    'subjectId': widget.subjectId,
+                    'teacherId': widget.teacherId,
+                    'gradeId': modelTable.id
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.edit,
+                color: blueicon,
+              ),
+            ),
+          )
       ],
     );
   }
 
-  DataRow laneTrimestre(
-      String periodo, String nota, String faltas, String line) {
+  DataRow laneTrimestre(ModelTable modelTable) {
     return DataRow(
       cells: [
-        DataCell(Text(periodo.toString() + 'º Trimestre')),
-        DataCell(Text(nota.toString())),
-        DataCell(Text(faltas.toString())),
-        DataCell(IconButton(
-            onPressed: () {
-              Modular.to.pushNamed("./edit-report", arguments: {
-                'cycle': widget.cycle,
-                'modelTable':
-                    ModelTable(faltas: faltas, nota: nota, periodo: line),
-              });
-            },
-            icon: Icon(
-              Icons.edit,
-              color: grey,
-            ))),
+        DataCell(Text(modelTable.periodo.toString() + 'º Trimestre')),
+        DataCell(Text(modelTable.nota.toString())),
+        DataCell(Text(modelTable.faltas.toString())),
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(
+            IconButton(
+              onPressed: () {
+                Modular.to.pushNamed(
+                  "./edit-report",
+                  arguments: {
+                    'cycle': widget.cycle,
+                    'modelTable': modelTable,
+                    'studentId': widget.studentUser.id,
+                    'classId': widget.controller.classReceived.id,
+                    'cycleId': widget.controller.classReceived.cycleId,
+                    'subjectId': widget.subjectId,
+                    'teacherId': widget.teacherId,
+                    'gradeId': modelTable.id
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.edit,
+                color: grey,
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -172,7 +196,9 @@ class _StudentCardState extends State<StudentCard> {
         DataCell(Text(faltas,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: colorAttendence))),
-        DataCell(SizedBox()),
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(SizedBox()),
       ],
     );
   }

@@ -1,7 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'edit_school_report/edit_school_report_controller.dart';
-import 'school_report/school_report_controller.dart';
 import 'edit_school_report/edit_school_report_page.dart';
+import 'school_report/school_report_controller.dart';
+
 import 'historic/historic_page.dart';
 
 import 'home_page/home_controller.dart';

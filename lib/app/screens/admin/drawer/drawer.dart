@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/styles/colors.dart';
 import '../../../resources/auth_repository.dart';
 
 import '../../../core/models/school_model.dart';
@@ -51,7 +52,7 @@ class HomeDrawer extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         Colors.grey.withOpacity(0.0),
-                        Colors.white.withOpacity(0.2),
+                        defaultWhite.withOpacity(0.2),
                       ],
                     ),
                   ),

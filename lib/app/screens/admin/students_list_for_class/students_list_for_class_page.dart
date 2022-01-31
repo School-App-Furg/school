@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/models/classes.dart';
@@ -33,6 +34,7 @@ class _StudentsListForClassState
         return controller.loading
             ? LoaderPage()
             : Scaffold(
+                backgroundColor: lightGrey,
                 appBar: AppBar(
                   title: Text(
                     'Alunos',
@@ -50,7 +52,6 @@ class _StudentsListForClassState
                             ),
                           )
                         : ListView.builder(
-                            padding: EdgeInsets.only(top: 10),
                             itemCount: controller.students.length,
                             itemBuilder: (_, index) {
                               var data = controller.students[index];

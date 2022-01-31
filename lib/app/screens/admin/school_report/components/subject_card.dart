@@ -46,7 +46,7 @@ class _SubjectCardState extends State<SubjectCard> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Colors.white,
+      color: defaultWhite,
       child: RoundedExpansionTile(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
@@ -75,7 +75,7 @@ class _SubjectCardState extends State<SubjectCard> {
             headingTextStyle:
                 TextStyle(fontWeight: FontWeight.bold, color: white),
             headingRowColor:
-                MaterialStateProperty.resolveWith((states) => primary),
+                MaterialStateProperty.resolveWith((states) => blueicon),
             columns: [
               DataColumn(label: Text('Avaliação')),
               DataColumn(label: Text('Nota Final')),

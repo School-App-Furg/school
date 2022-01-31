@@ -1,3 +1,4 @@
+import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
 import '../../../core/models/teacher_user.dart';
 
@@ -70,6 +71,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   RoundedInput(
                     controller: _controller.cpfController,
                     hintText: "CPF",
+                    mask: [
+                      CnpjCpfFormatter(
+                        eDocumentType: EDocumentType.CPF,
+                      )
+                    ],
                     icon: Icons.corporate_fare_rounded,
                     keyboardType: TextInputType.number,
                     validator: validateCnpj,

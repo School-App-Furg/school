@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:school/app/core/styles/colors.dart';
 
 import '../../../core/components/label_text.dart';
 import '../../../core/components/loader/loader_page.dart';
@@ -49,10 +50,10 @@ class _EditClassPageState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             LabelText(
-                              text: 'Nome da turma:',
+                              text: 'ID da turma:',
                             ),
                             MyTextFormField(
-                              hintText: 'Nome da turma',
+                              hintText: 'ID da turma',
                               controller: controller.nameController,
                               validator: validateEmpty,
                             ),
@@ -106,7 +107,7 @@ class _EditClassPageState
                                 child: Text(
                                   'Atualizar',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: defaultWhite,
                                   ),
                                 ),
                               ),

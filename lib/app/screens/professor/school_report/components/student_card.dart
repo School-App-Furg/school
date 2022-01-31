@@ -54,7 +54,7 @@ class _StudentCardState extends State<StudentCard> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Colors.white,
+      color: defaultWhite,
       child: RoundedExpansionTile(
         title: Text(
           widget.studentUser.name,

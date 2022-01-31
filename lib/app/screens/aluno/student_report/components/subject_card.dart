@@ -42,11 +42,12 @@ class _SubjectCardState extends State<SubjectCard> {
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: widthAll(context),
       child: DataTable(
         headingTextStyle: TextStyle(fontWeight: FontWeight.bold, color: white),
-        headingRowColor: MaterialStateProperty.resolveWith((states) => primary),
+        headingRowColor: MaterialStateProperty.resolveWith((states) => blueicon),
         columns: [
           DataColumn(label: Text('Avaliação')),
           DataColumn(label: Text('Nota Final')),
@@ -84,6 +85,7 @@ class _SubjectCardState extends State<SubjectCard> {
                     Colors.black)
               ],
       ),
+
     );
   }
 

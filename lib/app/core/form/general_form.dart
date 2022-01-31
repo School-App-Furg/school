@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyTextFormField extends StatelessWidget {
+  final List<TextInputFormatter>? mask;
   final String hintText;
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -19,6 +21,7 @@ class MyTextFormField extends StatelessWidget {
     this.icon,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
+    this.mask,
   }) : super(key: key);
 
   @override
@@ -26,6 +29,7 @@ class MyTextFormField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: TextFormField(
+        inputFormatters: mask,
         controller: controller,
         validator: validator,
         decoration: InputDecoration(

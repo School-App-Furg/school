@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:school/app/core/styles/colors.dart';
 import '../../../core/models/model_table.dart';
+
 
 import '../../../core/components/label_text.dart';
 import '../../../core/components/rounded_label.dart';
@@ -46,6 +49,14 @@ class _EditSchoolReportPageState
 
   @override
   Widget build(BuildContext context) {
+    var maskFormatterNote = new MaskTextInputFormatter(
+      mask: '##,##',
+      filter: {"#": RegExp(r'[0-9]')},
+    );
+    var maskFormatterFaults = new MaskTextInputFormatter(
+      mask: '##',
+      filter: {"#": RegExp(r'[0-9]')},
+    );
     return Observer(
       builder: (_) {
         return Scaffold(
@@ -69,6 +80,7 @@ class _EditSchoolReportPageState
                       text: 'Nota final:',
                     ),
                     MyTextFormField(
+                      mask: [maskFormatterNote],
                       hintText: 'Insira a nota',
                       controller: controller.noteController,
                       validator: validateEmpty,
@@ -78,6 +90,7 @@ class _EditSchoolReportPageState
                       text: 'Total de faltas:',
                     ),
                     MyTextFormField(
+                      mask: [maskFormatterFaults],
                       hintText: 'Insira as faltas',
                       controller: controller.faultsController,
                       validator: validateEmpty,
@@ -104,7 +117,7 @@ class _EditSchoolReportPageState
                                   child: Text(
                                     'Cadastrar',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: defaultWhite,
                                       fontSize: width(context, .04),
                                     ),
                                   ),
@@ -120,7 +133,7 @@ class _EditSchoolReportPageState
                                   child: Text(
                                     'Atualizar',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: defaultWhite,
                                       fontSize: width(context, .04),
                                     ),
                                   ),

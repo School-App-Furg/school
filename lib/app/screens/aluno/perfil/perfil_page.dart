@@ -1,7 +1,7 @@
+import 'package:cnpj_cpf_formatter_nullsafety/cnpj_cpf_formatter_nullsafety.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/label_text.dart';
-
 
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';
@@ -66,6 +66,11 @@ class _PerfilPageState extends State<PerfilPage> {
                     text: 'CPF do aluno:',
                   ),
                   RoundedInput(
+                    mask: [
+                      CnpjCpfFormatter(
+                        eDocumentType: EDocumentType.CPF,
+                      )
+                    ],
                     controller: _controller.cpfController,
                     hintText: "CPF",
                     icon: Icons.description_rounded,

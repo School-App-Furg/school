@@ -94,23 +94,6 @@ class _NewCyclePageState
                         },
                       ).toList(),
                     ),
-                    LabelText(
-                      text: 'Padrão de aprovação por presenças:',
-                    ),
-                    RoundedDropdown(
-                      value: controller.attendance,
-                      onChanged: controller.setAttendance,
-                      hint: "Selecione o padrão de aprovação por presença:",
-                      items: controller.attendanceList
-                          .map<DropdownMenuItem<String>>(
-                        (e) {
-                          return DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e),
-                          );
-                        },
-                      ).toList(),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(

@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'historic/historic_controller.dart';
 import 'historic/historic_page.dart';
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
@@ -12,6 +13,7 @@ class AlunoModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton((i) => HomeController()),
         Bind.lazySingleton((i) => StudentReportController()),
+        Bind.lazySingleton((i) => HistoricController())
       ];
 
   @override
@@ -22,7 +24,10 @@ class AlunoModule extends Module {
                   subjectTeacher: args.data['subjectTeacher'],
                   studentId: args.data['studentId'],
                 )),
-        ChildRoute('/historic', child: (_, args) => HistoricPage()),
+        ChildRoute('/historic',
+            child: (_, args) => HistoricPage(
+                schoolId: args.data['schoolId'],
+                cycleId: args.data['cycleId'])),
         ChildRoute('/profile',
             child: (_, args) =>
                 PerfilPage(studentModel: args.data['studentModel'])),

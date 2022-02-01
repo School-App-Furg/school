@@ -21,6 +21,9 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
+  String actualyCycle = '';
+
+  @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
     cnpj: "",
@@ -38,11 +41,14 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    userStudent = await alunoService.getUserStudentById(user!.uid);
-    schoolModel =
-        await alunoService.getSchoolInformations(userStudent!.schoolId);
+    if (actualyCycle == '') {
+      userStudent = await alunoService.getUserStudentById(user!.uid);
+      schoolModel =
+          await alunoService.getSchoolInformations(userStudent!.schoolId);
+      actualyCycle = schoolModel!.currentCycle;
+    }
     subjects = await alunoService.getSubjectsForStudent(
-        schoolModel!.id!, schoolModel!.currentCycle, userStudent!.id!);
+        schoolModel!.id!, actualyCycle, userStudent!.id!);
     loading = false;
   }
 

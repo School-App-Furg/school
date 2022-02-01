@@ -1,51 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../core/components/cycle_period.dart';
+import 'package:school/app/core/components/loader/loader_page.dart';
+import 'package:school/app/core/models/cycle.dart';
 
-class HistoricPage extends StatelessWidget {
+import 'components/historic_card.dart';
+import 'historic_controller.dart';
+
+class HistoricPage extends StatefulWidget {
+  final String schoolId;
+  final String cycleId;
+  const HistoricPage({
+    Key? key,
+    required this.schoolId,
+    required this.cycleId,
+  }) : super(key: key);
+  @override
+  State<HistoricPage> createState() => _HistoricPageState();
+}
+
+class _HistoricPageState
+    extends ModularState<HistoricPage, HistoricController> {
+  @override
+  void initState() {
+    controller.getCycles(widget.schoolId, widget.cycleId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Histórico de Ciclos'),
-      ),
-      body: Observer(builder: (_) {
-        return ListView.builder(
-          itemCount: 3,
-          //controller.listOfCycles!.length,
-          itemBuilder: (BuildContext context, int index) {
-            //var data = controller.listOfCycles![index];
-            return InkWell(
-              onTap: () {},
-              child: Card(
-                child: ListTile(
-                  title: Row(
-                    children: [
-                      CyclePeriod(
-                        label: '2021/2',
-                        //data.name
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "01/01/21 até 10/04/21",
-                        //data.initialDate.toString()
-                        //data.finalDate.toString()
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ],
-                  ), //data.name),
-                  trailing: Icon(Icons.library_books),
+    return Observer(
+      builder: (_) {
+        return controller.loading
+            ? LoaderPage()
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Histórico de Ciclos'),
                 ),
-              ),
-            );
-          },
-        );
-      }),
+                body: Observer(
+                  builder: (_) {
+                    return ListView.builder(
+                      itemCount: controller.listOfCycles.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Cycle data = controller.listOfCycles[index]!;
+                        return HistoricCard(
+                          cycle: data,
+                          controller: controller,
+                          onTap: () => controller.setCycleToHome(data.id!),
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+      },
     );
   }
 }

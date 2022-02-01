@@ -1,14 +1,15 @@
 import 'dart:convert';
 
 class Cycle {
+  String? id;
   String name;
   String idSchool;
-
   String approvalPattern;
   String evaluationStandard;
   int initialDate;
   int finalDate;
   Cycle({
+    this.id,
     required this.name,
     required this.idSchool,
     required this.approvalPattern,
@@ -19,6 +20,7 @@ class Cycle {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'idSchool': idSchool,
       'approvalPattern': approvalPattern,
@@ -30,6 +32,7 @@ class Cycle {
 
   factory Cycle.fromMap(Map<String, dynamic> map) {
     return Cycle(
+      id: map['id'],
       name: map['name'] ?? '',
       idSchool: map['idSchool'] ?? '',
       approvalPattern: map['approvalPattern'] ?? '',

@@ -48,6 +48,40 @@ class CycleRepository {
     return model;
   }
 
+  //get de lista de ciclos de uma determinada escola
+  Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
+    List<Cycle> list = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
+          .collection('cycles')
+          .where('idSchool', isEqualTo: schoolId)
+          .where(FieldPath.documentId, isNotEqualTo: cycleId)
+          .get();
+      snapshot.docs.forEach(
+        (element) {
+          Cycle cycle = Cycle.fromJson(
+            json.encode(
+              element.data(),
+            ),
+          );
+          list.add(
+            Cycle(
+                id: element.id,
+                approvalPattern: cycle.approvalPattern,
+                evaluationStandard: cycle.evaluationStandard,
+                finalDate: cycle.finalDate,
+                idSchool: cycle.idSchool,
+                initialDate: cycle.initialDate,
+                name: cycle.name),
+          );
+        },
+      );
+    } catch (error) {
+      throw Exception(error);
+    }
+    return list;
+  }
+
   //Cadastra um ciclo de uma escola
   Future<bool> updateCycle(String cicleId, Cycle cycle) async {
     return await firestoreInstance.collection('cycles').doc(cicleId).set({

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/admin/home_page/components/selected_cycle.dart';
 
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
@@ -37,7 +38,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   text: controller.schoolModel!.name,
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
-                  onPressedHistoric: () => Modular.to.pushNamed('./historic'),
+                  onPressedHistoric: () => Modular.to.pushNamed(
+                    './historic',
+                    arguments: {
+                      'schoolId': controller.schoolModel!.id,
+                      'cycleId': controller.schoolModel!.currentCycle
+                    },
+                  ),
                 ),
                 body: Observer(
                   builder: (_) {
@@ -46,36 +53,54 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                             child: Text(
                                 'Nenhuma disciplina foi cadastrada até o momento!'),
                           )
-                        : ListView.builder(
-                            padding: EdgeInsets.all(10.0),
-                            itemCount: controller.subjects.length,
-                            itemBuilder: (context, int index) {
-                              return Container(
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: ClassesCard(
-                                    assetimage: controller.definiBanner(index),
-                                    first: controller.subjects[index].subject,
-                                    second: controller.subjects[index].teacher,
-                                    third: "",
-                                    index: index,
-                                    onTap: () {
-                                      Modular.to.pushNamed(
-                                        './student-report',
-                                        arguments: {
-                                          'studentId':
-                                              controller.userStudent!.id,
-                                          'subjectTeacher':
-                                              controller.subjects[index]
-                                        },
-                                      );
-                                    },
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Visibility(
+                                  visible: controller.actualyCycle !=
+                                      controller.schoolModel!.currentCycle,
+                                  child: SelectedCyclePeriod(
+                                    cycleName: 'Ciclo selecionado: 2021/2',
                                   ),
                                 ),
-                              );
-                            },
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: ScrollPhysics(),
+                                  padding: EdgeInsets.all(10.0),
+                                  itemCount: controller.subjects.length,
+                                  itemBuilder: (context, int index) {
+                                    return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: ClassesCard(
+                                          assetimage:
+                                              controller.definiBanner(index),
+                                          first: controller
+                                              .subjects[index].subject,
+                                          second: controller
+                                              .subjects[index].teacher,
+                                          third: "",
+                                          index: index,
+                                          onTap: () {
+                                            Modular.to.pushNamed(
+                                              './student-report',
+                                              arguments: {
+                                                'studentId':
+                                                    controller.userStudent!.id,
+                                                'subjectTeacher':
+                                                    controller.subjects[index]
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           );
                   },
                 ),

@@ -61,7 +61,11 @@ class AlunoService {
     try {
       List<Classes>? myClass = await _classesRepository.getClassesForStudent(
           schoolId, cycleId, studentId);
-      return await _classesRepository.getSubjectTeacher(myClass![0].id);
+      if (myClass!.length == 0) {
+        return [];
+      } else {
+        return await _classesRepository.getSubjectTeacher(myClass[0].id);
+      }
     } catch (error) {
       throw Exception(error);
     }
@@ -100,6 +104,14 @@ class AlunoService {
     try {
       await _authRepository.requestNewPassword(mail);
       return true;
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
+    try {
+      return await _cycleRepository.getCycles(schoolId, cycleId);
     } catch (error) {
       throw Exception(error);
     }

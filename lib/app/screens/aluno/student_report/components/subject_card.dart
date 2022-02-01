@@ -42,12 +42,12 @@ class _SubjectCardState extends State<SubjectCard> {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       width: widthAll(context),
       child: DataTable(
         headingTextStyle: TextStyle(fontWeight: FontWeight.bold, color: white),
-        headingRowColor: MaterialStateProperty.resolveWith((states) => blueicon),
+        headingRowColor:
+            MaterialStateProperty.resolveWith((states) => blueicon),
         columns: [
           DataColumn(label: Text('Avaliação')),
           DataColumn(label: Text('Nota Final')),
@@ -68,7 +68,13 @@ class _SubjectCardState extends State<SubjectCard> {
                     resultModel.faults.toString(),
                     widget.controller.getColorGrade(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
-                    Colors.black)
+                    Colors.black),
+                exame(
+                    resultModel.note.toString(),
+                    resultModel.faults.toString(),
+                    widget.controller.getColorGradeExame(resultModel.note,
+                        widget.grade, widget.cycle.approvalPattern),
+                    Colors.black),
               ]
             : [
                 laneTrimestre(modelList[0].periodo, modelList[0].nota,
@@ -82,10 +88,15 @@ class _SubjectCardState extends State<SubjectCard> {
                     resultModel.faults.toString(),
                     widget.controller.getColorGrade(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
-                    Colors.black)
+                    Colors.black),
+                exame(
+                    resultModel.note.toString(),
+                    resultModel.faults.toString(),
+                    widget.controller.getColorGradeExame(resultModel.note,
+                        widget.grade, widget.cycle.approvalPattern),
+                    Colors.black),
               ],
       ),
-
     );
   }
 
@@ -114,6 +125,20 @@ class _SubjectCardState extends State<SubjectCard> {
     return DataRow(
       cells: [
         DataCell(Text('Média', style: TextStyle(fontWeight: FontWeight.bold))),
+        DataCell(Text(nota,
+            style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
+        DataCell(Text(faltas,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: colorAttendence))),
+      ],
+    );
+  }
+
+  DataRow exame(
+      String nota, String faltas, Color colorGrade, Color colorAttendence) {
+    return DataRow(
+      cells: [
+        DataCell(Text('Exame', style: TextStyle(fontWeight: FontWeight.bold))),
         DataCell(Text(nota,
             style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
         DataCell(Text(faltas,

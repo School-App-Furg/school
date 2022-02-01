@@ -98,6 +98,12 @@ class _StudentCardState extends State<StudentCard> {
                         widget.controller.getColorGrade(resultModel.note,
                             widget.grades, widget.cycle.approvalPattern),
                         Colors.black),
+                    exame(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        widget.controller.getColorGradeExame(resultModel.note,
+                            widget.grades, widget.cycle.approvalPattern),
+                        Colors.black),
                   ]
                 : [
                     laneTrimestre(modelList[0]),
@@ -108,7 +114,13 @@ class _StudentCardState extends State<StudentCard> {
                         resultModel.faults.toString(),
                         widget.controller.getColorGrade(resultModel.note,
                             widget.grades, widget.cycle.approvalPattern),
-                        Colors.black)
+                        Colors.black),
+                    exame(
+                        resultModel.note.toString(),
+                        resultModel.faults.toString(),
+                        widget.controller.getColorGradeExame(resultModel.note,
+                            widget.grades, widget.cycle.approvalPattern),
+                        Colors.black),
                   ],
           ),
         ],
@@ -199,6 +211,20 @@ class _StudentCardState extends State<StudentCard> {
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
             widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
           DataCell(SizedBox()),
+      ],
+    );
+  }
+
+  DataRow exame(
+      String nota, String faltas, Color colorGrade, Color colorAttendence) {
+    return DataRow(
+      cells: [
+        DataCell(Text('Exame', style: TextStyle(fontWeight: FontWeight.bold))),
+        DataCell(Text(nota,
+            style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
+        DataCell(Text(faltas,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: colorAttendence))),
       ],
     );
   }

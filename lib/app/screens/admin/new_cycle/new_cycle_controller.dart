@@ -76,17 +76,6 @@ abstract class _NewCycleControllerBase with Store {
     score = e;
   }
 
-  //configuração de padrão de aprovação por presenças
-  List attendanceList = ['60%', '70%'];
-
-  @observable
-  String attendance = '';
-
-  @action
-  setAttendance(e) {
-    attendance = e;
-  }
-
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",

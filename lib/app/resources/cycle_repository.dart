@@ -37,9 +37,17 @@ class CycleRepository {
     try {
       await firestoreInstance.collection('cycles').doc(uid).get().then(
         (DocumentSnapshot snapshot) {
-          model = Cycle.fromJson(
+          Cycle data = Cycle.fromJson(
             json.encode(snapshot.data()),
           );
+          model = Cycle(
+              id: snapshot.id,
+              name: data.name,
+              idSchool: data.idSchool,
+              approvalPattern: data.approvalPattern,
+              evaluationStandard: data.evaluationStandard,
+              initialDate: data.initialDate,
+              finalDate: data.finalDate);
         },
       );
     } catch (error) {

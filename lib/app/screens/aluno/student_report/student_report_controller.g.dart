@@ -39,36 +39,21 @@ mixin _$StudentReportController on _StudentReportControllerBase, Store {
     });
   }
 
-  final _$cycleAtom = Atom(name: '_StudentReportControllerBase.cycle');
-
-  @override
-  Cycle? get cycle {
-    _$cycleAtom.reportRead();
-    return super.cycle;
-  }
-
-  @override
-  set cycle(Cycle? value) {
-    _$cycleAtom.reportWrite(value, super.cycle, () {
-      super.cycle = value;
-    });
-  }
-
   final _$initStudentReportAsyncAction =
       AsyncAction('_StudentReportControllerBase.initStudentReport');
 
   @override
-  Future initStudentReport(String studentId, SubjectTeacher subjectTeacher) {
+  Future initStudentReport(
+      String studentId, SubjectTeacher subjectTeacher, Cycle cycle) {
     return _$initStudentReportAsyncAction
-        .run(() => super.initStudentReport(studentId, subjectTeacher));
+        .run(() => super.initStudentReport(studentId, subjectTeacher, cycle));
   }
 
   @override
   String toString() {
     return '''
 loading: ${loading},
-grades: ${grades},
-cycle: ${cycle}
+grades: ${grades}
     ''';
   }
 }

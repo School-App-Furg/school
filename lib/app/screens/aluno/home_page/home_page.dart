@@ -42,25 +42,38 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     './historic',
                     arguments: {
                       'schoolId': controller.schoolModel!.id,
-                      'cycleId': controller.schoolModel!.currentCycle
+                      'cycle': controller.actualyCycle
                     },
                   ),
                 ),
                 body: Observer(
                   builder: (_) {
                     return controller.subjects.length == 0
-                        ? Center(
-                            child: Text(
-                                'Nenhuma disciplina foi cadastrada até o momento!'),
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Visibility(
+                                visible: controller.actualyCycle!.id !=
+                                    controller.schoolModel!.currentCycle,
+                                child: SelectedCyclePeriod(
+                                  cycleName:
+                                      'Ciclo selecionado: ${controller.actualyCycle!.name}',
+                                ),
+                              ),
+                              Text(
+                                  'Nenhuma disciplina foi cadastrada até o momento!'),
+                              SizedBox()
+                            ],
                           )
                         : SingleChildScrollView(
                             child: Column(
                               children: [
                                 Visibility(
-                                  visible: controller.actualyCycle !=
+                                  visible: controller.actualyCycle!.id !=
                                       controller.schoolModel!.currentCycle,
                                   child: SelectedCyclePeriod(
-                                    cycleName: 'Ciclo selecionado: 2021/2',
+                                    cycleName:
+                                        'Ciclo selecionado: ${controller.actualyCycle!.name}',
                                   ),
                                 ),
                                 ListView.builder(
@@ -90,7 +103,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                 'studentId':
                                                     controller.userStudent!.id,
                                                 'subjectTeacher':
-                                                    controller.subjects[index]
+                                                    controller.subjects[index],
+                                                'cycle': controller.actualyCycle
                                               },
                                             );
                                           },

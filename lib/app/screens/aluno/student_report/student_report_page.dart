@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:school/app/core/models/cycle.dart';
+
+import '../../../core/components/loader/loader_page.dart';
+import '../../../core/models/subject_teacher.dart';
+import '../../../core/styles/colors.dart';
+import 'components/subject_card.dart';
+import 'student_report_controller.dart';
 import 'student_report_generator/model/boletim_model.dart';
 import 'student_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
 import 'student_report_generator/pdf_gerar/open_pdf.dart';
 
-import '../../../core/models/subject_teacher.dart';
-
-import '../../../core/components/loader/loader_page.dart';
-import '../../../core/styles/colors.dart';
-import 'components/subject_card.dart';
-import 'student_report_controller.dart';
-
 class StudentReportPage extends StatefulWidget {
   final String studentId;
   final SubjectTeacher subjectTeacher;
+  final Cycle cycle;
 
   const StudentReportPage({
     Key? key,
     required this.studentId,
     required this.subjectTeacher,
+    required this.cycle,
   }) : super(key: key);
   @override
   State<StudentReportPage> createState() => _StudentReportPageState();
@@ -30,7 +33,8 @@ class _StudentReportPageState
   @override
   void initState() {
     super.initState();
-    controller.initStudentReport(widget.studentId, widget.subjectTeacher);
+    controller.initStudentReport(
+        widget.studentId, widget.subjectTeacher, widget.cycle);
   }
 
   @override
@@ -86,7 +90,7 @@ class _StudentReportPageState
                 body: SubjectCard(
                   subjectTeacher: widget.subjectTeacher,
                   grade: controller.grades,
-                  cycle: controller.cycle!,
+                  cycle: widget.cycle,
                   controller: controller,
                 ),
               );

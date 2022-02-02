@@ -59,19 +59,19 @@ mixin _$HistoricController on _HistoricControllerBase, Store {
       AsyncAction('_HistoricControllerBase.getCycles');
 
   @override
-  Future<dynamic> getCycles(String schoolId, String cycleId) {
-    return _$getCyclesAsyncAction.run(() => super.getCycles(schoolId, cycleId));
+  Future<dynamic> getCycles(String schoolId, Cycle cycle) {
+    return _$getCyclesAsyncAction.run(() => super.getCycles(schoolId, cycle));
   }
 
   final _$_HistoricControllerBaseActionController =
       ActionController(name: '_HistoricControllerBase');
 
   @override
-  dynamic setCycleToHome(String cycleId) {
+  dynamic setCycleToHome(Cycle cycle) {
     final _$actionInfo = _$_HistoricControllerBaseActionController.startAction(
         name: '_HistoricControllerBase.setCycleToHome');
     try {
-      return super.setCycleToHome(cycleId);
+      return super.setCycleToHome(cycle);
     } finally {
       _$_HistoricControllerBaseActionController.endAction(_$actionInfo);
     }

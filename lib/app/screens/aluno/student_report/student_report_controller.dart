@@ -19,28 +19,19 @@ class StudentReportController = _StudentReportControllerBase
 
 abstract class _StudentReportControllerBase with Store {
   AlunoService _alunoService = AlunoService();
-  SchoolModel? school = Modular.get<HomeController>().schoolModel;
+
   @observable
   bool loading = false;
 
   @observable
   List<Grade> grades = [];
 
-  @observable
-  Cycle? cycle = Cycle(
-      name: '',
-      idSchool: '',
-      approvalPattern: '',
-      evaluationStandard: '',
-      initialDate: 0,
-      finalDate: 0);
-
   @action
-  initStudentReport(String studentId, SubjectTeacher subjectTeacher) async {
+  initStudentReport(
+      String studentId, SubjectTeacher subjectTeacher, Cycle cycle) async {
     loading = true;
-    cycle = await _alunoService.getCurrentCycle(school!.currentCycle);
     grades = await _alunoService.getGradesForSubject(
-        studentId, school!.currentCycle, subjectTeacher.idSubject);
+        studentId, cycle.id!, subjectTeacher.idSubject);
     loading = false;
   }
 

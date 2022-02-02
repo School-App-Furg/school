@@ -10,11 +10,11 @@ import 'historic_controller.dart';
 
 class HistoricPage extends StatefulWidget {
   final String schoolId;
-  final String cycleId;
+  final Cycle cycle;
   const HistoricPage({
     Key? key,
     required this.schoolId,
-    required this.cycleId,
+    required this.cycle,
   }) : super(key: key);
   @override
   State<HistoricPage> createState() => _HistoricPageState();
@@ -24,7 +24,7 @@ class _HistoricPageState
     extends ModularState<HistoricPage, HistoricController> {
   @override
   void initState() {
-    controller.getCycles(widget.schoolId, widget.cycleId);
+    controller.getCycles(widget.schoolId, widget.cycle);
     super.initState();
   }
 
@@ -47,7 +47,7 @@ class _HistoricPageState
                         return HistoricCard(
                           cycle: data,
                           controller: controller,
-                          onTap: () => controller.setCycleToHome(data.id!),
+                          onTap: () => controller.setCycleToHome(data),
                         );
                       },
                     );

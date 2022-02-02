@@ -12,13 +12,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$actualyCycleAtom = Atom(name: '_HomeControllerBase.actualyCycle');
 
   @override
-  String get actualyCycle {
+  Cycle? get actualyCycle {
     _$actualyCycleAtom.reportRead();
     return super.actualyCycle;
   }
 
   @override
-  set actualyCycle(String value) {
+  set actualyCycle(Cycle? value) {
     _$actualyCycleAtom.reportWrite(value, super.actualyCycle, () {
       super.actualyCycle = value;
     });

@@ -21,13 +21,12 @@ class AlunoModule extends Module {
         ChildRoute('/', child: (_, args) => HomePage()),
         ChildRoute('/student-report',
             child: (_, args) => StudentReportPage(
-                  subjectTeacher: args.data['subjectTeacher'],
-                  studentId: args.data['studentId'],
-                )),
+                subjectTeacher: args.data['subjectTeacher'],
+                studentId: args.data['studentId'],
+                cycle: args.data['cycle'])),
         ChildRoute('/historic',
             child: (_, args) => HistoricPage(
-                schoolId: args.data['schoolId'],
-                cycleId: args.data['cycleId'])),
+                schoolId: args.data['schoolId'], cycle: args.data['cycle'])),
         ChildRoute('/profile',
             child: (_, args) =>
                 PerfilPage(studentModel: args.data['studentModel'])),

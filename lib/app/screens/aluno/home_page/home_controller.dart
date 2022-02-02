@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/models/cycle.dart';
 
 import '../../../core/models/subject_teacher.dart';
 import '../aluno_service.dart';
@@ -21,7 +22,13 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
-  String actualyCycle = '';
+  Cycle? actualyCycle = Cycle(
+      name: "",
+      idSchool: "",
+      approvalPattern: "",
+      evaluationStandard: "",
+      initialDate: 0,
+      finalDate: 0);
 
   @observable
   SchoolModel? schoolModel = SchoolModel(
@@ -41,14 +48,15 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    if (actualyCycle == '') {
+    if (actualyCycle!.name == '') {
       userStudent = await alunoService.getUserStudentById(user!.uid);
       schoolModel =
           await alunoService.getSchoolInformations(userStudent!.schoolId);
-      actualyCycle = schoolModel!.currentCycle;
+      actualyCycle =
+          await alunoService.getCurrentCycle(schoolModel!.currentCycle);
     }
     subjects = await alunoService.getSubjectsForStudent(
-        schoolModel!.id!, actualyCycle, userStudent!.id!);
+        schoolModel!.id!, actualyCycle!.id!, userStudent!.id!);
     loading = false;
   }
 

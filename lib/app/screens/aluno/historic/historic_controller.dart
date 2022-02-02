@@ -28,22 +28,22 @@ abstract class _HistoricControllerBase with Store {
 
   //Solicita as lista de ciclos
   @action
-  Future getCycles(String schoolId, String cycleId) async {
+  Future getCycles(String schoolId, Cycle cycle) async {
     loading = true;
-    listOfCycles = await _alunoService.getCycles(schoolId, cycleId);
+    listOfCycles = await _alunoService.getCycles(schoolId, cycle.id!);
     loading = false;
+  }
+
+  @action
+  setCycleToHome(Cycle cycle) {
+    Modular.get<HomeController>().actualyCycle = cycle;
+    _alunoService.updateHome();
+    Modular.to.pop();
   }
 
   DateFormat format = DateFormat("dd/MM/yyyy");
 
   String convertDate(int date) {
     return format.format(DateTime.fromMillisecondsSinceEpoch(date));
-  }
-
-  @action
-  setCycleToHome(String cycleId) {
-    Modular.get<HomeController>().actualyCycle = cycleId;
-    _alunoService.updateHome();
-    Modular.to.pop();
   }
 }

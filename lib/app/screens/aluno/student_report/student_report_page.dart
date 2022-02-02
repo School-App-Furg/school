@@ -49,43 +49,6 @@ class _StudentReportPageState
                   title: Text(
                     widget.subjectTeacher.subject,
                   ),
-                  actions: [
-                    IconButton(
-                        icon: Icon(Icons.receipt_sharp),
-                        onPressed: () async {
-                          final boletim = Boletim(
-                            items: [
-                              ItensBoletim(
-                                disciplinas: 'Português',
-                                notaBim1: 7.5,
-                                notaBim2: 7.5,
-                                notaBim3: 7.5,
-                                notaBim4: 7.5,
-                                faltaBim1: 3,
-                                faltaBim2: 3,
-                                faltaBim3: 3,
-                                faltaBim4: 3,
-                              ),
-                              ItensBoletim(
-                                disciplinas: 'Matemática',
-                                notaBim1: 7.5,
-                                notaBim2: 7.5,
-                                notaBim3: 7.5,
-                                notaBim4: 7.5,
-                                faltaBim1: 3,
-                                faltaBim2: 3,
-                                faltaBim3: 3,
-                                faltaBim4: 3,
-                              ),
-                            ],
-                          );
-
-                          final pdfFile =
-                              await ReportGenerator.generate(boletim);
-
-                          PdfOpen.openFile(pdfFile);
-                        }),
-                  ],
                 ),
                 body: SubjectCard(
                   subjectTeacher: widget.subjectTeacher,

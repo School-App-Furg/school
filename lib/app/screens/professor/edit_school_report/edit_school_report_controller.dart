@@ -72,7 +72,7 @@ abstract class _EditSchoolReportControllerBase with Store {
             student: studentUser,
             cycle: cycleId,
             subject: subjectId,
-            note: int.parse(noteController.text),
+            note: double.parse(noteController.text),
             timeCourse: int.parse(modelTableReceived.periodo) - 1,
             faults: int.parse(faultsController.text),
             teacher: teacherId,
@@ -102,7 +102,7 @@ abstract class _EditSchoolReportControllerBase with Store {
         loader.show();
         bool inserted = await _professorService.updateGrade(
           gradeId,
-          int.parse(noteController.text),
+          double.parse(noteController.text),
           int.parse(faultsController.text),
         );
         if (inserted) {

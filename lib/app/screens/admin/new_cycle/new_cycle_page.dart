@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../core/styles/colors.dart';
-import '../../../core/components/label_text.dart';
-import '../../../core/components/date.dart';
 
+import '../../../core/components/date.dart';
+import '../../../core/components/label_text.dart';
 import '../../../core/components/rounded_dropdown.dart';
 import '../../../core/form/general_form.dart';
 import '../../../core/service/validators.dart';
+import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
-
 import 'new_cycle_controller.dart';
 
 class NewCyclePage extends StatefulWidget {

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../core/styles/colors.dart';
+
+import '../../../core/models/cycle.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/models/classes.dart';
+import '../../../core/styles/colors.dart';
 import 'components/student_card.dart';
 import 'students_list_for_class_controller.dart';
 
 class StudentsListForClass extends StatefulWidget {
   final Classes classe;
+  final Cycle cycle;
   const StudentsListForClass({
     Key? key,
     required this.classe,
+    required this.cycle,
   }) : super(key: key);
 
   @override
@@ -57,13 +61,14 @@ class _StudentsListForClassState
                               var data = controller.students[index];
                               return StudentCard(
                                 studentUser: data!,
-                                onTap: () =>
-                                    Modular.to.pushNamed('./school-report',
-                                        arguments: {
-                                          'classe': widget.classe,
-                                          'studentId': data.id,
-                                        },
-                                        forRoot: true),
+                                onTap: () => Modular.to.pushNamed(
+                                    './school-report',
+                                    arguments: {
+                                      'classe': widget.classe,
+                                      'studentId': data.id,
+                                      'cycle': widget.cycle
+                                    },
+                                    forRoot: true),
                               );
                             },
                           );

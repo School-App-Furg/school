@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/admin/historic/historic_controller.dart';
+import 'historic/historic_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';
@@ -53,8 +53,8 @@ class AdminModule extends Module {
           child: (_, args) => HomePage(),
         ),
         ChildRoute('/students-list-class',
-            child: (_, args) =>
-                StudentsListForClass(classe: args.data['classe'])),
+            child: (_, args) => StudentsListForClass(
+                classe: args.data['classe'], cycle: args.data['cycle'])),
         ChildRoute('/teachers-list', child: (_, args) => TeacherListPage()),
         ChildRoute('/students-list', child: (_, args) => StudentListPage()),
         ChildRoute('/edit-class',

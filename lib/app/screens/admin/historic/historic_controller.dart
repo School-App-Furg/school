@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
+import '../admin_service.dart';
 
 import '../home_page/home_controller.dart';
 

@@ -74,9 +74,10 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
       AsyncAction('_SchoolReportControllerBase.initSchoolReport');
 
   @override
-  Future initSchoolReport(Classes classes, String studentId) {
+  Future initSchoolReport(
+      Classes classes, String studentId, Cycle cycleReceived) {
     return _$initSchoolReportAsyncAction
-        .run(() => super.initSchoolReport(classes, studentId));
+        .run(() => super.initSchoolReport(classes, studentId, cycleReceived));
   }
 
   final _$_SchoolReportControllerBaseActionController =

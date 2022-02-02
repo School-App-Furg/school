@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/components/cycle_period.dart';
 import '../../../../core/models/cycle.dart';
-
 import '../historic_controller.dart';
 
 class HistoricCard extends StatelessWidget {

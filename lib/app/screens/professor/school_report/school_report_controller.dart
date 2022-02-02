@@ -43,7 +43,8 @@ abstract class _SchoolReportControllerBase with Store {
       SubjectTeacher(idSubject: '', subject: '', idTeacher: '', teacher: '');
 
   @action
-  initSchoolReport(Classes classe, SubjectTeacher subjectTeacher) async {
+  initSchoolReport(Classes classe, SubjectTeacher subjectTeacher,
+      Cycle cycleReceived) async {
     loading = true;
     classReceived = classe;
     subjectTeacherReceived = subjectTeacher;
@@ -53,7 +54,7 @@ abstract class _SchoolReportControllerBase with Store {
         classReceived.cycleId,
         subjectTeacherReceived.idSubject,
         subjectTeacherReceived.idTeacher);
-    cycle = await _professorService.getCurrentCycle(school!.currentCycle);
+    cycle = cycleReceived;
     loading = false;
   }
 

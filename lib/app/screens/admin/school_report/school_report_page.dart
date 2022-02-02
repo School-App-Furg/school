@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'school_report_generator/model/boletim_model.dart';
-import 'school_report_generator/pdf_gerar/gerar_boletim_pdfi.dart';
-import 'school_report_generator/pdf_gerar/open_pdf.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 
@@ -47,43 +44,6 @@ class _SchoolReportPageState
                   title: Text(
                     'Boletim',
                   ),
-                  actions: [
-                    IconButton(
-                        icon: Icon(Icons.receipt_sharp),
-                        onPressed: () async {
-                          final boletim = Boletim(
-                            items: [
-                              ItensBoletim(
-                                disciplinas: 'Português',
-                                notaBim1: 7.5,
-                                notaBim2: 7.5,
-                                notaBim3: 7.5,
-                                notaBim4: 7.5,
-                                faltaBim1: 3,
-                                faltaBim2: 3,
-                                faltaBim3: 3,
-                                faltaBim4: 3,
-                              ),
-                              ItensBoletim(
-                                disciplinas: 'Matemática',
-                                notaBim1: 7.5,
-                                notaBim2: 7.5,
-                                notaBim3: 7.5,
-                                notaBim4: 7.5,
-                                faltaBim1: 3,
-                                faltaBim2: 3,
-                                faltaBim3: 3,
-                                faltaBim4: 3,
-                              ),
-                            ],
-                          );
-
-                          final pdfFile =
-                              await ReportGenerator.generate(boletim);
-
-                          PdfOpen.openFile(pdfFile);
-                        }),
-                  ],
                 ),
                 body: ListView.builder(
                   itemCount: controller.classReceived.subjectTeachers!.length,

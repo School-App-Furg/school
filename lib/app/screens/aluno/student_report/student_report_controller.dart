@@ -77,4 +77,20 @@ abstract class _StudentReportControllerBase with Store {
     }
     return cor;
   }
+
+  Color getColorGradeExame(
+      String nota, List<Grade> grade, String approvalPattern) {
+    Color cor;
+    if (grade.length == 4) {
+      double exame = 5;
+      if (double.parse(nota) >= exame) {
+        cor = green;
+      } else {
+        cor = red;
+      }
+    } else {
+      cor = Colors.black;
+    }
+    return cor;
+  }
 }

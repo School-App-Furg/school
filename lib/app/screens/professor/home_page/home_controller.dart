@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/models/cycle.dart';
 
 import '../../../core/models/classes.dart';
 import '../../../core/models/school_model.dart';
@@ -33,15 +34,28 @@ abstract class _HomeControllerBase with Store {
   @observable
   bool loading = false;
 
+  @observable
+  Cycle? actualyCycle = Cycle(
+      name: "",
+      idSchool: "",
+      approvalPattern: "",
+      evaluationStandard: "",
+      initialDate: 0,
+      finalDate: 0);
+
   //Solicita as informações da escola ao firebase
   @action
   Future initHome() async {
     loading = true;
-    teacherUser = await professorService.getUserTeacherById(user!.uid);
-    schoolModel =
-        await professorService.getSchoolInformations(teacherUser!.schoolId);
+    if (actualyCycle!.name == '') {
+      teacherUser = await professorService.getUserTeacherById(user!.uid);
+      schoolModel =
+          await professorService.getSchoolInformations(teacherUser!.schoolId);
+      actualyCycle =
+          await professorService.getCurrentCycle(schoolModel!.currentCycle);
+    }
     classes = await professorService.getClasses(
-        teacherUser!.schoolId, schoolModel!.currentCycle);
+        teacherUser!.schoolId, actualyCycle!.id!);
     await setSubjectTeacher(classes!, teacherUser!.id!);
     loading = false;
   }

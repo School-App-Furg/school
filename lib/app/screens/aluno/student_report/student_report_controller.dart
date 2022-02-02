@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:mobx/mobx.dart';
 import '../../../core/models/model_table.dart';
 import '../../../core/models/result_model.dart';
 
 import '../../../core/models/cycle.dart';
 import '../../../core/models/grade.dart';
-import '../../../core/models/school_model.dart';
+
 import '../../../core/models/subject_teacher.dart';
 import '../../../core/styles/colors.dart';
 import '../aluno_service.dart';
-import '../home_page/home_controller.dart';
 
 part 'student_report_controller.g.dart';
 

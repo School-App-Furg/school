@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../core/styles/colors.dart';
 import '../../../core/models/model_table.dart';
 
 import '../../../core/components/label_text.dart';

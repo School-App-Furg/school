@@ -2,18 +2,22 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/core/styles/colors.dart';
-import '../../../resources/auth_repository.dart';
+
+import 'package:school/app/core/models/cycle.dart';
 
 import '../../../core/models/school_model.dart';
+import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
+import '../../../resources/auth_repository.dart';
 
 class HomeDrawer extends StatelessWidget {
   final SchoolModel? schoolModel;
+  final Cycle cycle;
   final AuthRepository? authRepository;
   const HomeDrawer({
     Key? key,
     required this.schoolModel,
+    required this.cycle,
     this.authRepository,
   }) : super(key: key);
 
@@ -105,39 +109,43 @@ class HomeDrawer extends StatelessWidget {
                             'authRepository': authRepository
                           }),
                     ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.class__outlined,
-                        color: Colors.black,
+                    if (cycle.id == schoolModel!.currentCycle)
+                      ListTile(
+                        leading: Icon(
+                          Icons.class__outlined,
+                          color: Colors.black,
+                        ),
+                        title: Text("Disciplinas"),
+                        onTap: () => Modular.to.pushNamed('./subjects-list'),
                       ),
-                      title: Text("Disciplinas"),
-                      onTap: () => Modular.to.pushNamed('./subjects-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
+                    if (cycle.id == schoolModel!.currentCycle)
+                      ListTile(
+                        leading: Icon(
+                          Icons.switch_account_outlined,
+                          color: Colors.black,
+                        ),
+                        title: Text("Professores"),
+                        onTap: () => Modular.to.pushNamed('./teachers-list'),
                       ),
-                      title: Text("Professores"),
-                      onTap: () => Modular.to.pushNamed('./teachers-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.switch_account_outlined,
-                        color: Colors.black,
+                    if (cycle.id == schoolModel!.currentCycle)
+                      ListTile(
+                        leading: Icon(
+                          Icons.switch_account_outlined,
+                          color: Colors.black,
+                        ),
+                        title: Text("Alunos"),
+                        onTap: () => Modular.to.pushNamed('./students-list'),
                       ),
-                      title: Text("Alunos"),
-                      onTap: () => Modular.to.pushNamed('./students-list'),
-                    ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.settings_applications_outlined,
-                        color: Colors.black,
+                    if (cycle.id == schoolModel!.currentCycle)
+                      ListTile(
+                        leading: Icon(
+                          Icons.settings_applications_outlined,
+                          color: Colors.black,
+                        ),
+                        title: Text("Configurações"),
+                        onTap: () => Modular.to.pushNamed('./config',
+                            arguments: {'schoolId': schoolModel!.id}),
                       ),
-                      title: Text("Configurações"),
-                      onTap: () => Modular.to.pushNamed('./config',
-                          arguments: {'schoolId': schoolModel!.id}),
-                    ),
                     ListTile(
                       leading: Icon(
                         Icons.logout,

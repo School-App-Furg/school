@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/admin/historic/historic_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';
@@ -42,6 +43,7 @@ class AdminModule extends Module {
         Bind.lazySingleton((i) => EditSubjectController()),
         Bind.lazySingleton((i) => StudentsListForClassController()),
         Bind.lazySingleton((i) => SchoolReportController()),
+        Bind.lazySingleton((i) => HistoricController())
       ];
 
   @override
@@ -63,9 +65,9 @@ class AdminModule extends Module {
                 ProfilePage(schoolModel: args.data['schoolModel'])),
         ChildRoute('/school-report',
             child: (_, args) => SchoolReportPage(
-                  classe: args.data['classe'],
-                  studentId: args.data['studentId'],
-                )),
+                classe: args.data['classe'],
+                studentId: args.data['studentId'],
+                cycle: args.data['cycle'])),
         ChildRoute('/config',
             child: (_, args) => ConfigPage(schoolId: args.data['schoolId'])),
         ChildRoute('/new-cycle', child: (_, args) => NewCyclePage()),
@@ -75,7 +77,9 @@ class AdminModule extends Module {
         ChildRoute('/subjects-list', child: (_, args) => SubjectsListPage()),
         ChildRoute('/edit-subject',
             child: (_, args) => EditSubjectPage(subject: args.data['subject'])),
-        ChildRoute('/historic', child: (_, args) => HistoricPage()),
+        ChildRoute('/historic',
+            child: (_, args) => HistoricPage(
+                schoolId: args.data['schoolId'], cycle: args.data['cycle'])),
         ChildRoute('/register-class', child: (_, args) => RegisterClassPage()),
       ];
 }

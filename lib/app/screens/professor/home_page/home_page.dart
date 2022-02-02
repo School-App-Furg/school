@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/core/components/selected_cycle.dart';
 
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
@@ -37,63 +38,101 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   onPressedDrawer: () =>
                       controller.scaffoldKey.currentState?.openDrawer(),
                   text: controller.schoolModel!.name,
-                  onPressedHistoric: () => Modular.to.pushNamed('./historic'),
+                  onPressedHistoric: () => Modular.to.pushNamed(
+                    './historic',
+                    arguments: {
+                      'schoolId': controller.schoolModel!.id,
+                      'cycle': controller.actualyCycle
+                    },
+                  ),
                 ),
                 body: Observer(
                   builder: (_) {
                     return controller.classes!.length == 0
-                        ? Padding(
-                            padding: const EdgeInsets.only(left: 40, right: 40),
-                            child: Center(
-                              child: Text(
-                                'Você ainda não pertence a nenhuma turma, solicite ao administrador da escola!',
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.center,
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Visibility(
+                                visible: controller.actualyCycle!.id !=
+                                    controller.schoolModel!.currentCycle,
+                                child: SelectedCyclePeriod(
+                                  cycleName:
+                                      'Ciclo selecionado: ${controller.actualyCycle!.name}',
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 40, right: 40),
+                                child: Text(
+                                  'Você ainda não pertence a nenhuma turma, solicite ao administrador da escola!',
+                                  style: TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox()
+                            ],
                           )
-                        : ListView.builder(
-                            padding: EdgeInsets.all(10.0),
-                            itemCount: controller.classes!.length,
-                            itemBuilder: (context, int index1) {
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: controller
-                                    .classes![index1].subjectTeachers!.length,
-                                itemBuilder: (context, int index2) {
-                                  return Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 5.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: ClassesCard(
-                                        assetimage:
-                                            controller.definiBanner(index1),
-                                        first:
-                                            '${controller.classes![index1].level}º ano - ${controller.classes![index1].subjectTeachers![index2].subject}',
-                                        second:
-                                            'Sala ${controller.classes![index1].room}',
-                                        third: controller.classes![index1].name,
-                                        index: index1,
-                                        onTap: () {
-                                          Modular.to.pushNamed(
-                                            './school-report',
-                                            arguments: {
-                                              'classe':
-                                                  controller.classes![index1],
-                                              'subjectTeacher': controller
-                                                  .classes![index1]
-                                                  .subjectTeachers![index2]
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                        : SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Visibility(
+                                  visible: controller.actualyCycle!.id !=
+                                      controller.schoolModel!.currentCycle,
+                                  child: SelectedCyclePeriod(
+                                    cycleName:
+                                        'Ciclo selecionado: ${controller.actualyCycle!.name}',
+                                  ),
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: ScrollPhysics(),
+                                  padding: EdgeInsets.all(10.0),
+                                  itemCount: controller.classes!.length,
+                                  itemBuilder: (context, int index1) {
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: controller.classes![index1]
+                                          .subjectTeachers!.length,
+                                      itemBuilder: (context, int index2) {
+                                        return Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: ClassesCard(
+                                              assetimage: controller
+                                                  .definiBanner(index1),
+                                              first:
+                                                  '${controller.classes![index1].level}º ano - ${controller.classes![index1].subjectTeachers![index2].subject}',
+                                              second:
+                                                  'Sala ${controller.classes![index1].room}',
+                                              third: controller
+                                                  .classes![index1].name,
+                                              index: index1,
+                                              onTap: () {
+                                                Modular.to.pushNamed(
+                                                  './school-report',
+                                                  arguments: {
+                                                    'classe': controller
+                                                        .classes![index1],
+                                                    'subjectTeacher': controller
+                                                            .classes![index1]
+                                                            .subjectTeachers![
+                                                        index2]
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           );
                   },
                 ),

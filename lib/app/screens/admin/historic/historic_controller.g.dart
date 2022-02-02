@@ -12,13 +12,13 @@ mixin _$HistoricController on _HistoricControllerBase, Store {
   final _$listOfCyclesAtom = Atom(name: '_HistoricControllerBase.listOfCycles');
 
   @override
-  List<Cycle>? get listOfCycles {
+  List<Cycle?> get listOfCycles {
     _$listOfCyclesAtom.reportRead();
     return super.listOfCycles;
   }
 
   @override
-  set listOfCycles(List<Cycle>? value) {
+  set listOfCycles(List<Cycle?> value) {
     _$listOfCyclesAtom.reportWrite(value, super.listOfCycles, () {
       super.listOfCycles = value;
     });
@@ -40,11 +40,49 @@ mixin _$HistoricController on _HistoricControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_HistoricControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$getCyclesAsyncAction =
+      AsyncAction('_HistoricControllerBase.getCycles');
+
+  @override
+  Future<dynamic> getCycles(String schoolId, Cycle cycle) {
+    return _$getCyclesAsyncAction.run(() => super.getCycles(schoolId, cycle));
+  }
+
+  final _$_HistoricControllerBaseActionController =
+      ActionController(name: '_HistoricControllerBase');
+
+  @override
+  dynamic setCycleToHome(Cycle cycle) {
+    final _$actionInfo = _$_HistoricControllerBaseActionController.startAction(
+        name: '_HistoricControllerBase.setCycleToHome');
+    try {
+      return super.setCycleToHome(cycle);
+    } finally {
+      _$_HistoricControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 listOfCycles: ${listOfCycles},
-cycleSelected: ${cycleSelected}
+cycleSelected: ${cycleSelected},
+loading: ${loading}
     ''';
   }
 }

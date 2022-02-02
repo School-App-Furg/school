@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../styles/colors.dart';
 
 class PerfilImage extends StatelessWidget {
   final AssetImage image;

@@ -40,10 +40,11 @@ abstract class _SchoolReportControllerBase with Store {
       finalDate: 0);
 
   @action
-  initSchoolReport(Classes classes, String studentId) async {
+  initSchoolReport(
+      Classes classes, String studentId, Cycle cycleReceived) async {
     loading = true;
     classReceived = classes;
-    cycle = await _adminService.getCurrentCycle(school!.currentCycle);
+    cycle = cycleReceived;
     grades = await _adminService.getGrades(studentId, classes.cycleId);
     loading = false;
   }

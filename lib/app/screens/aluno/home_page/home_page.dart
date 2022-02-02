@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/admin/home_page/components/selected_cycle.dart';
+import '../../../core/components/selected_cycle.dart';
 
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
@@ -103,8 +103,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                 'studentId':
                                                     controller.userStudent!.id,
                                                 'subjectTeacher':
-                                                    controller.subjects[index],
-                                                'cycle': controller.actualyCycle
+                                                    controller.subjects[index]
                                               },
                                             );
                                           },

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/professor/historic/historic_controller.dart';
 
 import 'edit_school_report/edit_school_report_controller.dart';
 import 'edit_school_report/edit_school_report_page.dart';
@@ -18,6 +19,7 @@ class ProfessorModule extends Module {
         Bind.lazySingleton((i) => HomeController()),
         Bind.lazySingleton((i) => SchoolReportController()),
         Bind.lazySingleton((i) => EditSchoolReportController()),
+        Bind.lazySingleton((i) => HistoricController())
       ];
 
   @override
@@ -41,6 +43,8 @@ class ProfessorModule extends Module {
             child: (_, args) => SchoolReportPage(
                 classe: args.data['classe'],
                 subjectTeacher: args.data['subjectTeacher'])),
-        ChildRoute('/historic', child: (_, args) => HistoricPage()),
+        ChildRoute('/historic',
+            child: (_, args) => HistoricPage(
+                schoolId: args.data['schoolId'], cycle: args.data['cycle'])),
       ];
 }

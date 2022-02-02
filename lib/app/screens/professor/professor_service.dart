@@ -143,6 +143,14 @@ class ProfessorService {
     }
   }
 
+  Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
+    try {
+      return await _cycleRepository.getCycles(schoolId, cycleId);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
   updateHome() {
     Modular.get<HomeController>().initHome();
   }

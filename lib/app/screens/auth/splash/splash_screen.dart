@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../core/styles/colors.dart';
 import '../auth_service.dart';
 import '../../../resources/auth_repository.dart';
 

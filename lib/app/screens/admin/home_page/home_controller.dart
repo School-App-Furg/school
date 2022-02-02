@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:school/app/core/models/cycle.dart';
 
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
@@ -21,6 +22,15 @@ abstract class _HomeControllerBase with Store {
   User? user = Modular.get<AuthRepository>().usuario;
 
   @observable
+  Cycle? actualyCycle = Cycle(
+      name: "",
+      idSchool: "",
+      approvalPattern: "",
+      evaluationStandard: "",
+      initialDate: 0,
+      finalDate: 0);
+
+  @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
     cnpj: "",
@@ -36,10 +46,15 @@ abstract class _HomeControllerBase with Store {
   @action
   Future initHome() async {
     loading = true;
-    userAdmin = await adminService.getUserAdminById(user!.uid);
-    schoolModel = await adminService.getSchoolInformations(userAdmin!.schoolId);
-    classes = await adminService.getClasses(
-        userAdmin!.schoolId, schoolModel!.currentCycle);
+    if (actualyCycle!.name == '') {
+      userAdmin = await adminService.getUserAdminById(user!.uid);
+      schoolModel =
+          await adminService.getSchoolInformations(userAdmin!.schoolId);
+      actualyCycle =
+          await adminService.getCurrentCycle(schoolModel!.currentCycle);
+    }
+    classes =
+        await adminService.getClasses(userAdmin!.schoolId, actualyCycle!.id!);
     await setSubjectTeacher(classes!);
     loading = false;
   }
@@ -94,7 +109,7 @@ abstract class _HomeControllerBase with Store {
       classes.subjectTeachers!.forEach((element) async {
         await adminService.deleteSubjectTeacher(element, classes.id!);
       });
-      bool deleted = await adminService.deleteClass(classes.id!);     
+      bool deleted = await adminService.deleteClass(classes.id!);
       Navigator.of(context).pop();
       if (deleted) {
         adminService.updateHome();

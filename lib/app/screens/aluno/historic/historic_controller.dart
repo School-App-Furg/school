@@ -2,8 +2,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
-import 'package:school/app/screens/aluno/aluno_service.dart';
-import 'package:school/app/screens/aluno/home_page/home_controller.dart';
+import '../aluno_service.dart';
+import '../home_page/home_controller.dart';
 
 import '../../../core/models/cycle.dart';
 

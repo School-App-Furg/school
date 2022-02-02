@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../core/models/cycle.dart';
 
 import '../../../core/models/classes.dart';
+import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/subject_teacher.dart';
 import '../../../core/models/teacher_user.dart';

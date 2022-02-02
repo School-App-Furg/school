@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:school/app/core/styles/colors.dart';
 import '../../../core/models/model_table.dart';
-
 
 import '../../../core/components/label_text.dart';
 import '../../../core/components/rounded_label.dart';
@@ -49,10 +49,6 @@ class _EditSchoolReportPageState
 
   @override
   Widget build(BuildContext context) {
-    var maskFormatterNote = new MaskTextInputFormatter(
-      mask: '##,##',
-      filter: {"#": RegExp(r'[0-9]')},
-    );
     var maskFormatterFaults = new MaskTextInputFormatter(
       mask: '##',
       filter: {"#": RegExp(r'[0-9]')},
@@ -80,10 +76,13 @@ class _EditSchoolReportPageState
                       text: 'Nota final:',
                     ),
                     MyTextFormField(
-                      mask: [maskFormatterNote],
+                      mask: [
+                        (FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9.]{0,4}$'))),
+                      ],
                       hintText: 'Insira a nota',
                       controller: controller.noteController,
-                      validator: validateEmpty,
+                      validator: validateNote10,
                       keyboardType: TextInputType.number,
                     ),
                     LabelText(

@@ -225,6 +225,9 @@ class _StudentCardState extends State<StudentCard> {
         DataCell(Text(faltas,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: colorAttendence))),
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(SizedBox()),
       ],
     );
   }

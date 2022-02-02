@@ -103,7 +103,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                 'studentId':
                                                     controller.userStudent!.id,
                                                 'subjectTeacher':
-                                                    controller.subjects[index]
+                                                    controller.subjects[index],
+                                                'cycle': controller.actualyCycle
                                               },
                                             );
                                           },

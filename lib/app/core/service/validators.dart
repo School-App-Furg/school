@@ -12,6 +12,13 @@ String? validateEmpty(value) {
   return null;
 }
 
+String? validateNote10(value) {
+  if (double.parse(value) > 10) {
+    return 'Nota inválida';
+  }
+  return null;
+}
+
 String? validateEmptyMultiSelect(value) {
   if (value == null || value.isEmpty) {
     return 'Dados obrigatórios';

@@ -49,10 +49,6 @@ class _EditSchoolReportPageState
 
   @override
   Widget build(BuildContext context) {
-    var maskFormatterNote = new MaskTextInputFormatter(
-      mask: '##.##',
-      filter: {"#": RegExp(r'[0-9]')},
-    );
     var maskFormatterFaults = new MaskTextInputFormatter(
       mask: '##',
       filter: {"#": RegExp(r'[0-9]')},
@@ -81,12 +77,12 @@ class _EditSchoolReportPageState
                     ),
                     MyTextFormField(
                       mask: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^(10|\d)[.,](\.\d{1,2})?$')),
+                        (FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9.]{0,4}$'))),
                       ],
                       hintText: 'Insira a nota',
                       controller: controller.noteController,
-                      validator: validateEmpty,
+                      validator: validateNote10,
                       keyboardType: TextInputType.number,
                     ),
                     LabelText(

@@ -66,13 +66,13 @@ class _SubjectCardState extends State<SubjectCard> {
                 media(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGrade(resultModel.note,
+                    widget.controller.getColorGradeBi(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
                     Colors.black),
                 exame(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGradeExame(resultModel.note,
+                    widget.controller.getColorGradeExameBi(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
                     Colors.black),
               ]
@@ -86,13 +86,13 @@ class _SubjectCardState extends State<SubjectCard> {
                 media(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGrade(resultModel.note,
+                    widget.controller.getColorGradeTri(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
                     Colors.black),
                 exame(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGradeExame(resultModel.note,
+                    widget.controller.getColorGradeExameTri(resultModel.note,
                         widget.grade, widget.cycle.approvalPattern),
                     Colors.black),
               ],

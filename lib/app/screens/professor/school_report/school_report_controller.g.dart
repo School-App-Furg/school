@@ -157,17 +157,6 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
   }
 
   @override
-  Color getColorGrade(String nota, List<Grade> grade, String approvalPattern) {
-    final _$actionInfo = _$_SchoolReportControllerBaseActionController
-        .startAction(name: '_SchoolReportControllerBase.getColorGrade');
-    try {
-      return super.getColorGrade(nota, grade, approvalPattern);
-    } finally {
-      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 loading: ${loading},

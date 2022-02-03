@@ -188,7 +188,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                     "./students-list-class",
                                                     arguments: {
                                                       'classe': controller
-                                                          .classes![index]
+                                                          .classes![index],
+                                                      'cycle': controller
+                                                          .actualyCycle
                                                     },
                                                   ),
                                                 ),

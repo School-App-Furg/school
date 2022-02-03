@@ -42,11 +42,11 @@ class _StudentCardState extends State<StudentCard> {
   @override
   void initState() {
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? modelList = widget.controller.setGrades(4, widget.grades)
-        : modelList = widget.controller.setGrades(3, widget.grades);
+        ? modelList = widget.controller.setGrades(5, widget.grades)
+        : modelList = widget.controller.setGrades(4, widget.grades);
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? resultModel = widget.controller.calculate(widget.grades, 4)
-        : resultModel = widget.controller.calculate(widget.grades, 3);
+        ? resultModel = widget.controller.calculate(widget.grades, 5)
+        : resultModel = widget.controller.calculate(widget.grades, 4);
     super.initState();
   }
 
@@ -92,6 +92,7 @@ class _StudentCardState extends State<StudentCard> {
                     laneBimestre(modelList[1]),
                     laneBimestre(modelList[2]),
                     laneBimestre(modelList[3]),
+                    laneExame(modelList[4]),
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
@@ -109,6 +110,7 @@ class _StudentCardState extends State<StudentCard> {
                     laneTrimestre(modelList[0]),
                     laneTrimestre(modelList[1]),
                     laneTrimestre(modelList[2]),
+                    laneExame(modelList[3]),
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
@@ -167,6 +169,41 @@ class _StudentCardState extends State<StudentCard> {
     return DataRow(
       cells: [
         DataCell(Text(modelTable.periodo.toString() + 'º Trimestre')),
+        DataCell(Text(modelTable.nota.toString())),
+        DataCell(Text(modelTable.faltas.toString())),
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(
+            IconButton(
+              onPressed: () {
+                Modular.to.pushNamed(
+                  "./edit-report",
+                  arguments: {
+                    'cycle': widget.cycle,
+                    'modelTable': modelTable,
+                    'studentId': widget.studentUser.id,
+                    'classId': widget.controller.classReceived.id,
+                    'cycleId': widget.controller.classReceived.cycleId,
+                    'subjectId': widget.subjectId,
+                    'teacherId': widget.teacherId,
+                    'gradeId': modelTable.id
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.edit,
+                color: grey,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  DataRow laneExame(ModelTable modelTable) {
+    return DataRow(
+      cells: [
+        DataCell(Text('Exame')),
         DataCell(Text(modelTable.nota.toString())),
         DataCell(Text(modelTable.faltas.toString())),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&

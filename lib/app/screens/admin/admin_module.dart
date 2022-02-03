@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'historic/historic_controller.dart';
 
 import 'config/config_controller.dart';
 import 'config/config_page.dart';
@@ -9,6 +8,7 @@ import 'edit_subject/edit_subject_controller.dart';
 import 'edit_subject/edit_subject_page.dart';
 import 'edit_teacher/edit_teacher_controller.dart';
 import 'edit_teacher/edit_teacher_page.dart';
+import 'historic/historic_controller.dart';
 import 'historic/historic_page.dart';
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';

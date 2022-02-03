@@ -111,6 +111,18 @@ class GradesRepository {
     }
   }
 
+  //cadastro de uma nota
+  Future<bool> insertMultipleGrades(List<Grade> listOfGrades) async {
+    try {
+      listOfGrades.forEach((element) async {
+        await firestoreInstance.collection('grades').add(element.toMap());
+      });
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   //editar uma nota
   Future<bool> updateGrade(String id, num note, num faults) async {
     try {

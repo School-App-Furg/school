@@ -43,6 +43,18 @@ class _SchoolReportPageState
                 appBar: AppBar(
                   title: Text(
                       '${widget.subjectTeacher.subject} - ${widget.classe.level}º ano, ${widget.classe.name}'),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          Modular.to.pushNamed('./add-grades', arguments: {
+                            'classe': widget.classe,
+                            'cycle': widget.cycle,
+                            'subjectTeacher': widget.subjectTeacher,
+                            'listOfStudents': controller.students
+                          });
+                        },
+                        icon: Icon(Icons.add_outlined))
+                  ],
                 ),
                 body: ListView.builder(
                   itemCount: controller.students.length,

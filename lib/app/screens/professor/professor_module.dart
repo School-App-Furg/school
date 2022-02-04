@@ -52,9 +52,11 @@ class ProfessorModule extends Module {
                 schoolId: args.data['schoolId'], cycle: args.data['cycle'])),
         ChildRoute('/add-grades',
             child: (_, args) => AddGradesPage(
-                classe: args.data['classe'],
-                cycle: args.data['cycle'],
-                subjectTeacher: args.data['subjectTeacher'],
-                listOfStudents: args.data['listOfStudents']))
+                  classe: args.data['classe'],
+                  cycle: args.data['cycle'],
+                  subjectTeacher: args.data['subjectTeacher'],
+                  listOfStudents: args.data['listOfStudents'],
+                  grades: args.data['grades'],
+                ))
       ];
 }

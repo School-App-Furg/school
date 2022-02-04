@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../aluno_service.dart';
-
-import '../../../resources/auth_repository.dart';
 
 import '../../../core/models/student_user.dart';
 import '../../../core/service/snackbars.dart';
+import '../../../resources/auth_repository.dart';
+import '../aluno_service.dart';
 
 part 'perfil_controller.g.dart';
 

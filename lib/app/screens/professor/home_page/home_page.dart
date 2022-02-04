@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../core/components/selected_cycle.dart';
 
 import '../../../core/components/classes_card.dart';
 import '../../../core/components/loader/loader_page.dart';
+import '../../../core/components/selected_cycle.dart';
 import '../drawer/drawer.dart';
 import 'components/app_bar_home.dart';
 import 'home_controller.dart';
@@ -86,7 +86,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: ScrollPhysics(),
-                                  padding: EdgeInsets.all(10.0),
                                   itemCount: controller.classes!.length,
                                   itemBuilder: (context, int index1) {
                                     return ListView.builder(
@@ -96,8 +95,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                           .subjectTeachers!.length,
                                       itemBuilder: (context, int index2) {
                                         return Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 5.0),
+                                          margin: const EdgeInsets.only(
+                                              left: 10.0,
+                                              right: 10,
+                                              bottom: 5,
+                                              top: 5),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10),

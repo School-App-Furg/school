@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/models/cycle.dart';
@@ -28,12 +29,15 @@ abstract class _AddGradesControllerBase with Store {
 
   late SubjectTeacher subjectTeacher;
 
+  late List<Grade> grades;
+
   @action
   initAddGrades(Classes classeReceived, Cycle cycleReceived,
-      SubjectTeacher subjectTeacherReceived) async {
+      SubjectTeacher subjectTeacherReceived, List<Grade> gradesReceived) async {
     loading = true;
     cycle = cycleReceived;
     classe = classeReceived;
+    grades = gradesReceived;
     subjectTeacher = subjectTeacherReceived;
     loading = false;
   }
@@ -111,23 +115,10 @@ abstract class _AddGradesControllerBase with Store {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
       try {
-        List<Grade> listOfGrades = [];
         loader.show();
-        studentsSelected.forEach(
-          (element) {
-            listOfGrades.add(Grade(
-                student: element,
-                cycle: cycle.id!,
-                subject: subjectTeacher.idSubject,
-                note: double.parse(noteController.text),
-                timeCourse: getCyclePeriod(cyclePeriod),
-                faults: int.parse(faultsController.text),
-                teacher: subjectTeacher.idTeacher,
-                classe: classe.id!));
-          },
-        );
-        bool inserted =
-            await _professorService.insertMultipleGrades(listOfGrades);
+
+        bool inserted = await registerGrades();
+
         if (inserted) {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
@@ -143,5 +134,44 @@ abstract class _AddGradesControllerBase with Store {
         buildSnackBarUi(context, e.toString());
       }
     }
+  }
+
+  Future<bool> registerGrades() async {
+    List<String> toRemove = [];
+    studentsSelected.forEach(
+      (elementStudent) {
+        grades.forEach(
+          (elementGrade) async {
+            if (elementGrade.student == elementStudent &&
+                elementGrade.timeCourse == getCyclePeriod(cyclePeriod) &&
+                elementGrade.classe == classe.id!) {
+              await _professorService.updateGrade(
+                elementGrade.id!,
+                double.parse(noteController.text),
+                int.parse(faultsController.text),
+              );
+            }
+          },
+        );
+      },
+    );
+    toRemove.forEach((element) {
+      studentsSelected.remove(element);
+    });
+    studentsSelected.forEach((element) async {
+      await _professorService.insertGrade(
+        Grade(
+            student: element,
+            cycle: cycle.id!,
+            subject: subjectTeacher.idSubject,
+            note: double.parse(noteController.text),
+            timeCourse: getCyclePeriod(cyclePeriod),
+            faults: int.parse(faultsController.text),
+            teacher: subjectTeacher.idTeacher,
+            classe: classe.id!),
+      );
+    });
+
+    return true;
   }
 }

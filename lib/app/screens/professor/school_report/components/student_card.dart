@@ -42,11 +42,11 @@ class _StudentCardState extends State<StudentCard> {
   @override
   void initState() {
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? modelList = widget.controller.setGrades(4, widget.grades)
-        : modelList = widget.controller.setGrades(3, widget.grades);
+        ? modelList = widget.controller.setGrades(5, widget.grades)
+        : modelList = widget.controller.setGrades(4, widget.grades);
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? resultModel = widget.controller.calculate(widget.grades, 4)
-        : resultModel = widget.controller.calculate(widget.grades, 3);
+        ? resultModel = widget.controller.calculate(widget.grades, 5)
+        : resultModel = widget.controller.calculate(widget.grades, 4);
     super.initState();
   }
 
@@ -67,6 +67,8 @@ class _StudentCardState extends State<StudentCard> {
         ),
         children: [
           DataTable(
+            horizontalMargin: 20,
+            columnSpacing: 10,
             headingTextStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: white,
@@ -81,10 +83,7 @@ class _StudentCardState extends State<StudentCard> {
                       DateTime.now().millisecondsSinceEpoch &&
                   widget.cycle.finalDate >
                       DateTime.now().millisecondsSinceEpoch)
-                DataColumn(
-                    label: SizedBox(
-                  width: 2,
-                ))
+                DataColumn(label: SizedBox()),
             ],
             rows: widget.cycle.evaluationStandard == 'Bimestral'
                 ? [

@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/models/cycle.dart';
-
 import 'components/historic_card.dart';
 import 'historic_controller.dart';
 

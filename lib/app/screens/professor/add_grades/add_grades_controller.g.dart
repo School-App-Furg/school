@@ -107,9 +107,9 @@ mixin _$AddGradesController on _AddGradesControllerBase, Store {
 
   @override
   Future initAddGrades(Classes classeReceived, Cycle cycleReceived,
-      SubjectTeacher subjectTeacherReceived) {
-    return _$initAddGradesAsyncAction.run(() => super
-        .initAddGrades(classeReceived, cycleReceived, subjectTeacherReceived));
+      SubjectTeacher subjectTeacherReceived, List<Grade> gradesReceived) {
+    return _$initAddGradesAsyncAction.run(() => super.initAddGrades(
+        classeReceived, cycleReceived, subjectTeacherReceived, gradesReceived));
   }
 
   final _$insertAsyncAction = AsyncAction('_AddGradesControllerBase.insert');

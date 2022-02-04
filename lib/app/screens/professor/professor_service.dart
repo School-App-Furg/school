@@ -139,15 +139,6 @@ class ProfessorService {
     }
   }
 
-  //cadastrar nota
-  Future<bool> insertMultipleGrades(List<Grade> listOfGrades) async {
-    try {
-      return await _gradesRepository.insertMultipleGrades(listOfGrades);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
   Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
     try {
       return await _cycleRepository.getCycles(schoolId, cycleId);

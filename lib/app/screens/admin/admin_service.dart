@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../core/models/grade.dart';
-import '../../resources/grades_repository.dart';
 
 import '../../core/models/classes.dart';
 import '../../core/models/cycle.dart';
-
+import '../../core/models/grade.dart';
 import '../../core/models/school_model.dart';
 import '../../core/models/student_user.dart';
 import '../../core/models/subject.dart';
@@ -15,6 +13,7 @@ import '../../core/models/user_admin.dart';
 import '../../resources/auth_repository.dart';
 import '../../resources/classes_repository.dart';
 import '../../resources/cycle_repository.dart';
+import '../../resources/grades_repository.dart';
 import '../../resources/school_repository.dart';
 import '../../resources/subjects_repository.dart';
 import '../../resources/users_repository.dart';

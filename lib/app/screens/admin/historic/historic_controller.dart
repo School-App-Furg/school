@@ -1,11 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import '../admin_service.dart';
-
-import '../home_page/home_controller.dart';
 
 import '../../../core/models/cycle.dart';
+import '../admin_service.dart';
+import '../home_page/home_controller.dart';
 
 part 'historic_controller.g.dart';
 

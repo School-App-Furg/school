@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../core/models/cycle.dart';
-
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/models/classes.dart';
+import '../../../core/models/cycle.dart';
 import '../../../core/models/subject_teacher.dart';
 import 'components/student_card.dart';
 import 'school_report_controller.dart';
@@ -43,6 +42,19 @@ class _SchoolReportPageState
                 appBar: AppBar(
                   title: Text(
                       '${widget.subjectTeacher.subject} - ${widget.classe.level}º ano, ${widget.classe.name}'),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          Modular.to.pushNamed('./add-grades', arguments: {
+                            'classe': widget.classe,
+                            'cycle': widget.cycle,
+                            'subjectTeacher': widget.subjectTeacher,
+                            'listOfStudents': controller.students,
+                            'grades': controller.grades
+                          });
+                        },
+                        icon: Icon(Icons.add_outlined))
+                  ],
                 ),
                 body: ListView.builder(
                   itemCount: controller.students.length,

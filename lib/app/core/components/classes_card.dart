@@ -33,7 +33,6 @@ class _ClassesCardState extends State<ClassesCard> {
         children: [
           Container(
             height: 140,
-            //margin: const EdgeInsets.symmetric(vertical: 5.0),
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               image: DecorationImage(

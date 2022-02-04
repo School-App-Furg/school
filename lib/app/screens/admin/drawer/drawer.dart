@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/models/cycle.dart';
-
 import '../../../core/models/school_model.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';

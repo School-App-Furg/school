@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:school/app/screens/professor/professor_service.dart';
 
 import '../../../core/models/school_model.dart';
 import '../../../core/models/teacher_user.dart';
@@ -23,7 +24,7 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthRepository _authRepository = AuthRepository();
-
+    ProfessorService _professorService = ProfessorService();
     return Container(
       width: width(context, 0.7),
       height: double.infinity,
@@ -94,8 +95,9 @@ class HomeDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                     title: Text("Tela inicial"),
-                    onTap: () =>
-                        Modular.to.popUntil(ModalRoute.withName('/professor/')),
+                    onTap: () {
+                      _professorService.updateHome();
+                    },
                   ),
                   ListTile(
                     leading: Icon(

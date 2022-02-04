@@ -19,18 +19,25 @@ class AddGradesController = _AddGradesControllerBase with _$AddGradesController;
 abstract class _AddGradesControllerBase with Store {
   ProfessorService _professorService = ProfessorService();
   GlobalKey<FormState> formKey = GlobalKey();
+
+  //controladores do inputs da tela
   TextEditingController noteController = TextEditingController();
   TextEditingController faultsController = TextEditingController();
 
+  //booleano que acompanha o carregamento
   @observable
   bool loading = false;
 
+  //ciclo recebido
   late Cycle cycle;
 
+  //disciplina com o seu respectivo professor
   late SubjectTeacher subjectTeacher;
 
+  //listagem de notas
   late List<Grade> grades;
 
+  //carregamento inicial da tela
   @action
   initAddGrades(Classes classeReceived, Cycle cycleReceived,
       SubjectTeacher subjectTeacherReceived, List<Grade> gradesReceived) async {
@@ -42,10 +49,12 @@ abstract class _AddGradesControllerBase with Store {
     loading = false;
   }
 
+  //turma recebida
   @observable
   Classes classe =
       Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
+  //listagem de estudantes
   @observable
   List<StudentUser> students = [];
 
@@ -64,6 +73,7 @@ abstract class _AddGradesControllerBase with Store {
     );
   }
 
+  //listagem de aluno selecionados
   @observable
   List<StudentUser> listOfStudentsSelected = [];
 
@@ -83,9 +93,16 @@ abstract class _AddGradesControllerBase with Store {
     'Exame'
   ];
 
+  //codigo do ciclo
   @observable
   String cyclePeriod = '';
 
+  @action
+  setCycleSelected(e) {
+    cyclePeriod = e;
+  }
+
+  //pega o o codigo do periodo
   @action
   int getCyclePeriod(String e) {
     int b = 0;
@@ -105,20 +122,14 @@ abstract class _AddGradesControllerBase with Store {
     return b;
   }
 
-  @action
-  setCycleSelected(e) {
-    cyclePeriod = e;
-  }
-
+  //função de inserção de notas
   @action
   insert(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
       try {
         loader.show();
-
         bool inserted = await registerGrades();
-
         if (inserted) {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
@@ -136,6 +147,7 @@ abstract class _AddGradesControllerBase with Store {
     }
   }
 
+  //cadastro de notas
   Future<bool> registerGrades() async {
     List<String> toRemove = [];
     studentsSelected.forEach(
@@ -159,20 +171,21 @@ abstract class _AddGradesControllerBase with Store {
     toRemove.forEach((element) {
       studentsSelected.remove(element);
     });
-    studentsSelected.forEach((element) async {
-      await _professorService.insertGrade(
-        Grade(
-            student: element,
-            cycle: cycle.id!,
-            subject: subjectTeacher.idSubject,
-            note: double.parse(noteController.text),
-            timeCourse: getCyclePeriod(cyclePeriod),
-            faults: int.parse(faultsController.text),
-            teacher: subjectTeacher.idTeacher,
-            classe: classe.id!),
-      );
-    });
-
+    studentsSelected.forEach(
+      (element) async {
+        await _professorService.insertGrade(
+          Grade(
+              student: element,
+              cycle: cycle.id!,
+              subject: subjectTeacher.idSubject,
+              note: double.parse(noteController.text),
+              timeCourse: getCyclePeriod(cyclePeriod),
+              faults: int.parse(faultsController.text),
+              teacher: subjectTeacher.idTeacher,
+              classe: classe.id!),
+        );
+      },
+    );
     return true;
   }
 }

@@ -59,6 +59,7 @@ abstract class _SchoolReportControllerBase with Store {
     return lista;
   }
 
+  @action
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
     List<ModelTable> list = [];
     for (var a = 0; a < numberOfLines; a++) {
@@ -75,11 +76,21 @@ abstract class _SchoolReportControllerBase with Store {
     return list;
   }
 
+  @action
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
     num faults = 0;
+    List<Grade> list = [];
     grade.forEach((element) {
-      average = average + element.note.toInt();
+      if (element.timeCourse == numberOfLines) {
+        list.add(element);
+      }
+    });
+    list.forEach((element) {
+      grade.remove(element);
+    });
+    grade.forEach((element) {
+      average = average + element.note.toDouble();
       faults = faults + element.faults.toInt();
     });
     average = average / numberOfLines;
@@ -87,68 +98,35 @@ abstract class _SchoolReportControllerBase with Store {
         note: average.toStringAsFixed(2), faults: faults.toString());
   }
 
-  Color getColorGradeBi(
-      String nota, List<Grade> grade, String approvalPattern) {
+  Color getColorGrade(String nota, List<Grade> grade, String approvalPattern,
+      String evaluationStandard, bool isExam) {
     Color cor;
-    if (grade.length == 4) {
-      double media =
-          double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
-      if (double.parse(nota) >= media) {
-        cor = green;
-      } else {
-        cor = red;
-      }
+    double media;
+    if (isExam) {
+      media = 5;
     } else {
-      cor = Colors.black;
+      media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
     }
-    return cor;
-  }
-
-  Color getColorGradeExameBi(
-      String nota, List<Grade> grade, String approvalPattern) {
-    Color cor;
-    if (grade.length == 4) {
-      double exame = 5;
-      if (double.parse(nota) >= exame) {
-        cor = green;
+    if (evaluationStandard == 'Bimestral') {
+      if (grade.length == 4) {
+        if (double.parse(nota) >= media) {
+          cor = green;
+        } else {
+          cor = red;
+        }
       } else {
-        cor = red;
+        cor = Colors.black;
       }
     } else {
-      cor = Colors.black;
-    }
-    return cor;
-  }
-
-  Color getColorGradeTri(
-      String nota, List<Grade> grade, String approvalPattern) {
-    Color cor;
-    if (grade.length == 3) {
-      double media =
-          double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
-      if (double.parse(nota) >= media) {
-        cor = green;
+      if (grade.length == 3) {
+        if (double.parse(nota) >= media) {
+          cor = green;
+        } else {
+          cor = red;
+        }
       } else {
-        cor = red;
+        cor = Colors.black;
       }
-    } else {
-      cor = Colors.black;
-    }
-    return cor;
-  }
-
-  Color getColorGradeExameTri(
-      String nota, List<Grade> grade, String approvalPattern) {
-    Color cor;
-    if (grade.length == 3) {
-      double exame = 5;
-      if (double.parse(nota) >= exame) {
-        cor = green;
-      } else {
-        cor = red;
-      }
-    } else {
-      cor = Colors.black;
     }
     return cor;
   }

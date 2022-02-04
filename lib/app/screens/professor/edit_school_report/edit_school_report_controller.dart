@@ -26,12 +26,18 @@ abstract class _EditSchoolReportControllerBase with Store {
   TextEditingController noteController = TextEditingController();
   TextEditingController faultsController = TextEditingController();
 
-  List<String>? trimestral = ["1º Trimestre", "2º Trimestre", "3º Trimestre"];
+  List<String>? trimestral = [
+    "1º Trimestre",
+    "2º Trimestre",
+    "3º Trimestre",
+    "Exame"
+  ];
   List<String>? bimestral = [
     "1º Bimestre",
     "2º Bimestre",
     "3º Bimestre",
-    "4º Bimestre"
+    "4º Bimestre",
+    "Exame"
   ];
 
   @observable

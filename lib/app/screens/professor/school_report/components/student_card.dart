@@ -94,15 +94,22 @@ class _StudentCardState extends State<StudentCard> {
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        widget.controller.getColorGradeBi(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
+                        widget.controller.getColorGrade(
+                            resultModel.note,
+                            widget.grades,
+                            widget.cycle.approvalPattern,
+                            widget.cycle.evaluationStandard,
+                            false),
                         Colors.black),
-                    exame(
-                        resultModel.note.toString(),
-                        resultModel.faults.toString(),
-                        widget.controller.getColorGradeExameBi(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
-                        Colors.black),
+                    laneExame(
+                      modelList[4],
+                      widget.controller.getColorGrade(
+                          resultModel.note,
+                          widget.grades,
+                          widget.cycle.approvalPattern,
+                          widget.cycle.evaluationStandard,
+                          true),
+                    ),
                   ]
                 : [
                     laneTrimestre(modelList[0]),
@@ -111,17 +118,22 @@ class _StudentCardState extends State<StudentCard> {
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        widget.controller.getColorGradeTri(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
-                        Colors.black),
-                    exame(
-                        resultModel.note.toString(),
-                        resultModel.faults.toString(),
-                        widget.controller.getColorGradeExameTri(
+                        widget.controller.getColorGrade(
                             resultModel.note,
                             widget.grades,
-                            widget.cycle.approvalPattern),
+                            widget.cycle.approvalPattern,
+                            widget.cycle.evaluationStandard,
+                            false),
                         Colors.black),
+                    laneExame(
+                      modelList[3],
+                      widget.controller.getColorGrade(
+                          resultModel.note,
+                          widget.grades,
+                          widget.cycle.approvalPattern,
+                          widget.cycle.evaluationStandard,
+                          true),
+                    ),
                   ],
           ),
         ],
@@ -191,7 +203,45 @@ class _StudentCardState extends State<StudentCard> {
               },
               icon: Icon(
                 Icons.edit,
-                color: grey,
+                color: blueicon,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  DataRow laneExame(ModelTable modelTable, Color color) {
+    return DataRow(
+      cells: [
+        DataCell(Text('Exame')),
+        DataCell(Text(
+          modelTable.nota.toString(),
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+        )),
+        DataCell(Text(modelTable.faltas.toString())),
+        if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+          DataCell(
+            IconButton(
+              onPressed: () {
+                Modular.to.pushNamed(
+                  "./edit-report",
+                  arguments: {
+                    'cycle': widget.cycle,
+                    'modelTable': modelTable,
+                    'studentId': widget.studentUser.id,
+                    'classId': widget.controller.classReceived.id,
+                    'cycleId': widget.controller.classReceived.cycleId,
+                    'subjectId': widget.subjectId,
+                    'teacherId': widget.teacherId,
+                    'gradeId': modelTable.id
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.edit,
+                color: blueicon,
               ),
             ),
           ),

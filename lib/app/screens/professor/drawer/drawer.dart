@@ -86,43 +86,41 @@ class HomeDrawer extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    ListTile(
-                      leading: Icon(
-                        Icons.home_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Tela inicial"),
-                      onTap: () => Modular.to
-                          .popUntil(ModalRoute.withName('/professor/')),
+              Column(
+                children: [
+                  ListTile(
+                    leading: Icon(
+                      Icons.home_outlined,
+                      color: Colors.black,
                     ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.person_outline_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Perfil"),
-                      onTap: () =>
-                          Modular.to.pushNamed('./profile-page', arguments: {
-                        'teacherUser': teacherUser,
-                      }),
+                    title: Text("Tela inicial"),
+                    onTap: () =>
+                        Modular.to.popUntil(ModalRoute.withName('/professor/')),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_outline_outlined,
+                      color: Colors.black,
                     ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                      title: Text("Sair"),
-                      onTap: () {
-                        _authRepository.logout();
-                        Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/login');
-                      },
-                    )
-                  ],
-                ),
+                    title: Text("Perfil"),
+                    onTap: () =>
+                        Modular.to.pushNamed('./profile-page', arguments: {
+                      'teacherUser': teacherUser,
+                    }),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                    ),
+                    title: Text("Sair"),
+                    onTap: () {
+                      _authRepository.logout();
+                      Modular.to.pop();
+                      Modular.to.pushReplacementNamed('/auth/login');
+                    },
+                  )
+                ],
               )
             ],
           ),

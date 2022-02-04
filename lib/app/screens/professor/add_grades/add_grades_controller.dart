@@ -145,6 +145,7 @@ abstract class _AddGradesControllerBase with Store {
             if (elementGrade.student == elementStudent &&
                 elementGrade.timeCourse == getCyclePeriod(cyclePeriod) &&
                 elementGrade.classe == classe.id!) {
+              toRemove.add(elementStudent);
               await _professorService.updateGrade(
                 elementGrade.id!,
                 double.parse(noteController.text),

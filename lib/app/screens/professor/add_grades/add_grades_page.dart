@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:school/app/core/styles/sizes.dart';
 import '../../../core/models/grade.dart';
 
 import '../../../core/components/label_text.dart';
@@ -134,19 +135,30 @@ class _AddGradesPageState
                                 onConfirm: controller.setStudentsSelected,
                                 initialValue:
                                     controller.listOfStudentsSelected),
+                            Padding(
+                              padding: EdgeInsets.all(15),
+                              child: LabelText(
+                                text:
+                                    'Caso o aluno ja possua uma nota no período selecionado, a nota será atualizada.',
+                              ),
+                            ),
                             Center(
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.blueAccent,
-                                ),
+                                    primary: Colors.blueAccent,
+                                    minimumSize: Size(width(context, .04),
+                                        height(context, .05))),
                                 onPressed: () {
                                   controller.insert(context);
                                 },
                                 child: Text(
                                   'Cadastrar',
                                   style: TextStyle(
-                                    color: defaultWhite,
-                                  ),
+                                      color: defaultWhite,
+                                      fontSize: width(
+                                        context,
+                                        .04,
+                                      )),
                                 ),
                               ),
                             ),

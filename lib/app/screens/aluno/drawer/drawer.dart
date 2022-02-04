@@ -38,21 +38,19 @@ class HomeDrawer extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          SizedBox(
-            child: ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 4.0,
-                  sigmaY: 4.0,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.grey.withOpacity(0.0),
-                        defaultWhite.withOpacity(0.2),
-                      ],
-                    ),
+          ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 4.0,
+                sigmaY: 4.0,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.grey.withOpacity(0.0),
+                      defaultWhite.withOpacity(0.2),
+                    ],
                   ),
                 ),
               ),
@@ -81,43 +79,40 @@ class HomeDrawer extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    ListTile(
-                      leading: Icon(
-                        Icons.home_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Tela inicial"),
-                      onTap: () =>
-                          Modular.to.popUntil(ModalRoute.withName('/aluno/')),
+              Column(
+                children: [
+                  ListTile(
+                    leading: Icon(
+                      Icons.home_outlined,
+                      color: Colors.black,
                     ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.person_outline_outlined,
-                        color: Colors.black,
-                      ),
-                      title: Text("Perfil"),
-                      onTap: () =>
-                          Modular.to.pushNamed('./profile', arguments: {
-                        'studentModel': studentUser,
-                      }),
+                    title: Text("Tela inicial"),
+                    onTap: () =>
+                        Modular.to.popUntil(ModalRoute.withName('/aluno/')),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_outline_outlined,
+                      color: Colors.black,
                     ),
-                    ListTile(
-                      leading: Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                      title: Text("Sair"),
-                      onTap: () {
-                        _authRepository.logout();
-                        Modular.to.pop();
-                        Modular.to.pushReplacementNamed('/auth/login');
-                      },
-                    )
-                  ],
-                ),
+                    title: Text("Perfil"),
+                    onTap: () => Modular.to.pushNamed('./profile', arguments: {
+                      'studentModel': studentUser,
+                    }),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                    ),
+                    title: Text("Sair"),
+                    onTap: () {
+                      _authRepository.logout();
+                      Modular.to.pop();
+                      Modular.to.pushReplacementNamed('/auth/login');
+                    },
+                  )
+                ],
               )
             ],
           ),

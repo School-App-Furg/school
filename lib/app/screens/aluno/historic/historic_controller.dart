@@ -13,20 +13,16 @@ class HistoricController = _HistoricControllerBase with _$HistoricController;
 
 abstract class _HistoricControllerBase with Store {
   AlunoService _alunoService = AlunoService();
-  Cycle? cycle;
 
-  //lista de ciclos da escola
-  @observable
-  List<Cycle?> listOfCycles = [];
-
-  //ciclo selecionadas
-  @observable
-  List<String> cycleSelected = [];
-
+  //acompanhamento do carregamento da requisição
   @observable
   bool loading = false;
 
-  //Solicita as lista de ciclos
+//lista de ciclos da escola
+  @observable
+  List<Cycle?> listOfCycles = [];
+
+  //solicita as lista de ciclos
   @action
   Future getCycles(String schoolId, Cycle cycle) async {
     loading = true;
@@ -34,6 +30,7 @@ abstract class _HistoricControllerBase with Store {
     loading = false;
   }
 
+  //altera o ciclo existente na home screen
   @action
   setCycleToHome(Cycle cycle) {
     Modular.get<HomeController>().actualyCycle = cycle;
@@ -41,8 +38,8 @@ abstract class _HistoricControllerBase with Store {
     Modular.to.pop();
   }
 
+  //formatação do tipo data
   DateFormat format = DateFormat("dd/MM/yyyy");
-
   String convertDate(int date) {
     return format.format(DateTime.fromMillisecondsSinceEpoch(date));
   }

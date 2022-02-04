@@ -1,18 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'add_grades/add_grades_controller.dart';
 import 'add_grades/add_grades_page.dart';
-import 'historic/historic_controller.dart';
-
 import 'edit_school_report/edit_school_report_controller.dart';
 import 'edit_school_report/edit_school_report_page.dart';
-import 'school_report/school_report_controller.dart';
-
+import 'historic/historic_controller.dart';
 import 'historic/historic_page.dart';
-
 import 'home_page/home_controller.dart';
 import 'home_page/home_page.dart';
 import 'profile/profile_page.dart';
-
+import 'school_report/school_report_controller.dart';
 import 'school_report/school_report_page.dart';
 
 class ProfessorModule extends Module {

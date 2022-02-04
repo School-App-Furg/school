@@ -9,6 +9,21 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
+  final _$subjectsAtom = Atom(name: '_HomeControllerBase.subjects');
+
+  @override
+  List<SubjectTeacher> get subjects {
+    _$subjectsAtom.reportRead();
+    return super.subjects;
+  }
+
+  @override
+  set subjects(List<SubjectTeacher> value) {
+    _$subjectsAtom.reportWrite(value, super.subjects, () {
+      super.subjects = value;
+    });
+  }
+
   final _$actualyCycleAtom = Atom(name: '_HomeControllerBase.actualyCycle');
 
   @override
@@ -69,21 +84,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  final _$subjectsAtom = Atom(name: '_HomeControllerBase.subjects');
-
-  @override
-  List<SubjectTeacher> get subjects {
-    _$subjectsAtom.reportRead();
-    return super.subjects;
-  }
-
-  @override
-  set subjects(List<SubjectTeacher> value) {
-    _$subjectsAtom.reportWrite(value, super.subjects, () {
-      super.subjects = value;
-    });
-  }
-
   final _$initHomeAsyncAction = AsyncAction('_HomeControllerBase.initHome');
 
   @override
@@ -94,11 +94,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
+subjects: ${subjects},
 actualyCycle: ${actualyCycle},
 schoolModel: ${schoolModel},
 userStudent: ${userStudent},
-loading: ${loading},
-subjects: ${subjects}
+loading: ${loading}
     ''';
   }
 }

@@ -22,16 +22,7 @@ class AlunoService {
   GradesRepository _gradesRepository = GradesRepository();
   AuthRepository _authRepository = AuthRepository();
 
-  //listagem de alunos da escola
-  Future<List<StudentUser>> getStudentsBySchoolId(String schoolId) async {
-    try {
-      return await _userRepository.getStudentsBySchoolId(schoolId);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
-  //solicita as informacoes do user admin
+  //solicita as informacoes do user aluno
   Future<StudentUser?> getUserStudentById(String userId) async {
     try {
       return await _userRepository.getUserStudentById(userId);
@@ -51,10 +42,6 @@ class AlunoService {
     }
   }
 
-  updateHome() {
-    Modular.get<HomeController>().initHome();
-  }
-
   //serviço para solicitar as disciplinas do aluno
   Future<List<SubjectTeacher>> getSubjectsForStudent(
       String schoolId, String cycleId, String studentId) async {
@@ -71,7 +58,7 @@ class AlunoService {
     }
   }
 
-  //pegar dados do ciclo
+  //pega dados do ciclo
   Future<Cycle?> getCurrentCycle(String uid) async {
     try {
       return await _cycleRepository.getCurrentCycle(uid);
@@ -80,6 +67,7 @@ class AlunoService {
     }
   }
 
+  //Solicita as notas com base em uma disciplina
   Future<List<Grade>> getGradesForSubject(
       String studentId, String cycleId, String subject) async {
     try {
@@ -90,7 +78,7 @@ class AlunoService {
     }
   }
 
-  //atualizar aluno
+  //atualiza informações de um aluno
   Future<bool> updateStudent(StudentUser student) async {
     try {
       return await _userRepository.updateStudent(student);
@@ -109,11 +97,17 @@ class AlunoService {
     }
   }
 
+  //solicita a lista de cyclos de uma escola
   Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
     try {
       return await _cycleRepository.getCycles(schoolId, cycleId);
     } catch (error) {
       throw Exception(error);
     }
+  }
+
+  //atualiza a home screen do aluno
+  updateHome() {
+    Modular.get<HomeController>().initHome();
   }
 }

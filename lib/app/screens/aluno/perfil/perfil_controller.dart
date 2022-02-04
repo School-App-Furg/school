@@ -13,22 +13,25 @@ class PerfilController = _PerfilControllerBase with _$PerfilController;
 
 abstract class _PerfilControllerBase with Store {
   AlunoService alunoService = AlunoService();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController cpfController = TextEditingController();
-
-  //injeção do email do usuário
-  String? mail = Modular.get<AuthRepository>().usuario!.email;
 
   StudentUser student = StudentUser(cpf: '', name: '', type: 2, schoolId: '');
 
-  //Carregar por rota perfil do aluno
+  //abertura dos controllers de inputs da tela
+  TextEditingController nameController = TextEditingController();
+  TextEditingController cpfController = TextEditingController();
+
+  //injeção do email do email do user
+  String? mail = Modular.get<AuthRepository>().usuario!.email;
+
+  //carregamento de informações herdadas do user
   initProfile(StudentUser studentModel) {
     student = studentModel;
     nameController.text = studentModel.name;
     cpfController.text = studentModel.cpf;
   }
 
-  Future<void> recuperarSenha(BuildContext context) async {
+  //função para recuperação de senha
+  Future recuperarSenha(BuildContext context) async {
     try {
       await alunoService.requestNewPassword(mail!);
       buildSnackBarUi(context, "E-mail de recuperação de senha enviado");
@@ -37,7 +40,7 @@ abstract class _PerfilControllerBase with Store {
     }
   }
 
-  //update dos dados do aluno
+  //função de update de dados do aluno
   Future update(BuildContext context) async {
     try {
       student.name = nameController.text;

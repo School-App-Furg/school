@@ -49,6 +49,20 @@ mixin _$StudentReportController on _StudentReportControllerBase, Store {
         .run(() => super.initStudentReport(studentId, subjectTeacher, cycle));
   }
 
+  final _$_StudentReportControllerBaseActionController =
+      ActionController(name: '_StudentReportControllerBase');
+
+  @override
+  ResultModel calculate(List<Grade> grade, int numberOfLines) {
+    final _$actionInfo = _$_StudentReportControllerBaseActionController
+        .startAction(name: '_StudentReportControllerBase.calculate');
+    try {
+      return super.calculate(grade, numberOfLines);
+    } finally {
+      _$_StudentReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

@@ -39,17 +39,21 @@ class _HistoricPageState
                 ),
                 body: Observer(
                   builder: (_) {
-                    return ListView.builder(
-                      itemCount: controller.listOfCycles.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Cycle data = controller.listOfCycles[index]!;
-                        return HistoricCard(
-                          cycle: data,
-                          controller: controller,
-                          onTap: () => controller.setCycleToHome(data),
-                        );
-                      },
-                    );
+                    return controller.listOfCycles.length == 0
+                        ? Center(
+                            child: Text('Nenhum ciclo anterior existente!'),
+                          )
+                        : ListView.builder(
+                            itemCount: controller.listOfCycles.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Cycle data = controller.listOfCycles[index]!;
+                              return HistoricCard(
+                                cycle: data,
+                                controller: controller,
+                                onTap: () => controller.setCycleToHome(data),
+                              );
+                            },
+                          );
                   },
                 ),
               );

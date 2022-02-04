@@ -5,7 +5,6 @@ import '../../../../core/styles/colors.dart';
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onPressedDrawer;
   final String text;
-
   final Function()? onPressedHistoric;
 
   const AppBarHome({

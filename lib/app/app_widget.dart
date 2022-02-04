@@ -12,12 +12,11 @@ class AppWidget extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('pt', 'BR'), // English
+        const Locale('pt', 'BR'),
       ],
       title: 'School',
       theme: ThemeData(
-          visualDensity: VisualDensity
-              .adaptivePlatformDensity, // se adapta a plataforma e prioriza a densidade - melhora a qualidade do texto
+          visualDensity: VisualDensity.adaptivePlatformDensity,
           backgroundColor: Colors.grey[100]),
       initialRoute: '/',
       builder: asuka.builder,

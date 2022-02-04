@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../aluno_service.dart';
+
 import '../../../core/models/student_user.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
@@ -17,8 +19,8 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AlunoService _alunoService = AlunoService();
     AuthRepository _authRepository = AuthRepository();
-
     return Container(
       width: width(context, 0.7),
       height: double.infinity,
@@ -87,8 +89,9 @@ class HomeDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                     title: Text("Tela inicial"),
-                    onTap: () =>
-                        Modular.to.popUntil(ModalRoute.withName('/aluno/')),
+                    onTap: () {
+                      _alunoService.updateHome();
+                    },
                   ),
                   ListTile(
                     leading: Icon(

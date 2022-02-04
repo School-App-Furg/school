@@ -32,8 +32,8 @@ class _SubjectCardState extends State<SubjectCard> {
   @override
   void initState() {
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? modelList = widget.controller.setGrades(4, widget.grade)
-        : modelList = widget.controller.setGrades(3, widget.grade);
+        ? modelList = widget.controller.setGrades(5, widget.grade)
+        : modelList = widget.controller.setGrades(4, widget.grade);
     widget.cycle.evaluationStandard == 'Bimestral'
         ? resultModel = widget.controller.calculate(widget.grade, 4)
         : resultModel = widget.controller.calculate(widget.grade, 3);
@@ -66,15 +66,22 @@ class _SubjectCardState extends State<SubjectCard> {
                 media(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGradeBi(resultModel.note,
-                        widget.grade, widget.cycle.approvalPattern),
+                    widget.controller.getColorGrade(
+                        resultModel.note,
+                        widget.grade,
+                        widget.cycle.approvalPattern,
+                        widget.cycle.evaluationStandard,
+                        false),
                     Colors.black),
-                exame(
-                    resultModel.note.toString(),
-                    resultModel.faults.toString(),
-                    widget.controller.getColorGradeExameBi(resultModel.note,
-                        widget.grade, widget.cycle.approvalPattern),
-                    Colors.black),
+                laneExame(
+                  modelList[4],
+                  widget.controller.getColorGrade(
+                      resultModel.note,
+                      widget.grade,
+                      widget.cycle.approvalPattern,
+                      widget.cycle.evaluationStandard,
+                      true),
+                ),
               ]
             : [
                 laneTrimestre(modelList[0].periodo, modelList[0].nota,
@@ -86,15 +93,22 @@ class _SubjectCardState extends State<SubjectCard> {
                 media(
                     resultModel.note.toString(),
                     resultModel.faults.toString(),
-                    widget.controller.getColorGradeTri(resultModel.note,
-                        widget.grade, widget.cycle.approvalPattern),
+                    widget.controller.getColorGrade(
+                        resultModel.note,
+                        widget.grade,
+                        widget.cycle.approvalPattern,
+                        widget.cycle.evaluationStandard,
+                        false),
                     Colors.black),
-                exame(
-                    resultModel.note.toString(),
-                    resultModel.faults.toString(),
-                    widget.controller.getColorGradeExameTri(resultModel.note,
-                        widget.grade, widget.cycle.approvalPattern),
-                    Colors.black),
+                laneExame(
+                  modelList[4],
+                  widget.controller.getColorGrade(
+                      resultModel.note,
+                      widget.grade,
+                      widget.cycle.approvalPattern,
+                      widget.cycle.evaluationStandard,
+                      true),
+                ),
               ],
       ),
     );
@@ -134,16 +148,15 @@ class _SubjectCardState extends State<SubjectCard> {
     );
   }
 
-  DataRow exame(
-      String nota, String faltas, Color colorGrade, Color colorAttendence) {
+  DataRow laneExame(ModelTable modelTable, Color color) {
     return DataRow(
       cells: [
-        DataCell(Text('Exame', style: TextStyle(fontWeight: FontWeight.bold))),
-        DataCell(Text(nota,
-            style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
-        DataCell(Text(faltas,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: colorAttendence))),
+        DataCell(Text('Exame')),
+        DataCell(Text(
+          modelTable.nota.toString(),
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+        )),
+        DataCell(Text(modelTable.faltas.toString())),
       ],
     );
   }

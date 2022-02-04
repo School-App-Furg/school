@@ -105,23 +105,19 @@ abstract class _SchoolReportControllerBase with Store {
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
     num faults = 0;
-
     List<Grade> list = [];
     grade.forEach((element) {
       if (element.timeCourse == numberOfLines) {
         list.add(element);
       }
     });
-
     list.forEach((element) {
       grade.remove(element);
     });
-
     grade.forEach((element) {
       average = average + element.note.toDouble();
       faults = faults + element.faults.toInt();
     });
-
     average = average / numberOfLines;
     return ResultModel(
         note: average.toStringAsFixed(2), faults: faults.toString());
@@ -131,13 +127,11 @@ abstract class _SchoolReportControllerBase with Store {
       String evaluationStandard, bool isExam) {
     Color cor;
     double media;
-
     if (isExam) {
       media = 5;
     } else {
       media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
     }
-
     if (evaluationStandard == 'Bimestral') {
       if (grade.length == 4) {
         if (double.parse(nota) >= media) {

@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:school/app/core/styles/sizes.dart';
+import '../../../core/styles/sizes.dart';
 import '../../../core/models/grade.dart';
 
 import '../../../core/components/label_text.dart';

@@ -17,7 +17,13 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   AlunoService alunoService = AlunoService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //pega as informações do user logado através da injeção de dependencia
   User? user = Modular.get<AuthRepository>().usuario;
+
+  //lista de disciplinas e seus respectivos professores
+  @observable
+  List<SubjectTeacher> subjects = [];
 
   @observable
   Cycle? actualyCycle = Cycle(
@@ -57,10 +63,6 @@ abstract class _HomeControllerBase with Store {
         schoolModel!.id!, actualyCycle!.id!, userStudent!.id!);
     loading = false;
   }
-
-  //lista de disciplinas
-  @observable
-  List<SubjectTeacher> subjects = [];
 
   //lista de imagens banner
   List banners = [

@@ -83,10 +83,12 @@ abstract class _SchoolReportControllerBase with Store {
       faults = faults + element.faults.toInt();
     });
     average = average / numberOfLines;
-    return ResultModel(note: average.toString(), faults: faults.toString());
+    return ResultModel(
+        note: average.toStringAsFixed(2), faults: faults.toString());
   }
 
-  Color getColorGrade(String nota, List<Grade> grade, String approvalPattern) {
+  Color getColorGradeBi(
+      String nota, List<Grade> grade, String approvalPattern) {
     Color cor;
     if (grade.length == 4) {
       double media =
@@ -102,10 +104,43 @@ abstract class _SchoolReportControllerBase with Store {
     return cor;
   }
 
-  Color getColorGradeExame(
+  Color getColorGradeExameBi(
       String nota, List<Grade> grade, String approvalPattern) {
     Color cor;
     if (grade.length == 4) {
+      double exame = 5;
+      if (double.parse(nota) >= exame) {
+        cor = green;
+      } else {
+        cor = red;
+      }
+    } else {
+      cor = Colors.black;
+    }
+    return cor;
+  }
+
+  Color getColorGradeTri(
+      String nota, List<Grade> grade, String approvalPattern) {
+    Color cor;
+    if (grade.length == 3) {
+      double media =
+          double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
+      if (double.parse(nota) >= media) {
+        cor = green;
+      } else {
+        cor = red;
+      }
+    } else {
+      cor = Colors.black;
+    }
+    return cor;
+  }
+
+  Color getColorGradeExameTri(
+      String nota, List<Grade> grade, String approvalPattern) {
+    Color cor;
+    if (grade.length == 3) {
       double exame = 5;
       if (double.parse(nota) >= exame) {
         cor = green;

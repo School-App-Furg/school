@@ -45,8 +45,8 @@ class _StudentCardState extends State<StudentCard> {
         ? modelList = widget.controller.setGrades(5, widget.grades)
         : modelList = widget.controller.setGrades(4, widget.grades);
     widget.cycle.evaluationStandard == 'Bimestral'
-        ? resultModel = widget.controller.calculate(widget.grades, 5)
-        : resultModel = widget.controller.calculate(widget.grades, 4);
+        ? resultModel = widget.controller.calculate(widget.grades, 4)
+        : resultModel = widget.controller.calculate(widget.grades, 3);
     super.initState();
   }
 
@@ -92,39 +92,49 @@ class _StudentCardState extends State<StudentCard> {
                     laneBimestre(modelList[1]),
                     laneBimestre(modelList[2]),
                     laneBimestre(modelList[3]),
-                    laneExame(modelList[4]),
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        widget.controller.getColorGradeBi(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
+                        widget.controller.getColorGrade(
+                            resultModel.note,
+                            widget.grades,
+                            widget.cycle.approvalPattern,
+                            widget.cycle.evaluationStandard,
+                            false),
                         Colors.black),
-                    exame(
-                        resultModel.note.toString(),
-                        resultModel.faults.toString(),
-                        widget.controller.getColorGradeExameBi(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
-                        Colors.black),
+                    laneExame(
+                      modelList[4],
+                      widget.controller.getColorGrade(
+                          resultModel.note,
+                          widget.grades,
+                          widget.cycle.approvalPattern,
+                          widget.cycle.evaluationStandard,
+                          true),
+                    ),
                   ]
                 : [
                     laneTrimestre(modelList[0]),
                     laneTrimestre(modelList[1]),
                     laneTrimestre(modelList[2]),
-                    laneExame(modelList[3]),
                     media(
                         resultModel.note.toString(),
                         resultModel.faults.toString(),
-                        widget.controller.getColorGradeTri(resultModel.note,
-                            widget.grades, widget.cycle.approvalPattern),
-                        Colors.black),
-                    exame(
-                        resultModel.note.toString(),
-                        resultModel.faults.toString(),
-                        widget.controller.getColorGradeExameTri(
+                        widget.controller.getColorGrade(
                             resultModel.note,
                             widget.grades,
-                            widget.cycle.approvalPattern),
+                            widget.cycle.approvalPattern,
+                            widget.cycle.evaluationStandard,
+                            false),
                         Colors.black),
+                    laneExame(
+                      modelList[3],
+                      widget.controller.getColorGrade(
+                          resultModel.note,
+                          widget.grades,
+                          widget.cycle.approvalPattern,
+                          widget.cycle.evaluationStandard,
+                          true),
+                    ),
                   ],
           ),
         ],
@@ -194,7 +204,7 @@ class _StudentCardState extends State<StudentCard> {
               },
               icon: Icon(
                 Icons.edit,
-                color: grey,
+                color: blueicon,
               ),
             ),
           ),
@@ -202,11 +212,14 @@ class _StudentCardState extends State<StudentCard> {
     );
   }
 
-  DataRow laneExame(ModelTable modelTable) {
+  DataRow laneExame(ModelTable modelTable, Color color) {
     return DataRow(
       cells: [
         DataCell(Text('Exame')),
-        DataCell(Text(modelTable.nota.toString())),
+        DataCell(Text(
+          modelTable.nota.toString(),
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+        )),
         DataCell(Text(modelTable.faltas.toString())),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
             widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
@@ -229,7 +242,7 @@ class _StudentCardState extends State<StudentCard> {
               },
               icon: Icon(
                 Icons.edit,
-                color: grey,
+                color: blueicon,
               ),
             ),
           ),

@@ -59,8 +59,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                       'Ciclo selecionado: ${controller.actualyCycle!.name}',
                                 ),
                               ),
-                              Text(
-                                  'Nenhuma disciplina foi cadastrada até o momento!'),
+                              Padding(
+                                padding: const EdgeInsets.all(40.0),
+                                child: Text(
+                                  'Nenhuma disciplina foi cadastrada até o momento!',
+                                  style: TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                               SizedBox()
                             ],
                           )

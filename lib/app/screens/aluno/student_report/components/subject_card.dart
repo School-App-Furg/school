@@ -101,7 +101,7 @@ class _SubjectCardState extends State<SubjectCard> {
                         false),
                     Colors.black),
                 laneExame(
-                  modelList[4],
+                  modelList[3],
                   widget.controller.getColorGrade(
                       resultModel.note,
                       widget.grade,

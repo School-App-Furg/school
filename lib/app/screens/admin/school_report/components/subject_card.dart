@@ -55,11 +55,11 @@ class _SubjectCardState extends State<SubjectCard> {
           children: [
             Text(
               widget.subjectTeacher.subject,
-              style: TextStyle(fontSize: width(context, .04)),
+              style: TextStyle(fontSize: width(context, .045)),
             ),
             Text(
               'Professor(a): ' + widget.subjectTeacher.teacher,
-              style: TextStyle(fontSize: width(context, .025)),
+              style: TextStyle(fontSize: width(context, .032)),
             ),
           ],
         ),

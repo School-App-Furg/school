@@ -57,15 +57,14 @@ class _RegisterClassPageState
                           validator: validateEmpty,
                         ),
                         MultiSelect(
-                            buttonText: "Selecione os alunos desta turma",
+                            buttonText: "Alunos desta turma",
                             title: "Selecione os alunos:",
                             items: controller.students
                                 .map((e) => MultiSelectItem(e.id, e.name))
                                 .toList(),
                             onConfirm: controller.setStudentsSelected),
                         MultiSelect(
-                          buttonText:
-                              "Selecione as disciplinas/professores desta turma",
+                          buttonText: "Disciplinas/Profº desta turma",
                           title: "Selecione as disciplinas:",
                           items: controller.subjectTeacher
                               .map((e) => MultiSelectItem(

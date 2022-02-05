@@ -29,9 +29,15 @@ class _MultiSelectState extends State<MultiSelect> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: MultiSelectDialogField(
-          buttonText:
-              Text(widget.buttonText, style: TextStyle(color: darkGrey)),
-          title: Text(widget.title),
+          buttonText: Text(
+            widget.buttonText,
+            style: TextStyle(color: darkGrey),
+            overflow: TextOverflow.ellipsis,
+          ),
+          title: Text(
+            widget.title,
+            overflow: TextOverflow.ellipsis,
+          ),
           decoration: BoxDecoration(color: Colors.grey[200]),
           buttonIcon: Icon(Icons.arrow_drop_down),
           barrierColor: Colors.transparent.withOpacity(0.4),

@@ -1,6 +1,7 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:school/app/core/styles/sizes.dart';
 
 import '../styles/colors.dart';
 
@@ -35,6 +36,7 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
         ),
         initialValue: widget.currentValue,
         format: DateFormat("dd/MM/yyyy"),
+        style: TextStyle(fontSize: width(context, 0.037)),
         onChanged: widget.onChanged,
         onShowPicker: (context, currentValue) async {
           DateTime? date = await showDatePicker(

@@ -76,7 +76,7 @@ class _EditClassPageState
                               validator: validateEmpty,
                             ),
                             MultiSelect(
-                                buttonText: "Selecione os alunos desta turma",
+                                buttonText: "Alunos desta turma",
                                 title: "Selecione os alunos:",
                                 items: controller.students
                                     .map((e) => MultiSelectItem(e, e.name))
@@ -85,8 +85,7 @@ class _EditClassPageState
                                 initialValue:
                                     controller.listOfStudentsSelected),
                             MultiSelect(
-                              buttonText:
-                                  "Selecione as disciplinas/professores desta turma",
+                              buttonText: "Disciplinas/Profº desta turma",
                               title: "Selecione as disciplinas:",
                               items: controller.subjectTeacher
                                   .map((e) => MultiSelectItem(

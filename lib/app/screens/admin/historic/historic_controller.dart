@@ -33,6 +33,7 @@ abstract class _HistoricControllerBase with Store {
     loading = false;
   }
 
+  //Direcionamento para o ciclo selecionado
   @action
   setCycleToHome(Cycle cycle) {
     Modular.get<HomeController>().actualyCycle = cycle;

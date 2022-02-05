@@ -14,6 +14,7 @@ class PerfilController = _PerfilControllerBase with _$PerfilController;
 abstract class _PerfilControllerBase with Store {
   AlunoService alunoService = AlunoService();
 
+  //Classe sendo inicializada
   StudentUser student = StudentUser(cpf: '', name: '', type: 2, schoolId: '');
 
   //abertura dos controllers de inputs da tela

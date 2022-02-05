@@ -33,6 +33,7 @@ abstract class _HistoricControllerBase with Store {
     loading = false;
   }
 
+  //altera o ciclo existente na home screen
   @action
   setCycleToHome(Cycle cycle) {
     Modular.get<HomeController>().actualyCycle = cycle;

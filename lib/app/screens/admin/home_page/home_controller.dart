@@ -21,6 +21,7 @@ abstract class _HomeControllerBase with Store {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   User? user = Modular.get<AuthRepository>().usuario;
 
+  //Classe sendo inicializada
   @observable
   Cycle? actualyCycle = Cycle(
       name: "",
@@ -30,6 +31,7 @@ abstract class _HomeControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
+  //Classe sendo inicializada
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
@@ -39,6 +41,7 @@ abstract class _HomeControllerBase with Store {
 
   late UserAdmin? userAdmin;
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 
@@ -59,6 +62,7 @@ abstract class _HomeControllerBase with Store {
     loading = false;
   }
 
+  //Define o professor associado à turma
   @action
   setSubjectTeacher(List<Classes> classes) async {
     classes.forEach(
@@ -82,7 +86,7 @@ abstract class _HomeControllerBase with Store {
     "assets/banners/4.jpg"
   ];
 
-  //funcao para alocar a sequencia de imagens banner
+  //função para alocar a sequência de imagens banner
   definiBanner(int index) {
     var resto = index % 5;
     if (index < 5) {
@@ -102,6 +106,7 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
+  //Exclui a turma selecionada
   deleteClass(BuildContext context, Classes classes) async {
     final loader = LoaderDefault();
     try {

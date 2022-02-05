@@ -16,9 +16,10 @@ abstract class _ProfileControllerBase with Store {
   TextEditingController nameController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
 
-//injeção do email do usuário
+  //injeção do email do usuário
   String? mail = Modular.get<AuthRepository>().usuario!.email;
 
+  //Classe sendo inicializada
   TeacherUser teacher = TeacherUser(schoolId: '', name: '', cpf: '', type: 0);
 
   //Carregar por rota perfil da escola

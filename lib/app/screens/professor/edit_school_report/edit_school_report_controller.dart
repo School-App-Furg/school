@@ -21,11 +21,11 @@ class EditSchoolReportController = _EditSchoolReportControllerBase
 
 abstract class _EditSchoolReportControllerBase with Store {
   ProfessorService _professorService = ProfessorService();
-
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController noteController = TextEditingController();
   TextEditingController faultsController = TextEditingController();
 
+  //configuração do padrão de avaliação
   List<String>? trimestral = [
     "1º Trimestre",
     "2º Trimestre",
@@ -40,6 +40,7 @@ abstract class _EditSchoolReportControllerBase with Store {
     "Exame"
   ];
 
+  //Classe sendo inicializada
   @observable
   Cycle? cycleReceived = Cycle(
       name: '',
@@ -49,8 +50,10 @@ abstract class _EditSchoolReportControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
+  //Classe sendo inicializada
   ModelTable modelTableReceived = ModelTable(periodo: '', nota: '', faltas: '');
 
+  //carregamento inicial dos dados da tela
   @action
   initEditSchoolReport(Cycle cycle, ModelTable modelTable) {
     cycleReceived = cycle;
@@ -64,9 +67,11 @@ abstract class _EditSchoolReportControllerBase with Store {
         : period = trimestral![int.parse(modelTable.periodo) - 1];
   }
 
+  //Declaração de variável para controle do período do ciclo
   @observable
   String period = '';
 
+  //Cadastro de notas e faltas
   @action
   insert(BuildContext context, String studentUser, String cycleId,
       String subjectId, String teacherId, String classId) async {
@@ -88,10 +93,10 @@ abstract class _EditSchoolReportControllerBase with Store {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
           Modular.to.pop();
-          buildSnackBarUi(context, "Turma cadastrada com sucesso!");
+          buildSnackBarUi(context, "Nota/falta(s) cadastrada(s) com sucesso!");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "A turma não foi cadastrada corretamente!");
+          buildSnackBarUi(context, "Registros não atualizados corretamente!");
         }
       } catch (e) {
         loader.hide();
@@ -100,6 +105,7 @@ abstract class _EditSchoolReportControllerBase with Store {
     }
   }
 
+  //Atualização de notas e faltas
   @action
   update(BuildContext context, String gradeId) async {
     if (formKey.currentState!.validate()) {
@@ -115,10 +121,10 @@ abstract class _EditSchoolReportControllerBase with Store {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
           Modular.to.pop();
-          buildSnackBarUi(context, "Nota atualizada com sucesso!");
+          buildSnackBarUi(context, "Nota/falta(s) atualizada(s) com sucesso!");
         } else {
           loader.hide();
-          buildSnackBarUi(context, "A nota não foi atualizada corretamente!");
+          buildSnackBarUi(context, "Registros não atualizados corretamente!");
         }
       } catch (e) {
         loader.hide();

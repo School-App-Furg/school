@@ -21,6 +21,7 @@ abstract class _SubjectsListControllerBase with Store {
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 

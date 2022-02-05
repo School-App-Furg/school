@@ -102,7 +102,7 @@ abstract class _AddGradesControllerBase with Store {
     cyclePeriod = e;
   }
 
-  //pega o o codigo do periodo
+  //pega o o código do periodo
   @action
   int getCyclePeriod(String e) {
     int b = 0;

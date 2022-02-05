@@ -20,6 +20,7 @@ abstract class _EditTeacherControllerBase with Store {
   TextEditingController emailController = TextEditingController();
   AdminService _adminService = AdminService();
 
+  //Classe sendo inicializada
   @observable
   TeacherUser _teacherUser =
       TeacherUser(schoolId: '', name: '', cpf: '', type: 0);
@@ -31,9 +32,11 @@ abstract class _EditTeacherControllerBase with Store {
   @observable
   List<Subject>? listOfsubjects = [];
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 
+  //Solicita as informações do professor ao firebase
   @action
   initEditPage(TeacherUser teacherUser) async {
     loading = true;
@@ -44,6 +47,7 @@ abstract class _EditTeacherControllerBase with Store {
     loading = false;
   }
 
+  //Recebe a disciplina selecionada anteriormente deste professor
   @action
   getSubjectsPreviusSelected(TeacherUser teacherUser) {
     teacherUser.subjects!.forEach(

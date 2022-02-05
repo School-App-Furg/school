@@ -53,15 +53,19 @@ abstract class _RegisterClassControllerBase with Store {
     );
   }
 
+  //lista de disciplinas
   @observable
   List<Subject>? subjects = [];
 
+  //lista de alunos
   @observable
   List<TeacherUser>? teachers = [];
 
+  //bool para carregamento dos dados
   @observable
   bool loadingTest = false;
 
+  //Recebe as informações da disciplina+professor disponíveis
   @action
   getSubjectsAndTeachers() async {
     loadingTest = true;
@@ -91,9 +95,11 @@ abstract class _RegisterClassControllerBase with Store {
     loadingTest = false;
   }
 
+  //Lista de disciplina+professor
   @observable
   List<SubjectTeacher> subjectTeacher = [];
 
+  //Lista de disciplinas selecionadas
   @observable
   List subjectsSelected = [];
 
@@ -114,6 +120,7 @@ abstract class _RegisterClassControllerBase with Store {
     );
   }
 
+  //Realiza o cadastro da turma
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();

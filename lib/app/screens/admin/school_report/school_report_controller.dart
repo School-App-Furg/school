@@ -23,13 +23,16 @@ abstract class _SchoolReportControllerBase with Store {
   @observable
   bool loading = false;
 
+  //Classe sendo inicializada
   @observable
   Classes classReceived =
       Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
+  //Lista de notas
   @observable
   List<Grade> grades = [];
 
+  //Classe sendo inicializada
   @observable
   Cycle? cycle = Cycle(
       name: '',
@@ -39,6 +42,7 @@ abstract class _SchoolReportControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
+  //Solicita as informações do boletim ao firebase
   @action
   initSchoolReport(
       Classes classes, String studentId, Cycle cycleReceived) async {
@@ -49,6 +53,7 @@ abstract class _SchoolReportControllerBase with Store {
     loading = false;
   }
 
+  //Organiza as notas de acordo com as disciplinas e professores
   @action
   List<Grade> filterGrades(String subject, String teacher) {
     List<Grade> lista = [];
@@ -59,6 +64,7 @@ abstract class _SchoolReportControllerBase with Store {
     return lista;
   }
 
+  //Inclusão de notas e faltas considerando se for para bimestre ou trimestre
   @action
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
     List<ModelTable> list = [];
@@ -76,6 +82,7 @@ abstract class _SchoolReportControllerBase with Store {
     return list;
   }
 
+  //Cálculo da média e somatória de faltas
   @action
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
@@ -98,6 +105,7 @@ abstract class _SchoolReportControllerBase with Store {
         note: average.toStringAsFixed(2), faults: faults.toString());
   }
 
+  //Seleção de cor no caso de exame, média, trimestre ou bimestre e padrão de aprovação
   Color getColorGrade(String nota, List<Grade> grade, String approvalPattern,
       String evaluationStandard, bool isExam) {
     Color cor;

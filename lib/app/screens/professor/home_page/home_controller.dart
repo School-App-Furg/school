@@ -18,8 +18,11 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   ProfessorService professorService = ProfessorService();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //injeção do usuário no carregamento
   User? user = Modular.get<AuthRepository>().usuario;
 
+  //Classe sendo inicializada
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
@@ -27,13 +30,16 @@ abstract class _HomeControllerBase with Store {
     name: '',
   );
 
+  //Classe sendo inicializada
   @observable
   TeacherUser? teacherUser =
       TeacherUser(name: '', schoolId: '', type: 2, cpf: '');
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 
+  //Classe sendo inicializada
   @observable
   Cycle? actualyCycle = Cycle(
       name: "",
@@ -60,6 +66,7 @@ abstract class _HomeControllerBase with Store {
     loading = false;
   }
 
+  //Define o professor associado à turma
   @action
   setSubjectTeacher(List<Classes> classesList, String teacherId) async {
     //lista de indexes que irei remover

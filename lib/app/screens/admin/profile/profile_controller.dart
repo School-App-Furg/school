@@ -16,9 +16,10 @@ abstract class _ProfileControllerBase with Store {
   TextEditingController nameController = TextEditingController();
   TextEditingController cnpjController = TextEditingController();
 
-//injeção do email do usuário
+  //injeção do email do usuário
   String? mail = Modular.get<AuthRepository>().usuario!.email;
 
+  //Classe sendo inicializada
   SchoolModel school = SchoolModel(currentCycle: '', cnpj: '', name: '');
 
   //Carregar por rota perfil da escola
@@ -28,7 +29,7 @@ abstract class _ProfileControllerBase with Store {
     cnpjController.text = schoolModel.cnpj;
   }
 
-  //Enviar numa senha
+  //Enviar nova senha
   Future redefinirSenha(BuildContext context) async {
     try {
       await adminService.requestNewPassword(mail!);

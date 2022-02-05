@@ -22,9 +22,11 @@ abstract class _EditSubjectControllerBase with Store {
   @observable
   Subject _subjectReceived = Subject(name: '', schoolId: '');
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 
+  //Solicita as informações da disciplina ao firebase
   @action
   initEditPage(Subject subject) async {
     loading = true;
@@ -33,7 +35,7 @@ abstract class _EditSubjectControllerBase with Store {
     loading = false;
   }
 
-  //edição de professores
+  //edição de disciplina
   @action
   update(BuildContext context) async {
     final loader = LoaderDefault();

@@ -26,6 +26,7 @@ abstract class _NewCycleControllerBase with Store {
   @observable
   TextEditingController cycleName = TextEditingController();
 
+  //bool para carregamento dos dados
   @observable
   bool loadingPage = false;
 
@@ -76,6 +77,7 @@ abstract class _NewCycleControllerBase with Store {
     score = e;
   }
 
+  //Classe sendo inicializada
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",

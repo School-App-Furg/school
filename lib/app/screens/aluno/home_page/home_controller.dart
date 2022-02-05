@@ -25,6 +25,7 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<SubjectTeacher> subjects = [];
 
+  //Classe sendo inicializada
   @observable
   Cycle? actualyCycle = Cycle(
       name: "",
@@ -34,6 +35,7 @@ abstract class _HomeControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
+  //Classe sendo inicializada
   @observable
   SchoolModel? schoolModel = SchoolModel(
     currentCycle: "",
@@ -41,10 +43,12 @@ abstract class _HomeControllerBase with Store {
     name: '',
   );
 
+  //Classe sendo inicializada
   @observable
   StudentUser? userStudent =
       StudentUser(schoolId: '', name: '', cpf: '', type: 2);
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 

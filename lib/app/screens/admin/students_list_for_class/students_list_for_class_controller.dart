@@ -14,6 +14,7 @@ class StudentsListForClassController = _StudentsListForClassControllerBase
 abstract class _StudentsListForClassControllerBase with Store {
   AdminService _adminService = AdminService();
 
+  //bool para carregamento dos dados
   @observable
   bool loading = false;
 
@@ -29,6 +30,7 @@ abstract class _StudentsListForClassControllerBase with Store {
     }
   }
 
+  //Lista de alunos
   @observable
   List<StudentUser?> students = [];
 }

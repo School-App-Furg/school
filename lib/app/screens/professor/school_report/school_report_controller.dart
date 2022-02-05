@@ -123,6 +123,7 @@ abstract class _SchoolReportControllerBase with Store {
         note: average.toStringAsFixed(2), faults: faults.toString());
   }
 
+  //Seleção de cor no caso de exame, média, trimestre ou bimestre e padrão de aprovação
   Color getColorGrade(String nota, List<Grade> grade, String approvalPattern,
       String evaluationStandard, bool isExam) {
     Color cor;

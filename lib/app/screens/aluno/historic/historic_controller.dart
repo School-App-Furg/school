@@ -18,7 +18,7 @@ abstract class _HistoricControllerBase with Store {
   @observable
   bool loading = false;
 
-//lista de ciclos da escola
+  //lista de ciclos da escola
   @observable
   List<Cycle?> listOfCycles = [];
 

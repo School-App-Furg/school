@@ -23,6 +23,7 @@ abstract class _EditClassControllerBase with Store {
   TextEditingController yearController = TextEditingController();
   AdminService _adminService = AdminService();
 
+  //Solicita as informações da turma ao firebase
   @action
   initEditClass(Classes classes) async {
     loadingTest = true;
@@ -37,13 +38,16 @@ abstract class _EditClassControllerBase with Store {
     loadingTest = false;
   }
 
+  //Classe sendo inicializada
   @observable
   Classes classesReceived =
       Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
+  //Lista de alunos selecionados
   @observable
   List<StudentUser> listOfStudentsSelected = [];
 
+  //Recebe as informações do aluno selecionado anteriormente
   @action
   getStudentsPreviusSelected(Classes classes) {
     classes.students!.forEach(
@@ -59,8 +63,10 @@ abstract class _EditClassControllerBase with Store {
     );
   }
 
+  //Lista de disciplina anterior
   List<SubjectTeacher> previusList = [];
 
+  //Recebe as informações da disciplina+professor selecionados anteriormente
   @action
   getSubjectsTeacherPreviusSelected(Classes classes) async {
     previusList = await _adminService.getSubjectTeacher(classes.id);
@@ -78,6 +84,7 @@ abstract class _EditClassControllerBase with Store {
     );
   }
 
+  //Lista de disciplina+professor selecionada
   @observable
   List<SubjectTeacher> listOfSubjectTeachersSelected = [];
 
@@ -104,18 +111,23 @@ abstract class _EditClassControllerBase with Store {
     );
   }
 
+  //Lista de disciplina
   @observable
   List<Subject> subjects = [];
 
+  //Lista de professor
   @observable
   List<TeacherUser> teachers = [];
 
+  //Lista de disciplina+professor
   @observable
   List<SubjectTeacher> subjectTeacher = [];
 
+  //bool para carregamento dos dados
   @observable
   bool loadingTest = false;
 
+  //Recebe as informações da disciplina+professor disponíveis
   @action
   Future getSubjectsAndTeachers() async {
     subjects = await _adminService.getSubjects(schoolId);
@@ -146,7 +158,7 @@ abstract class _EditClassControllerBase with Store {
   @observable
   List<SubjectTeacher> subjectsTeacherSelected = [];
 
-  //recebe os valores selecionados no multiSelect dos students
+  //seta os valores selecionados no multiSelect dos students
   @action
   setSubjectsSelected(List values) {
     subjectsTeacherSelected.clear();
@@ -164,6 +176,7 @@ abstract class _EditClassControllerBase with Store {
     );
   }
 
+  //Atualiza a edição da turma
   update(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();
@@ -193,6 +206,7 @@ abstract class _EditClassControllerBase with Store {
     }
   }
 
+  //Atualiza a seleção da disciplina+professor
   bool updateSubjectTeacher() {
     try {
       if (subjectsTeacherSelected.isNotEmpty) {

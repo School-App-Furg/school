@@ -97,17 +97,15 @@ class _SubjectCardState extends State<SubjectCard> {
                             resultModel.note,
                             widget.grade,
                             widget.cycle.approvalPattern,
-                            widget.cycle.evaluationStandard,
-                            false),
-                        Colors.black),
+                            widget.cycle.evaluationStandard)),
                     laneExame(
                       modelList[4],
-                      widget.controller.getColorGrade(
-                          resultModel.note,
-                          widget.grade,
-                          widget.cycle.approvalPattern,
-                          widget.cycle.evaluationStandard,
-                          true),
+                      widget.controller.getColorGradeExam(
+                        modelList[4].nota.toString(),
+                        widget.grade,
+                        widget.cycle.approvalPattern,
+                        widget.cycle.evaluationStandard,
+                      ),
                     ),
                   ]
                 : [
@@ -124,17 +122,14 @@ class _SubjectCardState extends State<SubjectCard> {
                             resultModel.note,
                             widget.grade,
                             widget.cycle.approvalPattern,
-                            widget.cycle.evaluationStandard,
-                            false),
-                        Colors.black),
+                            widget.cycle.evaluationStandard)),
                     laneExame(
                       modelList[3],
-                      widget.controller.getColorGrade(
-                          resultModel.note,
+                      widget.controller.getColorGradeExam(
+                          modelList[3].nota.toString(),
                           widget.grade,
                           widget.cycle.approvalPattern,
-                          widget.cycle.evaluationStandard,
-                          true),
+                          widget.cycle.evaluationStandard),
                     ),
                   ],
           ),
@@ -163,16 +158,13 @@ class _SubjectCardState extends State<SubjectCard> {
     );
   }
 
-  DataRow media(
-      String nota, String faltas, Color colorGrade, Color colorAttendence) {
+  DataRow media(String nota, String faltas, Color colorGrade) {
     return DataRow(
       cells: [
         DataCell(Text('Média', style: TextStyle(fontWeight: FontWeight.bold))),
         DataCell(Text(nota,
             style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
-        DataCell(Text(faltas,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: colorAttendence))),
+        DataCell(Text(faltas, style: TextStyle(fontWeight: FontWeight.bold))),
       ],
     );
   }

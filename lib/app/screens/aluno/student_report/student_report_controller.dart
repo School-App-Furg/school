@@ -77,16 +77,12 @@ abstract class _StudentReportControllerBase with Store {
         note: average.toStringAsFixed(2), faults: faults.toString());
   }
 
-  //altera a cor com base na média atingida ou não
+  //Seleção de cor no caso média, trimestre ou bimestre e padrão de aprovação
   Color getColorGrade(String nota, List<Grade> grade, String approvalPattern,
-      String evaluationStandard, bool isExam) {
+      String evaluationStandard) {
     Color cor;
     double media;
-    if (isExam) {
-      media = 5;
-    } else {
-      media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
-    }
+    media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
     if (evaluationStandard == 'Bimestral') {
       if (grade.length == 4) {
         if (double.parse(nota) >= media) {
@@ -100,6 +96,40 @@ abstract class _StudentReportControllerBase with Store {
     } else {
       if (grade.length == 3) {
         if (double.parse(nota) >= media) {
+          cor = green;
+        } else {
+          cor = red;
+        }
+      } else {
+        cor = Colors.black;
+      }
+    }
+    return cor;
+  }
+
+  //altera a cor com base na nota atingida do exame
+  Color getColorGradeExam(
+    String nota,
+    List<Grade> grade,
+    String approvalPattern,
+    String evaluationStandard,
+  ) {
+    Color cor;
+    double media;
+    media = 5;
+    if (evaluationStandard == 'Bimestral') {
+      if (grade.length == 4) {
+        if (double.parse(nota.replaceAll(RegExp('-'), '5')) >= media) {
+          cor = green;
+        } else {
+          cor = red;
+        }
+      } else {
+        cor = Colors.black;
+      }
+    } else {
+      if (grade.length == 3) {
+        if (double.parse(nota.replaceAll(RegExp('-'), '5')) >= media) {
           cor = green;
         } else {
           cor = red;

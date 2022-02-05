@@ -134,22 +134,22 @@ mixin _$AddGradesController on _AddGradesControllerBase, Store {
   }
 
   @override
-  int getCyclePeriod(String e) {
+  dynamic setCycleSelected(dynamic e) {
     final _$actionInfo = _$_AddGradesControllerBaseActionController.startAction(
-        name: '_AddGradesControllerBase.getCyclePeriod');
+        name: '_AddGradesControllerBase.setCycleSelected');
     try {
-      return super.getCyclePeriod(e);
+      return super.setCycleSelected(e);
     } finally {
       _$_AddGradesControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setCycleSelected(dynamic e) {
+  int getCyclePeriod(String e) {
     final _$actionInfo = _$_AddGradesControllerBaseActionController.startAction(
-        name: '_AddGradesControllerBase.setCycleSelected');
+        name: '_AddGradesControllerBase.getCyclePeriod');
     try {
-      return super.setCycleSelected(e);
+      return super.getCyclePeriod(e);
     } finally {
       _$_AddGradesControllerBaseActionController.endAction(_$actionInfo);
     }

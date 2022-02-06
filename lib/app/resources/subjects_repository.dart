@@ -33,7 +33,7 @@ class SubjectRepository {
     }
   }
 
-  //cadastro de disciplinas
+  //cadastra uma disciplina
   Future<bool> insertSubject(Subject subject) async {
     return await firestoreInstance.collection('subjects').doc().set({
       'schoolId': subject.schoolId,
@@ -46,7 +46,7 @@ class SubjectRepository {
     ).catchError((error) => throw Exception(error));
   }
 
-  //atualização de dados de uma disciplina
+  //atualiza uma disciplina
   Future<bool> updateSubject(Subject subject) async {
     return await firestoreInstance
         .collection('subjects')
@@ -58,20 +58,5 @@ class SubjectRepository {
         return true;
       },
     ).catchError((error) => throw Exception(error));
-  }
-
-  //remover disciplina
-  Future<bool> removeSubject(String idSubject) async {
-    return await firestoreInstance
-        .collection('subjects')
-        .doc(idSubject)
-        .delete()
-        .then(
-      (value) {
-        return true;
-      },
-    ).catchError(
-      (error) => throw Exception(error),
-    );
   }
 }

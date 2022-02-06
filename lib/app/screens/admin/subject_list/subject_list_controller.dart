@@ -71,27 +71,4 @@ abstract class _SubjectsListControllerBase with Store {
       buildSnackBarUi(context, e.toString());
     }
   }
-
-  //exclusão de disciplinas
-  @action
-  excluir(BuildContext context, String idSubject) async {
-    final loader = LoaderDefault();
-    try {
-      loader.show();
-      bool removed = await _adminService.removeSubject(idSubject);
-      subjects = await _adminService.getSubjects(schoolId);
-      Navigator.of(context).pop();
-      if (removed) {
-        loader.hide();
-        buildSnackBarUi(context, "Disciplina removida!");
-      } else {
-        Navigator.of(context).pop();
-        loader.hide();
-        buildSnackBarUi(context, "Erro ao remover a disciplina!");
-      }
-    } catch (e) {
-      loader.hide();
-      buildSnackBarUi(context, e.toString());
-    }
-  }
 }

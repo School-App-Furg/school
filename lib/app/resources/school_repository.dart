@@ -19,6 +19,7 @@ class SchoolRepository {
     }
   }
 
+  //retorna as informações de uma escola com base em um id
   Future<SchoolModel?> getSchoolInformationsById(String id) async {
     SchoolModel? model;
     try {
@@ -41,6 +42,7 @@ class SchoolRepository {
     return model;
   }
 
+  //pega a lista de escola
   Future<List<SchoolModel?>> getSchools() async {
     List<SchoolModel?> list = [];
     try {
@@ -69,7 +71,7 @@ class SchoolRepository {
     return list;
   }
 
-  //update do ciclo da escola
+  //atualiza o ciclo de uma escola
   Future<bool> updateCycleSchool(String cycleId, String schoolId) async {
     return await firestoreInstance.collection('schools').doc(schoolId).update({
       'currentCycle': cycleId,
@@ -80,7 +82,7 @@ class SchoolRepository {
     ).catchError((error) => throw Exception(error));
   }
 
-  //atualizar escola
+  //atualiza uma escola
   Future<bool> updateSchool(SchoolModel _schoolModel) async {
     try {
       await firestoreInstance

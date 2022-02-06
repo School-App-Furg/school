@@ -7,6 +7,7 @@ import '../core/models/grade.dart';
 
 class GradesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
   Future<List<Grade>> getGrades(String studentId, String cycleId) async {
     List<Grade> list = [];
@@ -33,7 +34,7 @@ class GradesRepository {
     }
   }
 
-  //Retorna a lista de disciplinas cadastradas em uma determinada escola
+  //Retorna a lista de disciplinas com base em uma determinada disciplina
   Future<List<Grade>> getGradesForSubject(
       String studentId, String cycleId, String subject) async {
     List<Grade> list = [];
@@ -61,7 +62,7 @@ class GradesRepository {
     }
   }
 
-  //Retorna a lista de disciplinas cadastradas em uma determinada escola
+  //Retorna a lista de disciplinas cadastradas com base em um professor
   Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
       String cycleId, String idSubject, String idTeacher) async {
     ObservableList<Grade> list = ObservableList();
@@ -101,7 +102,7 @@ class GradesRepository {
     }
   }
 
-  //cadastro de uma nota
+  //insere uma nota
   Future<bool> insertGrade(Grade grade) async {
     try {
       await firestoreInstance.collection('grades').add(grade.toMap());
@@ -111,7 +112,7 @@ class GradesRepository {
     }
   }
 
-  //editar uma nota
+  //atualiza uma nota
   Future<bool> updateGrade(String id, num note, num faults) async {
     try {
       await firestoreInstance.collection('grades').doc(id).update({

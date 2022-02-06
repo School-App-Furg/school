@@ -128,16 +128,18 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                             showDialog<void>(
                                                           context: context,
                                                           barrierDismissible:
-                                                              false, // user must tap button!
+                                                              false,
                                                           builder: (BuildContext
                                                               context) {
                                                             return AlertDialogConfirmation(
                                                               onPressed: () {
-                                                                controller.deleteClass(
-                                                                    context,
-                                                                    controller
-                                                                            .classes![
-                                                                        index]);
+                                                                controller
+                                                                    .deleteClass(
+                                                                  context,
+                                                                  controller
+                                                                          .classes![
+                                                                      index],
+                                                                );
                                                               },
                                                             );
                                                           },

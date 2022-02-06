@@ -207,15 +207,6 @@ class AdminService {
     }
   }
 
-  //remover disciplina
-  Future<bool> removeSubject(String idSubject) async {
-    try {
-      return await _subjectRepository.removeSubject(idSubject);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
   //atualizar professor
   Future<bool> updateTeacher(TeacherUser teacher) async {
     try {

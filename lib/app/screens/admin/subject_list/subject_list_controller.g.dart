@@ -55,14 +55,6 @@ mixin _$SubjectsListController on _SubjectsListControllerBase, Store {
     return _$getSubjectsAsyncAction.run(() => super.getSubjects(context));
   }
 
-  final _$excluirAsyncAction =
-      AsyncAction('_SubjectsListControllerBase.excluir');
-
-  @override
-  Future excluir(BuildContext context, String idSubject) {
-    return _$excluirAsyncAction.run(() => super.excluir(context, idSubject));
-  }
-
   @override
   String toString() {
     return '''

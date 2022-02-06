@@ -7,7 +7,7 @@ import '../core/models/cycle.dart';
 class CycleRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
-  //cadastro de turmas
+  //cadastro de um novo ciclo
   Future<String> insertCycle(Cycle cycle) async {
     try {
       var data =
@@ -18,7 +18,7 @@ class CycleRepository {
     }
   }
 
-  //cadastro de turmas
+  //cadastro do primeiro ciclo de uma escola
   Future<bool> insertFirstCycle(String idCycle, Cycle cycle) async {
     try {
       await firestoreInstance
@@ -31,7 +31,7 @@ class CycleRepository {
     }
   }
 
-  //Cadastra um ciclo de uma escola
+  //pega as informações de um determinado ciclo
   Future<Cycle?> getCurrentCycle(String uid) async {
     Cycle? model;
     try {
@@ -90,7 +90,7 @@ class CycleRepository {
     return list;
   }
 
-  //Cadastra um ciclo de uma escola
+  //atualiza o ciclo de uma escola
   Future<bool> updateCycle(String cicleId, Cycle cycle) async {
     return await firestoreInstance.collection('cycles').doc(cicleId).set({
       'name': cycle.name,

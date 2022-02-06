@@ -3,12 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../aluno_service.dart';
-
 import '../../../core/models/student_user.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/sizes.dart';
 import '../../../resources/auth_repository.dart';
+import '../aluno_service.dart';
 
 class HomeDrawer extends StatelessWidget {
   final StudentUser? studentUser;

@@ -67,6 +67,7 @@ class AdminService {
     }
   }
 
+  //insere uma disciplina
   Future<bool> insertSubject(Subject subject) async {
     try {
       return await _subjectRepository.insertSubject(subject);
@@ -75,6 +76,7 @@ class AdminService {
     }
   }
 
+  //atualiza uma disciplina
   Future<bool> updateSubject(Subject subject) async {
     try {
       return await _subjectRepository.updateSubject(subject);

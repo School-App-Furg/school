@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/admin/admin_service.dart';
+import '../admin_service.dart';
 
 import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';

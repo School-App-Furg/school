@@ -17,6 +17,7 @@ import '../../resources/grades_repository.dart';
 import '../../resources/school_repository.dart';
 import '../../resources/subjects_repository.dart';
 import '../../resources/users_repository.dart';
+import 'config/config_controller.dart';
 import 'home_page/home_controller.dart';
 
 class AdminService {
@@ -314,5 +315,13 @@ class AdminService {
 
   updateHome() {
     Modular.get<HomeController>().initHome();
+  }
+
+  //serviço de atualização da home após a adição de um novo ciclo
+  updateHomeAfterNewCycle(Cycle newCycle) {
+    Modular.get<HomeController>().schoolModel!.currentCycle = newCycle.id!;
+    Modular.get<HomeController>().actualyCycle = newCycle;
+    updateHome();
+    Modular.get<ConfigController>().getCurrentCycle();
   }
 }

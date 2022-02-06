@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../core/models/cycle.dart';
-
 import '../../../core/components/loader/loader_page.dart';
 import '../../../core/models/classes.dart';
+import '../../../core/models/cycle.dart';
 import '../../../core/styles/colors.dart';
 import 'components/student_card.dart';
 import 'students_list_for_class_controller.dart';

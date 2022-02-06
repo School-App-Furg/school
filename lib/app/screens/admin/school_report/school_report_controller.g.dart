@@ -95,6 +95,28 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
   }
 
   @override
+  List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.setGrades');
+    try {
+      return super.setGrades(numberOfLines, grade);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  ResultModel calculate(List<Grade> grade, int numberOfLines) {
+    final _$actionInfo = _$_SchoolReportControllerBaseActionController
+        .startAction(name: '_SchoolReportControllerBase.calculate');
+    try {
+      return super.calculate(grade, numberOfLines);
+    } finally {
+      _$_SchoolReportControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 loading: ${loading},

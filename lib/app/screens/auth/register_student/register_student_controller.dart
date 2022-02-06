@@ -24,6 +24,7 @@ abstract class _RegisterStudentControllerBase with Store {
   @observable
   bool obscureText = true;
 
+  //Torna visível a senha
   @action
   void mostrarSenhaUser() {
     obscureText = !obscureText;
@@ -45,10 +46,11 @@ abstract class _RegisterStudentControllerBase with Store {
     school = value!;
   }
 
-  // escola selecionada
+  //escola selecionada
   @observable
   String school = '';
 
+  //Cadastro de aluno
   cadastrar(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       final loader = LoaderDefault();

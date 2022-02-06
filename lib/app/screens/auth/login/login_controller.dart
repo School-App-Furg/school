@@ -26,6 +26,7 @@ abstract class _LoginControllerBase with Store {
   @observable
   bool obscureText = true;
 
+  //Torna visível a senha
   @action
   void mostrarSenhaUser() {
     obscureText = !obscureText;

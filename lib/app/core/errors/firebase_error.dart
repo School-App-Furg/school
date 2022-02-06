@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+//Retornos de permissão negada no Firebase
 class FirebaseErrorCodes {
   static const String ERROR_PERMISSION_DENIED = "permission-denied";
 }

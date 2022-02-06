@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+//Mensagens de erro retornadas pelo Firebase
 class AuthErrorCodes {
   static const String ERROR_C0DE_NETWORK_ERROR = "FirebaseException";
   static const String ERROR_USER_NOT_FOUND = "user-not-found";

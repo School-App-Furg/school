@@ -15,6 +15,7 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   AuthService _authService = AuthService();
 
+  //Direcionamento de usuário na tela de início (modularidade)
   @override
   void initState() {
     super.initState();

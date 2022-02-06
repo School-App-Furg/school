@@ -84,6 +84,7 @@ class ProfessorService {
     }
   }
 
+  //Requisita uma nova senha com base no email
   Future<bool> requestNewPassword(String mail) async {
     try {
       await _authRepository.requestNewPassword(mail);
@@ -102,6 +103,7 @@ class ProfessorService {
     }
   }
 
+  //listagem de notas e faltas de uma turma p/ o professor com base nos atributos da classe Grade
   Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
       String cycleId, String idSubject, String idTeacher) async {
     try {
@@ -139,6 +141,7 @@ class ProfessorService {
     }
   }
 
+  //listagem de ciclos
   Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
     try {
       return await _cycleRepository.getCycles(schoolId, cycleId);
@@ -156,6 +159,7 @@ class ProfessorService {
     }
   }
 
+  //Atualização da tela inicial
   updateHome() {
     Modular.get<HomeController>().initHome();
   }

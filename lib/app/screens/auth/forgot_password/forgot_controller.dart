@@ -13,6 +13,7 @@ abstract class _ForgotControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController emailController = TextEditingController();
 
+  //Recuperação de senha com base no usuário e email cadastrado
   Future<void> recuperarSenha(BuildContext context) async {
     try {
       await _authRepository.requestNewPassword(emailController.text);

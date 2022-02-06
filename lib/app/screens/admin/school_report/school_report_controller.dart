@@ -107,63 +107,32 @@ abstract class _SchoolReportControllerBase with Store {
 
   //Seleção de cor no caso média, trimestre ou bimestre e padrão de aprovação
   Color getColorGrade(String nota, List<Grade> grade, String approvalPattern,
-      String evaluationStandard) {
-    Color cor;
+      String evaluationStandard, bool isExam) {
+    Color cor = Colors.black;
     double media;
-    media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
-    if (evaluationStandard == 'Bimestral') {
-      if (grade.length == 4) {
-        if (double.parse(nota) >= media) {
-          cor = green;
-        } else {
-          cor = red;
-        }
-      } else {
-        cor = Colors.black;
-      }
-    } else {
-      if (grade.length == 3) {
-        if (double.parse(nota) >= media) {
-          cor = green;
-        } else {
-          cor = red;
-        }
-      } else {
-        cor = Colors.black;
-      }
-    }
-    return cor;
-  }
 
-  //altera a cor com base na nota atingida do exame
-  Color getColorGradeExam(
-    String nota,
-    List<Grade> grade,
-    String approvalPattern,
-    String evaluationStandard,
-  ) {
-    Color cor;
-    double media;
-    media = 5;
-    if (evaluationStandard == 'Bimestral') {
-      if (grade.length == 4) {
-        if (double.parse(nota.replaceAll(RegExp('-'), '5')) >= media) {
-          cor = green;
-        } else {
-          cor = red;
-        }
-      } else {
-        cor = Colors.black;
-      }
+    if (isExam) {
+      media = 5;
     } else {
-      if (grade.length == 3) {
-        if (double.parse(nota.replaceAll(RegExp('-'), '5')) >= media) {
-          cor = green;
-        } else {
-          cor = red;
+      media = double.parse((approvalPattern.replaceAll(RegExp('%'), ''))) / 10;
+    }
+    if (nota != '-') {
+      if (evaluationStandard == 'Bimestral') {
+        if (grade.length >= 4) {
+          if (double.parse(nota) >= media) {
+            cor = green;
+          } else {
+            cor = red;
+          }
         }
       } else {
-        cor = Colors.black;
+        if (grade.length >= 3) {
+          if (double.parse(nota) >= media) {
+            cor = green;
+          } else {
+            cor = red;
+          }
+        }
       }
     }
     return cor;

@@ -26,7 +26,6 @@ abstract class _ConfigControllerBase with Store {
   @action
   Future getCurrentCycle() async {
     loadingPage = true;
-
     schoolModel = await _adminService.getSchoolInformations(schoolId);
     cycle = await _adminService.getCurrentCycle(schoolModel!.currentCycle);
     cycleName.text = cycle!.name;
@@ -96,6 +95,7 @@ abstract class _ConfigControllerBase with Store {
 
   @observable
   Cycle? cycle = Cycle(
+    id: '',
     name: "",
     idSchool: "",
     finalDate: DateTime.now().millisecondsSinceEpoch,
@@ -110,20 +110,20 @@ abstract class _ConfigControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-
-        bool updatedCycle = await _adminService.updateCycle(
-          schoolModel!.currentCycle,
-          Cycle(
-              name: cycleName.text,
-              idSchool: schoolId,
-              finalDate: finalDate.millisecondsSinceEpoch,
-              initialDate: initialDate.millisecondsSinceEpoch,
-              approvalPattern: score,
-              evaluationStandard: cyclePeriod),
-        );
-
-        if (updatedCycle) {
+        Cycle updatedCycle = Cycle(
+            id: cycle!.id,
+            name: cycleName.text,
+            idSchool: schoolId,
+            finalDate: finalDate.millisecondsSinceEpoch,
+            initialDate: initialDate.millisecondsSinceEpoch,
+            approvalPattern: score,
+            evaluationStandard: cyclePeriod);
+        bool updated = await _adminService.updateCycle(
+            schoolModel!.currentCycle, updatedCycle);
+        if (updated) {
           loader.hide();
+          Modular.get<HomeController>().actualyCycle = updatedCycle;
+          _adminService.updateHome();
           buildSnackBarUi(context, "Ciclo atualizado com sucesso!");
           Modular.to.pop();
         } else {

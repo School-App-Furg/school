@@ -90,22 +90,23 @@ class _StudentCardState extends State<StudentCard> {
                     laneBimestre(modelList[2]),
                     laneBimestre(modelList[3]),
                     media(
-                      resultModel.note.toString(),
-                      resultModel.faults.toString(),
+                      resultModel.note,
+                      resultModel.faults,
                       widget.controller.getColorGrade(
                           resultModel.note,
                           widget.grades,
                           widget.cycle.approvalPattern,
-                          widget.cycle.evaluationStandard),
+                          widget.cycle.evaluationStandard,
+                          false),
                     ),
                     laneExame(
                       modelList[4],
-                      widget.controller.getColorGradeExam(
-                        modelList[4].nota.toString(),
-                        widget.grades,
-                        widget.cycle.approvalPattern,
-                        widget.cycle.evaluationStandard,
-                      ),
+                      widget.controller.getColorGrade(
+                          modelList[4].nota,
+                          widget.grades,
+                          widget.cycle.approvalPattern,
+                          widget.cycle.evaluationStandard,
+                          true),
                     ),
                   ]
                 : [
@@ -113,21 +114,23 @@ class _StudentCardState extends State<StudentCard> {
                     laneTrimestre(modelList[1]),
                     laneTrimestre(modelList[2]),
                     media(
-                      resultModel.note.toString(),
-                      resultModel.faults.toString(),
+                      resultModel.note,
+                      resultModel.faults,
                       widget.controller.getColorGrade(
                           resultModel.note,
                           widget.grades,
                           widget.cycle.approvalPattern,
-                          widget.cycle.evaluationStandard),
+                          widget.cycle.evaluationStandard,
+                          false),
                     ),
                     laneExame(
                       modelList[3],
-                      widget.controller.getColorGradeExam(
-                          modelList[3].nota.toString(),
+                      widget.controller.getColorGrade(
+                          modelList[3].nota,
                           widget.grades,
                           widget.cycle.approvalPattern,
-                          widget.cycle.evaluationStandard),
+                          widget.cycle.evaluationStandard,
+                          true),
                     ),
                   ],
           ),

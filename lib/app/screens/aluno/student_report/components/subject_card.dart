@@ -70,15 +70,16 @@ class _SubjectCardState extends State<SubjectCard> {
                         resultModel.note,
                         widget.grade,
                         widget.cycle.approvalPattern,
-                        widget.cycle.evaluationStandard)),
+                        widget.cycle.evaluationStandard,
+                        false)),
                 laneExame(
                   modelList[4],
-                  widget.controller.getColorGradeExam(
-                    modelList[4].nota.toString(),
-                    widget.grade,
-                    widget.cycle.approvalPattern,
-                    widget.cycle.evaluationStandard,
-                  ),
+                  widget.controller.getColorGrade(
+                      modelList[4].nota.toString(),
+                      widget.grade,
+                      widget.cycle.approvalPattern,
+                      widget.cycle.evaluationStandard,
+                      true),
                 ),
               ]
             : [
@@ -89,20 +90,22 @@ class _SubjectCardState extends State<SubjectCard> {
                 laneTrimestre(modelList[2].periodo, modelList[2].nota,
                     modelList[2].faltas),
                 media(
-                    resultModel.note.toString(),
-                    resultModel.faults.toString(),
+                    resultModel.note,
+                    resultModel.faults,
                     widget.controller.getColorGrade(
                         resultModel.note,
                         widget.grade,
                         widget.cycle.approvalPattern,
-                        widget.cycle.evaluationStandard)),
+                        widget.cycle.evaluationStandard,
+                        false)),
                 laneExame(
                   modelList[3],
-                  widget.controller.getColorGradeExam(
-                      modelList[3].nota.toString(),
+                  widget.controller.getColorGrade(
+                      modelList[3].nota,
                       widget.grade,
                       widget.cycle.approvalPattern,
-                      widget.cycle.evaluationStandard),
+                      widget.cycle.evaluationStandard,
+                      true),
                 ),
               ],
       ),

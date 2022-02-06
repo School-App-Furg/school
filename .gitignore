@@ -19,5 +19,6 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
-google-services-json
+google-services-json.json
+GoogleService-Info.plist
 keystore.properties

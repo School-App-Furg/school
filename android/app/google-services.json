@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "886047047462-cmkpg69kofjcbpk2qgr7v70ksr0emrkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.furg.school",
+            "certificate_hash": "1debd757b15be076e7034d5ad5c78ce44ac4d158"
+          }
+        },
+        {
           "client_id": "886047047462-vc4mna75o0vpcdjrr6j1m2ui8b0ackid.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "886047047462-vc4mna75o0vpcdjrr6j1m2ui8b0ackid.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "886047047462-h3osfljqgupj8clrhbm1tag9bof4mtg5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.furg.school"
+              }
             }
           ]
         }

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:school/app/screens/professor/professor_service.dart';
+import '../professor_service.dart';
 
 import '../../../core/models/school_model.dart';
 import '../../../core/models/teacher_user.dart';

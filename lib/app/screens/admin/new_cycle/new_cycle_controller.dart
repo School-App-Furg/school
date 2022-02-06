@@ -7,7 +7,6 @@ import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/service/snackbars.dart';
 import '../admin_service.dart';
-import '../config/config_controller.dart';
 import '../home_page/home_controller.dart';
 
 part 'new_cycle_controller.g.dart';
@@ -93,23 +92,21 @@ abstract class _NewCycleControllerBase with Store {
         loader.show();
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
-        String id = await _adminService.insertCycle(
-          Cycle(
+        Cycle cycleToInsert = Cycle(
             name: cycleName.text,
             idSchool: schoolId,
             initialDate: initialDate.millisecondsSinceEpoch,
             finalDate: finalDate.millisecondsSinceEpoch,
             approvalPattern: score,
-            evaluationStandard: cyclePeriod,
-          ),
-        );
+            evaluationStandard: cyclePeriod);
+        String id = await _adminService.insertCycle(cycleToInsert);
+        cycleToInsert.id = id;
         bool updateSchoolCycle =
             await _adminService.updateCycleSchool(id, schoolId);
-
         if (updateSchoolCycle) {
           loader.hide();
           buildSnackBarUi(context, "Ciclo cadastrado com sucesso!");
-          Modular.get<ConfigController>().getCurrentCycle();
+          _adminService.updateHomeAfterNewCycle(cycleToInsert);
           Modular.to.pop();
         } else {
           loader.hide();

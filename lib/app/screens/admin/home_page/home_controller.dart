@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import '../../../core/models/cycle.dart';
 
 import '../../../core/components/loader/loader_default.dart';
 import '../../../core/models/classes.dart';
+import '../../../core/models/cycle.dart';
 import '../../../core/models/school_model.dart';
 import '../../../core/models/user_admin.dart';
 import '../../../core/service/snackbars.dart';

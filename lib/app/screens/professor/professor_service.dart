@@ -75,15 +75,6 @@ class ProfessorService {
     }
   }
 
-  //atualizar professor
-  Future<bool> updateTeacher(TeacherUser teacher) async {
-    try {
-      return await _userRepository.updateTeacher(teacher);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
   //Requisita uma nova senha com base no email
   Future<bool> requestNewPassword(String mail) async {
     try {

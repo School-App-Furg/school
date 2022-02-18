@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 
+import '../../../../core/models/school_model.dart';
+
 import '../../../../core/models/cycle.dart';
 import '../../../../core/models/grade.dart';
 import '../../../../core/models/model_table.dart';
@@ -18,6 +20,7 @@ class StudentCard extends StatefulWidget {
   final SchoolReportController controller;
   final String subjectId;
   final String teacherId;
+  final SchoolModel schoolModel;
 
   StudentCard({
     Key? key,
@@ -27,6 +30,7 @@ class StudentCard extends StatefulWidget {
     required this.controller,
     required this.subjectId,
     required this.teacherId,
+    required this.schoolModel,
   }) : super(key: key);
 
   @override
@@ -80,7 +84,8 @@ class _StudentCardState extends State<StudentCard> {
               if (widget.cycle.initialDate <
                       DateTime.now().millisecondsSinceEpoch &&
                   widget.cycle.finalDate >
-                      DateTime.now().millisecondsSinceEpoch)
+                      DateTime.now().millisecondsSinceEpoch &&
+                  widget.cycle.id == widget.schoolModel.currentCycle)
                 DataColumn(label: SizedBox()),
             ],
             rows: widget.cycle.evaluationStandard == 'Bimestral'
@@ -146,7 +151,8 @@ class _StudentCardState extends State<StudentCard> {
         DataCell(Text(modelTable.nota.toString())),
         DataCell(Text(modelTable.faltas.toString())),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
-            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.id == widget.schoolModel.currentCycle)
           DataCell(
             IconButton(
               onPressed: () {
@@ -181,7 +187,8 @@ class _StudentCardState extends State<StudentCard> {
         DataCell(Text(modelTable.nota.toString())),
         DataCell(Text(modelTable.faltas.toString())),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
-            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.id == widget.schoolModel.currentCycle)
           DataCell(
             IconButton(
               onPressed: () {
@@ -219,7 +226,8 @@ class _StudentCardState extends State<StudentCard> {
         )),
         DataCell(Text(modelTable.faltas.toString())),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
-            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.id == widget.schoolModel.currentCycle)
           DataCell(
             IconButton(
               onPressed: () {
@@ -255,7 +263,8 @@ class _StudentCardState extends State<StudentCard> {
             style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
         DataCell(Text(faltas, style: TextStyle(fontWeight: FontWeight.bold))),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
-            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.id == widget.schoolModel.currentCycle)
           DataCell(SizedBox()),
       ],
     );
@@ -269,7 +278,8 @@ class _StudentCardState extends State<StudentCard> {
             style: TextStyle(fontWeight: FontWeight.bold, color: colorGrade))),
         DataCell(Text(faltas, style: TextStyle(fontWeight: FontWeight.bold))),
         if (widget.cycle.initialDate < DateTime.now().millisecondsSinceEpoch &&
-            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch)
+            widget.cycle.finalDate > DateTime.now().millisecondsSinceEpoch &&
+            widget.cycle.id == widget.schoolModel.currentCycle)
           DataCell(SizedBox()),
       ],
     );

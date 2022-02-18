@@ -4,8 +4,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import '../../../core/styles/sizes.dart';
-import '../../../core/models/grade.dart';
 
 import '../../../core/components/label_text.dart';
 import '../../../core/components/loader/loader_page.dart';
@@ -14,11 +12,12 @@ import '../../../core/form/general_form.dart';
 import '../../../core/form/multi_select.dart';
 import '../../../core/models/classes.dart';
 import '../../../core/models/cycle.dart';
+import '../../../core/models/grade.dart';
 import '../../../core/models/student_user.dart';
 import '../../../core/models/subject_teacher.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/colors.dart';
-
+import '../../../core/styles/sizes.dart';
 import 'add_grades_controller.dart';
 
 class AddGradesPage extends StatefulWidget {

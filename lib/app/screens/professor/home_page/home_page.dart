@@ -124,7 +124,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                                                             .subjectTeachers![
                                                         index2],
                                                     'cycle':
-                                                        controller.actualyCycle
+                                                        controller.actualyCycle,
+                                                    'schoolModel':
+                                                        controller.schoolModel
                                                   },
                                                 );
                                               },

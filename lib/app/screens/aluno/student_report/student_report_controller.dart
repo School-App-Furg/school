@@ -31,7 +31,10 @@ abstract class _StudentReportControllerBase with Store {
       String studentId, SubjectTeacher subjectTeacher, Cycle cycle) async {
     loading = true;
     grades = await _alunoService.getGradesForSubject(
-        studentId, cycle.id!, subjectTeacher.idSubject);
+      studentId,
+      cycle.id!,
+      subjectTeacher.idSubject,
+    );
     loading = false;
   }
 

@@ -25,7 +25,7 @@ abstract class _SchoolReportControllerBase with Store {
 
   //Classe sendo inicializada
   @observable
-  Classes classReceived =
+  Classes classes =
       Classes(schoolId: '', name: '', room: '', cycleId: '', level: '');
 
   //Lista de notas
@@ -45,11 +45,12 @@ abstract class _SchoolReportControllerBase with Store {
   //Solicita as informações do relatório ao firebase
   @action
   initSchoolReport(
-      Classes classes, String studentId, Cycle cycleReceived) async {
+      Classes classesReceived, String studentId, Cycle cycleReceived) async {
     loading = true;
-    classReceived = classes;
+    classes = classesReceived;
     cycle = cycleReceived;
-    grades = await _adminService.getGrades(studentId, classes.cycleId);
+    grades =
+        await _adminService.getGrades(studentId, classes.cycleId, classes.id!);
     loading = false;
   }
 

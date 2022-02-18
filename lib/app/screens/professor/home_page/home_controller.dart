@@ -95,11 +95,14 @@ abstract class _HomeControllerBase with Store {
       if (lista.length == 0) {
         toRemove.add(a);
       }
+
+      subjectTeacherToRemove.clear();
     }
+    toRemove = toRemove.reversed.toList();
     //remove da lista os que não possuem
-    toRemove.forEach((element) {
-      classes!.remove(classes![element]);
-    });
+    for (var c = 0; c < toRemove.length; c++) {
+      classes!.remove(classes![toRemove[c]]);
+    }
   }
 
   //lista de turmas

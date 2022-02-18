@@ -292,9 +292,10 @@ class AdminService {
   }
 
   //listagem de notas e faltas de uma turma com base nos atributos da classe Grade
-  Future<List<Grade>> getGrades(String studentId, String cycleId) async {
+  Future<List<Grade>> getGrades(
+      String studentId, String cycleId, String classId) async {
     try {
-      return await _gradesRepository.getGrades(studentId, cycleId);
+      return await _gradesRepository.getGrades(studentId, cycleId, classId);
     } catch (error) {
       throw Exception(error);
     }

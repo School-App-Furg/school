@@ -53,7 +53,8 @@ abstract class _SchoolReportControllerBase with Store {
         classReceived.students!,
         classReceived.cycleId,
         subjectTeacherReceived.idSubject,
-        subjectTeacherReceived.idTeacher);
+        subjectTeacherReceived.idTeacher,
+        classReceived.id!);
     cycle = cycleReceived;
     loading = false;
   }
@@ -68,7 +69,8 @@ abstract class _SchoolReportControllerBase with Store {
         classReceived.students!,
         classReceived.cycleId,
         subjectTeacherReceived.idSubject,
-        subjectTeacherReceived.idTeacher);
+        subjectTeacherReceived.idTeacher,
+        classReceived.id!);
     loading = false;
   }
 

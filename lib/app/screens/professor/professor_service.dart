@@ -95,11 +95,15 @@ class ProfessorService {
   }
 
   //listagem de notas e faltas de uma turma p/ o professor com base nos atributos da classe Grade
-  Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
-      String cycleId, String idSubject, String idTeacher) async {
+  Future<ObservableList<Grade>> getGradesForTeacher(
+      List<String> students,
+      String cycleId,
+      String idSubject,
+      String idTeacher,
+      String classId) async {
     try {
       return await _gradesRepository.getGradesForTeacher(
-          students, cycleId, idSubject, idTeacher);
+          students, cycleId, idSubject, idTeacher, classId);
     } catch (error) {
       throw Exception(error);
     }

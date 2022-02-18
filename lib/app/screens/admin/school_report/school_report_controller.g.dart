@@ -24,19 +24,18 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
     });
   }
 
-  final _$classReceivedAtom =
-      Atom(name: '_SchoolReportControllerBase.classReceived');
+  final _$classesAtom = Atom(name: '_SchoolReportControllerBase.classes');
 
   @override
-  Classes get classReceived {
-    _$classReceivedAtom.reportRead();
-    return super.classReceived;
+  Classes get classes {
+    _$classesAtom.reportRead();
+    return super.classes;
   }
 
   @override
-  set classReceived(Classes value) {
-    _$classReceivedAtom.reportWrite(value, super.classReceived, () {
-      super.classReceived = value;
+  set classes(Classes value) {
+    _$classesAtom.reportWrite(value, super.classes, () {
+      super.classes = value;
     });
   }
 
@@ -75,9 +74,9 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
 
   @override
   Future initSchoolReport(
-      Classes classes, String studentId, Cycle cycleReceived) {
-    return _$initSchoolReportAsyncAction
-        .run(() => super.initSchoolReport(classes, studentId, cycleReceived));
+      Classes classesReceived, String studentId, Cycle cycleReceived) {
+    return _$initSchoolReportAsyncAction.run(() =>
+        super.initSchoolReport(classesReceived, studentId, cycleReceived));
   }
 
   final _$_SchoolReportControllerBaseActionController =
@@ -120,7 +119,7 @@ mixin _$SchoolReportController on _SchoolReportControllerBase, Store {
   String toString() {
     return '''
 loading: ${loading},
-classReceived: ${classReceived},
+classes: ${classes},
 grades: ${grades},
 cycle: ${cycle}
     ''';

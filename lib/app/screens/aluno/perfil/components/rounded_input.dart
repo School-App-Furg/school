@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:school/app/core/components/text_field_container.dart';
-import 'package:school/app/core/styles/colors.dart';
+import '../../../../core/components/text_field_container.dart';
+import '../../../../core/styles/colors.dart';
 
 class RoundedInputAluno extends StatelessWidget {
   final String hintText;

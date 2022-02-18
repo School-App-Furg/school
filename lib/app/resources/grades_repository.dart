@@ -9,13 +9,15 @@ class GradesRepository {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
-  Future<List<Grade>> getGrades(String studentId, String cycleId) async {
+  Future<List<Grade>> getGrades(
+      String studentId, String cycleId, String classId) async {
     List<Grade> list = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
           .collection('grades')
           .where('student', isEqualTo: studentId)
           .where('cycle', isEqualTo: cycleId)
+          .where('classe', isEqualTo: classId)
           .get();
       snapshot.docs.forEach(
         (element) {
@@ -63,8 +65,12 @@ class GradesRepository {
   }
 
   //Retorna a lista de disciplinas cadastradas com base em um professor
-  Future<ObservableList<Grade>> getGradesForTeacher(List<String> students,
-      String cycleId, String idSubject, String idTeacher) async {
+  Future<ObservableList<Grade>> getGradesForTeacher(
+      List<String> students,
+      String cycleId,
+      String idSubject,
+      String idTeacher,
+      String classId) async {
     ObservableList<Grade> list = ObservableList();
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
@@ -73,6 +79,7 @@ class GradesRepository {
           .where('cycle', isEqualTo: cycleId)
           .where('subject', isEqualTo: idSubject)
           .where('teacher', isEqualTo: idTeacher)
+          .where('classe', isEqualTo: classId)
           .orderBy('timeCourse')
           .get();
       snapshot.docs.forEach(

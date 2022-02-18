@@ -41,9 +41,11 @@ class ProfessorModule extends Module {
                 )),
         ChildRoute('/school-report',
             child: (_, args) => SchoolReportPage(
-                classe: args.data['classe'],
-                subjectTeacher: args.data['subjectTeacher'],
-                cycle: args.data['cycle'])),
+                  classe: args.data['classe'],
+                  subjectTeacher: args.data['subjectTeacher'],
+                  cycle: args.data['cycle'],
+                  schoolModel: args.data['schoolModel'],
+                )),
         ChildRoute('/historic',
             child: (_, args) => HistoricPage(
                 schoolId: args.data['schoolId'], cycle: args.data['cycle'])),

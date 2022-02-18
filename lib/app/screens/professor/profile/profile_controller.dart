@@ -38,17 +38,4 @@ abstract class _ProfileControllerBase with Store {
       buildSnackBarUi(context, e.toString());
     }
   }
-
-  //update dos dados da escola
-  Future update(BuildContext context) async {
-    try {
-      teacher.name = nameController.text;
-      teacher.cpf = cpfController.text;
-      await professorService.updateTeacher(teacher);
-      professorService.updateHome();
-      buildSnackBarUi(context, "Dados atualizados");
-    } catch (e) {
-      buildSnackBarUi(context, e.toString());
-    }
-  }
 }

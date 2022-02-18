@@ -78,15 +78,6 @@ class AlunoService {
     }
   }
 
-  //atualiza informações de um aluno
-  Future<bool> updateStudent(StudentUser student) async {
-    try {
-      return await _userRepository.updateStudent(student);
-    } catch (error) {
-      throw Exception(error);
-    }
-  }
-
   //solicitação de uma nova senha
   Future<bool> requestNewPassword(String mail) async {
     try {

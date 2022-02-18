@@ -5,10 +5,10 @@ import '../../../core/components/label_text.dart';
 import '../../../core/components/profiles/background_image.dart';
 import '../../../core/components/profiles/perfil_image.dart';
 import '../../../core/components/rounded_button.dart';
-import '../../../core/components/rounded_input.dart';
 import '../../../core/models/teacher_user.dart';
 import '../../../core/service/validators.dart';
 import '../../../core/styles/colors.dart';
+import 'components/rounded_input.dart';
 import 'profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   LabelText(
                     text: 'Nome:',
                   ),
-                  RoundedInput(
+                  RoundedInputProfessor(
                     controller: _controller.nameController,
                     hintText: "Meu nome",
                     icon: Icons.school,
@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   LabelText(
                     text: 'CPF:',
                   ),
-                  RoundedInput(
+                  RoundedInputProfessor(
                     controller: _controller.cpfController,
                     hintText: "CPF",
                     mask: [
@@ -78,14 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icons.corporate_fare_rounded,
                     keyboardType: TextInputType.number,
                     validator: validateCnpj,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  RoundedButton(
-                    text: "Atualizar",
-                    onpressed: () => _controller.update(context),
-                    textColor: white,
                   ),
                 ],
               ),

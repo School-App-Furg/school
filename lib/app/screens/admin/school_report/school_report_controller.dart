@@ -42,7 +42,7 @@ abstract class _SchoolReportControllerBase with Store {
       initialDate: 0,
       finalDate: 0);
 
-  //Solicita as informações do boletim ao firebase
+  //Solicita as informações do relatório ao firebase
   @action
   initSchoolReport(
       Classes classes, String studentId, Cycle cycleReceived) async {
@@ -53,7 +53,7 @@ abstract class _SchoolReportControllerBase with Store {
     loading = false;
   }
 
-  //Organiza as notas de acordo com as disciplinas e professores
+  //Listagem dos cards com as notas e faltas de cada disciplinas/professor
   @action
   List<Grade> filterGrades(String subject, String teacher) {
     List<Grade> lista = [];

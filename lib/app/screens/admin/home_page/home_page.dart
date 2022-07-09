@@ -13,6 +13,8 @@ import 'components/app_bar_home.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -54,7 +56,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         : null),
                 body: Observer(
                   builder: (_) {
-                    return controller.classes!.length == 0
+                    return controller.classes!.isEmpty
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

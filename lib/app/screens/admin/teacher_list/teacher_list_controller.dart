@@ -14,7 +14,7 @@ class TeacherListController = _TeacherListControllerBase
     with _$TeacherListController;
 
 abstract class _TeacherListControllerBase with Store {
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;

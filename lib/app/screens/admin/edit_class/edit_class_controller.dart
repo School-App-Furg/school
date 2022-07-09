@@ -21,7 +21,7 @@ abstract class _EditClassControllerBase with Store {
   TextEditingController nameController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController yearController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //Solicita as informações da turma ao firebase
   @action
@@ -50,17 +50,13 @@ abstract class _EditClassControllerBase with Store {
   //Recebe as informações do aluno selecionado anteriormente
   @action
   getStudentsPreviusSelected(Classes classes) {
-    classes.students!.forEach(
-      (element) {
-        students.forEach(
-          (student) {
-            if (element == student.id) {
-              listOfStudentsSelected.add(student);
-            }
-          },
-        );
-      },
-    );
+    for (final element in classes.students!) {
+      for (final student in students) {
+        if (element == student.id) {
+          listOfStudentsSelected.add(student);
+        }
+      }
+    }
   }
 
   //Lista de disciplina anterior
@@ -70,18 +66,14 @@ abstract class _EditClassControllerBase with Store {
   @action
   getSubjectsTeacherPreviusSelected(Classes classes) async {
     previusList = await _adminService.getSubjectTeacher(classes.id);
-    previusList.forEach(
-      (element1) {
-        subjectTeacher.forEach(
-          (element2) {
-            if (element1.idSubject == element2.idSubject &&
-                element1.idTeacher == element2.idTeacher) {
-              listOfSubjectTeachersSelected.add(element2);
-            }
-          },
-        );
-      },
-    );
+    for (final element1 in previusList) {
+      for (final element2 in subjectTeacher) {
+        if (element1.idSubject == element2.idSubject &&
+            element1.idTeacher == element2.idTeacher) {
+          listOfSubjectTeachersSelected.add(element2);
+        }
+      }
+    }
   }
 
   //Lista de disciplina+professor selecionada
@@ -104,11 +96,9 @@ abstract class _EditClassControllerBase with Store {
   @action
   setStudentsSelected(List values) {
     studentsSelected.clear();
-    values.forEach(
-      (element) {
-        studentsSelected.add(element.id);
-      },
-    );
+    for (final element in values) {
+      studentsSelected.add(element.id);
+    }
   }
 
   //Lista de disciplina
@@ -132,27 +122,21 @@ abstract class _EditClassControllerBase with Store {
   Future getSubjectsAndTeachers() async {
     subjects = await _adminService.getSubjects(schoolId);
     teachers = await _adminService.getTeachers(schoolId);
-    teachers.forEach(
-      (elementTeacher) {
-        elementTeacher.subjects!.forEach(
-          (elementTeacherSubject) {
-            subjects.forEach(
-              (elementSubject) {
-                if (elementTeacherSubject == elementSubject.id) {
-                  subjectTeacher.add(
-                    SubjectTeacher(
-                        idSubject: elementSubject.id ?? '',
-                        subject: elementSubject.name,
-                        idTeacher: elementTeacher.id ?? '',
-                        teacher: elementTeacher.name),
-                  );
-                }
-              },
+    for (final elementTeacher in teachers) {
+      for (final elementTeacherSubject in elementTeacher.subjects!) {
+        for (final elementSubject in subjects) {
+          if (elementTeacherSubject == elementSubject.id) {
+            subjectTeacher.add(
+              SubjectTeacher(
+                  idSubject: elementSubject.id ?? '',
+                  subject: elementSubject.name,
+                  idTeacher: elementTeacher.id ?? '',
+                  teacher: elementTeacher.name),
             );
-          },
-        );
-      },
-    );
+          }
+        }
+      }
+    }
   }
 
   @observable
@@ -162,18 +146,16 @@ abstract class _EditClassControllerBase with Store {
   @action
   setSubjectsSelected(List values) {
     subjectsTeacherSelected.clear();
-    values.forEach(
-      (element) {
-        subjectsTeacherSelected.add(
-          SubjectTeacher(
-              id: element.id,
-              idTeacher: element.idTeacher,
-              idSubject: element.idSubject,
-              subject: element.subject,
-              teacher: element.teacher),
-        );
-      },
-    );
+    for (final element in values) {
+      subjectsTeacherSelected.add(
+        SubjectTeacher(
+            id: element.id,
+            idTeacher: element.idTeacher,
+            idSubject: element.idSubject,
+            subject: element.subject,
+            teacher: element.teacher),
+      );
+    }
   }
 
   //Atualiza a edição da turma
@@ -188,8 +170,8 @@ abstract class _EditClassControllerBase with Store {
         if (studentsSelected.isNotEmpty) {
           classesReceived.students = studentsSelected;
         }
-        bool updated = await _adminService.updateClass(classesReceived);
-        bool updatedSubjectTeacher = updateSubjectTeacher();
+        final bool updated = await _adminService.updateClass(classesReceived);
+        final bool updatedSubjectTeacher = await updateSubjectTeacher();
         if (updated && updatedSubjectTeacher) {
           _adminService.updateHome();
           loader.hide();
@@ -207,11 +189,11 @@ abstract class _EditClassControllerBase with Store {
   }
 
   //Atualiza a seleção da disciplina+professor
-  bool updateSubjectTeacher() {
+  Future<bool> updateSubjectTeacher() async {
     try {
       if (subjectsTeacherSelected.isNotEmpty) {
-        List previusRemove = [];
-        List subjectRemove = [];
+        final List previusRemove = [];
+        final List subjectRemove = [];
         for (var a = 0; a < previusList.length; a++) {
           for (var b = 0; b < subjectsTeacherSelected.length; b++) {
             if (previusList[a].idSubject ==
@@ -224,34 +206,26 @@ abstract class _EditClassControllerBase with Store {
           }
         }
 
-        previusRemove.forEach(
-          (element) {
-            previusList.remove(
-              previusList[element],
-            );
-          },
-        );
+        for (final element in previusRemove) {
+          previusList.remove(
+            previusList[element],
+          );
+        }
 
-        subjectRemove.forEach(
-          (element) {
-            subjectsTeacherSelected.remove(
-              subjectsTeacherSelected[element],
-            );
-          },
-        );
+        for (final element in subjectRemove) {
+          subjectsTeacherSelected.remove(
+            subjectsTeacherSelected[element],
+          );
+        }
 
-        subjectsTeacherSelected.forEach(
-          (element) async {
-            await _adminService.insertSubjectTeacher(
-                element, classesReceived.id ?? '');
-          },
-        );
-        previusList.forEach(
-          (element) async {
-            await _adminService.deleteSubjectTeacher(
-                element, classesReceived.id ?? '');
-          },
-        );
+        for (final element in subjectsTeacherSelected) {
+          await _adminService.insertSubjectTeacher(
+              element, classesReceived.id ?? '');
+        }
+        for (final element in previusList) {
+          await _adminService.deleteSubjectTeacher(
+              element, classesReceived.id ?? '');
+        }
       }
 
       return true;

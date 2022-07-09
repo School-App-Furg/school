@@ -18,7 +18,7 @@ abstract class _EditTeacherControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //Classe sendo inicializada
   @observable
@@ -50,17 +50,13 @@ abstract class _EditTeacherControllerBase with Store {
   //Recebe a disciplina selecionada anteriormente deste professor
   @action
   getSubjectsPreviusSelected(TeacherUser teacherUser) {
-    teacherUser.subjects!.forEach(
-      (subjectId) {
-        listOfsubjects!.forEach(
-          (element) {
-            if (subjectId == element.id) {
-              listOfSubjectsSelected.add(element);
-            }
-          },
-        );
-      },
-    );
+    for (final subjectId in teacherUser.subjects!) {
+      for (final element in listOfsubjects!) {
+        if (subjectId == element.id) {
+          listOfSubjectsSelected.add(element);
+        }
+      }
+    }
   }
 
   @observable
@@ -74,11 +70,9 @@ abstract class _EditTeacherControllerBase with Store {
   @action
   setSubjectsSelected(List values) {
     subjectsSelected.clear();
-    values.forEach(
-      (element) {
-        subjectsSelected.add(element.id);
-      },
-    );
+    for (final element in values) {
+      subjectsSelected.add(element.id);
+    }
   }
 
   //edição de professores
@@ -89,7 +83,7 @@ abstract class _EditTeacherControllerBase with Store {
       loader.show();
       _teacherUser.name = nameController.text;
       _teacherUser.subjects = subjectsSelected;
-      bool updated = await _adminService.updateTeacher(_teacherUser);
+      final bool updated = await _adminService.updateTeacher(_teacherUser);
       Modular.to.pop();
       if (updated) {
         loader.hide();

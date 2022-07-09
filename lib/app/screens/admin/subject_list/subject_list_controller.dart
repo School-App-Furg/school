@@ -16,7 +16,7 @@ class SubjectsListController = _SubjectsListControllerBase
 abstract class _SubjectsListControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
@@ -33,7 +33,7 @@ abstract class _SubjectsListControllerBase with Store {
       try {
         loader.show();
         //cadastra o user da escola
-        bool inserted = await _adminService.insertSubject(
+        final bool inserted = await _adminService.insertSubject(
             Subject(name: nameController.text, schoolId: schoolId));
         subjects = await _adminService.getSubjects(schoolId);
         Navigator.of(context).pop();

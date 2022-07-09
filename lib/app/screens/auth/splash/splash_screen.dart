@@ -8,12 +8,14 @@ import '../../../resources/auth_repository.dart';
 import '../auth_service.dart';
 
 class Splash extends StatefulWidget {
+  const Splash({Key? key}) : super(key: key);
+
   @override
   State<Splash> createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   //Direcionamento de usuário na tela de início (modularidade)
   @override
@@ -21,14 +23,15 @@ class _SplashState extends State<Splash> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback(
       (timeStamp) async {
-        AuthRepository auth = Modular.get<AuthRepository>();
+        final AuthRepository auth = Modular.get<AuthRepository>();
         Future.delayed(
           const Duration(seconds: 2),
           () async {
             if (auth.usuario == null) {
               Modular.to.pushNamed("/auth/");
             } else {
-              int type = await _authService.getUserType(auth.usuario!.uid);
+              final int type =
+                  await _authService.getUserType(auth.usuario!.uid);
               if (type == 0) {
                 Modular.to.pushReplacementNamed("/admin/");
               } else if (type == 1) {

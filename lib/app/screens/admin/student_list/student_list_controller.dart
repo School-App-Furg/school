@@ -16,7 +16,7 @@ class StudentListController = _StudentListControllerBase
 abstract class _StudentListControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //injeção de depencias da user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;

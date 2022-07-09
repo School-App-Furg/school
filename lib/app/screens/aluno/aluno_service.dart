@@ -15,12 +15,12 @@ import '../../resources/users_repository.dart';
 import 'home_page/home_controller.dart';
 
 class AlunoService {
-  SchoolRepository _schoolRepository = SchoolRepository();
-  UsersRepository _userRepository = UsersRepository();
-  ClassesRepository _classesRepository = ClassesRepository();
-  CycleRepository _cycleRepository = CycleRepository();
-  GradesRepository _gradesRepository = GradesRepository();
-  AuthRepository _authRepository = AuthRepository();
+  final SchoolRepository _schoolRepository = SchoolRepository();
+  final UsersRepository _userRepository = UsersRepository();
+  final ClassesRepository _classesRepository = ClassesRepository();
+  final CycleRepository _cycleRepository = CycleRepository();
+  final GradesRepository _gradesRepository = GradesRepository();
+  final AuthRepository _authRepository = AuthRepository();
 
   //solicita as informacoes do user aluno
   Future<StudentUser?> getUserStudentById(String userId) async {
@@ -34,7 +34,7 @@ class AlunoService {
   //serviço para solicitar as informações da escola atrelada ao usuario
   Future<SchoolModel?> getSchoolInformations(String schoolId) async {
     try {
-      SchoolModel? schoolModel =
+      final SchoolModel? schoolModel =
           await _schoolRepository.getSchoolInformationsById(schoolId);
       return schoolModel;
     } catch (error) {
@@ -46,9 +46,9 @@ class AlunoService {
   Future<List<SubjectTeacher>> getSubjectsForStudent(
       String schoolId, String cycleId, String studentId) async {
     try {
-      List<Classes>? myClass = await _classesRepository.getClassesForStudent(
-          schoolId, cycleId, studentId);
-      if (myClass!.length == 0) {
+      final List<Classes>? myClass = await _classesRepository
+          .getClassesForStudent(schoolId, cycleId, studentId);
+      if (myClass!.isEmpty) {
         return [];
       } else {
         return await _classesRepository.getSubjectTeacher(myClass[0].id);

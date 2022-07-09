@@ -16,7 +16,7 @@ class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   TextEditingController nomeEscolaController = TextEditingController();
   TextEditingController cnpjController = TextEditingController();
@@ -40,12 +40,12 @@ abstract class _RegisterControllerBase with Store {
         loader.show();
 
         //cadastra o user da escola
-        User? user = await _authService.createUserWithEmailPass(
+        final User? user = await _authService.createUserWithEmailPass(
           emailController.text,
           senhaController.text,
         );
         //cadastra a escola e retorna o id da escola
-        String idSchool = await _authService.insertScholl(
+        final String idSchool = await _authService.insertScholl(
           SchoolModel(
             currentCycle: user!.uid,
             cnpj: cnpjController.text,
@@ -54,7 +54,7 @@ abstract class _RegisterControllerBase with Store {
         );
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
-        bool insertedCycle = await _authService.insertFirstCycleSchool(
+        final bool insertedCycle = await _authService.insertFirstCycleSchool(
           user.uid,
           Cycle(
             name: DateTime.now().year.toString(),
@@ -67,7 +67,7 @@ abstract class _RegisterControllerBase with Store {
         );
 
         //Cadastra as demais informações do user admin
-        bool inserted = await _authService.insertUserAdmin(
+        final bool inserted = await _authService.insertUserAdmin(
           user.uid,
           UserAdmin(
               schoolId: idSchool, name: nomeEscolaController.text, type: 0),

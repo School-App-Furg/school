@@ -79,7 +79,7 @@ abstract class _HomeControllerBase with Store {
 
   //funcao para alocar a sequencia de imagens banner
   definiBanner(int index) {
-    var resto = index % 5;
+    final resto = index % 5;
     if (index < 5) {
       return banners[index];
     } else {

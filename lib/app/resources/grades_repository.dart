@@ -11,25 +11,24 @@ class GradesRepository {
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
   Future<List<Grade>> getGrades(
       String studentId, String cycleId, String classId) async {
-    List<Grade> list = [];
+    final List<Grade> list = [];
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
-          .collection('grades')
-          .where('student', isEqualTo: studentId)
-          .where('cycle', isEqualTo: cycleId)
-          .where('classe', isEqualTo: classId)
-          .get();
-      snapshot.docs.forEach(
-        (element) {
-          list.add(
-            Grade.fromJson(
-              json.encode(
-                element.data(),
-              ),
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance
+              .collection('grades')
+              .where('student', isEqualTo: studentId)
+              .where('cycle', isEqualTo: cycleId)
+              .where('classe', isEqualTo: classId)
+              .get();
+      for (final element in snapshot.docs) {
+        list.add(
+          Grade.fromJson(
+            json.encode(
+              element.data(),
             ),
-          );
-        },
-      );
+          ),
+        );
+      }
       return list;
     } catch (error) {
       throw Exception(error);
@@ -39,25 +38,24 @@ class GradesRepository {
   //Retorna a lista de disciplinas com base em uma determinada disciplina
   Future<List<Grade>> getGradesForSubject(
       String studentId, String cycleId, String subject) async {
-    List<Grade> list = [];
+    final List<Grade> list = [];
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
-          .collection('grades')
-          .where('student', isEqualTo: studentId)
-          .where('cycle', isEqualTo: cycleId)
-          .where('subject', isEqualTo: subject)
-          .get();
-      snapshot.docs.forEach(
-        (element) {
-          list.add(
-            Grade.fromJson(
-              json.encode(
-                element.data(),
-              ),
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance
+              .collection('grades')
+              .where('student', isEqualTo: studentId)
+              .where('cycle', isEqualTo: cycleId)
+              .where('subject', isEqualTo: subject)
+              .get();
+      for (final element in snapshot.docs) {
+        list.add(
+          Grade.fromJson(
+            json.encode(
+              element.data(),
             ),
-          );
-        },
-      );
+          ),
+        );
+      }
       return list;
     } catch (error) {
       throw Exception(error);
@@ -71,38 +69,37 @@ class GradesRepository {
       String idSubject,
       String idTeacher,
       String classId) async {
-    ObservableList<Grade> list = ObservableList();
+    final ObservableList<Grade> list = ObservableList();
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
-          .collection('grades')
-          .where('student', whereIn: students)
-          .where('cycle', isEqualTo: cycleId)
-          .where('subject', isEqualTo: idSubject)
-          .where('teacher', isEqualTo: idTeacher)
-          .where('classe', isEqualTo: classId)
-          .orderBy('timeCourse')
-          .get();
-      snapshot.docs.forEach(
-        (element) {
-          var data = Grade.fromJson(
-            json.encode(
-              element.data(),
-            ),
-          );
-          list.add(
-            Grade(
-                id: element.id,
-                student: data.student,
-                cycle: data.cycle,
-                subject: data.subject,
-                note: data.note,
-                timeCourse: data.timeCourse,
-                faults: data.faults,
-                teacher: data.teacher,
-                classe: data.classe),
-          );
-        },
-      );
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance
+              .collection('grades')
+              .where('student', whereIn: students)
+              .where('cycle', isEqualTo: cycleId)
+              .where('subject', isEqualTo: idSubject)
+              .where('teacher', isEqualTo: idTeacher)
+              .where('classe', isEqualTo: classId)
+              .orderBy('timeCourse')
+              .get();
+      for (final element in snapshot.docs) {
+        final data = Grade.fromJson(
+          json.encode(
+            element.data(),
+          ),
+        );
+        list.add(
+          Grade(
+              id: element.id,
+              student: data.student,
+              cycle: data.cycle,
+              subject: data.subject,
+              note: data.note,
+              timeCourse: data.timeCourse,
+              faults: data.faults,
+              teacher: data.teacher,
+              classe: data.classe),
+        );
+      }
       return list;
     } catch (error) {
       throw Exception(error);

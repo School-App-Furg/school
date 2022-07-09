@@ -12,7 +12,7 @@ class StudentsListForClassController = _StudentsListForClassControllerBase
     with _$StudentsListForClassController;
 
 abstract class _StudentsListForClassControllerBase with Store {
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //bool para carregamento dos dados
   @observable

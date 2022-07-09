@@ -20,7 +20,7 @@ class EditSchoolReportController = _EditSchoolReportControllerBase
     with _$EditSchoolReportController;
 
 abstract class _EditSchoolReportControllerBase with Store {
-  ProfessorService _professorService = ProfessorService();
+  final ProfessorService _professorService = ProfessorService();
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController noteController = TextEditingController();
   TextEditingController faultsController = TextEditingController();
@@ -79,7 +79,7 @@ abstract class _EditSchoolReportControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        Grade newGrade = Grade(
+        final Grade newGrade = Grade(
             student: studentUser,
             cycle: cycleId,
             subject: subjectId,
@@ -88,7 +88,7 @@ abstract class _EditSchoolReportControllerBase with Store {
             faults: int.parse(faultsController.text),
             teacher: teacherId,
             classe: classId);
-        bool inserted = await _professorService.insertGrade(newGrade);
+        final bool inserted = await _professorService.insertGrade(newGrade);
         if (inserted) {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
@@ -112,7 +112,7 @@ abstract class _EditSchoolReportControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        bool inserted = await _professorService.updateGrade(
+        final bool inserted = await _professorService.updateGrade(
           gradeId,
           double.parse(noteController.text),
           int.parse(faultsController.text),

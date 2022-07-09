@@ -52,10 +52,11 @@ String? validateCpf(value) {
 
 //valida senha se nula
 String? validateSenha(value) {
-  if (isNull(value) || value.isEmpty)
+  if (isNull(value) || value.isEmpty) {
     return 'Senha precisa ser preenchida';
-  else if (value.length < 6)
+  } else if (value.length < 6) {
     return 'Mínimo 6 caracteres';
-  else
+  } else {
     return null;
+  }
 }

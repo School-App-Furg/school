@@ -6,6 +6,8 @@ import '../../../core/components/loader/loader_page.dart';
 import 'teacher_list_controller.dart';
 
 class TeacherListPage extends StatefulWidget {
+  const TeacherListPage({Key? key}) : super(key: key);
+
   @override
   State<TeacherListPage> createState() => _TeacherListPageState();
 }
@@ -34,14 +36,14 @@ class _TeacherListPageState
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.teachers!.length == 0
+                    return controller.teachers!.isEmpty
                         ? Center(
                             child: Text('Nenhum professor cadastrado!'),
                           )
                         : ListView.builder(
                             itemCount: controller.teachers!.length,
                             itemBuilder: (_, index) {
-                              var data = controller.teachers![index];
+                              final data = controller.teachers![index];
                               return Card(
                                 child: ListTile(
                                   leading: Icon(Icons.person),

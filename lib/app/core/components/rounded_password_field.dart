@@ -10,7 +10,7 @@ class RoundedPasswordField extends StatefulWidget {
   final bool obscureText;
   final Function()? onTap;
 
-  RoundedPasswordField({
+  const RoundedPasswordField({
     Key? key,
     required this.hintSenha,
     required this.controller,
@@ -42,7 +42,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
           ),
           suffixIcon: GestureDetector(
             onTap: widget.onTap,
-            child: new Icon(
+            child: Icon(
                 widget.obscureText ? Icons.visibility_off : Icons.visibility),
           ),
         ),

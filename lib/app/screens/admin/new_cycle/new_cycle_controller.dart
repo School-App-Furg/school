@@ -18,7 +18,7 @@ abstract class _NewCycleControllerBase with Store {
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
   GlobalKey<FormState> formKey = GlobalKey();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   String currentCycle = '';
 
@@ -48,10 +48,11 @@ abstract class _NewCycleControllerBase with Store {
 
   @action
   setinitialDate(e) {
-    if (e == null)
+    if (e == null) {
       initialDate = DateTime.now();
-    else
+    } else {
       initialDate = e;
+    }
   }
 
   @observable
@@ -59,10 +60,11 @@ abstract class _NewCycleControllerBase with Store {
 
   @action
   setFinalDate(e) {
-    if (e == null)
+    if (e == null) {
       finalDate = DateTime.now();
-    else
+    } else {
       finalDate = e;
+    }
   }
 
   //configuração de padrão de aprovação por nota
@@ -92,16 +94,16 @@ abstract class _NewCycleControllerBase with Store {
         loader.show();
 
         //cadastra o primeiro ciclo com o docId igual o id do User , retorna true se tiver sido cadastrado
-        Cycle cycleToInsert = Cycle(
+        final Cycle cycleToInsert = Cycle(
             name: cycleName.text,
             idSchool: schoolId,
             initialDate: initialDate.millisecondsSinceEpoch,
             finalDate: finalDate.millisecondsSinceEpoch,
             approvalPattern: score,
             evaluationStandard: cyclePeriod);
-        String id = await _adminService.insertCycle(cycleToInsert);
+        final String id = await _adminService.insertCycle(cycleToInsert);
         cycleToInsert.id = id;
-        bool updateSchoolCycle =
+        final bool updateSchoolCycle =
             await _adminService.updateCycleSchool(id, schoolId);
         if (updateSchoolCycle) {
           loader.hide();

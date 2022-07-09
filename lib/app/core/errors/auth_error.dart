@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 //Mensagens de erro retornadas pelo Firebase

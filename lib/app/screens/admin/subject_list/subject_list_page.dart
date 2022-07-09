@@ -7,6 +7,8 @@ import 'components/add_subject_dialog.dart';
 import 'subject_list_controller.dart';
 
 class SubjectsListPage extends StatefulWidget {
+  const SubjectsListPage({Key? key}) : super(key: key);
+
   @override
   State<SubjectsListPage> createState() => _SubjectsListPageState();
 }
@@ -42,14 +44,14 @@ class _SubjectsListPageState
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.subjects!.length == 0
+                    return controller.subjects!.isEmpty
                         ? Center(
                             child: Text('Nenhuma disciplina cadastrada!'),
                           )
                         : ListView.builder(
                             itemCount: controller.subjects!.length,
                             itemBuilder: (_, index) {
-                              var data = controller.subjects![index];
+                              final data = controller.subjects![index];
                               return Card(
                                 child: ListTile(
                                   title: Text(data.name),

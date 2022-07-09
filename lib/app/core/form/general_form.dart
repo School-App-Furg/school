@@ -12,7 +12,7 @@ class MyTextFormField extends StatelessWidget {
 
   final TextInputType keyboardType;
 
-  MyTextFormField({
+  const MyTextFormField({
     Key? key,
     required this.hintText,
     required this.validator,

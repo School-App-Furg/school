@@ -17,7 +17,7 @@ part 'add_grades_controller.g.dart';
 class AddGradesController = _AddGradesControllerBase with _$AddGradesController;
 
 abstract class _AddGradesControllerBase with Store {
-  ProfessorService _professorService = ProfessorService();
+  final ProfessorService _professorService = ProfessorService();
   GlobalKey<FormState> formKey = GlobalKey();
 
   //controladores do inputs da tela
@@ -66,11 +66,9 @@ abstract class _AddGradesControllerBase with Store {
   @action
   setStudentsSelected(List values) {
     studentsSelected.clear();
-    values.forEach(
-      (element) {
-        studentsSelected.add(element.id);
-      },
-    );
+    for (final element in values) {
+      studentsSelected.add(element.id);
+    }
   }
 
   //listagem de aluno selecionados
@@ -129,7 +127,7 @@ abstract class _AddGradesControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        bool inserted = await registerGrades();
+        final bool inserted = await registerGrades();
         if (inserted) {
           Modular.get<SchoolReportController>().getGrades();
           loader.hide();
@@ -149,43 +147,38 @@ abstract class _AddGradesControllerBase with Store {
 
   //cadastro de notas
   Future<bool> registerGrades() async {
-    List<String> toRemove = [];
-    studentsSelected.forEach(
-      (elementStudent) {
-        grades.forEach(
-          (elementGrade) async {
-            if (elementGrade.student == elementStudent &&
-                elementGrade.timeCourse == getCyclePeriod(cyclePeriod) &&
-                elementGrade.classe == classe.id!) {
-              toRemove.add(elementStudent);
-              await _professorService.updateGrade(
-                elementGrade.id!,
-                double.parse(noteController.text),
-                int.parse(faultsController.text),
-              );
-            }
-          },
-        );
-      },
-    );
-    toRemove.forEach((element) {
+    final List<String> toRemove = [];
+    for (final elementStudent in studentsSelected) {
+      for (final elementGrade in grades) {
+        if (elementGrade.student == elementStudent &&
+            elementGrade.timeCourse == getCyclePeriod(cyclePeriod) &&
+            elementGrade.classe == classe.id!) {
+          toRemove.add(elementStudent);
+          await _professorService.updateGrade(
+            elementGrade.id!,
+            double.parse(noteController.text),
+            int.parse(faultsController.text),
+          );
+        }
+      }
+    }
+    for (final element in toRemove) {
       studentsSelected.remove(element);
-    });
-    studentsSelected.forEach(
-      (element) async {
-        await _professorService.insertGrade(
-          Grade(
-              student: element,
-              cycle: cycle.id!,
-              subject: subjectTeacher.idSubject,
-              note: double.parse(noteController.text),
-              timeCourse: getCyclePeriod(cyclePeriod),
-              faults: int.parse(faultsController.text),
-              teacher: subjectTeacher.idTeacher,
-              classe: classe.id!),
-        );
-      },
-    );
+    }
+    for (final i in studentsSelected) {
+      await _professorService.insertGrade(
+        Grade(
+          student: i,
+          cycle: cycle.id!,
+          subject: subjectTeacher.idSubject,
+          note: double.parse(noteController.text),
+          timeCourse: getCyclePeriod(cyclePeriod),
+          faults: int.parse(faultsController.text),
+          teacher: subjectTeacher.idTeacher,
+          classe: classe.id!,
+        ),
+      );
+    }
     return true;
   }
 }

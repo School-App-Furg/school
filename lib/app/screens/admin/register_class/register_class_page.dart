@@ -11,6 +11,8 @@ import '../../../core/styles/colors.dart';
 import 'register_class_controller.dart';
 
 class RegisterClassPage extends StatefulWidget {
+  const RegisterClassPage({Key? key}) : super(key: key);
+
   @override
   State<RegisterClassPage> createState() => _RegisterClassPageState();
 }

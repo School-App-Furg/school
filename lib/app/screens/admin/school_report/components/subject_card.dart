@@ -15,7 +15,7 @@ class SubjectCard extends StatefulWidget {
   final List<Grade> grade;
   final SubjectTeacher subjectTeacher;
   final SchoolReportController controller;
-  SubjectCard({
+  const SubjectCard({
     Key? key,
     required this.cycle,
     required this.grade,
@@ -75,7 +75,7 @@ class _SubjectCardState extends State<SubjectCard> {
                 TextStyle(fontWeight: FontWeight.bold, color: white),
             headingRowColor:
                 MaterialStateProperty.resolveWith((states) => blueicon),
-            columns: [
+            columns: const [
               DataColumn(label: Text('Avaliação')),
               DataColumn(label: Text('Nota Final')),
               DataColumn(label: Text('Faltas')),

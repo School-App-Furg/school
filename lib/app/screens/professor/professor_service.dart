@@ -19,18 +19,18 @@ import '../../resources/users_repository.dart';
 import 'home_page/home_controller.dart';
 
 class ProfessorService {
-  SchoolRepository _schoolRepository = SchoolRepository();
-  UsersRepository _userRepository = UsersRepository();
-  ClassesRepository _classesRepository = ClassesRepository();
-  SubjectRepository _subjectRepository = SubjectRepository();
-  AuthRepository _authRepository = AuthRepository();
-  CycleRepository _cycleRepository = CycleRepository();
-  GradesRepository _gradesRepository = GradesRepository();
+  final SchoolRepository _schoolRepository = SchoolRepository();
+  final UsersRepository _userRepository = UsersRepository();
+  final ClassesRepository _classesRepository = ClassesRepository();
+  final SubjectRepository _subjectRepository = SubjectRepository();
+  final AuthRepository _authRepository = AuthRepository();
+  final CycleRepository _cycleRepository = CycleRepository();
+  final GradesRepository _gradesRepository = GradesRepository();
 
   //serviço para solicitar as informações da escola atrelada ao usuario
   Future<SchoolModel?> getSchoolInformations(String schoolId) async {
     try {
-      SchoolModel? schoolModel =
+      final SchoolModel? schoolModel =
           await _schoolRepository.getSchoolInformationsById(schoolId);
       return schoolModel;
     } catch (error) {
@@ -68,7 +68,7 @@ class ProfessorService {
   //serviço para solicitar lista de disciplinas
   Future<List<Subject>> getSubjects(String schoolId) async {
     try {
-      List<Subject> list = await _subjectRepository.getSubjects(schoolId);
+      final List<Subject> list = await _subjectRepository.getSubjects(schoolId);
       return list;
     } catch (error) {
       throw Exception(error);

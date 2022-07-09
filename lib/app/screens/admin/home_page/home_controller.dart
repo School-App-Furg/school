@@ -65,12 +65,10 @@ abstract class _HomeControllerBase with Store {
   //Define o professor associado à turma
   @action
   setSubjectTeacher(List<Classes> classes) async {
-    classes.forEach(
-      (element) async {
-        element.subjectTeachers =
-            await adminService.getSubjectTeacher(element.id);
-      },
-    );
+    for (final element in classes) {
+      element.subjectTeachers =
+          await adminService.getSubjectTeacher(element.id);
+    }
   }
 
   //lista de turmas
@@ -88,7 +86,7 @@ abstract class _HomeControllerBase with Store {
 
   //função para alocar a sequência de imagens banner
   definiBanner(int index) {
-    var resto = index % 5;
+    final resto = index % 5;
     if (index < 5) {
       return banners[index];
     } else {
@@ -111,10 +109,10 @@ abstract class _HomeControllerBase with Store {
     final loader = LoaderDefault();
     try {
       loader.show();
-      classes.subjectTeachers!.forEach((element) async {
+      for (final element in classes.subjectTeachers!) {
         await adminService.deleteSubjectTeacher(element, classes.id!);
-      });
-      bool deleted = await adminService.deleteClass(classes.id!);
+      }
+      final bool deleted = await adminService.deleteClass(classes.id!);
       Navigator.of(context).pop();
       if (deleted) {
         adminService.updateHome();

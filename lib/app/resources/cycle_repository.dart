@@ -10,7 +10,7 @@ class CycleRepository {
   //cadastro de um novo ciclo
   Future<String> insertCycle(Cycle cycle) async {
     try {
-      var data =
+      final data =
           await firestoreInstance.collection('cycles').add(cycle.toMap());
       return data.id;
     } catch (e) {
@@ -37,7 +37,7 @@ class CycleRepository {
     try {
       await firestoreInstance.collection('cycles').doc(uid).get().then(
         (DocumentSnapshot snapshot) {
-          Cycle data = Cycle.fromJson(
+          final Cycle data = Cycle.fromJson(
             json.encode(snapshot.data()),
           );
           model = Cycle(
@@ -58,32 +58,31 @@ class CycleRepository {
 
   //get de lista de ciclos de uma determinada escola
   Future<List<Cycle?>> getCycles(String schoolId, String cycleId) async {
-    List<Cycle> list = [];
+    final List<Cycle> list = [];
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
-          .collection('cycles')
-          .where('idSchool', isEqualTo: schoolId)
-          .where(FieldPath.documentId, isNotEqualTo: cycleId)
-          .get();
-      snapshot.docs.forEach(
-        (element) {
-          Cycle cycle = Cycle.fromJson(
-            json.encode(
-              element.data(),
-            ),
-          );
-          list.add(
-            Cycle(
-                id: element.id,
-                approvalPattern: cycle.approvalPattern,
-                evaluationStandard: cycle.evaluationStandard,
-                finalDate: cycle.finalDate,
-                idSchool: cycle.idSchool,
-                initialDate: cycle.initialDate,
-                name: cycle.name),
-          );
-        },
-      );
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance
+              .collection('cycles')
+              .where('idSchool', isEqualTo: schoolId)
+              .where(FieldPath.documentId, isNotEqualTo: cycleId)
+              .get();
+      for (final element in snapshot.docs) {
+        final Cycle cycle = Cycle.fromJson(
+          json.encode(
+            element.data(),
+          ),
+        );
+        list.add(
+          Cycle(
+              id: element.id,
+              approvalPattern: cycle.approvalPattern,
+              evaluationStandard: cycle.evaluationStandard,
+              finalDate: cycle.finalDate,
+              idSchool: cycle.idSchool,
+              initialDate: cycle.initialDate,
+              name: cycle.name),
+        );
+      }
     } catch (error) {
       throw Exception(error);
     }

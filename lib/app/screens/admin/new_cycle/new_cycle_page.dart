@@ -12,6 +12,8 @@ import '../../../core/styles/sizes.dart';
 import 'new_cycle_controller.dart';
 
 class NewCyclePage extends StatefulWidget {
+  const NewCyclePage({Key? key}) : super(key: key);
+
   @override
   State<NewCyclePage> createState() => _NewCyclePageState();
 }

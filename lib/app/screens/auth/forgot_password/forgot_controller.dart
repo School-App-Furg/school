@@ -9,7 +9,7 @@ part 'forgot_controller.g.dart';
 class ForgotController = _ForgotControllerBase with _$ForgotController;
 
 abstract class _ForgotControllerBase with Store {
-  AuthRepository _authRepository = AuthRepository();
+  final AuthRepository _authRepository = AuthRepository();
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController emailController = TextEditingController();
 

@@ -10,7 +10,7 @@ class SchoolRepository {
   //cadastro de escola
   Future<String> insertScholl(SchoolModel _schoolModel) async {
     try {
-      DocumentReference doc = await firestoreInstance
+      final DocumentReference doc = await firestoreInstance
           .collection('schools')
           .add(_schoolModel.toMap());
       return doc.id;
@@ -23,9 +23,9 @@ class SchoolRepository {
   Future<SchoolModel?> getSchoolInformationsById(String id) async {
     SchoolModel? model;
     try {
-      var snapshot =
+      final snapshot =
           await firestoreInstance.collection('schools').doc(id).get();
-      var school = SchoolModel.fromJson(
+      final school = SchoolModel.fromJson(
         json.encode(
           snapshot.data(),
         ),
@@ -44,27 +44,25 @@ class SchoolRepository {
 
   //pega a lista de escola
   Future<List<SchoolModel?>> getSchools() async {
-    List<SchoolModel?> list = [];
+    final List<SchoolModel?> list = [];
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot =
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
           await firestoreInstance.collection('schools').get();
-      snapshot.docs.forEach(
-        (element) {
-          var school = SchoolModel.fromJson(
-            json.encode(
-              element.data(),
-            ),
-          );
-          list.add(
-            SchoolModel(
-              id: element.id,
-              currentCycle: school.currentCycle,
-              cnpj: school.cnpj,
-              name: school.name,
-            ),
-          );
-        },
-      );
+      for (final element in snapshot.docs) {
+        final school = SchoolModel.fromJson(
+          json.encode(
+            element.data(),
+          ),
+        );
+        list.add(
+          SchoolModel(
+            id: element.id,
+            currentCycle: school.currentCycle,
+            cnpj: school.cnpj,
+            name: school.name,
+          ),
+        );
+      }
     } catch (error) {
       throw Exception(error);
     }

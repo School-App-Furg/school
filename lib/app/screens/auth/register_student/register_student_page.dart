@@ -14,6 +14,8 @@ import '../../../core/styles/sizes.dart';
 import 'register_student_controller.dart';
 
 class RegisterStudentPage extends StatefulWidget {
+  const RegisterStudentPage({Key? key}) : super(key: key);
+
   @override
   State<RegisterStudentPage> createState() => _RegisterStudentPageState();
 }
@@ -29,7 +31,7 @@ class _RegisterStudentPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: heightAll(context),
         width: widthAll(context),
         child: Stack(

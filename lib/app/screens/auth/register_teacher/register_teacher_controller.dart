@@ -19,7 +19,7 @@ abstract class _RegisterTeacherControllerBase with Store {
   TextEditingController emailController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   @observable
   bool obscureText = true;
@@ -58,13 +58,13 @@ abstract class _RegisterTeacherControllerBase with Store {
         loader.show();
 
         //cadastra o user da escola
-        var userTeacher = await _authService.createUserWithEmailPass(
+        final userTeacher = await _authService.createUserWithEmailPass(
           emailController.text,
           senhaController.text,
         );
 
         //cadastra a escola e retorna o id da escola
-        bool inserted = await _authService.insertTeacher(
+        final bool inserted = await _authService.insertTeacher(
           userTeacher!.uid,
           TeacherUser(
               name: nameController.text,

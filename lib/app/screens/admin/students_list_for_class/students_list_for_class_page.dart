@@ -45,7 +45,7 @@ class _StudentsListForClassState
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.students.length == 0
+                    return controller.students.isEmpty
                         ? Padding(
                             padding: const EdgeInsets.all(40.0),
                             child: Text(
@@ -57,7 +57,7 @@ class _StudentsListForClassState
                         : ListView.builder(
                             itemCount: controller.students.length,
                             itemBuilder: (_, index) {
-                              var data = controller.students[index];
+                              final data = controller.students[index];
                               return StudentCard(
                                 studentUser: data!,
                                 onTap: () => Modular.to.pushNamed(

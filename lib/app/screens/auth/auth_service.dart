@@ -11,10 +11,10 @@ import '../../resources/school_repository.dart';
 import '../../resources/users_repository.dart';
 
 class AuthService {
-  SchoolRepository _schoolRepository = SchoolRepository();
-  UsersRepository _userRepository = UsersRepository();
-  CycleRepository _cycleRepository = CycleRepository();
-  AuthRepository _authRepository = AuthRepository();
+  final SchoolRepository _schoolRepository = SchoolRepository();
+  final UsersRepository _userRepository = UsersRepository();
+  final CycleRepository _cycleRepository = CycleRepository();
+  final AuthRepository _authRepository = AuthRepository();
 
   //criação de usuários
   Future<User?>? createUserWithEmailPass(String email, String pass) async {

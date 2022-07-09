@@ -11,7 +11,7 @@ part 'historic_controller.g.dart';
 class HistoricController = _HistoricControllerBase with _$HistoricController;
 
 abstract class _HistoricControllerBase with Store {
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
   Cycle? cycle;
 
   //lista de ciclos da escola

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../core/errors/auth_error.dart';
 
 class AuthRepository extends ChangeNotifier {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
 
   AuthRepository() {
@@ -30,7 +30,7 @@ class AuthRepository extends ChangeNotifier {
   // cadastro por email
   Future<User?> createUserWithEmailPass(String email, String pass) async {
     try {
-      UserCredential userCredential =
+      final UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
         password: pass,
@@ -45,7 +45,8 @@ class AuthRepository extends ChangeNotifier {
   // acesso por email e senhaa
   Future<User?> signInEmailAndPassword(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      final UserCredential userCredential =
+          await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

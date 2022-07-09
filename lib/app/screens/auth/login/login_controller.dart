@@ -13,8 +13,8 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  AuthRepository _authRepository = AuthRepository();
-  UsersRepository _userRepository = UsersRepository();
+  final AuthRepository _authRepository = AuthRepository();
+  final UsersRepository _userRepository = UsersRepository();
 
   @observable
   TextEditingController emailController = TextEditingController();
@@ -38,9 +38,9 @@ abstract class _LoginControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        User? user = await _authRepository.signInEmailAndPassword(
+        final User? user = await _authRepository.signInEmailAndPassword(
             emailController.text, senhaController.text);
-        int type = await _userRepository.getUserType(user!.uid);
+        final int type = await _userRepository.getUserType(user!.uid);
         loader.hide();
         if (type == 0) {
           Modular.to.pushReplacementNamed("/admin/");

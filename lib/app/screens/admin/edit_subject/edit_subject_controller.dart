@@ -16,7 +16,7 @@ class EditSubjectController = _EditSubjectControllerBase
 abstract class _EditSubjectControllerBase with Store {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //lista de disciplinas da escola
   @observable
@@ -42,7 +42,7 @@ abstract class _EditSubjectControllerBase with Store {
     try {
       loader.show();
       _subjectReceived.name = nameController.text;
-      bool updated = await _adminService.updateSubject(_subjectReceived);
+      final bool updated = await _adminService.updateSubject(_subjectReceived);
       Modular.get<SubjectsListController>().getSubjects(context);
       Modular.to.pop();
       if (updated) {

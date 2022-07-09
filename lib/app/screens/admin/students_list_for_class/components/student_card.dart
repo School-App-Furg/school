@@ -22,21 +22,19 @@ class _StudentCardState extends State<StudentCard> {
     return Card(
       elevation: 0,
       color: defaultWhite,
-      child: Container(
-        child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 17.0),
-          title: Text(
-            widget.studentUser.name,
-            style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
-          ),
-          leading: Container(
-            height: 40,
-            padding: EdgeInsets.only(right: 12.0),
-            child: Icon(Icons.person_rounded, color: blueicon),
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right, size: 30.0),
-          onTap: widget.onTap,
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 17.0),
+        title: Text(
+          widget.studentUser.name,
+          style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
         ),
+        leading: Container(
+          height: 40,
+          padding: EdgeInsets.only(right: 12.0),
+          child: Icon(Icons.person_rounded, color: blueicon),
+        ),
+        trailing: Icon(Icons.keyboard_arrow_right, size: 30.0),
+        onTap: widget.onTap,
       ),
     );
   }

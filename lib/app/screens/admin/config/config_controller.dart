@@ -18,7 +18,7 @@ abstract class _ConfigControllerBase with Store {
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
 
   GlobalKey<FormState> formKey = GlobalKey();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   @observable
   TextEditingController cycleName = TextEditingController();
@@ -58,10 +58,11 @@ abstract class _ConfigControllerBase with Store {
 
   @action
   setinitialDate(e) {
-    if (e == null)
+    if (e == null) {
       initialDate = DateTime.now();
-    else
+    } else {
       initialDate = e;
+    }
   }
 
   @observable
@@ -69,10 +70,11 @@ abstract class _ConfigControllerBase with Store {
 
   @action
   setFinalDate(e) {
-    if (e == null)
+    if (e == null) {
       finalDate = DateTime.now();
-    else
+    } else {
       finalDate = e;
+    }
   }
 
   //configuração de padrão de aprovação por nota
@@ -110,7 +112,7 @@ abstract class _ConfigControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        Cycle updatedCycle = Cycle(
+        final Cycle updatedCycle = Cycle(
             id: cycle!.id,
             name: cycleName.text,
             idSchool: schoolId,
@@ -118,7 +120,7 @@ abstract class _ConfigControllerBase with Store {
             initialDate: initialDate.millisecondsSinceEpoch,
             approvalPattern: score,
             evaluationStandard: cyclePeriod);
-        bool updated = await _adminService.updateCycle(
+        final bool updated = await _adminService.updateCycle(
             schoolModel!.currentCycle, updatedCycle);
         if (updated) {
           loader.hide();

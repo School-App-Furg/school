@@ -6,6 +6,8 @@ import '../../../core/components/loader/loader_page.dart';
 import 'student_list_controller.dart';
 
 class StudentListPage extends StatefulWidget {
+  const StudentListPage({Key? key}) : super(key: key);
+
   @override
   State<StudentListPage> createState() => _StudentListPageState();
 }
@@ -34,14 +36,14 @@ class _StudentListPageState
                 ),
                 body: Observer(
                   builder: (_) {
-                    return controller.students!.length == 0
+                    return controller.students!.isEmpty
                         ? Center(
                             child: Text('Nenhum aluno cadastrado!'),
                           )
                         : ListView.builder(
                             itemCount: controller.students!.length,
                             itemBuilder: (_, index) {
-                              var data = controller.students![index];
+                              final data = controller.students![index];
                               return Card(
                                 child: ListTile(
                                   leading: Icon(Icons.person),

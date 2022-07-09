@@ -14,7 +14,7 @@ import 'profile_controller.dart';
 class ProfilePage extends StatefulWidget {
   final TeacherUser teacherUser;
 
-  ProfilePage({
+  const ProfilePage({
     Key? key,
     required this.teacherUser,
   }) : super(key: key);
@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Stack(
               clipBehavior: Clip.none,
-              children: [
+              children: const [
                 BackgroundImage(),
                 PerfilImage(
                   image: AssetImage("assets/images/teacher-3.jpg"),

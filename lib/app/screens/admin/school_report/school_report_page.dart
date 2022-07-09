@@ -48,7 +48,7 @@ class _SchoolReportPageState
                 body: ListView.builder(
                   itemCount: controller.classes.subjectTeachers!.length,
                   itemBuilder: (_, index) {
-                    var data = controller.classes.subjectTeachers![index];
+                    final data = controller.classes.subjectTeachers![index];
                     return SubjectCard(
                       subjectTeacher: data,
                       grade: controller.filterGrades(

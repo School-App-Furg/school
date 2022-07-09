@@ -18,7 +18,7 @@ class SchoolReportController = _SchoolReportControllerBase
     with _$SchoolReportController;
 
 abstract class _SchoolReportControllerBase with Store {
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
   SchoolModel? school = Modular.get<HomeController>().schoolModel;
   @observable
   bool loading = false;
@@ -57,29 +57,30 @@ abstract class _SchoolReportControllerBase with Store {
   //Listagem dos cards com as notas e faltas de cada disciplinas/professor
   @action
   List<Grade> filterGrades(String subject, String teacher) {
-    List<Grade> lista = [];
-    grades.forEach((element) {
-      if (element.subject == subject && element.teacher == teacher)
+    final List<Grade> lista = [];
+    for (final element in grades) {
+      if (element.subject == subject && element.teacher == teacher) {
         lista.add(element);
-    });
+      }
+    }
     return lista;
   }
 
   //Inclusão de notas e faltas considerando se for para bimestre ou trimestre
   @action
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
-    List<ModelTable> list = [];
+    final List<ModelTable> list = [];
     for (var a = 0; a < numberOfLines; a++) {
       list.add(ModelTable(
           id: '', periodo: (a + 1).toString(), nota: '-', faltas: '-'));
     }
-    grade.forEach((element) {
+    for (final element in grade) {
       list[element.timeCourse.toInt()] = ModelTable(
           id: element.id,
           periodo: (element.timeCourse + 1).toString(),
           nota: element.note.toString(),
           faltas: element.faults.toString());
-    });
+    }
     return list;
   }
 
@@ -88,19 +89,19 @@ abstract class _SchoolReportControllerBase with Store {
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
     num faults = 0;
-    List<Grade> list = [];
-    grade.forEach((element) {
+    final List<Grade> list = [];
+    for (final element in grade) {
       if (element.timeCourse == numberOfLines) {
         list.add(element);
       }
-    });
-    list.forEach((element) {
+    }
+    for (final element in list) {
       grade.remove(element);
-    });
-    grade.forEach((element) {
+    }
+    for (final element in grade) {
       average = average + element.note.toDouble();
       faults = faults + element.faults.toInt();
-    });
+    }
     average = average / numberOfLines;
     return ResultModel(
         note: average.toStringAsFixed(2), faults: faults.toString());

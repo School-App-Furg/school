@@ -9,24 +9,23 @@ class SubjectRepository {
 
   //Retorna a lista de disciplinas cadastradas em uma determinada escola
   Future<List<Subject>> getSubjects(String id) async {
-    List<Subject>? list = [];
+    final List<Subject> list = [];
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await firestoreInstance
-          .collection('subjects')
-          .where('schoolId', isEqualTo: id)
-          .get();
-      snapshot.docs.forEach(
-        (element) {
-          var teste = Subject.fromJson(
-            json.encode(
-              element.data(),
-            ),
-          );
-          list.add(
-            Subject(id: element.id, name: teste.name, schoolId: teste.schoolId),
-          );
-        },
-      );
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await firestoreInstance
+              .collection('subjects')
+              .where('schoolId', isEqualTo: id)
+              .get();
+      for (final element in snapshot.docs) {
+        final teste = Subject.fromJson(
+          json.encode(
+            element.data(),
+          ),
+        );
+        list.add(
+          Subject(id: element.id, name: teste.name, schoolId: teste.schoolId),
+        );
+      }
       return list;
     } catch (error) {
       throw Exception(error);

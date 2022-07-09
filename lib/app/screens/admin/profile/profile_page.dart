@@ -14,7 +14,7 @@ import 'profile_controller.dart';
 class ProfilePage extends StatefulWidget {
   final SchoolModel schoolModel;
 
-  ProfilePage({
+  const ProfilePage({
     Key? key,
     required this.schoolModel,
   }) : super(key: key);
@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Stack(
               clipBehavior: Clip.none,
-              children: [
+              children: const [
                 BackgroundImage(),
                 PerfilImage(
                   image: AssetImage("assets/images/school.png"),

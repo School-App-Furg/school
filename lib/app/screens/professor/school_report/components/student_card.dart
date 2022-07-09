@@ -22,7 +22,7 @@ class StudentCard extends StatefulWidget {
   final String teacherId;
   final SchoolModel schoolModel;
 
-  StudentCard({
+  const StudentCard({
     Key? key,
     required this.cycle,
     required this.grades,

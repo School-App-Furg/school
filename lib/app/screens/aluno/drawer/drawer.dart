@@ -18,14 +18,14 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AlunoService _alunoService = AlunoService();
-    AuthRepository _authRepository = AuthRepository();
+    final AlunoService _alunoService = AlunoService();
+    final AuthRepository _authRepository = AuthRepository();
     return Container(
       width: width(context, 0.7),
       height: double.infinity,
       decoration: BoxDecoration(
         color: Color.fromARGB(180, 250, 250, 250),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(31, 38, 135, 0.4),
             blurRadius: 8.0,

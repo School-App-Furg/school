@@ -15,7 +15,7 @@ class StudentReportController = _StudentReportControllerBase
     with _$StudentReportController;
 
 abstract class _StudentReportControllerBase with Store {
-  AlunoService _alunoService = AlunoService();
+  final AlunoService _alunoService = AlunoService();
 
   //bool para acompanhamento do carregamento da requisição
   @observable
@@ -40,18 +40,18 @@ abstract class _StudentReportControllerBase with Store {
 
   //transforma as notas no objeto usado para mostrar a nota
   List<ModelTable> setGrades(int numberOfLines, List<Grade> grade) {
-    List<ModelTable> list = [];
+    final List<ModelTable> list = [];
     for (var a = 0; a < numberOfLines; a++) {
       list.add(ModelTable(
           id: '', periodo: (a + 1).toString(), nota: '-', faltas: '-'));
     }
-    grade.forEach((element) {
+    for (final element in grade) {
       list[element.timeCourse.toInt()] = ModelTable(
           id: element.id,
           periodo: (element.timeCourse + 1).toString(),
           nota: element.note.toString(),
           faltas: element.faults.toString());
-    });
+    }
     return list;
   }
 
@@ -60,19 +60,19 @@ abstract class _StudentReportControllerBase with Store {
   ResultModel calculate(List<Grade> grade, int numberOfLines) {
     num average = 0;
     num faults = 0;
-    List<Grade> list = [];
-    grade.forEach((element) {
+    final List<Grade> list = [];
+    for (final element in grade) {
       if (element.timeCourse == numberOfLines) {
         list.add(element);
       }
-    });
-    list.forEach((element) {
+    }
+    for (final element in list) {
       grade.remove(element);
-    });
-    grade.forEach((element) {
+    }
+    for (final element in grade) {
       average = average + element.note.toDouble();
       faults = faults + element.faults.toInt();
-    });
+    }
     average = average / numberOfLines;
     return ResultModel(
         note: average.toStringAsFixed(2), faults: faults.toString());

@@ -48,7 +48,7 @@ class _EditSchoolReportPageState
 
   @override
   Widget build(BuildContext context) {
-    var maskFormatterFaults = new MaskTextInputFormatter(
+    final maskFormatterFaults = MaskTextInputFormatter(
       mask: '##',
       filter: {"#": RegExp(r'[0-9]')},
     );

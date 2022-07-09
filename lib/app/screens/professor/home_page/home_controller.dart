@@ -71,11 +71,11 @@ abstract class _HomeControllerBase with Store {
   setSubjectTeacher(List<Classes> classesList, String teacherId) async {
     //lista de indexes que irei remover
     List<int> toRemove = [];
-    List<int> subjectTeacherToRemove = [];
+    final List<int> subjectTeacherToRemove = [];
     //Percorrendo lista de turmas
     for (var a = 0; a < classesList.length; a++) {
       //retorna lista de subject teacher de cada turma
-      List<SubjectTeacher> lista =
+      final List<SubjectTeacher> lista =
           await professorService.getSubjectTeacher(classes![a].id);
 
       //verifica os subjectTeacher da lista que não possuem o id do professor
@@ -85,14 +85,14 @@ abstract class _HomeControllerBase with Store {
         }
       }
       //remove os que não possuem
-      subjectTeacherToRemove.forEach((element) {
+      for (final element in subjectTeacherToRemove) {
         lista.remove(lista[element]);
-      });
+      }
 
       classes![a].subjectTeachers = lista;
 
       //Adiciona o index da turma caso não tenha nenhum na lista
-      if (lista.length == 0) {
+      if (lista.isEmpty) {
         toRemove.add(a);
       }
 
@@ -120,7 +120,7 @@ abstract class _HomeControllerBase with Store {
 
   //funcao para alocar a sequencia de imagens banner
   definiBanner(int index) {
-    var resto = index % 5;
+    final resto = index % 5;
     if (index < 5) {
       return banners[index];
     } else {

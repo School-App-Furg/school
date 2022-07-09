@@ -13,7 +13,7 @@ import '../../../core/styles/sizes.dart';
 import 'register_school_controller.dart';
 
 class RegisterSchool extends StatefulWidget {
-  RegisterSchool({Key? key}) : super(key: key);
+  const RegisterSchool({Key? key}) : super(key: key);
 
   @override
   State<RegisterSchool> createState() => _RegisterState();
@@ -25,7 +25,7 @@ class _RegisterState extends State<RegisterSchool> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: heightAll(context),
         width: widthAll(context),
         child: Stack(

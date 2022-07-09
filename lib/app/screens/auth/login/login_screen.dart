@@ -13,21 +13,21 @@ import '../../../core/styles/sizes.dart';
 import 'login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginController _controller = LoginController();
+  final LoginController _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
         return Scaffold(
-          body: Container(
+          body: SizedBox(
             width: double.infinity,
             height: heightAll(context),
             child: Stack(

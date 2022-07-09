@@ -12,7 +12,7 @@ part 'historic_controller.g.dart';
 class HistoricController = _HistoricControllerBase with _$HistoricController;
 
 abstract class _HistoricControllerBase with Store {
-  AlunoService _alunoService = AlunoService();
+  final AlunoService _alunoService = AlunoService();
 
   //acompanhamento do carregamento da requisição
   @observable

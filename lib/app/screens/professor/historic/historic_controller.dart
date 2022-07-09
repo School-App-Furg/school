@@ -11,7 +11,7 @@ part 'historic_controller.g.dart';
 class HistoricController = _HistoricControllerBase with _$HistoricController;
 
 abstract class _HistoricControllerBase with Store {
-  ProfessorService _professorService = ProfessorService();
+  final ProfessorService _professorService = ProfessorService();
   Cycle? cycle;
 
   //lista de ciclos da escola

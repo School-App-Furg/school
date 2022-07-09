@@ -10,7 +10,7 @@ class BasicDateTimeField extends StatefulWidget {
   final DateTime? currentValue;
   final Function(DateTime?)? onChanged;
 
-  BasicDateTimeField({
+  const BasicDateTimeField({
     Key? key,
     required this.hintText,
     this.currentValue,
@@ -39,7 +39,7 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
         style: TextStyle(fontSize: width(context, 0.037)),
         onChanged: widget.onChanged,
         onShowPicker: (context, currentValue) async {
-          DateTime? date = await showDatePicker(
+          final DateTime? date = await showDatePicker(
             context: context,
             firstDate: DateTime(2020),
             initialDate: currentValue ?? DateTime.now(),

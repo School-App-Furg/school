@@ -39,7 +39,7 @@ class _PerfilPageState extends State<PerfilPage> {
           children: [
             Stack(
               clipBehavior: Clip.none,
-              children: [
+              children: const [
                 BackgroundImage(),
                 PerfilImage(
                   image: AssetImage("assets/images/student.jpg"),

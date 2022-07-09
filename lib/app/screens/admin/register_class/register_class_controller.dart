@@ -22,7 +22,7 @@ abstract class _RegisterClassControllerBase with Store {
   TextEditingController nameController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController yearController = TextEditingController();
-  AdminService _adminService = AdminService();
+  final AdminService _adminService = AdminService();
 
   //injeção de depencias do user admin
   String schoolId = Modular.get<HomeController>().userAdmin!.schoolId;
@@ -46,11 +46,9 @@ abstract class _RegisterClassControllerBase with Store {
   @action
   setStudentsSelected(List values) {
     studentsSelected.clear();
-    values.forEach(
-      (element) {
-        studentsSelected.add(element);
-      },
-    );
+    for (final element in values) {
+      studentsSelected.add(element);
+    }
   }
 
   //lista de disciplinas
@@ -71,27 +69,21 @@ abstract class _RegisterClassControllerBase with Store {
     loadingTest = true;
     subjects = await _adminService.getSubjects(schoolId);
     teachers = await _adminService.getTeachers(schoolId);
-    teachers!.forEach(
-      (elementTeacher) {
-        elementTeacher.subjects!.forEach(
-          (elementTeacherSubject) {
-            subjects!.forEach(
-              (elementSubject) {
-                if (elementTeacherSubject == elementSubject.id) {
-                  subjectTeacher.add(
-                    SubjectTeacher(
-                        idSubject: elementSubject.id ?? '',
-                        subject: elementSubject.name,
-                        idTeacher: elementTeacher.id ?? '',
-                        teacher: elementTeacher.name),
-                  );
-                }
-              },
+    for (final elementTeacher in teachers!) {
+      for (final elementTeacherSubject in elementTeacher.subjects!) {
+        for (final elementSubject in subjects!) {
+          if (elementTeacherSubject == elementSubject.id) {
+            subjectTeacher.add(
+              SubjectTeacher(
+                  idSubject: elementSubject.id ?? '',
+                  subject: elementSubject.name,
+                  idTeacher: elementTeacher.id ?? '',
+                  teacher: elementTeacher.name),
             );
-          },
-        );
-      },
-    );
+          }
+        }
+      }
+    }
     loadingTest = false;
   }
 
@@ -107,17 +99,15 @@ abstract class _RegisterClassControllerBase with Store {
   @action
   setSubjectsSelected(List values) {
     subjectsSelected.clear();
-    values.forEach(
-      (element) {
-        subjectsSelected.add(
-          SubjectTeacher(
-              idTeacher: element.idTeacher,
-              idSubject: element.idSubject,
-              subject: element.subject,
-              teacher: element.teacher),
-        );
-      },
-    );
+    for (final element in values) {
+      subjectsSelected.add(
+        SubjectTeacher(
+            idTeacher: element.idTeacher,
+            idSubject: element.idSubject,
+            subject: element.subject,
+            teacher: element.teacher),
+      );
+    }
   }
 
   //Realiza o cadastro da turma
@@ -126,19 +116,17 @@ abstract class _RegisterClassControllerBase with Store {
       final loader = LoaderDefault();
       try {
         loader.show();
-        Classes classes = Classes(
+        final Classes classes = Classes(
             schoolId: schoolId,
             name: nameController.text,
             room: roomController.text,
             cycleId: currentCycle,
             level: yearController.text,
             students: studentsSelected);
-        String doc = await _adminService.insertClasses(classes);
-        subjectsSelected.forEach(
-          (element) {
-            _adminService.insertSubjectTeacher(element, doc);
-          },
-        );
+        final String doc = await _adminService.insertClasses(classes);
+        for (final element in subjectsSelected) {
+          _adminService.insertSubjectTeacher(element, doc);
+        }
         if (doc.isNotEmpty) {
           _adminService.updateHome();
           loader.hide();
